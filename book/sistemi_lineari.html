@@ -1,0 +1,954 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sistemi lineari e fattorizzazione LU &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/sistemi_lineari';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mnad.png" class="logo__image only-light" alt="Metodi numerici per l'analisi dei dati - Home"/>
+    <script>document.write(`<img src="../_static/mnad.png" class="logo__image only-dark" alt="Metodi numerici per l'analisi dei dati - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Metodi numerici per l’analisi dei dati
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
+
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/elenaloli/computational-imaging.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/elenaloli/computational-imaging.git/issues/new?title=Issue%20on%20page%20%2Fbook/sistemi_lineari.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/sistemi_lineari.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sistemi lineari e fattorizzazione LU</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sistemi lineari e fattorizzazione LU</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita-della-soluzione">Esistenza e unicità della soluzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-non-si-calcola-l-inversa">Perché non si calcola l’inversa?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-diretti-e-metodi-iterativi">Metodi diretti e metodi iterativi</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemi-triangolari">Sistemi triangolari</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sostituzione-in-avanti">Sostituzione in avanti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sostituzione-all-indietro">Sostituzione all’indietro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#costo-computazionale">Costo computazionale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-del-sistema-mediante-lu">Risoluzione del sistema mediante LU</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primo-passaggio-l-mathbf-y-mathbf-b">Primo passaggio: <span class="math notranslate nohighlight">\(L\mathbf{y}=\mathbf{b}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#secondo-passaggio-u-mathbf-x-mathbf-y">Secondo passaggio: <span class="math notranslate nohighlight">\(U\mathbf{x}=\mathbf{y}\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">Risoluzione di un sistema con fattorizzazione Lu con pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">Risoluzione di un sistema con fattorizzazione di Cholesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluzione-del-sistema">Soluzione del sistema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vantaggi-e-limiti">Vantaggi e limiti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-del-sistema-con-pivoting">Risoluzione del sistema con pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sistemi-lineari-e-fattorizzazione-lu">
+<h1>Sistemi lineari e fattorizzazione LU<a class="headerlink" href="#sistemi-lineari-e-fattorizzazione-lu" title="Link to this heading">#</a></h1>
+<p>Consideriamo un sistema lineare quadrato</p>
+<div class="math notranslate nohighlight">
+\[
+A\mathbf{x}=\mathbf{b},
+\qquad
+A\in\mathbb{R}^{n\times n},
+\quad\mathbf{x},\mathbf{b}\in\mathbb{R}^{n}.
+\]</div>
+<p>Il vettore <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> è noto, mentre <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> è il vettore delle incognite.</p>
+<p>Lo studio numerico dei sistemi lineari comprende tre questioni fondamentali:</p>
+<ol class="arabic simple">
+<li><p><strong>Esistenza e unicità:</strong> il sistema possiede una soluzione? La soluzione è unica?</p></li>
+<li><p><strong>Algoritmi:</strong> come possiamo calcolare la soluzione in modo efficiente?</p></li>
+<li><p><strong>Errore:</strong> quanto è affidabile la soluzione calcolata in aritmetica finita?</p></li>
+</ol>
+<section id="esistenza-e-unicita-della-soluzione">
+<h2>Esistenza e unicità della soluzione<a class="headerlink" href="#esistenza-e-unicita-della-soluzione" title="Link to this heading">#</a></h2>
+<p>Se <span class="math notranslate nohighlight">\(A\)</span> è quadrata, le seguenti proprietà sono equivalenti:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span> è non singolare;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\det(A)\neq0\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\operatorname{rank}(A)=n\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\ker(A)=\{\mathbf{0}\}\)</span>;</p></li>
+<li><p>esiste <span class="math notranslate nohighlight">\(A^{-1}\)</span>;</p></li>
+<li><p>per ogni <span class="math notranslate nohighlight">\(\mathbf{b}\in\mathbb{R}^n\)</span>, il sistema <span class="math notranslate nohighlight">\(A\mathbf{x}=\mathbf{b}\)</span> ammette un’unica soluzione.</p></li>
+</ul>
+<p>In questo caso, dal punto di vista teorico,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}=A^{-1}\mathbf{b}.
+\]</div>
+<p>Se <span class="math notranslate nohighlight">\(A\)</span> è singolare, il sistema può non avere soluzioni oppure può averne infinite, a seconda del vettore <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</p>
+</section>
+<section id="perche-non-si-calcola-l-inversa">
+<h2>Perché non si calcola l’inversa?<a class="headerlink" href="#perche-non-si-calcola-l-inversa" title="Link to this heading">#</a></h2>
+<p>La formula <span class="math notranslate nohighlight">\(\mathbf{x}=A^{-1}\mathbf{b}\)</span> è utile dal punto di vista teorico, ma normalmente <strong>non viene utilizzata come algoritmo</strong>.</p>
+<p>Calcolare esplicitamente <span class="math notranslate nohighlight">\(A^{-1}\)</span>:</p>
+<ul class="simple">
+<li><p>richiede più operazioni della soluzione diretta del sistema;</p></li>
+<li><p>richiede memoria per memorizzare l’intera matrice inversa;</p></li>
+<li><p>può introdurre errori di arrotondamento non necessari;</p></li>
+<li><p>calcola molte informazioni che non servono se desideriamo soltanto <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p></li>
+</ul>
+<p>Nella pratica si usa quindi un algoritmo che risolve direttamente</p>
+<div class="math notranslate nohighlight">
+\[
+A\mathbf{x}=\mathbf{b}
+\]</div>
+<p>senza costruire <span class="math notranslate nohighlight">\(A^{-1}\)</span>.</p>
+</section>
+<section id="metodi-diretti-e-metodi-iterativi">
+<h2>Metodi diretti e metodi iterativi<a class="headerlink" href="#metodi-diretti-e-metodi-iterativi" title="Link to this heading">#</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="book/immagini_sorgente/metodi_diretti_iterativi.png"><img alt="book/immagini_sorgente/metodi_diretti_iterativi.png" src="book/immagini_sorgente/metodi_diretti_iterativi.png" style="width: 100%;" />
+</a>
+</figure>
+<p align="center">
+  <img src="immagini_sorgente/metodi_diretti_iterativi.png" width="700">
+</p>
+<p>I <strong>metodi diretti</strong> producono la soluzione dopo un numero finito di operazioni, se si lavora in aritmetica esatta. Sono basati principalmente sull’eliminazione di Gauss e sulle fattorizzazioni della matrice.</p>
+<p>I <strong>metodi iterativi</strong> costruiscono invece una successione di approssimazioni</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}^{(0)},\mathbf{x}^{(1)},\mathbf{x}^{(2)},\ldots
+\]</div>
+<p>che, sotto opportune condizioni, converge alla soluzione. Sono particolarmente importanti per matrici grandi e sparse.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="sistemi-triangolari">
+<h1>Sistemi triangolari<a class="headerlink" href="#sistemi-triangolari" title="Link to this heading">#</a></h1>
+<p>Una matrice <span class="math notranslate nohighlight">\(L=(\ell_{ij})\)</span> è <strong>triangolare inferiore</strong> se</p>
+<div class="math notranslate nohighlight">
+\[
+\ell_{ij}=0\qquad\text{per }j&gt;i.
+\]</div>
+<p>Una matrice <span class="math notranslate nohighlight">\(U=(u_{ij})\)</span> è <strong>triangolare superiore</strong> se</p>
+<div class="math notranslate nohighlight">
+\[
+u_{ij}=0\qquad\text{per }i&gt;j.
+\]</div>
+<p>I sistemi triangolari sono semplici da risolvere perché le incognite possono essere calcolate una alla volta.</p>
+<section id="sostituzione-in-avanti">
+<h2>Sostituzione in avanti<a class="headerlink" href="#sostituzione-in-avanti" title="Link to this heading">#</a></h2>
+<p>Consideriamo il sistema triangolare inferiore</p>
+<div class="math notranslate nohighlight">
+\[
+L\mathbf{x}=\mathbf{b}.
+\]</div>
+<p>La prima equazione contiene soltanto <span class="math notranslate nohighlight">\(x_1\)</span>. Una volta calcolato <span class="math notranslate nohighlight">\(x_1\)</span>, la seconda equazione permette di determinare <span class="math notranslate nohighlight">\(x_2\)</span>, e così via.</p>
+<p>La formula generale è</p>
+<div class="math notranslate nohighlight">
+\[
+x_i=\frac{1}{\ell_{ii}}
+\left(b_i-\sum_{j=1}^{i-1}\ell_{ij}x_j\right),
+\qquad i=1,\ldots,n.
+\]</div>
+<p>Il metodo prende il nome di <strong>sostituzione in avanti</strong>. Richiede un numero di operazioni proporzionale a <span class="math notranslate nohighlight">\(n^2\)</span>.</p>
+</section>
+<section id="sostituzione-all-indietro">
+<h2>Sostituzione all’indietro<a class="headerlink" href="#sostituzione-all-indietro" title="Link to this heading">#</a></h2>
+<p>Consideriamo ora il sistema triangolare superiore</p>
+<div class="math notranslate nohighlight">
+\[
+U\mathbf{x}=\mathbf{b}.
+\]</div>
+<p>Si parte dall’ultima equazione e si procede verso la prima:</p>
+<div class="math notranslate nohighlight">
+\[
+x_i=\frac{1}{u_{ii}}
+\left(b_i-\sum_{j=i+1}^{n}u_{ij}x_j\right),
+\qquad i=n,n-1,\ldots,1.
+\]</div>
+<p>Questo procedimento è detto <strong>sostituzione all’indietro</strong> e ha anch’esso complessità <span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sostituzione_avanti</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">1e-14</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Elemento diagonale nullo&#39;</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="n">i</span><span class="p">]</span> <span class="o">@</span> <span class="n">x</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sostituzione_indietro</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">1e-14</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Elemento diagonale nullo&#39;</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">@</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="costo-computazionale">
+<h2>Costo computazionale<a class="headerlink" href="#costo-computazionale" title="Link to this heading">#</a></h2>
+<p>Per un sistema triangolare di ordine <span class="math notranslate nohighlight">\(n\)</span>, il numero complessivo di termini presenti nelle somme è</p>
+<div class="math notranslate nohighlight">
+\[
+1+2+\cdots+(n-1)=\frac{n(n-1)}{2}.
+\]</div>
+<p>Una sostituzione in avanti o all’indietro richiede quindi circa <span class="math notranslate nohighlight">\(n^2\)</span> operazioni aritmetiche, cioè</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{O}(n^2).
+\]</div>
+<p>Questo è molto meno del costo <span class="math notranslate nohighlight">\(\mathcal{O}(n^3)\)</span> necessario per fattorizzare una matrice densa generale.</p>
+</section>
+<section id="risoluzione-del-sistema-mediante-lu">
+<h2>Risoluzione del sistema mediante LU<a class="headerlink" href="#risoluzione-del-sistema-mediante-lu" title="Link to this heading">#</a></h2>
+<p>Consideriamo ora</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A\mathbf{x}=\mathbf{b},
+\qquad
+\mathbf{b}=
+\begin{pmatrix}
+5\\-2\\9
+\end{pmatrix}.
+\end{split}\]</div>
+<section id="primo-passaggio-l-mathbf-y-mathbf-b">
+<h3>Primo passaggio: <span class="math notranslate nohighlight">\(L\mathbf{y}=\mathbf{b}\)</span><a class="headerlink" href="#primo-passaggio-l-mathbf-y-mathbf-b" title="Link to this heading">#</a></h3>
+<p>La sostituzione in avanti fornisce</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{y}=
+\begin{pmatrix}
+5\\-12\\2
+\end{pmatrix}.
+\end{split}\]</div>
+</section>
+<section id="secondo-passaggio-u-mathbf-x-mathbf-y">
+<h3>Secondo passaggio: <span class="math notranslate nohighlight">\(U\mathbf{x}=\mathbf{y}\)</span><a class="headerlink" href="#secondo-passaggio-u-mathbf-x-mathbf-y" title="Link to this heading">#</a></h3>
+<p>La sostituzione all’indietro fornisce</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{x}=
+\begin{pmatrix}
+1\\1\\2
+\end{pmatrix}.
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">9.</span><span class="p">])</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">sostituzione_avanti</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sostituzione_indietro</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y =&#39;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x =&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Residuo b - Ax =&#39;</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Norma del residuo =&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">9.</span><span class="p">])</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sostituzione_avanti</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">x</span> <span class="o">=</span> <span class="n">sostituzione_indietro</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y =&#39;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;L&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">
+<h2>Risoluzione di un sistema con fattorizzazione Lu con pivoting<a class="headerlink" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting" title="Link to this heading">#</a></h2>
+</section>
+<section id="risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">
+<h2>Risoluzione di un sistema con fattorizzazione di Cholesky<a class="headerlink" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky" title="Link to this heading">#</a></h2>
+<p>Se <span class="math notranslate nohighlight">\(A=LL^T\)</span>, il sistema</p>
+<div class="math notranslate nohighlight">
+\[
+A\mathbf{x}=\mathbf{b}
+\]</div>
+<p>diventa</p>
+<div class="math notranslate nohighlight">
+\[
+LL^T\mathbf{x}=\mathbf{b}.
+\]</div>
+<p>Si risolvono quindi due sistemi triangolari:</p>
+<div class="math notranslate nohighlight">
+\[
+L\mathbf{y}=\mathbf{b},
+\qquad
+L^T\mathbf{x}=\mathbf{y}.
+\]</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="book/immagini_sorgente/metodo_cholesky.png"><img alt="book/immagini_sorgente/metodo_cholesky.png" src="book/immagini_sorgente/metodo_cholesky.png" style="width: 100%;" />
+</a>
+</figure>
+<p align="center">
+  <img src="immagini_sorgente/metodo_cholesky.png" width="700">
+</p></section>
+<section id="soluzione-del-sistema">
+<h2>Soluzione del sistema<a class="headerlink" href="#soluzione-del-sistema" title="Link to this heading">#</a></h2>
+<p>Poniamo</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{b}=
+\begin{pmatrix}
+6\\11\\-1
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Risolvendo prima <span class="math notranslate nohighlight">\(L\mathbf{y}=\mathbf{b}\)</span> si ottiene</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{y}=(3,4,-2)^T.
+\]</div>
+<p>Risolvendo poi <span class="math notranslate nohighlight">\(L^T\mathbf{x}=\mathbf{y}\)</span> si ottiene</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}=(1,2,-1)^T.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">6.</span><span class="p">,</span> <span class="mf">11.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">])</span>
+
+<span class="c1"># np.linalg.solve applicato ai due sistemi triangolari</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y =&#39;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x =&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Norma del residuo =&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y = [ 3.  4. -2.]
+x = [ 1.  2. -1.]
+Norma del residuo = 0.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="vantaggi-e-limiti">
+<h2>Vantaggi e limiti<a class="headerlink" href="#vantaggi-e-limiti" title="Link to this heading">#</a></h2>
+<p>Rispetto alla fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span>, Cholesky:</p>
+<ul class="simple">
+<li><p>memorizza un solo fattore triangolare;</p></li>
+<li><p>richiede circa <span class="math notranslate nohighlight">\(n^3/3\)</span> operazioni, contro circa <span class="math notranslate nohighlight">\(2n^3/3\)</span> per <span class="math notranslate nohighlight">\(LU\)</span>;</p></li>
+<li><p>non richiede pivoting per matrici simmetriche definite positive.</p></li>
+</ul>
+<p>Può però essere applicata soltanto quando la matrice è simmetrica definita positiva. Se durante il calcolo compare una quantità non positiva sotto radice, le ipotesi non sono soddisfatte oppure gli effetti numerici sono rilevanti.</p>
+</section>
+<section id="risoluzione-del-sistema-con-pivoting">
+<h2>Risoluzione del sistema con pivoting<a class="headerlink" href="#risoluzione-del-sistema-con-pivoting" title="Link to this heading">#</a></h2>
+<p>Scegliamo</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{b}=
+\begin{pmatrix}
+3\\0\\7
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Poiché <span class="math notranslate nohighlight">\(PA=LU\)</span>, dobbiamo prima permutare il termine noto:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P\mathbf{b}=
+\begin{pmatrix}
+7\\0\\3
+\end{pmatrix}.
+\end{split}\]</div>
+<p>La sostituzione in avanti nel sistema</p>
+<div class="math notranslate nohighlight">
+\[
+L\mathbf{y}=P\mathbf{b}
+\]</div>
+<p>fornisce</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{y}=
+\begin{pmatrix}
+7\\-\frac72\\1
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Risolvendo poi <span class="math notranslate nohighlight">\(U\mathbf{x}=\mathbf{y}\)</span> otteniamo</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{x}=
+\begin{pmatrix}
+1\\2\\-1
+\end{pmatrix}.
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_piv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">])</span>
+
+<span class="n">y_piv</span> <span class="o">=</span> <span class="n">sostituzione_avanti</span><span class="p">(</span><span class="n">L_piv</span><span class="p">,</span> <span class="n">P</span> <span class="o">@</span> <span class="n">b_piv</span><span class="p">)</span>
+<span class="n">x_piv</span> <span class="o">=</span> <span class="n">sostituzione_indietro</span><span class="p">(</span><span class="n">U_piv</span><span class="p">,</span> <span class="n">y_piv</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P @ b =&#39;</span><span class="p">,</span> <span class="n">P</span> <span class="o">@</span> <span class="n">b_piv</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y =&#39;</span><span class="p">,</span> <span class="n">y_piv</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x =&#39;</span><span class="p">,</span> <span class="n">x_piv</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Residuo b - Ax =&#39;</span><span class="p">,</span> <span class="n">b_piv</span> <span class="o">-</span> <span class="n">A_piv</span> <span class="o">@</span> <span class="n">x_piv</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Norma del residuo =&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b_piv</span> <span class="o">-</span> <span class="n">A_piv</span> <span class="o">@</span> <span class="n">x_piv</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P @ b = [7. 0. 3.]
+y = [ 7.  -3.5  1. ]
+x = [ 1.  2. -1.]
+Residuo b - Ax = [0. 0. 0.]
+Norma del residuo = 0.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="esercizi">
+<h2>Esercizi<a class="headerlink" href="#esercizi" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Verificare manualmente che le matrici <span class="math notranslate nohighlight">\(L\)</span> e <span class="math notranslate nohighlight">\(U\)</span> dell’esempio soddisfino <span class="math notranslate nohighlight">\(LU=A\)</span>.</p></li>
+<li><p>Risolvere lo stesso sistema con <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code> e confrontare il risultato.</p></li>
+<li><p>Cambiare il termine noto <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> senza ricalcolare <span class="math notranslate nohighlight">\(L\)</span> e <span class="math notranslate nohighlight">\(U\)</span>.</p></li>
+<li><p>Contare moltiplicazioni e divisioni effettuate dalle due funzioni di sostituzione.</p></li>
+<li><p>Provare la funzione <code class="docutils literal notranslate"><span class="pre">fattorizzazione_lu</span></code> sulla matrice</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+   \begin{pmatrix}
+   0&amp;1\\1&amp;1
+   \end{pmatrix}
+   \end{split}\]</div>
+<p>e spiegare perché è necessario uno scambio di righe.</p>
+</li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sistemi lineari e fattorizzazione LU</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita-della-soluzione">Esistenza e unicità della soluzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-non-si-calcola-l-inversa">Perché non si calcola l’inversa?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-diretti-e-metodi-iterativi">Metodi diretti e metodi iterativi</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemi-triangolari">Sistemi triangolari</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sostituzione-in-avanti">Sostituzione in avanti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sostituzione-all-indietro">Sostituzione all’indietro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#costo-computazionale">Costo computazionale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-del-sistema-mediante-lu">Risoluzione del sistema mediante LU</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primo-passaggio-l-mathbf-y-mathbf-b">Primo passaggio: <span class="math notranslate nohighlight">\(L\mathbf{y}=\mathbf{b}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#secondo-passaggio-u-mathbf-x-mathbf-y">Secondo passaggio: <span class="math notranslate nohighlight">\(U\mathbf{x}=\mathbf{y}\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">Risoluzione di un sistema con fattorizzazione Lu con pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">Risoluzione di un sistema con fattorizzazione di Cholesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluzione-del-sistema">Soluzione del sistema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vantaggi-e-limiti">Vantaggi e limiti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-del-sistema-con-pivoting">Risoluzione del sistema con pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Elena Loli Piccolomini
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

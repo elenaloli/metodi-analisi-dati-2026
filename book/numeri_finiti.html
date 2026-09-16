@@ -1,0 +1,1154 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>I numeri finiti e il calcolo scientifico &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/numeri_finiti';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduzione all’analisi dei dati" href="analisi_dati.html" />
+    <link rel="prev" title="Introduzione al corso Metodi Numerici per l’Analisi dei Dati" href="intro_mnad.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mnad.png" class="logo__image only-light" alt="Metodi numerici per l'analisi dei dati - Home"/>
+    <script>document.write(`<img src="../_static/mnad.png" class="logo__image only-dark" alt="Metodi numerici per l'analisi dei dati - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Metodi numerici per l’analisi dei dati
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">I numeri finiti e il calcolo scientifico</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/elenaloli/computational-imaging.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/elenaloli/computational-imaging.git/issues/new?title=Issue%20on%20page%20%2Fbook/numeri_finiti.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/numeri_finiti.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>I numeri finiti e il calcolo scientifico</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">I numeri finiti e il calcolo scientifico</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calcolo-scientifico-e-algoritmi-numerici">Calcolo scientifico e algoritmi numerici</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#che-cos-e-il-calcolo-scientifico">Che cos’è il calcolo scientifico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-l-errore-e-inevitabile">Perché l’errore è inevitabile</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#misurare-l-errore">Misurare l’errore</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazione-dei-numeri-in-base-beta">Rappresentazione dei numeri in base <span class="math notranslate nohighlight">\(\beta\)</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazione-dei-numeri-interi">Rappresentazione dei numeri interi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazione-di-numeri-reali">Rappresentazione di numeri reali</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sistema-floating-point">Sistema floating point</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazioni-ieee-floating-point">Rappresentazioni IEEE floating point</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazione-di-un-numero-reale-in-un-sistema-floating-point">Rappresentazione di un numero reale in un sistema floating-point</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-di-rappresentazione">Errori di rappresentazione</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#arutmetica-floating-point">Arutmetica floating-point</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-nel-calcolo-numerico">Errori nel calcolo numerico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proprieta-degli-algoritmi">Proprietà degli algoritmi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuratezza">17. Accuratezza</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficienza">Efficienza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robustezza">Robustezza</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="i-numeri-finiti-e-il-calcolo-scientifico">
+<h1>I numeri finiti e il calcolo scientifico<a class="headerlink" href="#i-numeri-finiti-e-il-calcolo-scientifico" title="Link to this heading">#</a></h1>
+<p>Questo capitolo tratta:</p>
+<ul class="simple">
+<li><p>algoritmi numerici, errori e proprietà degli algoritmi;</p></li>
+<li><p>errori di arrotondamento e sistemi floating-point.</p></li>
+</ul>
+<p>To take home:</p>
+<ul class="simple">
+<li><p>perché i calcoli numerici sono inevitabilmente approssimati;</p></li>
+<li><p>come misurare errore assoluto ed errore relativo;</p></li>
+<li><p>quali errori derivano da modello, discretizzazione, convergenza e arrotondamento;</p></li>
+<li><p>come funziona una rappresentazione floating-point;</p></li>
+<li><p>cosa sono unità di arrotondamento, overflow, underflow, NaN e cancellazione;</p></li>
+<li><p>come progettare formule numericamente più stabili.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calcolo-scientifico-e-algoritmi-numerici">
+<h1>Calcolo scientifico e algoritmi numerici<a class="headerlink" href="#calcolo-scientifico-e-algoritmi-numerici" title="Link to this heading">#</a></h1>
+<section id="che-cos-e-il-calcolo-scientifico">
+<h2>Che cos’è il calcolo scientifico<a class="headerlink" href="#che-cos-e-il-calcolo-scientifico" title="Link to this heading">#</a></h2>
+<p>Il calcolo scientifico studia lo sviluppo e l’analisi di algoritmi numerici per risolvere problemi matematici che nascono da modelli scientifici, ingegneristici e informatici.</p>
+<p>Uno schema concettuale tipico è:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{fenomeno osservato}
+\rightarrow
+\text{modello matematico}
+\rightarrow
+\text{discretizzazione}
+\rightarrow
+\text{algoritmo di soluzione}
+\rightarrow
+\text{implementazione}.
+\]</div>
+<p>Il punto centrale è che il problema matematico originario è spesso continuo, mentre il computer può manipolare solo oggetti finiti.</p>
+<p>Per esempio:</p>
+<ul class="simple">
+<li><p>una funzione continua viene sostituita da un array di valori;</p></li>
+<li><p>una derivata viene sostituita da una formula alle differenze finite;</p></li>
+<li><p>un integrale viene sostituito da una somma;</p></li>
+<li><p>un’equazione differenziale viene sostituita da un sistema algebrico.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Esempio: una funzione continua campionata su una griglia finita.</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f_continua</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">x_fine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_fine</span><span class="p">,</span> <span class="n">f_continua</span><span class="p">(</span><span class="n">x_fine</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;funzione continua&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_grid</span><span class="p">,</span> <span class="n">f_continua</span><span class="p">(</span><span class="n">x_grid</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;campioni discreti&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Da funzione continua a dati discreti&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ed82a3c230949946f6a759cf853d4aac1c91250e5450321e66a7b6d7239ff3cd.png" src="../_images/ed82a3c230949946f6a759cf853d4aac1c91250e5450321e66a7b6d7239ff3cd.png" />
+</div>
+</div>
+</section>
+<section id="perche-l-errore-e-inevitabile">
+<h2>Perché l’errore è inevitabile<a class="headerlink" href="#perche-l-errore-e-inevitabile" title="Link to this heading">#</a></h2>
+<p>Il risultato di un calcolo numerico interessante è quasi sempre approssimato.</p>
+<p>Le cause principali sono:</p>
+<ol class="arabic simple">
+<li><p><strong>errore nel modello o nei dati</strong>;</p></li>
+<li><p><strong>errore di discretizzazione</strong>;</p></li>
+<li><p><strong>errore di convergenza</strong>;</p></li>
+<li><p><strong>errore di arrotondamento</strong>.</p></li>
+</ol>
+<p>L’obiettivo non è eliminare completamente l’errore, ma controllarlo e mantenerlo entro una soglia accettabile.</p>
+</section>
+</section>
+<section id="misurare-l-errore">
+<h1>Misurare l’errore<a class="headerlink" href="#misurare-l-errore" title="Link to this heading">#</a></h1>
+<p><strong>Errore assoluto</strong></p>
+<p>Sia <span class="math notranslate nohighlight">\(u\)</span> una quantità esatta e sia <span class="math notranslate nohighlight">\(v\)</span> una sua approssimazione.</p>
+<p>L’errore assoluto è</p>
+<div class="math notranslate nohighlight">
+\[
+|u-v|.
+\]</div>
+<p>Misura la distanza diretta fra valore esatto e valore approssimato.</p>
+<p>È utile quando la scala del problema è nota o quando il valore esatto può essere vicino a zero.</p>
+<p><strong>Errore relativo</strong></p>
+<p>Se <span class="math notranslate nohighlight">\(u\neq 0\)</span>, l’errore relativo è</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{|u-v|}{|u|}.
+\]</div>
+<p>Misura l’errore rispetto alla scala del valore esatto.</p>
+<p>L’errore relativo è spesso più informativo dell’errore assoluto, soprattutto quando i valori possono avere grandezze molto diverse.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">),</span>
+    <span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">99.99</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">99.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">1e8</span><span class="p">,</span> <span class="mf">1e8</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">1e-8</span><span class="p">,</span> <span class="mf">2e-8</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;u esatto&#39;</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;v appross.&#39;</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;err. assoluto&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;err. relativo&#39;</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
+    <span class="n">abs_err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">v</span><span class="p">)</span>
+    <span class="n">rel_err</span> <span class="o">=</span> <span class="n">abs_err</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">if</span> <span class="n">u</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">u</span><span class="si">:</span><span class="s2">14.6g</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">14.6g</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">abs_err</span><span class="si">:</span><span class="s2">16.6g</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">rel_err</span><span class="si">:</span><span class="s2">16.6g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      u esatto     v appross.    err. assoluto    err. relativo
+             1           0.99             0.01             0.01
+             1           1.01             0.01             0.01
+          -1.5           -1.2              0.3              0.2
+           100          99.99             0.01           0.0001
+           100             99                1             0.01
+         1e+08          1e+08                1            1e-08
+         1e-08          2e-08            1e-08                1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se <span class="math notranslate nohighlight">\(|u|\)</span> è molto piccolo, l’errore relativo può diventare molto grande o poco significativo.</p>
+<p>Per questo motivo, in molti algoritmi si usano criteri misti, per esempio:</p>
+<div class="math notranslate nohighlight">
+\[
+|u-v|\le \mathrm{atol}+\mathrm{rtol}|u|.
+\]</div>
+<p>Qui:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">atol</span></code> è una tolleranza assoluta;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rtol</span></code> è una tolleranza relativa.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">errore_misto</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">v</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">atol</span> <span class="o">+</span> <span class="n">rtol</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+<span class="n">tests</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mf">1e-13</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">1e8</span><span class="p">,</span> <span class="mf">1e8</span> <span class="o">+</span> <span class="mf">1e-3</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">1e-14</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tests</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;u =&quot;</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="s2">&quot;v =&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s2">&quot;vicini?&quot;</span><span class="p">,</span> <span class="n">errore_misto</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>u = 1.0 v = 1.0000000000001 vicini? True
+u = 100000000.0 v = 100000000.001 vicini? False
+u = 1e-14 v = 0.0 vicini? True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="rappresentazione-dei-numeri-in-base-beta">
+<h1>Rappresentazione dei numeri in base <span class="math notranslate nohighlight">\(\beta\)</span><a class="headerlink" href="#rappresentazione-dei-numeri-in-base-beta" title="Link to this heading">#</a></h1>
+<p>Fissato un numero <span class="math notranslate nohighlight">\(\beta\)</span> intero maggiore di 1, rappresentiamo nella base <span class="math notranslate nohighlight">\(\beta\)</span> un numero reale qualunque <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<p><em>rappresentazione di tipo misto</em></p>
+<div class="math notranslate nohighlight">
+\[  \alpha=(\alpha_0\alpha_1\alpha_2\ldots\alpha_p .
+       \alpha_{p+1}\alpha_{p+1}\ldots)_\beta
+              =\sum_{k=0}^p\alpha_k\beta^{p-k} +
+    \sum_{k=1}^\infty\alpha_{k+p}\beta^{-k}
+   \]</div>
+<p><em>rappresentazione normalizzata</em></p>
+<div class="math notranslate nohighlight">
+\[ \alpha=\pm(.\alpha_1\alpha_2\ldots)\beta^{p}\]</div>
+</section>
+<section id="rappresentazione-dei-numeri-interi">
+<h1>Rappresentazione dei numeri interi<a class="headerlink" href="#rappresentazione-dei-numeri-interi" title="Link to this heading">#</a></h1>
+<p><strong>Conversione da base 10 a base <span class="math notranslate nohighlight">\(\beta=2\)</span></strong></p>
+<p><img alt="alt-text" src="../_images/fig1.png" /></p>
+<p align="center">
+  <img src="immagini_sorgente\fig1.png"  width="800">
+</p>
+<ul class="simple">
+<li><p>Si ottengono le cifre di rappresentazione di <span class="math notranslate nohighlight">\(\alpha\)</span> in base <span class="math notranslate nohighlight">\(\beta\)</span> dalla meno significativa alla più significativa.</p></li>
+<li><p>Pertanto, scrivendo i resti delle divisioni nell’ordine inverso a quello in cui sono stati ottenuti si
+ottiene la rappresentazione in forma sintetica di <span class="math notranslate nohighlight">\(\alpha\)</span> in base <span class="math notranslate nohighlight">\(\beta\)</span>.</p></li>
+<li><p>Sul calcolatore, il numero è cocnvertito in base 2 ed ogni cifra viene memorizzata in un bit. Con <span class="math notranslate nohighlight">\(N\)</span> bit sono rappresentabili i numeri naturali (interi positivi) da <span class="math notranslate nohighlight">\(0\)</span> a <span class="math notranslate nohighlight">\(2^{N-1}\)</span>.</p></li>
+</ul>
+<p>-Per rappresentare un numero intero negativo, si può utilizzare la rappresentazione con modulo e segno in cui il primo bit viene usato per rappresentare il segno e i successivi il modulo. Con questa rappresentazione, il numero 0 ha due possibili rappresentazioni: +0 e -0.</p>
+</section>
+<section id="rappresentazione-di-numeri-reali">
+<h1>Rappresentazione di numeri reali<a class="headerlink" href="#rappresentazione-di-numeri-reali" title="Link to this heading">#</a></h1>
+<p>Conversione da base 10 a base <span class="math notranslate nohighlight">\(\beta\)</span> di un numro minore di uno, tramite il metodo delle moltiplicazioni successive:</p>
+<p align="center">
+  <img src="immagini_sorgente\fig12.png"  width="800">
+</p>
+<ul class="simple">
+<li><p>Ci si arresta o perchè la parte frazionaria diventa nulla o perchè si è raggiunto un numero di cifre
+sufficienti.</p></li>
+<li><p>non è detto che se un
+numero ha rappresentazione finita in base 10 altrettanto accade in base <span class="math notranslate nohighlight">\(\beta\)</span>.</p></li>
+</ul>
+<p><strong>Conversione di un numero reale da base 10 a base <span class="math notranslate nohighlight">\(\beta\)</span></strong></p>
+<p>Si convertono separatamente la parte reale e la parte decimale.</p>
+<p>Esempio: <span class="math notranslate nohighlight">\(\alpha=-25.357\)</span></p>
+<ul class="simple">
+<li><p>Si converte la parte intera <span class="math notranslate nohighlight">\(25=(11001)_2\)</span></p></li>
+<li><p>Si converte la parte frazionaria    <span class="math notranslate nohighlight">\(.357=(.011)_2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha= =(-11001.011)_2\)</span></p></li>
+</ul>
+<p><strong>Rappresentazione scientifica normalizzata di un numero reale:</strong></p>
+<p>Ogni numero reale <span class="math notranslate nohighlight">\(x\in \mathbb{R}\)</span> può essere rappresentato come</p>
+<div class="math notranslate nohighlight">
+\[ x=\pm (0.d_1d_2d_3\ldots )\beta^p = \pm
+    \sum_{i=1}^\infty(d_i\beta^{-i})\beta^p \]</div>
+<p>dove</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p\)</span> è un numero intero</p></li>
+<li><p>le cifre <span class="math notranslate nohighlight">\(d_i\)</span> verificano le condizioni:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(0\leq d_i \leq \beta-1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d_1 \neq 0\)</span> e le <span class="math notranslate nohighlight">\(d_i\)</span> non sono tutte uguali a <span class="math notranslate nohighlight">\(\beta-1\)</span> a partire da un indice in poi.</p></li>
+</ul>
+</li>
+<li><p>La rappresentazione di <span class="math notranslate nohighlight">\(x\)</span> nella forma <span class="math notranslate nohighlight">\(\pm (0.d_1d_2d_3\ldots
+)\beta^p\)</span> è chiamata <strong>rappresentazione normalizzata</strong></p></li>
+<li><p>Il numero <span class="math notranslate nohighlight">\(m = 0.d_1d_2d_3\ldots \)</span> viene detto comunemente la <strong>mantissa</strong> di <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta^p\)</span> la <em>parte esponente</em></p></li>
+<li><p>Il numero <span class="math notranslate nohighlight">\(p\)</span> è detto anche <strong>caratteristica</strong> (o esponente) di <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> è detto <strong>base</strong></p></li>
+<li><p>Le <span class="math notranslate nohighlight">\(d_i\)</span> sono dette <strong>cifre della rappresentazione</strong></p></li>
+</ul>
+</section>
+<section id="sistema-floating-point">
+<h1>Sistema floating point<a class="headerlink" href="#sistema-floating-point" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>A causa della sua capacità finita, un calcolatore non è in grado di rappresentare tutto l’insieme
+dei numeri reali. Si pone pertanto il problema di definire, per ogni
+<span class="math notranslate nohighlight">\(x\)</span> rappresentato nella forma precedente, una sua rappresentazione
+approssimata nel calcolatore.</p></li>
+<li><p>Si tratta di un fatto tecnico, ma con importanti implicazioni nel calcolo numerico.</p></li>
+<li><p>Un metodo divenuto ormai usuale per il calcolo scientifico e
+noto come <em>sistema floating-point</em> o <em>virgola mobile</em>.</p></li>
+<li><p>Esso permette la rappresentazione di un
+ampio intervallo della retta reale con una distribuzione uniforme
+degli errori relativi. L’ampiezza effettiva dell’intervallo dipende
+dal particolare calcolatore su cui la procedura è implementata.</p></li>
+</ul>
+<p>Si definisce <strong>insieme dei numeri macchina (floating-point)</strong>
+con <span class="math notranslate nohighlight">\(t\)</span> cifre significative, base <span class="math notranslate nohighlight">\(\beta\)</span> e range <span class="math notranslate nohighlight">\((L,U)\)</span>, l’insieme
+dei numeri reali definito nel modo seguente</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{F}(\beta,t,L,U)=\Big\{ 0
+\Big\}\cup\Big\{x\in\mathbb{R}=\text{sign}(x)\beta^p\sum_{i=1}^td_i\beta^{-i}\Big\}
+\]</div>
+<p>ove <span class="math notranslate nohighlight">\(t\)</span>,<span class="math notranslate nohighlight">\(\beta\)</span> sono interi positivi con <span class="math notranslate nohighlight">\(\beta\geq2\)</span>.</p>
+<p>Si ha inoltre:</p>
+<div class="math notranslate nohighlight">
+\[ 0\leq d_i \leq \beta-1, \quad i=1,2,\ldots d_1 \neq 0, \quad L\leq p\leq U\]</div>
+<p>I-n rappresentazione posizionale un numero macchina <span class="math notranslate nohighlight">\(x \neq 0\)</span> viene
+denotato con <span class="math notranslate nohighlight">\(x = \pm.d_1d_2\ldots d_t \beta^p\)</span>.</p>
+<ul class="simple">
+<li><p>La maggior parte dei calcolatori ha la possibilità di operare con lunghezze
+diverse di <span class="math notranslate nohighlight">\(t\)</span>, a cui corrispondono, ad esempio, la semplice e la
+doppia precisione.</p></li>
+<li><p>E’ importante osservare che l’insieme
+<span class="math notranslate nohighlight">\(\mathbb{F}\)</span> non è un insieme continuo e neppure infinito.</p></li>
+</ul>
+<p>I numeri dell’insieme <span class="math notranslate nohighlight">\(\mathbb{F}\)</span> sono ugualmente spaziati
+tra le successive potenze di <span class="math notranslate nohighlight">\(\beta\)</span>, ma non su tutto l’intervallo.</p>
+<p><em>Esempio</em> <span class="math notranslate nohighlight">\(\beta=2\)</span>, <span class="math notranslate nohighlight">\(t=3\)</span>, <span class="math notranslate nohighlight">\(L=-1\)</span>, <span class="math notranslate nohighlight">\(U=2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{F}=\{0\}\cup\{0.100\times 2^p,  0.101\times 2^p,  0.110\times 2^p, 0.111\times 2^p, \; p=-1,0,1,2\\]</div>
+<p>dove 0.100, 0.101, 0.110, 0.</p>
+<p>Sono 33 numeri compreso lo zero.</p>
+<p align="center">
+  <img src="immagini_sorgente\fig22.png"  width="800">
+</p><p align="center">
+  <img src="immagini_sorgente\fig4.png"  width="800">
+</p>
+<p>Risulta evidente l’aumento dell’ampiezza degli intervalli definiti
+dal valore <span class="math notranslate nohighlight">\(p\)</span>, in ognuno dei quali vengono localizzati i 4 valori
+della mantissa; ne risulta di conseguenza una diradazione delle
+suddivisioni verso gli estremi sinistro e destro della retta reale.</p>
+<p>Le grandezze
+fondamentali che defiscono l’insieme dei numeri finiti, oltre alla
+base di rappresentazione <span class="math notranslate nohighlight">\(\beta\)</span>, sono:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L\)</span> e <span class="math notranslate nohighlight">\(U\)</span> che definiscono l’ordine di grandezza dei numeri
+rappresentabili e in genere <span class="math notranslate nohighlight">\(L\sim U\)</span>;</p></li>
+<li><p>il numero <span class="math notranslate nohighlight">\(t\)</span> di cifre della mantissa che fissa la precisione di
+rappresentazione di ogni numero; infatti la retta reale viene suddivisa in
+intervalli <span class="math notranslate nohighlight">\([\beta^p; \beta^{p+1}]\)</span> di ampiezza crescente
+esponenzialmente con il valore <span class="math notranslate nohighlight">\(p\)</span>, ed in ognuno di questi
+intervalli vengono rappresentati lo stesso numero
+<span class="math notranslate nohighlight">\((\beta-1)\beta^{t-1}\)</span> di valori. Si ha quindi una suddivisione
+molto densa per valori vicini allo 0 e più rada per valori grandi in
+valore assoluto.</p></li>
+<li><p>Tutti i numeri
+reali all’interno di un sotto-intervallo tra due valori
+rappresentabili vengono approssimati da uno dei due estremi, quindi
+maggiore è il numero <span class="math notranslate nohighlight">\(t\)</span> di cifre della mantissa, minore sarà
+l’ampiezza dei sotto-intervalli e quindi migliore l’approssimazione
+introdotta. La normalizzazione di numeri floating point causa un
+‘’salto’’ intorno allo 0 nell’intervallo dei reali.</p></li>
+<li><p>precisione del numero floating point dipende dalla
+lunghezza della mantissa</p></li>
+</ul>
+<ul class="simple">
+<li><p>Gli <span class="math notranslate nohighlight">\(n\)</span> bit (o
+posizioni) disponibili per la memorizzazione di un numero finito
+vengono suddivisi tra le <span class="math notranslate nohighlight">\(t\)</span> cifre della mantissa e l’esponente <span class="math notranslate nohighlight">\(p\)</span>,  più un bit per il segno del numero.</p></li>
+<li><p>Nel caso della rappresentazione binaria, sarà
+sempre <span class="math notranslate nohighlight">\(d_1 = 1\)</span>, per cui può essere sottointeso senza mai essere
+fisicamente rappresentato.</p></li>
+</ul>
+</section>
+<section id="rappresentazioni-ieee-floating-point">
+<h1>Rappresentazioni IEEE floating point<a class="headerlink" href="#rappresentazioni-ieee-floating-point" title="Link to this heading">#</a></h1>
+<p>Alcune tipiche
+rappresentazioni sono:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbb{F}_{(2,24,-128,127)}\)</span> precisione singola: 32 bit. Vengono destinati 24 bit alla mantissa (in
+realtà solo 23) e 8 all’esponente (<span class="math notranslate nohighlight">\(2^8\)</span> = 256 = U-L+1; con L=-128 e
+U=127)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{F}_{(2,53,-1024,1023)}\)</span> precisione doppia: 64 bit.
+Le cifre della mantissa sono 53 (rappresentati 52 bit) e
+dell’esponente 11 (<span class="math notranslate nohighlight">\(2^{11}\)</span> = 2048 =U-L+1; con L=-1024 e U=1023)</p></li>
+<li><p>Nella codifica IEEE standard esistono anche sequenze di bit per rappresentare i valori
++0, -0, +<span class="math notranslate nohighlight">\(\infty\)</span>, -<span class="math notranslate nohighlight">\(\infty\)</span>, e quantità simboliche chiamate NaN (Not a Number).
+Queste quantità sono utilizzate per gestire ``speciali’’ operazioni,
+tipo la radice quadrata di un numero negativo, altrimenti non rappresentabili</p></li>
+</ul>
+<p align="center">
+  <img src="immagini_sorgente\fig5.png"  width="800">
+</p>
+<ul class="simple">
+<li><p>Si noti che la normalizzazione della mantissa
+permette di sfruttare al meglio le cifre disponibili, evitando di
+rappresentare esplicitamente gli 0 non significativi. Ad esempio
+0.000124 viene rappresentato come <span class="math notranslate nohighlight">\(0.124\times10^{-3}\)</span>.</p></li>
+<li><p>La virgola
+quindi non ha una posizione fissa tra la parte intera e quella non,
+ma varia; per questo motivo tale rappresentazione è detta
+<em>floating-point</em> o a <em>virgola mobile</em>.</p></li>
+</ul>
+</section>
+<section id="rappresentazione-di-un-numero-reale-in-un-sistema-floating-point">
+<h1>Rappresentazione di un numero reale in un sistema floating-point<a class="headerlink" href="#rappresentazione-di-un-numero-reale-in-un-sistema-floating-point" title="Link to this heading">#</a></h1>
+<p>Come
+rappresentare un numero reale positivo <span class="math notranslate nohighlight">\(x\)</span> in un sistema di numeri
+macchina <span class="math notranslate nohighlight">\(\mathbb{F}(\beta, t,L,U)\)</span>?</p>
+<ul class="simple">
+<li><p>se il numero <span class="math notranslate nohighlight">\(x\)</span> è tale che <span class="math notranslate nohighlight">\(L \leq p \leq U\)</span> e <span class="math notranslate nohighlight">\(d_i = 0\)</span> per <span class="math notranslate nohighlight">\(i &gt; t\)</span>; allora <span class="math notranslate nohighlight">\(x\)</span> è un numero macchina ed è
+rappresentato esattamente.</p></li>
+<li><p>se <span class="math notranslate nohighlight">\(p\notin [L,U]\)</span>; il numero non può essere rappresentato
+esattamente. Se <span class="math notranslate nohighlight">\(p &lt; L\)</span>, si dice che si verifica
+un underflow; solitamente si assume come valore approssimato del numero <span class="math notranslate nohighlight">\(x\)</span> il numero zero.
+Se <span class="math notranslate nohighlight">\(p &gt; U\)</span> si verifica un overflow e solitamente non si effettua nessuna approssimazione, ma il
+sistema di calcolo dà un avvertimento più drastico, come ad esempio, l’arresto del calcolo.</p></li>
+<li><p>se la caratteristica <span class="math notranslate nohighlight">\(p \in [L,U]\)</span>, ma le cifre <span class="math notranslate nohighlight">\(d_i\)</span>, per <span class="math notranslate nohighlight">\(i &gt; t\)</span>, non sono tutte nulle.
+In questo caso si pone il problema di scegliere un suo rappresentante in <span class="math notranslate nohighlight">\(\mathbb{F}\)</span>. Tale operazione
+viene indicata comunemente come operazione di arrotondamento (rounding), anche se in realtà
+possono essere utilizzate tecniche di tipo diverso.</p></li>
+</ul>
+<p>Se il numero è infinito, al numero viene associato il suo float
+ottenuto troncando (o arrotondando) la mantissa e viene
+rappresentato in memoria il float ottenuto:</p>
+<div class="math notranslate nohighlight">
+\[ x=1.333333\ldots=0.133333\ldots \cdot 10^1=fl(x)=0.133333 \cdot 10^1 \]</div>
+</section>
+<section id="errori-di-rappresentazione">
+<h1>Errori di rappresentazione<a class="headerlink" href="#errori-di-rappresentazione" title="Link to this heading">#</a></h1>
+<p>Se un numero <span class="math notranslate nohighlight">\(x \in R\)</span> viene rappresentato in un sistema floating-point <span class="math notranslate nohighlight">\(\mathbb{F}(\beta, t,L,U)\)</span>  e <span class="math notranslate nohighlight">\(x\)</span> non appartiene al sistema floating point  si avrà che <span class="math notranslate nohighlight">\(fl(x) \neq x\)</span>, cioè fra il numero <span class="math notranslate nohighlight">\(fl(x)\)</span>, associato ad <span class="math notranslate nohighlight">\(x\)</span>, ed <span class="math notranslate nohighlight">\(x\)</span> c’è una differenza che viene detta *errore di rappresentazione di <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Rispetto a tale errore si può dare una stima per eccesso:</p>
+<p><strong>Errore relativo di arrotondamento</strong></p>
+<div class="math notranslate nohighlight">
+\[E_r=\frac{|fl(x)-x|}{|x|} &lt; \frac{1}{2}\beta^{1-t}\]</div>
+<p><strong>Errore relativo di troncamento</strong></p>
+<div class="math notranslate nohighlight">
+\[E_r=\frac{|fl(x)-x|}{|x|} &lt; \beta^{1-t}\]</div>
+<p>La quantità
+<span class="math notranslate nohighlight">\(eps = \frac{1}{2}\beta^{1-t}\)</span> è detta <strong>precisione
+macchina</strong> nel fissato sistema floating point.
+La sua importanza
+numerica è data dalla seguente caratterizzazione: <span class="math notranslate nohighlight">\(eps\)</span> è il più
+piccolo numero macchina positivo tale che</p>
+<div class="math notranslate nohighlight">
+\[fl(1+eps)&gt;1\]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="arutmetica-floating-point">
+<h1>Arutmetica floating-point<a class="headerlink" href="#arutmetica-floating-point" title="Link to this heading">#</a></h1>
+<p>Le operazioni eseguite sul calcolatore (calcolo numerico) possono essere eseguite solo con
+numeri rappresentabili sul calcolatore stesso.</p>
+<ul class="simple">
+<li><p>Poichè <span class="math notranslate nohighlight">\(\mathbb{F}\)</span> è un sottoinsieme di <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, le usuali operazioni aritmetiche
+sono definite anche per operandi in <span class="math notranslate nohighlight">\(\mathbb{F}\)</span>, ma il loro
+risultato, in generale, non sta in <span class="math notranslate nohighlight">\(\mathbb{F}\)</span>. \item \alert{Il
+risultato esatto è arrotondato ad un numero che stia in
+<span class="math notranslate nohighlight">\(\mathbb{F}\)</span>}.</p></li>
+<li><p><em>Operazione aritmetica reale</em>:
+$<span class="math notranslate nohighlight">\(\cdot \; :\;\mathbb{R}\times\mathbb{R}\rightarrow\mathbb{R}\)</span>$</p></li>
+<li><p><em>operazione floating-point (o di macchina)</em>:
+$<span class="math notranslate nohighlight">\(\odot:\mathbb{F}\times\mathbb{F}\rightarrow\mathbb{F}\)</span>$</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[x\odot y = fl(x \cdot y)\]</div>
+<ul class="simple">
+<li><p>Ogni operazione provoca in generale un errore, detto <em>errore di arrotondamento</em> (del risultato dell’operazione)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\left| \frac{(x\odot y)-(x\cdot y)}{x\cdot y}\right| &lt;  eps\]</div>
+<p><strong>Realizzazione
+hardware di un’operazione floating point</strong> (con registro con
+precisione estesa) <span class="math notranslate nohighlight">\(x \oplus y\)</span></p>
+<ul class="simple">
+<li><p>Eseguo l’operazione esatta <span class="math notranslate nohighlight">\(z=x+y\)</span></p></li>
+<li><p>Effettuo il troncamento del risultato <span class="math notranslate nohighlight">\(x\oplus y=fl(z)\)</span></p></li>
+</ul>
+<p>Non vale la proprietà associativa nell’aritmetica
+floating point.</p>
+<ul class="simple">
+<li><p>Sulla maggior parte dei computer le operazioni aritmetiche (passo 1) sono fatte utilizzando più bit di quelli
+utilizzati per memorizzare il risultato.</p></li>
+<li><p>Il formato intermedio esteso non è accessibile all’utente, ma viene
+memorizzato in un registro interno alla CPU.</p></li>
+<li><p>Una volta che il
+calcolo è stato fatto in precisione estesa, il risultato viene
+arrotondato alla precisione del risultato (passo 2)</p></li>
+</ul>
+<p>Il risultato di un’ operazione in aritmetica floating point puo’ essere differente rispetto al risultato della stessa operazion e in  aritmetica esatta.</p>
+<ul class="simple">
+<li><p>Addizione o sottrazione: lo spostamento della mantissa puo causare perdita di cifre o di accuratezza.</p></li>
+<li><p>Moltiplicazione: Il prodotto di due numeri con  <span class="math notranslate nohighlight">\(t\)</span>-cifre di mantissa ha al piu’
+<span class="math notranslate nohighlight">\(2t\)</span> cifre, quindi il risultato puo’non essere rappresentabile.</p></li>
+<li><p>Division :Il  quoziente di due numeri con  <span class="math notranslate nohighlight">\(t\)</span> cifre di mantissa puo’contenere piu’di <span class="math notranslate nohighlight">\(t\)</span> cifre come per esempio la rappresentazione binaria  di
+<span class="math notranslate nohighlight">\(1/10\)</span></p></li>
+</ul>
+<p>Esempio: <span class="math notranslate nohighlight">\(\beta=10\)</span>, <span class="math notranslate nohighlight">\(t=6\)</span>
+<span class="math notranslate nohighlight">\(x=192.403, y=0.635782, \ \ fl(x)=0.192403 \cdot 10^3, \ fl(y)=0.635782\cdot 10^0\)</span></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(z=fl(x)+fl(y)=(0.192403 + 0.000635782)\cdot 10^3 = 0.193038782 \cdot 10^3\)</span>
+<span class="math notranslate nohighlight">\(fl(z)=0.193039 \cdot 10^3\)</span> Le ultime due cifre di  <span class="math notranslate nohighlight">\(y\)</span> non influiscono sul risultato.</p></li>
+<li><p><span class="math notranslate nohighlight">\(w=fl(x)*fl(y)=(0.635782 \cdot 0.192403)\cdot 10^{3}=0.122326364146\cdot 10^{3}\)</span>
+<span class="math notranslate nohighlight">\(fl(w)=0.122326\cdot 10^{3}\)</span> che elimina la meta’ delle cifre..</p></li>
+</ul>
+<p>Esempio 2:</p>
+<p align="center">
+  <img src="immagini_sorgente\fig8.png"  width="600">
+</p><p>Il risultato in aritmetica reale puo’non essere rappfresentabile an ch perche’l’esponente <span class="math notranslate nohighlight">\(p\)</span> e’ esterno al suo range di rappresentazione:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p &gt; U\)</span> Overflow</p></li>
+<li><p><span class="math notranslate nohighlight">\(p&lt;L\)</span> Underflow</p></li>
+</ul>
+<section id="errori-nel-calcolo-numerico">
+<h2>Errori nel calcolo numerico<a class="headerlink" href="#errori-nel-calcolo-numerico" title="Link to this heading">#</a></h2>
+<p>Nella risoluzione di un problema numerico al calcolatore si possono avere diversi tipi di errore:</p>
+<ul class="simple">
+<li><p><strong>Errore di misura</strong>, dovuto alle imperfezioni dello strumento di misura dei dati del problema.</p></li>
+<li><p><strong>Errore di troncamento</strong>, quando un procedimento infinito viene realizzato come procedimento finito.
+(esempio: calcolo del valore di una funzione tramite sviluppo in serie).</p></li>
+<li><p><strong>Errore algoritmico</strong>, dovuto al propagarsi degli errori di arrotondamento sulle singole operazioni in un procedimento complesso.</p></li>
+<li><p><strong>Errore inerente</strong>, dovuto al fatto che i dati di un problema non sempre appartengono all’insieme <span class="math notranslate nohighlight">\(\mathbb{F}\)</span>
+dei numeri rappresentabili e quindi vengono approssimati.</p></li>
+</ul>
+</section>
+<section id="proprieta-degli-algoritmi">
+<h2>Proprietà degli algoritmi<a class="headerlink" href="#proprieta-degli-algoritmi" title="Link to this heading">#</a></h2>
+</section>
+<section id="accuratezza">
+<h2>17. Accuratezza<a class="headerlink" href="#accuratezza" title="Link to this heading">#</a></h2>
+<p>L’accuratezza misura quanto il risultato calcolato è vicino alla soluzione esatta.</p>
+<p>Può essere valutata con:</p>
+<ul class="simple">
+<li><p>errore assoluto;</p></li>
+<li><p>errore relativo;</p></li>
+<li><p>residuo;</p></li>
+<li><p>stime teoriche.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Il <strong>residuo</strong> misura quanto bene il risultato calcolato soddisfa l’equazione o il problema di partenza.</p>
+<p>Ad esempio, se vogliamo risolvere un’equazione</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=0
+\]</div>
+<p>e il metodo numerico produce un’approssimazione <span class="math notranslate nohighlight">\(\tilde{x}\)</span>, il residuo è</p>
+<div class="math notranslate nohighlight">
+\[
+r=f(\tilde{x}).
+\]</div>
+<p>Se <span class="math notranslate nohighlight">\(r\)</span> è vicino a zero, significa che <span class="math notranslate nohighlight">\(\tilde{x}\)</span> soddisfa quasi l’equazione.</p>
+<p>Analogamente, per un sistema lineare</p>
+<div class="math notranslate nohighlight">
+\[
+Ax=b,
+\]</div>
+<p>se <span class="math notranslate nohighlight">\(\tilde{x}\)</span> è la soluzione numerica calcolata, il residuo è</p>
+<div class="math notranslate nohighlight">
+\[
+r=b-A\tilde{x}.
+\]</div>
+<p>Un residuo piccolo indica che <span class="math notranslate nohighlight">\(A\tilde{x}\)</span> è vicino a <span class="math notranslate nohighlight">\(b\)</span>, cioè che la soluzione calcolata soddisfa quasi il sistema.</p>
+<p>È importante però distinguere tra <strong>errore</strong> e <strong>residuo</strong>:</p>
+<ul class="simple">
+<li><p>l’errore misura quanto <span class="math notranslate nohighlight">\(\tilde{x}\)</span> è vicino alla soluzione esatta;</p></li>
+<li><p>il residuo misura quanto <span class="math notranslate nohighlight">\(\tilde{x}\)</span> soddisfa bene l’equazione.</p></li>
+</ul>
+<blockquote>
+<div><p>In molti casi il residuo è utile perché la soluzione esatta non è nota, mentre il residuo può essere calcolato direttamente.</p>
+</div></blockquote>
+<p>Un algoritmo numerico dovrebbe permettere di prevedere la grandezza dell’errore atteso.</p>
+<section id="efficienza">
+<h3>Efficienza<a class="headerlink" href="#efficienza" title="Link to this heading">#</a></h3>
+<p>L’efficienza riguarda il <strong>costo computazionale</strong>.</p>
+<p>Si può misurare con:</p>
+<ul class="simple">
+<li><p>numero di operazioni aritmetiche;</p></li>
+<li><p>tempo CPU;</p></li>
+<li><p>memoria richiesta;</p></li>
+<li><p>accessi alla memoria;</p></li>
+<li><p>possibilità di vettorizzazione o parallelizzazione.</p></li>
+</ul>
+<p>Una stima classica conta le operazioni elementari, spesso chiamate <strong>flops</strong>.</p>
+</section>
+<section id="robustezza">
+<h3>Robustezza<a class="headerlink" href="#robustezza" title="Link to this heading">#</a></h3>
+<p>La robustezza misura la capacità di un algoritmo di funzionare bene in situazioni diverse.</p>
+<p>Un algoritmo robusto dovrebbe:</p>
+<ul class="simple">
+<li><p>produrre un risultato entro una tolleranza accettabile;</p></li>
+<li><p>oppure segnalare chiaramente il fallimento;</p></li>
+<li><p>evitare risultati apparentemente validi ma numericamente privi di senso.</p></li>
+</ul>
+<p>Molto software numerico è complesso perché deve gestire casi limite, non perché l’idea matematica di base sia difficile.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro_mnad.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="analisi_dati.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduzione all’analisi dei dati</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">I numeri finiti e il calcolo scientifico</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calcolo-scientifico-e-algoritmi-numerici">Calcolo scientifico e algoritmi numerici</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#che-cos-e-il-calcolo-scientifico">Che cos’è il calcolo scientifico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-l-errore-e-inevitabile">Perché l’errore è inevitabile</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#misurare-l-errore">Misurare l’errore</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazione-dei-numeri-in-base-beta">Rappresentazione dei numeri in base <span class="math notranslate nohighlight">\(\beta\)</span></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazione-dei-numeri-interi">Rappresentazione dei numeri interi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazione-di-numeri-reali">Rappresentazione di numeri reali</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sistema-floating-point">Sistema floating point</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazioni-ieee-floating-point">Rappresentazioni IEEE floating point</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rappresentazione-di-un-numero-reale-in-un-sistema-floating-point">Rappresentazione di un numero reale in un sistema floating-point</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-di-rappresentazione">Errori di rappresentazione</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#arutmetica-floating-point">Arutmetica floating-point</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-nel-calcolo-numerico">Errori nel calcolo numerico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proprieta-degli-algoritmi">Proprietà degli algoritmi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuratezza">17. Accuratezza</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficienza">Efficienza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robustezza">Robustezza</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Elena Loli Piccolomini
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
