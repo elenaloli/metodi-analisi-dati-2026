@@ -1,0 +1,831 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Risoluzione di equazioni non lineari &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/zeri';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mnad.png" class="logo__image only-light" alt="Metodi numerici per l'analisi dei dati - Home"/>
+    <script>document.write(`<img src="../_static/mnad.png" class="logo__image only-dark" alt="Metodi numerici per l'analisi dei dati - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Metodi numerici per l’analisi dei dati
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo numerico</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
+
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/elenaloli/computational-imaging.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/elenaloli/computational-imaging.git/issues/new?title=Issue%20on%20page%20%2Fbook/zeri.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/zeri.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Risoluzione di equazioni non lineari</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">Metodo di bisezione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">Metodo del punto fisso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">Metodo di Newton</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="risoluzione-di-equazioni-non-lineari">
+<h1>Risoluzione di equazioni non lineari<a class="headerlink" href="#risoluzione-di-equazioni-non-lineari" title="Link to this heading">#</a></h1>
+<p>L’obiettivo è risolvere l’equazione:</p>
+<div class="math notranslate nohighlight">
+\[f(x)=0\]</div>
+<p>dove <span class="math notranslate nohighlight">\(f:[a,b] \rightarrow  R\)</span> è una funzione continua.
+Questa equazione in generale non è risolubile con tecnoche analitiche, a meno di casi particolari di funzioni <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+<p><em>Condizioni di esistenza e unicità della soluzione nel continuo</em></p>
+<p>Se <span class="math notranslate nohighlight">\(f\)</span> è una funzione continua in [a,b] e tale che <span class="math notranslate nohighlight">\(f(a)f(b)&lt;0\)</span>,
+allora esiste almeno uno zero di <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\((a,b)\)</span>.</p>
+<p><em>Algoritmi per calcolare la soluzione: metodi iterativi</em></p>
+<ul class="simple">
+<li><p>Non è possibile in
+generale costruire metodi numerici che calcolino le radici di
+un’equazione non lineare in un numero finito di passi.</p></li>
+<li><p>I metodi per questo tipo di problema sono <strong>metodi iterativi.</strong></p></li>
+<li><p>A partire da uno o pi\ug dati iniziali, calcolano dei valori
+<span class="math notranslate nohighlight">\(x_k\)</span> attraverso un procedimento che si ripete (itera) sempre uguale
+ad ogni passo k:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[x_k=G(x_{k-1})\]</div>
+<ul class="simple">
+<li><p>Si crea quindi una successione che deve avere la proprieta di essere convergente e di convergere alla soluzione esatta, cioè sotto opportune
+condizioni gli iterati <span class="math notranslate nohighlight">\(x_k\)</span> convergono alla soluzione <span class="math notranslate nohighlight">\(x^*\)</span> (tale
+che <span class="math notranslate nohighlight">\(f(x^*)=0\)</span>) per <span class="math notranslate nohighlight">\(k \rightarrow \infty\)</span>.</p></li>
+</ul>
+<p>Schema algoritmo iterativo:</p>
+<ol class="arabic simple">
+<li><p>Dati: <span class="math notranslate nohighlight">\(x_0\)</span></p></li>
+</ol>
+<p>2.k=1</p>
+<ol class="arabic" start="3">
+<li><p>Ripeti finchè convergenza</p>
+<p>3.1 <span class="math notranslate nohighlight">\(x_k=G(x_{k-1})\)</span></p>
+<p>3.2  <span class="math notranslate nohighlight">\(k=k+1\)</span></p>
+</li>
+</ol>
+<p>end</p>
+<p>Sono da specificare nel singolo metodo le condizioni di convergenza
+che  regolano l’arresto del ciclo “ripeti”.</p>
+<p><strong>Ordine di converegenza dei metodi iterativi</strong></p>
+<p>Si dice che la successione <span class="math notranslate nohighlight">\({x_k}\)</span> generata da un metodo iterativo
+converge ad <span class="math notranslate nohighlight">\(x^*\)</span> con ordine <span class="math notranslate nohighlight">\(p\geq 1\)</span> se:
+$<span class="math notranslate nohighlight">\( \frac{|x_{k+1}-x^*a|}{|x_k-x^*|^p}= C, \forall
+k\geq k_0\)</span><span class="math notranslate nohighlight">\(dove \)</span>k_0<span class="math notranslate nohighlight">\( \eg un intero opportuno e \)</span>C \in R$ tale che:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bigg \{
+\begin{array}{rrl}
+0&lt;C\leq 1 &amp; se &amp; p=1 \\
+C&gt;0 &amp; se &amp;p&gt;1 \\
+\end{array}
+\end{split}\]</div>
+<p>In tal caso si dice che <strong>il metodo è di ordine<span class="math notranslate nohighlight">\(p\)</span></strong>.</p>
+<p><em>Osservazione</em>. nel caso <span class="math notranslate nohighlight">\(p=1\)</span> per avere convergenza deve
+essere <span class="math notranslate nohighlight">\(C&lt;1\)</span>. In questo caso <span class="math notranslate nohighlight">\(C\)</span> prende il nome di <em>fattore di
+convergenza.</em></p>
+<p>In generale la convergenza di un
+metodo iterativo per la risoluzione di un’equazione non lineare
+dipende dalla scelta del valore iniziale <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
+<p>Esisteranno quindi risultati di <strong>convergenza globale</strong> quando
+il metodo converge per <strong>ogni</strong>
+scelta di <span class="math notranslate nohighlight">\(x_0\)</span> e teoremi di <strong>convergenza locale</strong> quando il
+metodo converge solo se <span class="math notranslate nohighlight">\(x_0\)</span> è scelto in un
+opportuno intorno della radice
+esatta.</p>
+<p>*<em>Algoritmi per il calcolo di uno zero della funzione <span class="math notranslate nohighlight">\(f\)</span></em></p>
+<ul class="simple">
+<li><p>Metodo di bisezione</p></li>
+<li><p>Metodo del punto fisso</p></li>
+<li><p>Metodo di Newton</p></li>
+</ul>
+<section id="metodo-di-bisezione">
+<h2>Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link to this heading">#</a></h2>
+<p>Si costruisce una successione di
+intervalli (<span class="math notranslate nohighlight">\(f(a_1)&lt;0,f(b_1)&gt;0\)</span>):
+$<span class="math notranslate nohighlight">\(I_1=[a_1,b_1],I_2=[a_2,b_2], \ldots ,I_k=[a_k,b_k]\)</span><span class="math notranslate nohighlight">\(
+tali che:\)</span><span class="math notranslate nohighlight">\(I_k\subset I_{k-1} \subset \ldots \subset I_1\)</span><span class="math notranslate nohighlight">\( con
+\)</span>f(a_k)f(b_k)&lt;0, k=1,2 \ldots<span class="math notranslate nohighlight">\(. (\)</span>a_1=a,b_1=b<span class="math notranslate nohighlight">\(). Al passo \)</span>k<span class="math notranslate nohighlight">\( si
+calcola \)</span><span class="math notranslate nohighlight">\(c_k=\frac{a_k+b_k}{2}, \quad k=1,2 \ldots \)</span><span class="math notranslate nohighlight">\(e il valore
+\)</span>f(c_k)<span class="math notranslate nohighlight">\(. Se \)</span>f(c_k)=0,c_k=x^*<span class="math notranslate nohighlight">\(, altrimenti:
+\)</span><span class="math notranslate nohighlight">\([a_{k+1},b_{k+1}]=\left\{
+                      \begin{array}{ll}
+                        [a_k,c_k], &amp; \hbox{se \)</span>f(c_k)&gt;0<span class="math notranslate nohighlight">\(}\\
+                        1 [c_k,b_k], &amp; \hbox{se \)</span>f(c_k)&lt;0<span class="math notranslate nohighlight">\(.}
+                      \end{array}
+                    \right.
+\)</span>$</p>
+<p><em>Osservazioni sulla implementazione dell’algoritmo con i numeri finiti</em></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(c=a+\frac{b-a}{2}\)</span> altrimenti <span class="math notranslate nohighlight">\(c_{k+1}\)</span> pu\og cadere esterno
+all’intervallo <span class="math notranslate nohighlight">\([a_k,b_k]\)</span>.</p></li>
+</ul>
+<p>esempio: <span class="math notranslate nohighlight">\(a=0.983,b=0.986\)</span>,<span class="math notranslate nohighlight">\(\mathbb{F}(10,3,-5,5)\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(a)f(b)\)</span> pu\og non essere rappresentabile sulla macchina.
+per verificare il segno conviene quindi usare la funzione <span class="math notranslate nohighlight">\(sign(f)\)</span></p></li>
+<li><p>L’algoritmo in aritmetica
+finita pu\og non avere fine.</p></li>
+</ul>
+<p>esempio: <span class="math notranslate nohighlight">\(a_k=98.5\)</span>, <span class="math notranslate nohighlight">\(b_k=98.6\)</span>, <span class="math notranslate nohighlight">\(\epsilon=0.004\)</span> in
+<span class="math notranslate nohighlight">\(\mathbb{F}(10,3,-5,5)\)</span>. Infatti <span class="math notranslate nohighlight">\(c_k=98.55\)</span>, ma <span class="math notranslate nohighlight">\(fl(c_k)=0.985\cdot
+10^{2}\)</span>, quindi si genera una successione di iterati costanti.</p>
+<p>Test modificato: $<span class="math notranslate nohighlight">\(|b_k-a_k|&lt;\epsilon +eps\cdot max(|b|,|a|) \quad
+\&amp; \quad iter&lt;itmax\)</span><span class="math notranslate nohighlight">\( dove \)</span>eps$ è la precisione di
+macchina.</p>
+<p><em>Convergenza del metodo di bisezione</em></p>
+<p>Al passo <span class="math notranslate nohighlight">\(k\)</span>,
+$<span class="math notranslate nohighlight">\(b_{k+1}-a_{k+1}=\frac{1}{2}(b_k-a_k)=\frac{1}{2^2}(b_{k-1}-a_{k-1})=
+\ldots =\frac{1}{2^k}(b_1-a_1)\)</span><span class="math notranslate nohighlight">\( quindi
+\)</span>x^*=c_{k+1}\pm\epsilon_{k+1}$, dove</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{k+1}\leq
+\frac{1}{2^{k+1}}(b-a).\]</div>
+<p>Viceversa, fissato <span class="math notranslate nohighlight">\(\epsilon\)</span> tale che
+<span class="math notranslate nohighlight">\(\epsilon=\frac{1}{2^{k+1}}(b-a)\)</span>, il numero <span class="math notranslate nohighlight">\(c_{k+1}\)</span> \eg una
+approssimazione di <span class="math notranslate nohighlight">\(x^*\)</span> entro una tolleranza <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p>
+<p>Quindi per
+<span class="math notranslate nohighlight">\(k\rightarrow \infty\)</span>, <span class="math notranslate nohighlight">\(\{c_k\} \rightarrow x^*\)</span> con velocità di
+convergenza pari a quella della successione <span class="math notranslate nohighlight">\(\{\frac{1}{2^k}\}\)</span>.</p>
+<p>Il metodo fornisce inoltre una maggiorazione dell’errore, cioè
+fissata una tolleranza <span class="math notranslate nohighlight">\(\delta\)</span> è possibile determinare il numero
+minimo di iterazioni <span class="math notranslate nohighlight">\(k\)</span> per ottenere un errore minore di <span class="math notranslate nohighlight">\(\delta\)</span>.
+Infatti <span class="math notranslate nohighlight">\(k\)</span> è tale che:
+$<span class="math notranslate nohighlight">\(\frac{1}{2^k}(b-a)&lt;\delta \Rightarrow 2^k\geq
+\frac{b-a}{\delta}\Rightarrow\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(k\geq log_2\frac{b-a}{\delta}\)</span>$
+<strong>Complessità computazionale del metodo</strong>: ad ogni iterazione
+occorrono 2 valutazioni di funzione.</p>
+</section>
+<section id="metodo-del-punto-fisso">
+<h2>Metodo del punto fisso<a class="headerlink" href="#metodo-del-punto-fisso" title="Link to this heading">#</a></h2>
+<p>Il problema
+di cercare una radice di $<span class="math notranslate nohighlight">\(f(x)=0\)</span><span class="math notranslate nohighlight">\( viene spostato nel problema di
+cercare una soluzione dell'equazione \)</span><span class="math notranslate nohighlight">\(x=g(x)\)</span><span class="math notranslate nohighlight">\( cioè un punto
+fisso della funzione \)</span>g(x)$ dove</p>
+<div class="math notranslate nohighlight">
+\[g(x)=x-f(x)\Phi(x).\]</div>
+<p><strong>Perchè calcolare <span class="math notranslate nohighlight">\(f(x)=0\)</span> è equivalente a calcolare <span class="math notranslate nohighlight">\(x=g(x)\)</span> (per una opportuna funzione <span class="math notranslate nohighlight">\(g\)</span>)?</strong></p>
+<p>Se <span class="math notranslate nohighlight">\(f(x)\)</span> si
+annulla in <span class="math notranslate nohighlight">\([a,b]\)</span> e <span class="math notranslate nohighlight">\(\Phi(x)\)</span> è una funzione tale
+che:</p>
+<div class="math notranslate nohighlight">
+\[
+0&lt;|\Phi(x)|&lt;\infty, \ \ x \in [a,b]
+\]</div>
+<p>allora :</p>
+<ol class="arabic simple">
+<li><p>se <span class="math notranslate nohighlight">\(f(x)=0\)</span> allora <span class="math notranslate nohighlight">\(g(x)=x-0*f(x)=x\)</span></p></li>
+<li><p>se <span class="math notranslate nohighlight">\(g(x)=x\)</span> allora, poichè <span class="math notranslate nohighlight">\(\Phi(x)\)</span> non si annulla, necessariamente  è <span class="math notranslate nohighlight">\(f(x)=0\)</span>.</p></li>
+</ol>
+<p>Geometricamente è l’intersezione delle due curve:
+$<span class="math notranslate nohighlight">\(y=x \ \ \ y=g(x)\)</span>$</p>
+<p>Per potere applicare il metodo numerico, o l’algoritmo, nel caso discreto devono essercinin generale delle condizioni da verificare nel caso continuo. Se non si verificano queste condizioni e quindi non è possibile calcolare la soluzione nel caso continuo, allora non ha senso applicare l’algortimo anche nel caso discreto.</p>
+<p>Questo teorema è un esempio di tali condizioni.</p>
+<p><strong>Teorema di esistenza e unicità del punto fisso nel modello continuo</strong></p>
+<p>Sia <span class="math notranslate nohighlight">\(g(x)\)</span> continua in <span class="math notranslate nohighlight">\([a,b]\)</span> e tale che <span class="math notranslate nohighlight">\(g(x) \in [a,b]\)</span>. Sia <span class="math notranslate nohighlight">\(L\)</span>
+una costante  <span class="math notranslate nohighlight">\(0\leq L&lt;1\)</span> tale che, per ogni <span class="math notranslate nohighlight">\(x, y \in [a,b]\)</span> si ha:
+$<span class="math notranslate nohighlight">\(|g(x)-g(y)|\leq L|x-y|\)</span><span class="math notranslate nohighlight">\(
+ossia \)</span>g<span class="math notranslate nohighlight">\( è una contrazione in \)</span>[a,b]<span class="math notranslate nohighlight">\(. Allora esiste un unico
+punto fisso \)</span>x^*<span class="math notranslate nohighlight">\( di \)</span>g(x)<span class="math notranslate nohighlight">\( in \)</span>[a,b]$.</p>
+<p>Come tutti i teoremi ha una dimostrazione che non tratteremo in questo corso (così come in geerale le dimostrazioni dei teoremi) poichè non è la parte teorica il focus del corso e visto il tempo ridotto a disposizione. Per chi ha interesse a vederla potete consultare il testo….</p>
+<p><em>Osservazione</em></p>
+<p>Se <span class="math notranslate nohighlight">\(g(x)\)</span> è derivabile in <span class="math notranslate nohighlight">\([a,b]\)</span> con
+<span class="math notranslate nohighlight">\(|g'(x)|\leq L&lt;1\)</span> per <span class="math notranslate nohighlight">\(x \in [a,b]\)</span>, allora <span class="math notranslate nohighlight">\(g(x)\)</span> è una
+contrazione. Il viceversa non è vero perchè <span class="math notranslate nohighlight">\(g(x)\)</span> può non
+essere derivabile.</p>
+<p><strong>Algoritmo del punto fisso</strong></p>
+<p>Data una approssimazione iniziale <span class="math notranslate nohighlight">\(x_0\)</span> di <span class="math notranslate nohighlight">\(x^*\)</span>, punto fisso di <span class="math notranslate nohighlight">\(g(x)\)</span> in
+<span class="math notranslate nohighlight">\([a,b]\)</span>, si genera una successione di iterati mediante il metodo delle
+approssimazioni successive o del punto fisso o iterazione
+funzionale:</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}=g(x_k)\]</div>
+<p><strong>N.B. in un metodo iterativo, dopo avere espresso la regola per costruire la successione <span class="math notranslate nohighlight">\(x_0,x_1, \ldots x_k \ldots\)</span> si devono dare le condizioni per cui questa successione è effettiamnte convergente alla soluzione cercata. Altrimenti non è utilizzabile.</strong></p>
+<p>In questo caso ci sono due teoremi che assicurano la convergenza: il primo pone le condizioni affibchè la successione creata sia una successione che converge a un certo punto <span class="math notranslate nohighlight">\(x^*\)</span>, il secondo teorema assicura che il punto <span class="math notranslate nohighlight">\(x^*\)</span> è esattamente il punto voluto, cioè uno zero della funzione <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+<p><em>Teorema 1 (la successione converge a un punto).</em></p>
+<p>Se <span class="math notranslate nohighlight">\(g(x)\)</span> è continua e la successione <span class="math notranslate nohighlight">\(\{x_k\}\)</span> converge per <span class="math notranslate nohighlight">\(k
+\rightarrow \infty\)</span> a un punto <span class="math notranslate nohighlight">\(x^*\)</span>, allora <span class="math notranslate nohighlight">\(x^*\)</span> è punto fisso
+di <span class="math notranslate nohighlight">\(g(x)\)</span>. Infatti:</p>
+<div class="math notranslate nohighlight">
+\[x^*=\lim_{k \rightarrow \infty} x_{k+1}=\lim_{k \rightarrow \infty}g(
+x_{k})=g(\lim_{k \rightarrow \infty} x_{k})=g(x^*)\]</div>
+<p>Geometricamente, il metodo dell’iterazione funzionale equivale alla
+costruzione di una poligonale orientata con lati orizzontali e
+verticali nel piano <span class="math notranslate nohighlight">\(xy\)</span>.</p>
+<p align="center">
+  <img src="immagini_sorgente\fig100.png"  width="800">
+</p>
+<p align="center">
+  <img src="immagini_sorgente\fig101.png"  width="600">
+</p><p><em>Teorema 2 (il punto di convergenza è uno zero della funzione). Convergenza globale</em></p>
+<p>Sia <span class="math notranslate nohighlight">\(g(x)\)</span> una funzione definita in <span class="math notranslate nohighlight">\([a,b]\)</span>. Sia:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(g(x)\)</span>
+continua in <span class="math notranslate nohighlight">\([a,b]\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(g(x) \in [a,b]\)</span>
+-<span class="math notranslate nohighlight">\(g(x)\)</span> una contrazione in <span class="math notranslate nohighlight">\([a,b]\)</span></p></li>
+</ul>
+<p>Allora per ogni <span class="math notranslate nohighlight">\(x_0 \in [a,b]\)</span> la successione degli iterati
+<span class="math notranslate nohighlight">\(\{x_k\}\)</span> con <span class="math notranslate nohighlight">\(x_k=g(x_{k-1}), k=1,2 \ldots\)</span> converge per <span class="math notranslate nohighlight">\(k
+\rightarrow \infty\)</span> all’unico punto fisso <span class="math notranslate nohighlight">\(x^+\)</span> di <span class="math notranslate nohighlight">\(g(x)\)</span> in
+<span class="math notranslate nohighlight">\([a,b]\)</span>.
+Inoltre vale:
+$<span class="math notranslate nohighlight">\(|x_k-x^*|\leq \frac{\lambda^k}{1-\lambda}|x_1-x_0|\)</span>$</p>
+<p>Distinguiamo la <em>convergenza globale</em> dalla <em>convergenza locale</em>.
+Convergenza globale significa che il metodo, sotto opportune condizioni, converge <strong>per ogni iterato iniziale <span class="math notranslate nohighlight">\(x_0\)</span></strong> nell’intervallo di riferimento, mentre convergenza locale significa che il metodo converge <strong>se <span class="math notranslate nohighlight">\(x_0\)</span> appartiene ad un opportuno intorno della soluzione</strong> (intorno che oviamente non si conosce).</p>
+<p>Esempio.</p>
+<div class="math notranslate nohighlight">
+\[f(x)=x^3+4x^2-10=0, \ \  x \in [1,2]\]</div>
+<p>si considera <span class="math notranslate nohighlight">\(x_0=1.5\)</span>.</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(x=x-x^3-4x^2+10=g_1(x)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x=\left(\frac{1}{x}-4x\right)^{1/2}=g_2(x)\)</span> (da <span class="math notranslate nohighlight">\(x^3=10-4x^2\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x=\frac{1}{2}(10-x^3)^{1/2}=g_3(x)\)</span> (da
+<span class="math notranslate nohighlight">\(x^2=\frac{1}{4}(10-x^3)\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x=\left(\frac{10}{x+4}\right)^{1/2}=g_4(x)\)</span> (da
+<span class="math notranslate nohighlight">\(x^3+4x^2=10\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(xx-\frac{x^3+4x^2-10}{3x^2+8x}=g_5(x)\)</span> (da
+<span class="math notranslate nohighlight">\(x=x-\frac{f(x)}{f'(x)}\)</span>).</p></li>
+</ol>
+<p align="center">
+  <img src="immagini_sorgente\fig6.png"  width="900">
+</p>
+<p>Non tutte le
+scelte portano ad un metodo convergente (caso 1) o ben definito
+(caso 2). Inoltre la velocità di convergenza del metodo è
+diversa nei vari casi (con il metodo di bisezione per avere la
+stessa precisione sono necessarie 27 valutazioni di funzione</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(g'_1(x)=1-3x^2-8x,|g'(x)|&gt;1 \quad
+x\in[1,2]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g_2(x)\)</span> è definita per <span class="math notranslate nohighlight">\(-\sqrt{1}/2\leq x\leq \sqrt{1}/2
+\simeq 1.581113\)</span>, <span class="math notranslate nohighlight">\(\Rightarrow g_2(x) \notin [1,2]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(|g'_3(x)|=\frac{-3x^2}{4(10-x^3)^{1/2}}\)</span>, dunque <span class="math notranslate nohighlight">\(g'_3(x)\leq
+2.1213\)</span>, però in <span class="math notranslate nohighlight">\([1,1.5], |g'_3(x)|=|g'_3(1.5)|\backsimeq
+0.6556&lt;1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(g'_4(x)=\frac{1}{2}\sqrt{\frac{x+4}{10}}\)</span>, per cui
+<span class="math notranslate nohighlight">\(|g'_4(x)|\leq 0.15\)</span>, la convergenza è piùg rapida che nel caso
+(3).</p></li>
+<li><p><span class="math notranslate nohighlight">\(g'_5(x)=\frac{6x^4+32x^3+32x^2-60x-80}{(3x^2+8x)^2}\)</span> in
+<span class="math notranslate nohighlight">\([1,2], |g'_5(x)|\leq 0.6\)</span>. Tuttavia <span class="math notranslate nohighlight">\(g_5(x)\)</span> è il metodo a
+convergenza più rapida .</p></li>
+</ol>
+<p><em>Teorema di convergenza locale</em></p>
+<p>Sia <span class="math notranslate nohighlight">\(x^*\)</span> un punto fisso di <span class="math notranslate nohighlight">\(g(x)\)</span>; si suppone che <span class="math notranslate nohighlight">\(g(x)\)</span> sia
+continua e sia una contrazione per ogni <span class="math notranslate nohighlight">\(x \in [x^*-\rho,
+x^*+\rho]=I_\rho\)</span>. \
+Allora, per ogni <span class="math notranslate nohighlight">\(x_0 \in I_\rho\)</span>, la successione degli <span class="math notranslate nohighlight">\(\{x_k\}\)</span>
+è ben definita, ossia <span class="math notranslate nohighlight">\(x_k \in I_\rho\)</span> e converge per <span class="math notranslate nohighlight">\(k
+\rightarrow \infty\)</span> a <span class="math notranslate nohighlight">\(x^*\)</span>.\
+Inoltre, <span class="math notranslate nohighlight">\(x^*\)</span> è l’unico punto fisso di <span class="math notranslate nohighlight">\(g(x)\)</span> in <span class="math notranslate nohighlight">\(I_\rho\)</span>.</p>
+<p><em>Criteri di arresto</em></p>
+<p>Occorre determinare un criterio per
+vedere se l’approssimazione ottenuta è un punto fisso di <span class="math notranslate nohighlight">\(g(x)\)</span>
+ossia se
+<span class="math notranslate nohighlight">\(x-g(x)=\phi(x)f(x)=0\)</span>.</p>
+<p>Si ritiene che <span class="math notranslate nohighlight">\(x_k\)</span> sia una approssimazione accettabile se
+contemporaneamente:</p>
+<div class="math notranslate nohighlight">
+\[ |f(x_k)| \leq \epsilon_1 \quad \text{e} \quad |x_k-x_{k-1}|\leq
+    \epsilon_2\]</div>
+<p>oppure</p>
+<div class="math notranslate nohighlight">
+\[\frac{|f(x_k)|}{f_{\max}}\leq \sigma_1 \quad \text{e} \quad \frac{|x_k-x_{k-1}|}{|x_k|}\leq\sigma_2\]</div>
+<p>dove <span class="math notranslate nohighlight">\(\epsilon_1,\epsilon_2,\sigma_1,\sigma_2\)</span> sono tolleranze
+assegnate e <span class="math notranslate nohighlight">\(f_{\max}=\max_{x\in I_\rho}|f(x)|\)</span></p>
+</section>
+<section id="metodo-di-newton">
+<h2>Metodo di Newton<a class="headerlink" href="#metodo-di-newton" title="Link to this heading">#</a></h2>
+<p>Data l’equazione <span class="math notranslate nohighlight">\(f(x)=0\)</span>, si può determinare la soluzione
+<span class="math notranslate nohighlight">\(x^*\)</span> come punto fisso di</p>
+<div class="math notranslate nohighlight">
+\[x=x-\phi(x)f(x)=g(x)\]</div>
+<p>Quindi l’iterazione del metodo di Newton è:</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)}\]</div>
+<p><em>Interpretazione geometrica del metodo di Newton</em></p>
+<p align="center">
+  <img src="immagini_sorgente\fig7.png"  width="600">
+</p><p><em>Teorema di convergenza locale del metodo di Newton</em></p>
+<p>Sia <span class="math notranslate nohighlight">\(x^*\)</span> uno zero di <span class="math notranslate nohighlight">\(f(x)\)</span>. Sia <span class="math notranslate nohighlight">\(f(x)\)</span> continua insieme alle sue derivate prima,
+seconda e terza.</p>
+<p>Sia <span class="math notranslate nohighlight">\(f'(x)\neq 0\)</span> per <span class="math notranslate nohighlight">\(x\)</span> in un opportuno intorno di <span class="math notranslate nohighlight">\(x^*\)</span> e sia
+<span class="math notranslate nohighlight">\(f''(x^*)\neq 0\)</span> (<span class="math notranslate nohighlight">\(f(x)/f'(x)\)</span> deve essere definita e deve essere
+<span class="math notranslate nohighlight">\(g''(x)\neq 0\)</span>).</p>
+<p>Allora, per ogni <span class="math notranslate nohighlight">\(x_0 \in I_\rho\)</span>, la successione generata dal
+metodo di Newton converge a <span class="math notranslate nohighlight">\(x^*\)</span> in modo quadratico.</p>
+<p><em>Velocità di convergenza del metodo di Newton</em></p>
+<p>Il metodo iterativo ha quindi velocità di convergenza <em>quadratica</em>, cioè l’ordine di convergenza del metodo di Newton è p=2.</p>
+<p>Esempio 1</p>
+<p><span class="math notranslate nohighlight">\(\sin(x)-\left(\frac{x}{2}\right)^2\)</span> in <span class="math notranslate nohighlight">\([1,2].\)</span></p>
+<p><span class="math notranslate nohighlight">\(f'(x)=\cos(x)-\frac{x}{2}; \qquad f''(x)=-\sin(x)-\frac{1}{2}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\displaystyle{x_{k+1}=x_k-\frac{\sin(x_k)-\left(\frac{x_k}{2}\right)^2}{\cos(x)-\frac{x_k}{2}}}\)</span></p>
+<p>costante asintotica d’errore <span class="math notranslate nohighlight">\(\frac{g''(x^*)}{2}=\frac{f''(x^*)}{2f'(x^*)}\simeq0.54\)</span></p>
+<p align="center">
+  <img src="immagini_sorgente\fig108.png"  width="800">
+</p><p>Esempio 2</p>
+<p><span class="math notranslate nohighlight">\(x^2-\gamma=0\)</span></p>
+<p><span class="math notranslate nohighlight">\(\displaystyle{x_{k+1}=x_k-\frac{x_k^2-\gamma}{2x_k}}=\frac{1}{2}\left( x_k + \frac{\gamma}{x_k}\right)\)</span></p>
+<p>Per <span class="math notranslate nohighlight">\(\gamma=2\)</span> e <span class="math notranslate nohighlight">\([1,2]\)</span> si ha:</p>
+<p align="center">
+  <img src="immagini_sorgente\fig109.png"  width="250">
+</p>
+<p><em>costante asintotica d’errore</em></p>
+<p><span class="math notranslate nohighlight">\(\frac{f''(x^*)}{2f'(x^*)}=\frac{1}{2\sqrt{\gamma}}\)</span>; se <span class="math notranslate nohighlight">\(\gamma\)</span>
+è piccolo, la convergenza può essere lenta.</p>
+<p><em>Considerazioni algoritmiche</em></p>
+<ul class="simple">
+<li><p>I criteri di arresto del
+metodo di newton sono gli stessi del metodo delle approssimazioni
+successive.</p></li>
+<li><p>La complessità computazionale del metodo di Newton è
+pari ad una valutazione della funzione e una valutazione della
+derivata prima per passo.</p></li>
+<li><p>Se la complessit\ag di <span class="math notranslate nohighlight">\(f'\)</span> è analoga a quella di <span class="math notranslate nohighlight">\(f\)</span>, si dice che
+il metodo richiede due valutazioni di funzioni per passo.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">Metodo di bisezione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">Metodo del punto fisso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">Metodo di Newton</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Elena Loli Piccolomini
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

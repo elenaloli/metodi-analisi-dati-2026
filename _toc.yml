@@ -1,0 +1,20 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: book/intro_mnad
+- file: book/numeri_finiti
+- file: book/analisi_dati
+- file: book/fattorizzazione-matrici
+- file: book/fattorizzazione-matrici2
+#- file: book/norme e condizionamento
+#- file: book/sislin_minq
+# - file: book/zeri
+# - file: book/optimization
+# - file: book/convoluzione
+# - file: book/imaging
+# - file: book/eqdiff
+
+
