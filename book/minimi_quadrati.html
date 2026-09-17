@@ -177,7 +177,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Metodi numerici per l’analisi dei dati
+                    Metodi numerici per l’Analisi dei dati
                 </a>
             </li>
         </ul>
@@ -187,34 +187,9 @@
 
 
 
-
-
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
 
 </ul>
 
@@ -411,7 +386,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Il problema lineare dei minimi quadrati</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Il problema lineare dei minimi quadrati</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#due-problemi-predittivi-fondamentali">Due problemi predittivi fondamentali</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obiettivi">Obiettivi</a></li>
 </ul>
 </li>
@@ -477,6 +453,22 @@ document.write(`
 <h1>Il problema lineare dei minimi quadrati<a class="headerlink" href="#il-problema-lineare-dei-minimi-quadrati" title="Link to this heading">#</a></h1>
 <p>I minimi quadrati permettono di trovare una soluzione <strong>approssimata</strong> quando un sistema lineare non ammette una soluzione esatta. Sono inoltre alla base della regressione lineare e di numerosi metodi di analisi dei dati.</p>
 <p>In questo notebook introdurremo gradualmente il problema, la sua interpretazione geometrica e i principali metodi numerici per risolverlo.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="due-problemi-predittivi-fondamentali">
+<h1>Due problemi predittivi fondamentali<a class="headerlink" href="#due-problemi-predittivi-fondamentali" title="Link to this heading">#</a></h1>
+<p>Nell’apprendimento supervisionato distinguiamo soprattutto:</p>
+<ul class="simple">
+<li><p><strong>classificazione</strong>, se <span class="math notranslate nohighlight">\(y\)</span> è una categoria;</p></li>
+<li><p><strong>regressione</strong>, se <span class="math notranslate nohighlight">\(y\)</span> è una quantità numerica.</p></li>
+</ul>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/classificazione_regressione.png"><img alt="../_images/classificazione_regressione.png" src="../_images/classificazione_regressione.png" style="width: 100%;" />
+</a>
+</figure>
+<p align="center">
+  <img src="immagini_sorgente/classificazione_regressione.png" width="700">
+</p>
+<p>In entrambi i casi il modello deve individuare una relazione tra gli input e gli output osservati, per poi applicarla a nuovi dati. Cambiano il tipo di risposta e le misure utilizzate per valutare l’errore.</p>
 <section id="obiettivi">
 <h2>Obiettivi<a class="headerlink" href="#obiettivi" title="Link to this heading">#</a></h2>
 <p>Alla fine del notebook sapremo:</p>
@@ -1192,7 +1184,8 @@ A=\begin{bmatrix}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Il problema lineare dei minimi quadrati</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Il problema lineare dei minimi quadrati</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#due-problemi-predittivi-fondamentali">Due problemi predittivi fondamentali</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obiettivi">Obiettivi</a></li>
 </ul>
 </li>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Perché l’algebra lineare è fondamentale nell’analisi dei dati? &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+    <title>1. Perché l’algebra lineare è fondamentale nell’analisi dei dati? &#8212; Metodi numerici per l&#39;analisi dei dati</title>
   
   
   
@@ -62,7 +62,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/fattorizzazione-matrici';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Decomposizione ai valori singolari (SVD)" href="fattorizzazione-matrici2.html" />
     <link rel="prev" title="Introduzione all’analisi dei dati" href="analisi_dati.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -177,7 +176,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Metodi numerici per l’analisi dei dati
+                    Metodi numerici per l’Analisi dei dati
                 </a>
             </li>
         </ul>
@@ -187,34 +186,9 @@
 
 
 
-
-
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
-
-
-
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
 
 </ul>
 
@@ -401,7 +375,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Perché l’algebra lineare è fondamentale nell’analisi dei dati?</h1>
+    <h1>1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -411,35 +385,27 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#partiamo-da-un-problema-concreto">Partiamo da un problema concreto</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-algebra-lineare-permette-di-confrontare-gli-oggetti">L’algebra lineare permette di confrontare gli oggetti</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-modelli-diventano-operazioni-tra-matrici-e-vettori">I modelli diventano operazioni tra matrici e vettori</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridurre-la-complessita-significa-trovare-nuove-direzioni">Ridurre la complessità significa trovare nuove direzioni</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anche-immagini-e-testi-diventano-vettori-e-matrici">Anche immagini e testi diventano vettori e matrici</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-gli-strumenti-devono-anche-essere-numericamente-affidabili">Perché gli strumenti devono anche essere numericamente affidabili?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-mappa-delle-idee">Una mappa delle idee</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#una-mappa-delle-idee">Una mappa delle idee</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#strumenti-per-l-algebra-lineare-norme">Strumenti per l’algebra lineare: norme</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#strumenti-per-l-algebra-lineare-norme">2. Strumenti per l’algebra lineare: norme</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norme-vettoriali-e-matriciali">Norme vettoriali e matriciali</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-sintesi">In sintesi</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-sulle-matrici-fattorizzazione-di-matrici">Operazioni sulle matrici: fattorizzazione di matrici</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-idea-fondamentale">L’idea fondamentale</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-fattorizzare-una-matrice">Perché fattorizzare una matrice?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#una-prima-classificazione">Una prima classificazione</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-lu">Fattorizzazione LU</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-completo-su-una-matrice-3-times3">Esempio completo su una matrice <span class="math notranslate nohighlight">\(3\times3\)</span></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting">Pivoting</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-pivot-nullo-non-implica-che-la-matrice-sia-singolare">Un pivot nullo non implica che la matrice sia singolare</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-di-cholesky">Fattorizzazione di Cholesky</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-esempio-3-times3">Un esempio <span class="math notranslate nohighlight">\(3\times3\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposizione-agli-autovalori-teoria-e-numpy">Decomposizione agli autovalori: teoria e NumPy</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-sulle-matrici-fattorizzazione-di-matrici">3. Operazioni sulle matrici: fattorizzazione di matrici</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-fattorizzare-una-matrice">3.1 Perché fattorizzare una matrice?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-lu">3.2 Fattorizzazione LU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting">3.3.1 Pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-parziale">3.3.2 Pivoting parziale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-di-cholesky">3.4 Fattorizzazione di Cholesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-agli-autovalori-teoria-e-numpy">4.   Fattorizzazione agli autovalori: teoria e NumPy</a></li>
 </ul>
 </li>
 </ul>
@@ -455,10 +421,8 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="perche-l-algebra-lineare-e-fondamentale-nell-analisi-dei-dati">
-<h1>Perché l’algebra lineare è fondamentale nell’analisi dei dati?<a class="headerlink" href="#perche-l-algebra-lineare-e-fondamentale-nell-analisi-dei-dati" title="Link to this heading">#</a></h1>
-</section>
-<section id="partiamo-da-un-problema-concreto">
-<h1>Partiamo da un problema concreto<a class="headerlink" href="#partiamo-da-un-problema-concreto" title="Link to this heading">#</a></h1>
+<h1>1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?<a class="headerlink" href="#perche-l-algebra-lineare-e-fondamentale-nell-analisi-dei-dati" title="Link to this heading">#</a></h1>
+<p><em>Partiamo da un problema concreto</em></p>
 <p>Un’azienda raccoglie alcune informazioni sui propri clienti:</p>
 <ul class="simple">
 <li><p>numero di visite al sito nell’ultimo mese;</p></li>
@@ -828,9 +792,8 @@ Numero di caratteristiche per cliente: 4
 </ul>
 <p>Non basta quindi sapere che una soluzione esiste: bisogna saperla calcolare in modo efficiente e stabile.</p>
 </section>
-</section>
 <section id="una-mappa-delle-idee">
-<h1>Una mappa delle idee<a class="headerlink" href="#una-mappa-delle-idee" title="Link to this heading">#</a></h1>
+<h2>Una mappa delle idee<a class="headerlink" href="#una-mappa-delle-idee" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Domanda sui dati</p></th>
@@ -877,9 +840,11 @@ Numero di caratteristiche per cliente: 4
 <div><p>Studiare l’algebra lineare non significa soltanto imparare a fare calcoli con le matrici. Significa imparare il linguaggio che permette di trasformare i dati in informazione.</p>
 </div></blockquote>
 </section>
+</section>
 <section id="strumenti-per-l-algebra-lineare-norme">
-<h1>Strumenti per l’algebra lineare: norme<a class="headerlink" href="#strumenti-per-l-algebra-lineare-norme" title="Link to this heading">#</a></h1>
-<p><strong>Norme vettoriali e matriciali</strong></p>
+<h1>2. Strumenti per l’algebra lineare: norme<a class="headerlink" href="#strumenti-per-l-algebra-lineare-norme" title="Link to this heading">#</a></h1>
+<section id="norme-vettoriali-e-matriciali">
+<h2>Norme vettoriali e matriciali<a class="headerlink" href="#norme-vettoriali-e-matriciali" title="Link to this heading">#</a></h2>
 <p>Una <strong>norma</strong> associa a ogni vettore un numero non negativo che ne misura la grandezza. Una funzione:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -980,7 +945,6 @@ align: center
 \[
 \|A\mathbf{x}\|\leq\|A\|\,\|\mathbf{x}\|.
 \]</div>
-<p><em>Norme matriciali <span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(\infty\)</span> e <span class="math notranslate nohighlight">\(2\)</span></em></p>
 <p>Per <span class="math notranslate nohighlight">\(A=(a_{ij})\in\mathbb{R}^{m\times n}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -994,9 +958,9 @@ align: center
 <p>cioè la massima somma dei moduli degli elementi di una <strong>riga</strong>;</p>
 <div class="math notranslate nohighlight">
 \[
-\|A\|_2=\sigma_{\max}(A)=\sqrt{\rho(A^TA)},
+\|A\|_2=\sqrt{\rho(A^TA)},
 \]</div>
-<p>dove <span class="math notranslate nohighlight">\(\sigma_{\max}(A)\)</span> è il massimo valore singolare e <span class="math notranslate nohighlight">\(\rho\)</span> indica il raggio spettrale.</p>
+<p>dove  <span class="math notranslate nohighlight">\(\rho\)</span> indica il <em>raggio spettrale di A</em>, cioè il massimo autovalore in modulo di <span class="math notranslate nohighlight">\(A^TA\)</span>.</p>
 <p><em>Norma di Frobenius</em></p>
 <p>La norma di Frobenius considera la matrice come un vettore formato da tutti i suoi elementi:</p>
 <div class="math notranslate nohighlight">
@@ -1043,6 +1007,7 @@ Disuguaglianza verificata? True
 </div>
 </div>
 </div>
+</section>
 <section id="in-sintesi">
 <h2>In sintesi<a class="headerlink" href="#in-sintesi" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -1057,7 +1022,7 @@ Disuguaglianza verificata? True
 </section>
 </section>
 <section id="operazioni-sulle-matrici-fattorizzazione-di-matrici">
-<h1>Operazioni sulle matrici: fattorizzazione di matrici<a class="headerlink" href="#operazioni-sulle-matrici-fattorizzazione-di-matrici" title="Link to this heading">#</a></h1>
+<h1>3. Operazioni sulle matrici: fattorizzazione di matrici<a class="headerlink" href="#operazioni-sulle-matrici-fattorizzazione-di-matrici" title="Link to this heading">#</a></h1>
 <p>Molti problemi numerici diventano più semplici se, invece di lavorare direttamente con la matrice originale, la esprimiamo come prodotto di matrici dotate di una struttura particolare. Questa operazione prende il nome di <strong>fattorizzazione</strong> o <strong>decomposizione matriciale</strong>.</p>
 <p>In forma generale, cerchiamo</p>
 <div class="math notranslate nohighlight">
@@ -1065,8 +1030,6 @@ Disuguaglianza verificata? True
 A=F_1F_2\cdots F_r,
 \]</div>
 <p>dove i fattori <span class="math notranslate nohighlight">\(F_1,\ldots,F_r\)</span> sono più facili da utilizzare oppure mettono in evidenza proprietà importanti di <span class="math notranslate nohighlight">\(A\)</span>.</p>
-<section id="l-idea-fondamentale">
-<h2>L’idea fondamentale<a class="headerlink" href="#l-idea-fondamentale" title="Link to this heading">#</a></h2>
 <p>Fattorizzare una matrice non significa soltanto riscriverla in una forma diversa. La fattorizzazione trasforma un problema complesso in una successione di problemi più semplici.</p>
 <!-- ```{figure} immagini_sorgente/idea_fattorizzazione.png
 ---
@@ -1079,10 +1042,8 @@ align: center
 </p> -->
 <p><img alt="" src="../_images/idea_fattorizzazione.png" /></p>
 <p>La scelta dei fattori non è unica: dipende dal problema da risolvere e dalle proprietà della matrice.</p>
-</section>
-</section>
 <section id="perche-fattorizzare-una-matrice">
-<h1>Perché fattorizzare una matrice?<a class="headerlink" href="#perche-fattorizzare-una-matrice" title="Link to this heading">#</a></h1>
+<h2>3.1 Perché fattorizzare una matrice?<a class="headerlink" href="#perche-fattorizzare-una-matrice" title="Link to this heading">#</a></h2>
 <p>Le fattorizzazioni vengono utilizzate per:</p>
 <ul class="simple">
 <li><p>risolvere sistemi lineari;</p></li>
@@ -1099,9 +1060,7 @@ align: center
 <li><p><strong>stabilità numerica</strong>, perché limita la propagazione degli errori di arrotondamento;</p></li>
 <li><p><strong>interpretabilità</strong>, perché rende visibili proprietà nascoste della matrice.</p></li>
 </ol>
-</section>
-<section id="una-prima-classificazione">
-<h1>Una prima classificazione<a class="headerlink" href="#una-prima-classificazione" title="Link to this heading">#</a></h1>
+<p><strong>Una prima classificazione</strong></p>
 <p>Nel seguito considereremo due grandi famiglie di fattorizzazioni.</p>
 <figure class="align-center">
 <a class="reference internal image-reference" href="../_images/mappa_fattorizzazioni.png"><img alt="../_images/mappa_fattorizzazioni.png" src="../_images/mappa_fattorizzazioni.png" style="width: 100%;" />
@@ -1113,7 +1072,7 @@ align: center
 <p>Le <strong>fattorizzazioni triangolari</strong> sono particolarmente adatte alla soluzione di sistemi lineari. Le fattorizzazioni basate su <strong>matrici ortogonali</strong> sono fondamentali per minimi quadrati, autovalori, valori singolari e analisi dei dati.</p>
 </section>
 <section id="fattorizzazione-lu">
-<h1>Fattorizzazione LU<a class="headerlink" href="#fattorizzazione-lu" title="Link to this heading">#</a></h1>
+<h2>3.2 Fattorizzazione LU<a class="headerlink" href="#fattorizzazione-lu" title="Link to this heading">#</a></h2>
 <p>L’obiettivo è rappresentare la matrice <span class="math notranslate nohighlight">\(A\)</span> come</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1154,9 +1113,7 @@ R_i\leftarrow R_i-m_{ik}R_k.
 \frac{2}{3}n^3
 \]</div>
 <p>operazioni in virgola mobile, mentre la soluzione dei due sistemi triangolari costa circa <span class="math notranslate nohighlight">\(2n^2\)</span> operazioni.</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="esempio-completo-su-una-matrice-3-times3">
-<h1>Esempio completo su una matrice <span class="math notranslate nohighlight">\(3\times3\)</span><a class="headerlink" href="#esempio-completo-su-una-matrice-3-times3" title="Link to this heading">#</a></h1>
+<p><strong>Esempio completo su una matrice <span class="math notranslate nohighlight">\(3\times3\)</span></strong></p>
 <p>Consideriamo</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1227,8 +1184,8 @@ L=
 LU=A.
 \]</div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="pivoting">
-<h1>Pivoting<a class="headerlink" href="#pivoting" title="Link to this heading">#</a></h1>
+<section id="pivoting">
+<h2>3.3.1 Pivoting<a class="headerlink" href="#pivoting" title="Link to this heading">#</a></h2>
 <p>Nell’eliminazione di Gauss il numero utilizzato come divisore al passo <span class="math notranslate nohighlight">\(k\)</span> è il <strong>pivot</strong> <span class="math notranslate nohighlight">\(u_{kk}\)</span>. Per eliminare gli elementi sotto il pivot calcoliamo</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1241,8 +1198,7 @@ m_{ik}=\frac{u_{ik}}{u_{kk}},
 <li><p><strong>Pivot molto piccolo.</strong> I moltiplicatori possono diventare molto grandi e amplificare gli errori di arrotondamento.</p></li>
 </ol>
 <p>Il pivoting consiste nel riordinare opportunamente le equazioni prima di eseguire l’eliminazione.</p>
-<section id="un-pivot-nullo-non-implica-che-la-matrice-sia-singolare">
-<h2>Un pivot nullo non implica che la matrice sia singolare<a class="headerlink" href="#un-pivot-nullo-non-implica-che-la-matrice-sia-singolare" title="Link to this heading">#</a></h2>
+<p><em>Un pivot nullo non implica che la matrice sia singolare</em></p>
 <p>Consideriamo</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1292,7 +1248,9 @@ m_{21}=\frac{1}{\varepsilon},
 \]</div>
 <p>che può essere molto grande. Le operazioni coinvolgono allora numeri di grandezza molto diversa e possono causare cancellazione e perdita di cifre significative.</p>
 <p>Scambiando le righe, il pivot diventa <span class="math notranslate nohighlight">\(1\)</span> e il moltiplicatore diventa <span class="math notranslate nohighlight">\(\varepsilon\)</span>.</p>
-<p><em>Pivoting parziale</em></p>
+</section>
+<section id="pivoting-parziale">
+<h2>3.3.2 Pivoting parziale<a class="headerlink" href="#pivoting-parziale" title="Link to this heading">#</a></h2>
 <p>Al passo <span class="math notranslate nohighlight">\(k\)</span> del <strong>pivoting parziale</strong> cerchiamo, nella colonna corrente, l’elemento di modulo massimo tra le righe non ancora utilizzate:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1352,9 +1310,8 @@ True
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="fattorizzazione-di-cholesky">
-<h1>Fattorizzazione di Cholesky<a class="headerlink" href="#fattorizzazione-di-cholesky" title="Link to this heading">#</a></h1>
+<section id="fattorizzazione-di-cholesky">
+<h2>3.4 Fattorizzazione di Cholesky<a class="headerlink" href="#fattorizzazione-di-cholesky" title="Link to this heading">#</a></h2>
 <p>La fattorizzazione di Cholesky è una variante particolarmente efficiente della fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span>. Si applica alle matrici reali <strong>simmetriche e definite positive</strong>.</p>
 <p>Una matrice <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{n\times n}\)</span> è definita positiva se</p>
 <div class="math notranslate nohighlight">
@@ -1367,8 +1324,7 @@ True
 \[
 A=LL^T.
 \]</div>
-<section id="un-esempio-3-times3">
-<h2>Un esempio <span class="math notranslate nohighlight">\(3\times3\)</span><a class="headerlink" href="#un-esempio-3-times3" title="Link to this heading">#</a></h2>
+<p><em>Un esempio</em> <span class="math notranslate nohighlight">\(3\times3\)</span></p>
 <p>Consideriamo la matrice simmetrica definita positiva</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1428,8 +1384,8 @@ Errore ||A - LL^T||_2 = 0.0
 </div>
 </div>
 </section>
-<section id="decomposizione-agli-autovalori-teoria-e-numpy">
-<h2>Decomposizione agli autovalori: teoria e NumPy<a class="headerlink" href="#decomposizione-agli-autovalori-teoria-e-numpy" title="Link to this heading">#</a></h2>
+<section id="fattorizzazione-agli-autovalori-teoria-e-numpy">
+<h2>4.   Fattorizzazione agli autovalori: teoria e NumPy<a class="headerlink" href="#fattorizzazione-agli-autovalori-teoria-e-numpy" title="Link to this heading">#</a></h2>
 <p>Questo notebook introduce la teoria essenziale e applica la decomposizione alla matrice dell’esempio.</p>
 <p><em>Autovalori e autovettori</em></p>
 <p>Dato un operatore lineare rappresentato da una matrice quadrata <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{n\times n}\)</span>, un numero <span class="math notranslate nohighlight">\(\lambda\)</span> è un <strong>autovalore</strong> se esiste un vettore non nullo <span class="math notranslate nohighlight">\(v\)</span> tale che</p>
@@ -1575,15 +1531,6 @@ Verifica A @ V = V @ Lambda: True
         <p class="prev-next-title">Introduzione all’analisi dei dati</p>
       </div>
     </a>
-    <a class="right-next"
-       href="fattorizzazione-matrici2.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Decomposizione ai valori singolari (SVD)</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1600,35 +1547,27 @@ Verifica A @ V = V @ Lambda: True
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#partiamo-da-un-problema-concreto">Partiamo da un problema concreto</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-algebra-lineare-permette-di-confrontare-gli-oggetti">L’algebra lineare permette di confrontare gli oggetti</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-modelli-diventano-operazioni-tra-matrici-e-vettori">I modelli diventano operazioni tra matrici e vettori</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ridurre-la-complessita-significa-trovare-nuove-direzioni">Ridurre la complessità significa trovare nuove direzioni</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anche-immagini-e-testi-diventano-vettori-e-matrici">Anche immagini e testi diventano vettori e matrici</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-gli-strumenti-devono-anche-essere-numericamente-affidabili">Perché gli strumenti devono anche essere numericamente affidabili?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-mappa-delle-idee">Una mappa delle idee</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#una-mappa-delle-idee">Una mappa delle idee</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#strumenti-per-l-algebra-lineare-norme">Strumenti per l’algebra lineare: norme</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#strumenti-per-l-algebra-lineare-norme">2. Strumenti per l’algebra lineare: norme</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norme-vettoriali-e-matriciali">Norme vettoriali e matriciali</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-sintesi">In sintesi</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-sulle-matrici-fattorizzazione-di-matrici">Operazioni sulle matrici: fattorizzazione di matrici</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-idea-fondamentale">L’idea fondamentale</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-fattorizzare-una-matrice">Perché fattorizzare una matrice?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#una-prima-classificazione">Una prima classificazione</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-lu">Fattorizzazione LU</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-completo-su-una-matrice-3-times3">Esempio completo su una matrice <span class="math notranslate nohighlight">\(3\times3\)</span></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting">Pivoting</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-pivot-nullo-non-implica-che-la-matrice-sia-singolare">Un pivot nullo non implica che la matrice sia singolare</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-di-cholesky">Fattorizzazione di Cholesky</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-esempio-3-times3">Un esempio <span class="math notranslate nohighlight">\(3\times3\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposizione-agli-autovalori-teoria-e-numpy">Decomposizione agli autovalori: teoria e NumPy</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-sulle-matrici-fattorizzazione-di-matrici">3. Operazioni sulle matrici: fattorizzazione di matrici</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-fattorizzare-una-matrice">3.1 Perché fattorizzare una matrice?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-lu">3.2 Fattorizzazione LU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting">3.3.1 Pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-parziale">3.3.2 Pivoting parziale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-di-cholesky">3.4 Fattorizzazione di Cholesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-agli-autovalori-teoria-e-numpy">4.   Fattorizzazione agli autovalori: teoria e NumPy</a></li>
 </ul>
 </li>
 </ul>

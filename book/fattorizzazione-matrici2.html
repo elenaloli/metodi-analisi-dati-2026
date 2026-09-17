@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Decomposizione ai valori singolari (SVD) &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+    <title>5. Decomposizione ai valori singolari (SVD) &#8212; Metodi numerici per l&#39;analisi dei dati</title>
   
   
   
@@ -62,7 +62,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/fattorizzazione-matrici2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Perché l’algebra lineare è fondamentale nell’analisi dei dati?" href="fattorizzazione-matrici.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,6 +124,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -176,44 +177,19 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Metodi numerici per l’analisi dei dati
+                    Metodi numerici per l’Analisi dei dati
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
 
 
 
-
-
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Decomposizione ai valori singolari (SVD)</a></li>
 
 </ul>
 
@@ -400,7 +376,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Decomposizione ai valori singolari (SVD)</h1>
+    <h1>5. Decomposizione ai valori singolari (SVD)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -410,36 +386,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decomposizione ai valori singolari (SVD)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#richiamo-ortogonalita">Richiamo: ortogonalità</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-di-esistenza-della-svd">Teorema di esistenza della SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensioni-delle-matrici">Dimensioni delle matrici</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svd-compatta">SVD compatta</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vettori-singolari">Vettori singolari</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-geometrica">Interpretazione geometrica</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relazione-con-autovalori-e-autovettori">Relazione con autovalori e autovettori</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rango-immagine-e-nucleo">Rango, immagine e nucleo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposizione-diadica">Decomposizione diadica</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svd-troncata-e-approssimazione-a-rango-basso">SVD troncata e approssimazione a rango basso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norme-e-numero-di-condizionamento">Norme e numero di condizionamento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudoinversa-mediante-svd">Pseudoinversa mediante SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aspetti-numerici">Aspetti numerici</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximazione-mediante-diadi">Approximazione mediante diadi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qualita-dell-approssimazione">Qualità dell’approssimazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-come-compressione">Interpretazione come compressione</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. Decomposizione ai valori singolari (SVD)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#richiamo-ortogonalita">5.1 Richiamo: ortogonalità</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-di-esistenza-della-svd">5.2 Teorema di esistenza della SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relazione-con-autovalori-e-autovettori">5.4 Relazione con autovalori e autovettori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rango-immagine-e-nucleo">5.5 Rango, immagine e nucleo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-decomposizione-diadica">5.6 Una applicazione:  decomposizione diadica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudoinversa-mediante-svd">5.7 Pseudoinversa mediante SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aspetti-numerici">5.8 Aspetti numerici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximazione-mediante-diadi">5.9 Approximazione mediante diadi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-come-compressione">5.10 Interpretazione come compressione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-pca-mediante-svd">5.11 Una applicazione:  PCA mediante SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-il-dataset-iris">5.12 Esempio: il dataset Iris</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-mediante-svd">PCA mediante SVD</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#legame-tra-pca-e-svd">Legame tra PCA e SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-il-dataset-iris">Esempio: il dataset Iris</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proiezione-sulle-prime-due-componenti">Proiezione sulle prime due componenti</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-delle-componenti">Interpretazione delle componenti</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ricostruzione-con-un-numero-ridotto-di-componenti">Ricostruzione con un numero ridotto di componenti</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#una-scelta-importante-centrare-o-standardizzare">Una scelta importante: centrare o standardizzare?</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ricostruzione-con-un-numero-ridotto-di-componenti">Ricostruzione con un numero ridotto di componenti</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-sintesi">In sintesi</a></li>
 </ul>
 </li>
@@ -455,9 +416,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="decomposizione-ai-valori-singolari-svd">
-<h1>Decomposizione ai valori singolari (SVD)<a class="headerlink" href="#decomposizione-ai-valori-singolari-svd" title="Link to this heading">#</a></h1>
-<p>La <strong>Singular Value Decomposition</strong> è una delle fattorizzazioni più importanti dell’algebra lineare numerica. È definita per ogni matrice, anche rettangolare o di rango non massimo, e permette di descrivere in modo trasparente:</p>
+  <section id="decomposizione-ai-valori-singolari-svd">
+<h1>5. Decomposizione ai valori singolari (SVD)<a class="headerlink" href="#decomposizione-ai-valori-singolari-svd" title="Link to this heading">#</a></h1>
+<p>La <strong>Decomposizione in Valori Singolari (Singular Value Decomposition o SVD)</strong> è una delle fattorizzazioni più importanti dell’algebra lineare numerica. È definita per ogni matrice, anche rettangolare o di rango non massimo, e permette di descrivere in modo trasparente:</p>
 <ul class="simple">
 <li><p>l’azione geometrica di una matrice;</p></li>
 <li><p>rango, nucleo e immagine;</p></li>
@@ -465,8 +426,8 @@ document.write(`
 <li><p>approssimazioni a rango basso e compressione dei dati.</p></li>
 </ul>
 <section id="richiamo-ortogonalita">
-<h2>Richiamo: ortogonalità<a class="headerlink" href="#richiamo-ortogonalita" title="Link to this heading">#</a></h2>
-<p>Due vettori <span class="math notranslate nohighlight">\(x,y\in\mathbb{R}^n\)</span> sono ortogonali se <span class="math notranslate nohighlight">\(x^Ty=0\)</span>. Un insieme di vettori è <strong>ortonormale</strong> se i vettori sono ortogonali tra loro e hanno norma euclidea unitaria.</p>
+<h2>5.1 Richiamo: ortogonalità<a class="headerlink" href="#richiamo-ortogonalita" title="Link to this heading">#</a></h2>
+<p>Due vettori <span class="math notranslate nohighlight">\(x,y\in\mathbb{R}^n\)</span> sono <em>ortogonali</em> se <span class="math notranslate nohighlight">\(x^Ty=0\)</span>. Un insieme di vettori è <strong>ortonormale</strong> se i vettori sono ortogonali tra loro e hanno norma euclidea unitaria.</p>
 <p>Una matrice quadrata <span class="math notranslate nohighlight">\(Q\)</span> è ortogonale quando le sue colonne formano una base ortonormale, cioè</p>
 <div class="math notranslate nohighlight">
 \[
@@ -506,7 +467,7 @@ Q^TQ=QQ^T=I, \qquad Q^{-1}=Q^T.
 </div>
 </section>
 <section id="teorema-di-esistenza-della-svd">
-<h2>Teorema di esistenza della SVD<a class="headerlink" href="#teorema-di-esistenza-della-svd" title="Link to this heading">#</a></h2>
+<h2>5.2 Teorema di esistenza della SVD<a class="headerlink" href="#teorema-di-esistenza-della-svd" title="Link to this heading">#</a></h2>
 <p>Per ogni matrice reale <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{m\times n}\)</span> esistono due matrici ortogonali</p>
 <div class="math notranslate nohighlight">
 \[
@@ -523,9 +484,6 @@ V\in\mathbb{R}^{n\times n},
 \[
 \sigma_1\geq\sigma_2\geq\cdots\geq\sigma_p\geq0.
 \]</div>
-</section>
-<section id="dimensioni-delle-matrici">
-<h2>Dimensioni delle matrici<a class="headerlink" href="#dimensioni-delle-matrici" title="Link to this heading">#</a></h2>
 <p>Nella SVD completa le dimensioni sono:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -555,16 +513,13 @@ V\in\mathbb{R}^{n\times n},
 </table>
 </div>
 <p>Le colonne di <span class="math notranslate nohighlight">\(U=(u_1,\ldots,u_m)\)</span> e di <span class="math notranslate nohighlight">\(V=(v_1,\ldots,v_n)\)</span> sono basi ortonormali rispettivamente di <span class="math notranslate nohighlight">\(\mathbb{R}^m\)</span> e <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
-<p>La figura seguente, tratta dalle slide, evidenzia le dimensioni dei fattori nella SVD completa.</p>
 <figure class="align-center">
 <a class="reference internal image-reference" href="../_images/svd_dimensioni.png"><img alt="../_images/svd_dimensioni.png" src="../_images/svd_dimensioni.png" style="width: 100%;" />
 </a>
 </figure>
 <p align="center">
   <img src="immagini_sorgente/svd_dimensioni.png" width="700">
-</p></section>
-<section id="svd-compatta">
-<h2>SVD compatta<a class="headerlink" href="#svd-compatta" title="Link to this heading">#</a></h2>
+</p><p><strong>SVD compatta</strong></p>
 <p>Se <span class="math notranslate nohighlight">\(r=\operatorname{rank}(A)\)</span>, allora esattamente <span class="math notranslate nohighlight">\(r\)</span> valori singolari sono positivi:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -577,9 +532,6 @@ V\in\mathbb{R}^{n\times n},
 A=U_r\Sigma_rV_r^T,
 \]</div>
 <p>dove <span class="math notranslate nohighlight">\(U_r\in\mathbb{R}^{m\times r}\)</span>, <span class="math notranslate nohighlight">\(\Sigma_r\in\mathbb{R}^{r\times r}\)</span> e <span class="math notranslate nohighlight">\(V_r\in\mathbb{R}^{n\times r}\)</span>. Questa forma contiene tutta l’informazione necessaria a ricostruire <span class="math notranslate nohighlight">\(A\)</span>.</p>
-</section>
-<section id="vettori-singolari">
-<h2>Vettori singolari<a class="headerlink" href="#vettori-singolari" title="Link to this heading">#</a></h2>
 <p>Per ogni valore singolare positivo valgono le relazioni fondamentali</p>
 <div class="math notranslate nohighlight">
 \[
@@ -588,65 +540,8 @@ A^Tu_i=\sigma_i v_i.
 \]</div>
 <p>Quindi <span class="math notranslate nohighlight">\(A\)</span> trasforma il vettore unitario <span class="math notranslate nohighlight">\(v_i\)</span> nel vettore <span class="math notranslate nohighlight">\(u_i\)</span>, moltiplicandone la lunghezza per <span class="math notranslate nohighlight">\(\sigma_i\)</span>. Le direzioni <span class="math notranslate nohighlight">\(v_i\)</span> sono le direzioni principali nel dominio; le direzioni <span class="math notranslate nohighlight">\(u_i\)</span> sono le corrispondenti direzioni nel codominio.</p>
 </section>
-<section id="interpretazione-geometrica">
-<h2>Interpretazione geometrica<a class="headerlink" href="#interpretazione-geometrica" title="Link to this heading">#</a></h2>
-<p>La trasformazione <span class="math notranslate nohighlight">\(x\mapsto Ax\)</span> può essere letta in tre passaggi:</p>
-<div class="math notranslate nohighlight">
-\[
-x \xrightarrow{\,V^T\,} V^Tx
-\xrightarrow{\,\Sigma\,} \Sigma V^Tx
-\xrightarrow{\,U\,} U\Sigma V^Tx.
-\]</div>
-<ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(V^T\)</span> ruota o riflette il sistema di riferimento;</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Sigma\)</span> dilata o contrae lungo direzioni ortogonali;</p></li>
-<li><p><span class="math notranslate nohighlight">\(U\)</span> applica una seconda rotazione o riflessione.</p></li>
-</ol>
-<p>In due dimensioni, la circonferenza unitaria viene trasformata in un’ellisse i cui semiassi hanno lunghezza <span class="math notranslate nohighlight">\(\sigma_1\)</span> e <span class="math notranslate nohighlight">\(\sigma_2\)</span>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Trasformazione della circonferenza unitaria in un&#39;ellisse</span>
-<span class="n">A_geo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]])</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
-<span class="n">cerchio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
-<span class="n">ellisse</span> <span class="o">=</span> <span class="n">A_geo</span> <span class="o">@</span> <span class="n">cerchio</span>
-<span class="n">U_geo</span><span class="p">,</span> <span class="n">s_geo</span><span class="p">,</span> <span class="n">VT_geo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A_geo</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cerchio</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cerchio</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Dominio: circonferenza unitaria&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ellisse</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ellisse</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Codominio: ellisse&#39;</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.7&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.7&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">colore</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:purple&#39;</span><span class="p">]):</span>
-    <span class="n">asse</span> <span class="o">=</span> <span class="n">s_geo</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">U_geo</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">asse</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">asse</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span>
-                 <span class="n">scale_units</span><span class="o">=</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colore</span><span class="p">,</span>
-                 <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s1">&#39;$\sigma_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">u_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Valori singolari:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">s_geo</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/41b2794ff7fb1873cf2ebfd7eb64dcea5080fa77674e1dd324a5663bda07e4b5.png" src="../_images/41b2794ff7fb1873cf2ebfd7eb64dcea5080fa77674e1dd324a5663bda07e4b5.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valori singolari: [2.5583 0.9772]
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="relazione-con-autovalori-e-autovettori">
-<h2>Relazione con autovalori e autovettori<a class="headerlink" href="#relazione-con-autovalori-e-autovettori" title="Link to this heading">#</a></h2>
+<h2>5.4 Relazione con autovalori e autovettori<a class="headerlink" href="#relazione-con-autovalori-e-autovettori" title="Link to this heading">#</a></h2>
 <p>Dalla SVD segue</p>
 <div class="math notranslate nohighlight">
 \[
@@ -667,7 +562,6 @@ AA^Tu_i=\sigma_i^2u_i.
 <blockquote>
 <div><p>Questa relazione è utile teoricamente, ma in generale non conviene calcolare numericamente la SVD formando esplicitamente <span class="math notranslate nohighlight">\(A^TA\)</span>: il condizionamento viene elevato al quadrato e si può perdere accuratezza.</p>
 </div></blockquote>
-<p>La diagonalizzazione di <span class="math notranslate nohighlight">\(A^TA\)</span> mediante i vettori singolari destri è rappresentata nello schema delle slide.</p>
 <figure class="align-center">
 <a class="reference internal image-reference" href="../_images/svd_ata.png"><img alt="../_images/svd_ata.png" src="../_images/svd_ata.png" style="width: 100%;" />
 </a>
@@ -717,7 +611,7 @@ V^T V =
 </div>
 </section>
 <section id="rango-immagine-e-nucleo">
-<h2>Rango, immagine e nucleo<a class="headerlink" href="#rango-immagine-e-nucleo" title="Link to this heading">#</a></h2>
+<h2>5.5 Rango, immagine e nucleo<a class="headerlink" href="#rango-immagine-e-nucleo" title="Link to this heading">#</a></h2>
 <p>Se <span class="math notranslate nohighlight">\(A\)</span> ha rango <span class="math notranslate nohighlight">\(r\)</span>, la SVD rende immediatamente visibili i suoi sottospazi fondamentali:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -733,8 +627,8 @@ V^T V =
 \]</div>
 <p>In aritmetica floating point non si verifica quasi mai se <span class="math notranslate nohighlight">\(\sigma_i\)</span> è esattamente zero: si confronta con una tolleranza dipendente da <span class="math notranslate nohighlight">\(\sigma_1\)</span>, dalle dimensioni della matrice e dalla precisione di macchina.</p>
 </section>
-<section id="decomposizione-diadica">
-<h2>Decomposizione diadica<a class="headerlink" href="#decomposizione-diadica" title="Link to this heading">#</a></h2>
+<section id="una-applicazione-decomposizione-diadica">
+<h2>5.6 Una applicazione:  decomposizione diadica<a class="headerlink" href="#una-applicazione-decomposizione-diadica" title="Link to this heading">#</a></h2>
 <p>La SVD compatta può essere scritta come somma di matrici di rango uno:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -760,9 +654,7 @@ Dopo 2 termine/i: errore di Frobenius = 0.000000
 </div>
 </div>
 </div>
-</section>
-<section id="svd-troncata-e-approssimazione-a-rango-basso">
-<h2>SVD troncata e approssimazione a rango basso<a class="headerlink" href="#svd-troncata-e-approssimazione-a-rango-basso" title="Link to this heading">#</a></h2>
+<p><strong>SVD troncata e approssimazione a rango basso</strong></p>
 <p>Se conserviamo soltanto i primi <span class="math notranslate nohighlight">\(k&lt;r\)</span> termini otteniamo</p>
 <div class="math notranslate nohighlight">
 \[
@@ -808,51 +700,8 @@ k=3: errore 2 = 0.0322 (sigma_4=0.0322), errore F = 0.0322 (teorico=0.0322)
 </div>
 </div>
 </section>
-<section id="norme-e-numero-di-condizionamento">
-<h2>Norme e numero di condizionamento<a class="headerlink" href="#norme-e-numero-di-condizionamento" title="Link to this heading">#</a></h2>
-<p>La SVD consente di calcolare direttamente alcune quantità fondamentali:</p>
-<div class="math notranslate nohighlight">
-\[
-\|A\|_2=\sigma_1,
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\|A\|_F=\sqrt{\sigma_1^2+\cdots+\sigma_r^2}.
-\]</div>
-<p>Se <span class="math notranslate nohighlight">\(A\)</span> è quadrata e invertibile,</p>
-<div class="math notranslate nohighlight">
-\[
-\|A^{-1}\|_2=\frac{1}{\sigma_n}, \qquad
-\kappa_2(A)=\frac{\sigma_1}{\sigma_n}.
-\]</div>
-<p>Un valore singolare minimo molto piccolo indica che esiste una direzione fortemente contratta da <span class="math notranslate nohighlight">\(A\)</span> e che la matrice è vicina a essere singolare.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.000</span><span class="p">,</span> <span class="mf">2.000</span><span class="p">],</span>
-              <span class="p">[</span><span class="mf">0.499</span><span class="p">,</span> <span class="mf">1.001</span><span class="p">]])</span>
-<span class="n">sc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">compute_uv</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Valori singolari:&#39;</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Norma 2 dalla SVD:&#39;</span><span class="p">,</span> <span class="n">sc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Norma 2 con NumPy:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Condizionamento dalla SVD:&#39;</span><span class="p">,</span> <span class="n">sc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">sc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Condizionamento con NumPy:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valori singolari: [2.50020010e+00 1.19990396e-03]
-Norma 2 dalla SVD: 2.500200104037774
-Norma 2 con NumPy: 2.500200104037774
-Condizionamento dalla SVD: 2083.6668534103555
-Condizionamento con NumPy: 2083.6668534103555
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="pseudoinversa-mediante-svd">
-<h2>Pseudoinversa mediante SVD<a class="headerlink" href="#pseudoinversa-mediante-svd" title="Link to this heading">#</a></h2>
+<h2>5.7 Pseudoinversa mediante SVD<a class="headerlink" href="#pseudoinversa-mediante-svd" title="Link to this heading">#</a></h2>
 <p>Dalla SVD compatta <span class="math notranslate nohighlight">\(A=U_r\Sigma_rV_r^T\)</span> si definisce la pseudoinversa di Moore-Penrose:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -893,7 +742,7 @@ Confronto con np.linalg.pinv: 1.0408340855860843e-17
 </div>
 </section>
 <section id="aspetti-numerici">
-<h2>Aspetti numerici<a class="headerlink" href="#aspetti-numerici" title="Link to this heading">#</a></h2>
+<h2>5.8 Aspetti numerici<a class="headerlink" href="#aspetti-numerici" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Per una matrice densa <span class="math notranslate nohighlight">\(m\times n\)</span>, il costo della SVD completa è dell’ordine di <span class="math notranslate nohighlight">\(mn\min(m,n)\)</span>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">np.linalg.svd(A,</span> <span class="pre">full_matrices=False)</span></code> calcola la forma ridotta ed evita di memorizzare colonne non necessarie.</p></li>
@@ -903,7 +752,7 @@ Confronto con np.linalg.pinv: 1.0408340855860843e-17
 </ul>
 </section>
 <section id="approximazione-mediante-diadi">
-<h2>Approximazione mediante diadi<a class="headerlink" href="#approximazione-mediante-diadi" title="Link to this heading">#</a></h2>
+<h2>5.9 Approximazione mediante diadi<a class="headerlink" href="#approximazione-mediante-diadi" title="Link to this heading">#</a></h2>
 <p>La decomposizione diadica ordina le componenti di <span class="math notranslate nohighlight">\(A\)</span> in base alla loro importanza:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -971,8 +820,6 @@ R_k=A-A_k=\sum_{i=k+1}^{r}\sigma_i u_i v_i^T.
 <img alt="../_images/4a75f967193b4ca14595268bfcc9f180741646283de1f9033a88d77cf3ee3dc9.png" src="../_images/4a75f967193b4ca14595268bfcc9f180741646283de1f9033a88d77cf3ee3dc9.png" />
 </div>
 </div>
-<section id="qualita-dell-approssimazione">
-<h3>Qualità dell’approssimazione<a class="headerlink" href="#qualita-dell-approssimazione" title="Link to this heading">#</a></h3>
 <p>L’approssimazione <span class="math notranslate nohighlight">\(A_k\)</span> non è soltanto una possibile matrice di rango <span class="math notranslate nohighlight">\(k\)</span>: è la <strong>migliore</strong> tra tutte le matrici di rango al più <span class="math notranslate nohighlight">\(k\)</span>. Gli errori sono</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1028,7 +875,7 @@ E_k=\frac{\sigma_1^2+\cdots+\sigma_k^2}
 </div>
 </section>
 <section id="interpretazione-come-compressione">
-<h3>Interpretazione come compressione<a class="headerlink" href="#interpretazione-come-compressione" title="Link to this heading">#</a></h3>
+<h2>5.10 Interpretazione come compressione<a class="headerlink" href="#interpretazione-come-compressione" title="Link to this heading">#</a></h2>
 <p>Una matrice <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{m\times n}\)</span> richiede <span class="math notranslate nohighlight">\(mn\)</span> numeri. Per memorizzare la sua approssimazione <span class="math notranslate nohighlight">\(A_k=U_k\Sigma_kV_k^T\)</span> sono sufficienti</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1041,10 +888,8 @@ k(m+n+1)&lt;mn.
 \]</div>
 <p>La scelta di <span class="math notranslate nohighlight">\(k\)</span> realizza quindi un compromesso: valori piccoli producono maggiore compressione, mentre valori grandi riducono l’errore di approssimazione.</p>
 </section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="pca-mediante-svd">
-<h1>PCA mediante SVD<a class="headerlink" href="#pca-mediante-svd" title="Link to this heading">#</a></h1>
+<section id="una-applicazione-pca-mediante-svd">
+<h2>5.11 Una applicazione:  PCA mediante SVD<a class="headerlink" href="#una-applicazione-pca-mediante-svd" title="Link to this heading">#</a></h2>
 <p>La <strong>Principal Component Analysis</strong> (PCA) cerca nuove direzioni ortogonali lungo le quali i dati presentano la massima variabilità. Può essere calcolata direttamente mediante la SVD della matrice dei dati centrati.</p>
 <p>Sia <span class="math notranslate nohighlight">\(X\in\mathbb{R}^{N\times p}\)</span> una matrice in cui le righe rappresentano gli oggetti osservati e le colonne le variabili. Prima di applicare la PCA si sottrae da ogni colonna la propria media:</p>
 <div class="math notranslate nohighlight">
@@ -1052,8 +897,6 @@ k(m+n+1)&lt;mn.
 X_c=X-\mathbf{1}\mu^T.
 \]</div>
 <p>La centratura è essenziale: la PCA deve descrivere le variazioni rispetto al centro dei dati, non la loro posizione rispetto all’origine.</p>
-<section id="legame-tra-pca-e-svd">
-<h2>Legame tra PCA e SVD<a class="headerlink" href="#legame-tra-pca-e-svd" title="Link to this heading">#</a></h2>
 <p>Calcoliamo la SVD della matrice centrata:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1077,7 +920,7 @@ Z=X_cV=U\Sigma.
 \]</div>
 </section>
 <section id="esempio-il-dataset-iris">
-<h2>Esempio: il dataset Iris<a class="headerlink" href="#esempio-il-dataset-iris" title="Link to this heading">#</a></h2>
+<h2>5.12 Esempio: il dataset Iris<a class="headerlink" href="#esempio-il-dataset-iris" title="Link to this heading">#</a></h2>
 <p>Il dataset contiene 150 fiori appartenenti a tre specie. Ogni fiore è descritto da quattro variabili: lunghezza e larghezza del sepalo, lunghezza e larghezza del petalo.</p>
 <p>Calcoliamo la PCA usando soltanto <code class="docutils literal notranslate"><span class="pre">numpy.linalg.svd</span></code>. Le specie non vengono usate nel calcolo: serviranno unicamente per colorare il grafico finale.</p>
 <div class="cell docutils container">
@@ -1107,21 +950,15 @@ Z=X_cV=U\Sigma.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_iris</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dimensione di X: (150, 4)
+Media delle variabili: [5.843 3.057 3.758 1.199]
+Valori singolari: [25.1    6.013  3.414  1.885]
+Varianza spiegata: [0.9246 0.0531 0.0171 0.0052]
+Varianza spiegata dalle prime due componenti: 97.77%
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="proiezione-sulle-prime-due-componenti">
-<h2>Proiezione sulle prime due componenti<a class="headerlink" href="#proiezione-sulle-prime-due-componenti" title="Link to this heading">#</a></h2>
 <p>Per ridurre i dati da quattro a due dimensioni conserviamo soltanto le prime due colonne di <span class="math notranslate nohighlight">\(V\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1161,10 +998,11 @@ Z_2=X_cV_2\in\mathbb{R}^{N\times2}.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/648d44e3cfcedc40e6a014c746fe5ca97058935a375eddf14c43ae2fb37fbf81.png" src="../_images/648d44e3cfcedc40e6a014c746fe5ca97058935a375eddf14c43ae2fb37fbf81.png" />
 </div>
-</section>
-<section id="interpretazione-delle-componenti">
-<h2>Interpretazione delle componenti<a class="headerlink" href="#interpretazione-delle-componenti" title="Link to this heading">#</a></h2>
+</div>
+<p><em>Interpretazione delle componenti</em></p>
 <p>Gli elementi di <span class="math notranslate nohighlight">\(v_i\)</span> sono detti <strong>loadings</strong> e misurano il contributo delle variabili originali alla componente principale <span class="math notranslate nohighlight">\(i\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1190,10 +1028,14 @@ z_i=X_cv_i.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/16448e7ef63ca9797ef6a58d0bc64a9cf9e1373d2be4ac11f126153d2c16538f.png" src="../_images/16448e7ef63ca9797ef6a58d0bc64a9cf9e1373d2be4ac11f126153d2c16538f.png" />
+</div>
 </div>
 </section>
+</section>
 <section id="ricostruzione-con-un-numero-ridotto-di-componenti">
-<h2>Ricostruzione con un numero ridotto di componenti<a class="headerlink" href="#ricostruzione-con-un-numero-ridotto-di-componenti" title="Link to this heading">#</a></h2>
+<h1>Ricostruzione con un numero ridotto di componenti<a class="headerlink" href="#ricostruzione-con-un-numero-ridotto-di-componenti" title="Link to this heading">#</a></h1>
 <p>Dopo aver conservato <span class="math notranslate nohighlight">\(k\)</span> componenti, i dati centrati si ricostruiscono mediante</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1217,12 +1059,18 @@ X_{c,k}=Z_kV_k^T=U_k\Sigma_kV_k^T.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> k   varianza conservata   errore relativo di ricostruzione
+ 1            0.9246                      0.2746
+ 2            0.9777                      0.1494
+ 3            0.9948                      0.0722
+ 4            1.0000                      0.0000
+</pre></div>
 </div>
-<section id="una-scelta-importante-centrare-o-standardizzare">
-<h3>Una scelta importante: centrare o standardizzare?<a class="headerlink" href="#una-scelta-importante-centrare-o-standardizzare" title="Link to this heading">#</a></h3>
+</div>
+</div>
+<p><strong>Una scelta importante: centrare o standardizzare?</strong></p>
 <p>La centratura è sempre necessaria. Se le variabili hanno unità di misura o scale molto diverse, è spesso opportuno anche dividerle per la deviazione standard. In tal caso la PCA viene applicata alla matrice standardizzata e non alla sola matrice centrata. La scelta dipende dal significato dei dati.</p>
-</section>
-</section>
 <section id="in-sintesi">
 <h2>In sintesi<a class="headerlink" href="#in-sintesi" title="Link to this heading">#</a></h2>
 <p>La fattorizzazione</p>
@@ -1264,15 +1112,6 @@ A=U\Sigma V^T
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="fattorizzazione-matrici.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</p>
-      </div>
-    </a>
 </div>
                 </footer>
               
@@ -1289,36 +1128,21 @@ A=U\Sigma V^T
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decomposizione ai valori singolari (SVD)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#richiamo-ortogonalita">Richiamo: ortogonalità</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-di-esistenza-della-svd">Teorema di esistenza della SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensioni-delle-matrici">Dimensioni delle matrici</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svd-compatta">SVD compatta</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vettori-singolari">Vettori singolari</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-geometrica">Interpretazione geometrica</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relazione-con-autovalori-e-autovettori">Relazione con autovalori e autovettori</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rango-immagine-e-nucleo">Rango, immagine e nucleo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decomposizione-diadica">Decomposizione diadica</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svd-troncata-e-approssimazione-a-rango-basso">SVD troncata e approssimazione a rango basso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#norme-e-numero-di-condizionamento">Norme e numero di condizionamento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudoinversa-mediante-svd">Pseudoinversa mediante SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aspetti-numerici">Aspetti numerici</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximazione-mediante-diadi">Approximazione mediante diadi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qualita-dell-approssimazione">Qualità dell’approssimazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-come-compressione">Interpretazione come compressione</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. Decomposizione ai valori singolari (SVD)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#richiamo-ortogonalita">5.1 Richiamo: ortogonalità</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-di-esistenza-della-svd">5.2 Teorema di esistenza della SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relazione-con-autovalori-e-autovettori">5.4 Relazione con autovalori e autovettori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rango-immagine-e-nucleo">5.5 Rango, immagine e nucleo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-decomposizione-diadica">5.6 Una applicazione:  decomposizione diadica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudoinversa-mediante-svd">5.7 Pseudoinversa mediante SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aspetti-numerici">5.8 Aspetti numerici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximazione-mediante-diadi">5.9 Approximazione mediante diadi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-come-compressione">5.10 Interpretazione come compressione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-pca-mediante-svd">5.11 Una applicazione:  PCA mediante SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-il-dataset-iris">5.12 Esempio: il dataset Iris</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-mediante-svd">PCA mediante SVD</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#legame-tra-pca-e-svd">Legame tra PCA e SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-il-dataset-iris">Esempio: il dataset Iris</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proiezione-sulle-prime-due-componenti">Proiezione sulle prime due componenti</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-delle-componenti">Interpretazione delle componenti</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ricostruzione-con-un-numero-ridotto-di-componenti">Ricostruzione con un numero ridotto di componenti</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#una-scelta-importante-centrare-o-standardizzare">Una scelta importante: centrare o standardizzare?</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ricostruzione-con-un-numero-ridotto-di-componenti">Ricostruzione con un numero ridotto di componenti</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-sintesi">In sintesi</a></li>
 </ul>
 </li>
