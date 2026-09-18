@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/fattorizzazione-matrici';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Decomposizione ai valori singolari (SVD)" href="fattorizzazione-matrici2.html" />
     <link rel="prev" title="Introduzione all’analisi dei dati" href="analisi_dati.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -189,6 +190,8 @@
 <li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
+
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">5. Decomposizione ai valori singolari (SVD)</a></li>
 
 </ul>
 
@@ -404,6 +407,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-lu">3.2 Fattorizzazione LU</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting">3.3.1 Pivoting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-parziale">3.3.2 Pivoting parziale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-matrice-di-permutazione">La matrice di permutazione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-e-stabilita">Pivoting e stabilità</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-di-cholesky">3.4 Fattorizzazione di Cholesky</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-agli-autovalori-teoria-e-numpy">4.   Fattorizzazione agli autovalori: teoria e NumPy</a></li>
 </ul>
@@ -1270,6 +1275,122 @@ p=\operatorname*{argmax}_{i=k,\ldots,n}|u_{ik}|.
 |m_{ik}|=\left|\frac{u_{ik}}{u_{kk}}\right|\leq1.
 \]</div>
 <p>Il pivoting parziale è la strategia usata normalmente per matrici dense generali.</p>
+</section>
+<section id="la-matrice-di-permutazione">
+<h2>La matrice di permutazione<a class="headerlink" href="#la-matrice-di-permutazione" title="Link to this heading">#</a></h2>
+<p>Gli scambi di righe vengono rappresentati mediante una <strong>matrice di permutazione</strong> <span class="math notranslate nohighlight">\(P\)</span>. Essa si ottiene dalla matrice identità eseguendo gli stessi scambi applicati ad <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Le matrici di permutazione sono ortogonali:</p>
+<div class="math notranslate nohighlight">
+\[
+P^{-1}=P^T.
+\]</div>
+<p>Con il pivoting, l’eliminazione non fattorizza direttamente <span class="math notranslate nohighlight">\(A\)</span>, ma la matrice con le righe permutate:</p>
+<div class="math notranslate nohighlight">
+\[
+PA=LU.
+\]</div>
+<p>Per risolvere <span class="math notranslate nohighlight">\(A\mathbf{x}=\mathbf{b}\)</span> moltiplichiamo anche il termine noto per <span class="math notranslate nohighlight">\(P\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+PA\mathbf{x}=P\mathbf{b}
+\quad\Longrightarrow\quad
+LU\mathbf{x}=P\mathbf{b}.
+\]</div>
+<p>Risolviamo quindi</p>
+<div class="math notranslate nohighlight">
+\[
+L\mathbf{y}=P\mathbf{b},
+\qquad
+U\mathbf{x}=\mathbf{y}.
+\]</div>
+<p><strong>Esempio <span class="math notranslate nohighlight">\(3\times3\)</span> con pivoting parziale</strong></p>
+<p>Consideriamo</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A=
+\begin{pmatrix}
+0&amp;2&amp;1\\
+1&amp;-2&amp;-3\\
+2&amp;3&amp;1
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Il primo pivot candidato è <span class="math notranslate nohighlight">\(a_{11}=0\)</span>, quindi l’eliminazione senza pivoting fallisce immediatamente.</p>
+<p>Nella prima colonna confrontiamo</p>
+<div class="math notranslate nohighlight">
+\[
+|0|,\quad |1|,\quad |2|.
+\]</div>
+<p>Il valore massimo è <span class="math notranslate nohighlight">\(2\)</span>, che si trova nella terza riga. Scambiamo quindi <span class="math notranslate nohighlight">\(R_1\)</span> e <span class="math notranslate nohighlight">\(R_3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P=
+\begin{pmatrix}
+0&amp;0&amp;1\\
+0&amp;1&amp;0\\
+1&amp;0&amp;0
+\end{pmatrix},
+\qquad
+PA=
+\begin{pmatrix}
+2&amp;3&amp;1\\
+1&amp;-2&amp;-3\\
+0&amp;2&amp;1
+\end{pmatrix}.
+\end{split}\]</div>
+<p><em>Primo passo di eliminazione</em></p>
+<p>Dopo lo scambio, il pivot è <span class="math notranslate nohighlight">\(2\)</span>. I moltiplicatori sono</p>
+<div class="math notranslate nohighlight">
+\[
+m_{21}=\frac{1}{2},
+\qquad
+m_{31}=0.
+\]</div>
+<p>Eseguiamo</p>
+<div class="math notranslate nohighlight">
+\[
+R_2\leftarrow R_2-\frac12R_1,
+\]</div>
+<p>ottenendo</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+2&amp;3&amp;1\\
+0&amp;-\frac72&amp;-\frac72\\
+0&amp;2&amp;1
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Nella seconda colonna confrontiamo <span class="math notranslate nohighlight">\(|-7/2|\)</span> e <span class="math notranslate nohighlight">\(|2|\)</span>. Il pivot di modulo massimo è già nella seconda riga, quindi non sono necessari altri scambi.</p>
+<p><em>Secondo passo e fattori finali</em></p>
+<p>Il moltiplicatore della seconda colonna è</p>
+<div class="math notranslate nohighlight">
+\[
+m_{32}=\frac{2}{-7/2}=-\frac47.
+\]</div>
+<p>Dopo l’ultima eliminazione otteniamo</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+U=
+\begin{pmatrix}
+2&amp;3&amp;1\\
+0&amp;-\frac72&amp;-\frac72\\
+0&amp;0&amp;-1
+\end{pmatrix}.
+\end{split}\]</div>
+<p>I moltiplicatori formano</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L=
+\begin{pmatrix}
+1&amp;0&amp;0\\
+\frac12&amp;1&amp;0\\
+0&amp;-\frac47&amp;1
+\end{pmatrix}.
+\end{split}\]</div>
+<p>La fattorizzazione ottenuta è</p>
+<div class="math notranslate nohighlight">
+\[
+PA=LU.
+\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1309,6 +1430,20 @@ True
 </div>
 </div>
 </div>
+</section>
+<section id="pivoting-e-stabilita">
+<h2>Pivoting e stabilità<a class="headerlink" href="#pivoting-e-stabilita" title="Link to this heading">#</a></h2>
+<p>Il pivoting parziale riduce il rischio di crescita eccessiva dei moltiplicatori ed è molto efficace nella pratica. Non modifica l’ordine di complessità della fattorizzazione, che resta</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{O}(n^3).
+\]</div>
+<p>È importante però distinguere due concetti:</p>
+<ul class="simple">
+<li><p>il <strong>pivoting</strong> riguarda la stabilità dell’algoritmo di eliminazione;</p></li>
+<li><p>il <strong>condizionamento</strong> riguarda la sensibilità del problema rispetto a perturbazioni nei dati.</p></li>
+</ul>
+<p>Il pivoting non può rendere ben condizionata una matrice mal condizionata. Può però evitare di aggiungere instabilità numerica non necessaria durante il calcolo.</p>
 </section>
 <section id="fattorizzazione-di-cholesky">
 <h2>3.4 Fattorizzazione di Cholesky<a class="headerlink" href="#fattorizzazione-di-cholesky" title="Link to this heading">#</a></h2>
@@ -1531,6 +1666,15 @@ Verifica A @ V = V @ Lambda: True
         <p class="prev-next-title">Introduzione all’analisi dei dati</p>
       </div>
     </a>
+    <a class="right-next"
+       href="fattorizzazione-matrici2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5. Decomposizione ai valori singolari (SVD)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1566,6 +1710,8 @@ Verifica A @ V = V @ Lambda: True
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-lu">3.2 Fattorizzazione LU</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting">3.3.1 Pivoting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-parziale">3.3.2 Pivoting parziale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-matrice-di-permutazione">La matrice di permutazione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-e-stabilita">Pivoting e stabilità</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-di-cholesky">3.4 Fattorizzazione di Cholesky</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-agli-autovalori-teoria-e-numpy">4.   Fattorizzazione agli autovalori: teoria e NumPy</a></li>
 </ul>
