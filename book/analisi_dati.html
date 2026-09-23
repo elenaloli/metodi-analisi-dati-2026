@@ -193,12 +193,6 @@
 <li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati e i modelli predittivi</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">Ottimizzazione numerica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="equazioni_differenziali.html">Introduzione alle equazioni differenziali e ai problemi di Cauchy</a></li>
 </ul>
 
     </div>
@@ -524,21 +518,6 @@ document.write(`
 <li><p><strong>campioni non rappresentativi</strong> della popolazione che vogliamo studiare.</p></li>
 </ul>
 <p>La pulizia dei dati non è un passaggio secondario: risultati numericamente corretti possono essere privi di significato se i dati di partenza sono inaffidabili.</p>
-<p><strong>Un piccolo esempio contenente un valore mancante e un valore sospetto</strong></p>
-<p>dati_problematici = studenti.copy()
-dati_problematici.loc[2, ‘Frequenza’] = np.nan
-dati_problematici.loc[6, ‘Ore_studio’] = 280</p>
-<p>display(dati_problematici)
-print(‘\nValori mancanti per colonna:’)
-display(dati_problematici.isna().sum())</p>
-<p><em>DOMANDE</em></p>
-<ol class="arabic simple">
-<li><p>Il valore <code class="docutils literal notranslate"><span class="pre">280</span></code> è necessariamente errato?</p></li>
-<li><p>Come potremmo verificare se si tratta di un errore?</p></li>
-<li><p>È sempre corretto eliminare una riga contenente un valore mancante?</p></li>
-<li><p>Che cosa accade alla media delle ore di studio in presenza del valore sospetto?</p></li>
-</ol>
-<p>Non esiste una risposta automatica valida in ogni situazione: le scelte dipendono dal significato dei dati e dallo scopo dell’analisi.</p>
 <p><em>Il ruolo dell’errore e del rumore</em></p>
 <p>L’errore è inevitabile nell’analisi dei dati. Può derivare da errori di misura, dati mancanti, rumore, approssimazioni del modello, errori di arrotondamento o interruzione anticipata di un algoritmo iterativo.</p>
 <p>Possiamo rappresentare una misura mediante</p>
