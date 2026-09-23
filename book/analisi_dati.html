@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/analisi_dati';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?" href="algebra_lineare.html" />
+    <link rel="next" title="Perché l’algebra lineare è fondamentale nell’analisi dei dati?" href="algebra_lineare.html" />
     <link rel="prev" title="I numeri finiti e il calcolo scientifico" href="numeri_finiti.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -188,11 +188,17 @@
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduzione all’analisi dei dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">3. Operazioni sulle matrici: fattorizzazione di matrici</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">5. Decomposizione ai valori singolari (SVD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati e i modelli predittivi</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">Ottimizzazione numerica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equazioni_differenziali.html">Introduzione alle equazioni differenziali e ai problemi di Cauchy</a></li>
 </ul>
 
     </div>
@@ -476,9 +482,9 @@ document.write(`
 <a class="reference internal image-reference" href="../_images/an_dati1.png"><img alt="../_images/an_dati1.png" src="../_images/an_dati1.png" style="width: 60%;" />
 </a>
 </figure>
-<p align="center">
+<!-- <p align="center">
   <img src="immagini_sorgente\an_dati1.png"  width="400">
-</p>
+</p> -->
 </section>
 </section>
 <section id="il-ciclo-di-vita-dell-analisi-dei-dati">
@@ -488,9 +494,9 @@ document.write(`
 <a class="reference internal image-reference" href="../_images/an_dati2.png"><img alt="../_images/an_dati2.png" src="../_images/an_dati2.png" style="width: 60%;" />
 </a>
 </figure>
-<p align="center">
+<!-- <p align="center">
   <img src="immagini_sorgente\an_dati2.png"  width="400">
-</p>
+</p> -->
 <p>I risultati ottenuti possono suggerire di modificare il modello, raccogliere nuovi dati o persino riformulare la domanda iniziale.</p>
 <p><em>Analisi descrittiva</em></p>
 <p>Risponde alla domanda: <strong>che cosa mostrano i dati?</strong></p>
@@ -784,9 +790,9 @@ y^\delta = y + \eta,
 <a class="reference internal image-reference" href="../_images/classificazione_regressione.png"><img alt="../_images/classificazione_regressione.png" src="../_images/classificazione_regressione.png" style="width: 100%;" />
 </a>
 </figure>
-<p align="center">
+<!-- <p align="center">
   <img src="immagini_sorgente/classificazione_regressione.png" width="700">
-</p>
+</p> -->
 <p>In entrambi i casi il modello deve individuare una relazione tra gli input e gli output osservati, per poi applicarla a nuovi dati. Cambiano il tipo di risposta e le misure utilizzate per valutare l’errore.</p>
 <section id="che-cos-e-un-classificatore">
 <h3>2.1 Che cos’è un classificatore?<a class="headerlink" href="#che-cos-e-un-classificatore" title="Link to this heading">#</a></h3>
@@ -804,9 +810,9 @@ f:\mathbb{R}^n\longrightarrow\{C_1,C_2,\ldots,C_K\}.
 <a class="reference internal image-reference" href="../_images/schema_classificazione.png"><img alt="../_images/schema_classificazione.png" src="../_images/schema_classificazione.png" style="width: 100%;" />
 </a>
 </figure>
-<p align="center">
+<!-- <p align="center">
   <img src="immagini_sorgente/schema_classificazione.png" width="700">
-</p></section>
+</p> --></section>
 <section id="apprendimento-supervisionato">
 <h3>2.3 Apprendimento supervisionato<a class="headerlink" href="#apprendimento-supervisionato" title="Link to this heading">#</a></h3>
 <p>Come possiamo costruire la funzione <span class="math notranslate nohighlight">\(f\)</span>? Disponiamo di un insieme di esempi per i quali la classe corretta è già nota:</p>
@@ -822,9 +828,9 @@ f:\mathbb{R}^n\longrightarrow\{C_1,C_2,\ldots,C_K\}.
 <a class="reference internal image-reference" href="../_images/dati_due_classi.png"><img alt="../_images/dati_due_classi.png" src="../_images/dati_due_classi.png" style="width: 100%;" />
 </a>
 </figure>
-<p align="center">
+<!-- <p align="center">
   <img src="immagini_sorgente/dati_due_classi.png" width="700">
-</p>
+</p> -->
 <p>Ogni punto rappresenta un’osservazione. La sua posizione dipende dalle caratteristiche, mentre il colore e la forma indicano la classe nota.</p>
 <p>Se le possibili etichette fossero più di due, per esempio gatto, cane e cavallo, parleremmo invece di <strong>classificazione multiclasse</strong>.</p>
 <p>Il classificatore suddivide lo spazio delle caratteristiche in regioni associate alle diverse classi. Il confine tra queste regioni prende il nome di <strong>frontiera di decisione</strong>.</p>
@@ -832,9 +838,9 @@ f:\mathbb{R}^n\longrightarrow\{C_1,C_2,\ldots,C_K\}.
 <a class="reference internal image-reference" href="../_images/frontiera_classificazione.png"><img alt="../_images/frontiera_classificazione.png" src="../_images/frontiera_classificazione.png" style="width: 100%;" />
 </a>
 </figure>
-<p align="center">
+<!-- <p align="center">
   <img src="immagini_sorgente/frontiera_classificazione.png" width="700">
-</p>
+</p> -->
 <p>Una volta costruita la frontiera, una nuova osservazione viene classificata in base alla regione in cui si trova.</p>
 <blockquote>
 <div><p>La frontiera mostrata nella figura serve soltanto a illustrare il concetto: nei problemi reali deve essere appresa dai dati.</p>
@@ -1079,9 +1085,9 @@ f:\mathbb{R}^2\longrightarrow\{\text{Setosa},\text{Versicolor}\}.
 <a class="reference internal image-reference" href="../_images/modelli_lineare_quadratico.png"><img alt="../_images/modelli_lineare_quadratico.png" src="../_images/modelli_lineare_quadratico.png" style="width: 100%;" />
 </a>
 </figure>
-<p align="center">
+<!-- <p align="center">
   <img src="immagini_sorgente/modelli_lineare_quadratico.png" width="700">
-</p>
+</p> -->
 <p>Nel primo caso il modello ha la forma</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1101,9 +1107,9 @@ f(x;\boldsymbol{\theta})=\theta_0+\theta_1 e^{\alpha x}.
 <a class="reference internal image-reference" href="../_images/modello_esponenziale.png"><img alt="../_images/modello_esponenziale.png" src="../_images/modello_esponenziale.png" style="width: 100%;" />
 </a>
 </figure>
-<p align="center">
+<!-- <p align="center">
   <img src="immagini_sorgente/modello_esponenziale.png" width="700">
-</p>
+</p> -->
 <p>La scelta della famiglia di funzioni dipende dal fenomeno che vogliamo descrivere e dalle informazioni disponibili sui dati.</p>
 </section>
 <section id="i-modelli-famiglie-parametriche-di-funzioni">
@@ -1167,9 +1173,9 @@ f(x;\boldsymbol{\theta})=\theta_0+\theta_1 e^{\alpha x}.
 <a class="reference internal image-reference" href="../_images/studying_training_evaluation.png"><img alt="../_images/studying_training_evaluation.png" src="../_images/studying_training_evaluation.png" style="width: 100%;" />
 </a>
 </figure>
-<p align="center">
+<!-- <p align="center">
   <img src="immagini_sorgente/studying_training_evaluation.png" width="700">
-</p>
+</p> -->
 <p>Se le domande dell’esame fossero identiche agli esercizi studiati, non potremmo capire se lo studente ha davvero imparato. Analogamente, un modello deve essere valutato su dati non utilizzati durante il training.</p>
 <p>Nell’<strong>apprendimento supervisionato</strong> disponiamo di un insieme di esempi</p>
 <div class="math notranslate nohighlight">
@@ -1199,9 +1205,9 @@ f_{\boldsymbol{\theta}}(\mathbf{x}_{\mathrm{new}})
 <a class="reference internal image-reference" href="../_images/training_validation_test.png"><img alt="../_images/training_validation_test.png" src="../_images/training_validation_test.png" style="width: 100%;" />
 </a>
 </figure>
-<p align="center">
+<!-- <p align="center">
   <img src="immagini_sorgente/training_validation_test.png" width="700">
-</p>
+</p> -->
 <ul class="simple">
 <li><p>Il <strong>training set</strong> serve ad apprendere i parametri del modello.</p></li>
 <li><p>Il <strong>validation set</strong> serve a confrontare scelte e configurazioni.</p></li>
@@ -1259,7 +1265,7 @@ f_{\boldsymbol{\theta}}(\mathbf{x}_{\mathrm{new}})
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</p>
+        <p class="prev-next-title">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

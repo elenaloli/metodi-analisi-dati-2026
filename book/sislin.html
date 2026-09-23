@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/sislin';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Decomposizione ai valori singolari (SVD)" href="fattorizzazione-matrici2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -181,18 +180,19 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
 
 
 
 <li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">3. Operazioni sulle matrici: fattorizzazione di matrici</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">5. Decomposizione ai valori singolari (SVD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
 
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sistemi lineari</a></li>
 </ul>
 
     </div>
@@ -388,34 +388,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sistemi lineari</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita-della-soluzione">Esistenza e unicità della soluzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-non-si-calcola-l-inversa">Perché non si calcola l’inversa?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-diretti-e-metodi-iterativi">Metodi diretti e metodi iterativi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrici-particolari-sistemi-triangolari">Matrici particolari: sistemi triangolari</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#costo-computazionale">Costo computazionale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita-della-soluzione">6.1 Esistenza e unicità della soluzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-diretti-e-metodi-iterativi">6.2 Metodi diretti e metodi iterativi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrici-particolari-sistemi-triangolari">6.3 Matrici particolari: sistemi triangolari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risolvere-un-sistema-mediante-fattorizzazione-lu">6.3  Risolvere un sistema mediante fattorizzazione LU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">6.5 Risoluzione di un sistema con fattorizzazione Lu con pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">6.6 Risoluzione di un sistema con fattorizzazione di Cholesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condizionamento-dei-sistemi-lineari">6.7 Condizionamento dei sistemi lineari</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#risolvere-un-sistema-mediante-fattorizzazione-lu">Risolvere un sistema mediante fattorizzazione LU</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio">Esempio</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primo-passaggio-l-mathbf-y-mathbf-b">Primo passaggio: <span class="math notranslate nohighlight">\(L\mathbf{y}=\mathbf{b}\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#secondo-passaggio-u-mathbf-x-mathbf-y">Secondo passaggio: <span class="math notranslate nohighlight">\(U\mathbf{x}=\mathbf{y}\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">Risoluzione di un sistema con fattorizzazione Lu con pivoting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">Risoluzione di un sistema con fattorizzazione di Cholesky</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#condizionamento-dei-sistemi-lineari">Condizionamento dei sistemi lineari</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-problema-perturbato">Il problema perturbato</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-esempio-mal-condizionato">Un esempio mal condizionato</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-condizionamento">Numero di condizionamento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condizionamento-nella-norma-2">Condizionamento nella norma 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-matrice-di-hilbert">La matrice di Hilbert</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazioni-pratiche">Osservazioni pratiche</a></li>
-</ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -444,7 +424,7 @@ A\in\mathbb{R}^{n\times n},
 <li><p><strong>Errore:</strong> quanto è affidabile la soluzione calcolata in aritmetica finita?</p></li>
 </ol>
 <section id="esistenza-e-unicita-della-soluzione">
-<h2>Esistenza e unicità della soluzione<a class="headerlink" href="#esistenza-e-unicita-della-soluzione" title="Link to this heading">#</a></h2>
+<h2>6.1 Esistenza e unicità della soluzione<a class="headerlink" href="#esistenza-e-unicita-della-soluzione" title="Link to this heading">#</a></h2>
 <p>Se <span class="math notranslate nohighlight">\(A\)</span> è quadrata, le seguenti proprietà sono equivalenti:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(A\)</span> è non singolare;</p></li>
@@ -460,9 +440,7 @@ A\in\mathbb{R}^{n\times n},
 \mathbf{x}=A^{-1}\mathbf{b}.
 \]</div>
 <p>Se <span class="math notranslate nohighlight">\(A\)</span> è singolare, il sistema può non avere soluzioni oppure può averne infinite, a seconda del vettore <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</p>
-</section>
-<section id="perche-non-si-calcola-l-inversa">
-<h2>Perché non si calcola l’inversa?<a class="headerlink" href="#perche-non-si-calcola-l-inversa" title="Link to this heading">#</a></h2>
+<p><strong>Perché non si calcola l’inversa?</strong></p>
 <p>La formula <span class="math notranslate nohighlight">\(\mathbf{x}=A^{-1}\mathbf{b}\)</span> è utile dal punto di vista teorico, ma normalmente <strong>non viene utilizzata come algoritmo</strong>.</p>
 <p>Calcolare esplicitamente <span class="math notranslate nohighlight">\(A^{-1}\)</span>:</p>
 <ul class="simple">
@@ -479,7 +457,7 @@ A\mathbf{x}=\mathbf{b}
 <p>senza costruire <span class="math notranslate nohighlight">\(A^{-1}\)</span>.</p>
 </section>
 <section id="metodi-diretti-e-metodi-iterativi">
-<h2>Metodi diretti e metodi iterativi<a class="headerlink" href="#metodi-diretti-e-metodi-iterativi" title="Link to this heading">#</a></h2>
+<h2>6.2 Metodi diretti e metodi iterativi<a class="headerlink" href="#metodi-diretti-e-metodi-iterativi" title="Link to this heading">#</a></h2>
 <figure class="align-center">
 <a class="reference internal image-reference" href="../_images/metodi_diretti_iterativi.png"><img alt="../_images/metodi_diretti_iterativi.png" src="../_images/metodi_diretti_iterativi.png" style="width: 100%;" />
 </a>
@@ -496,7 +474,7 @@ A\mathbf{x}=\mathbf{b}
 <p>che, sotto opportune condizioni, converge alla soluzione. Sono particolarmente importanti per matrici grandi e sparse.</p>
 </section>
 <section id="matrici-particolari-sistemi-triangolari">
-<h2>Matrici particolari: sistemi triangolari<a class="headerlink" href="#matrici-particolari-sistemi-triangolari" title="Link to this heading">#</a></h2>
+<h2>6.3 Matrici particolari: sistemi triangolari<a class="headerlink" href="#matrici-particolari-sistemi-triangolari" title="Link to this heading">#</a></h2>
 <p>Una matrice <span class="math notranslate nohighlight">\(L=(\ell_{ij})\)</span> è <strong>triangolare inferiore</strong> se</p>
 <div class="math notranslate nohighlight">
 \[
@@ -569,9 +547,7 @@ x_i=\frac{1}{u_{ii}}
 </div>
 </div>
 </div>
-</section>
-<section id="costo-computazionale">
-<h2>Costo computazionale<a class="headerlink" href="#costo-computazionale" title="Link to this heading">#</a></h2>
+<p><strong>Costo computazionale</strong></p>
 <p>Per un sistema triangolare di ordine <span class="math notranslate nohighlight">\(n\)</span>, il numero complessivo di termini presenti nelle somme è</p>
 <div class="math notranslate nohighlight">
 \[
@@ -584,9 +560,8 @@ x_i=\frac{1}{u_{ii}}
 \]</div>
 <p>Questo è molto meno del costo <span class="math notranslate nohighlight">\(\mathcal{O}(n^3)\)</span> necessario per fattorizzare una matrice densa generale.</p>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="risolvere-un-sistema-mediante-fattorizzazione-lu">
-<h1>Risolvere un sistema mediante fattorizzazione LU<a class="headerlink" href="#risolvere-un-sistema-mediante-fattorizzazione-lu" title="Link to this heading">#</a></h1>
+<section id="risolvere-un-sistema-mediante-fattorizzazione-lu">
+<h2>6.3  Risolvere un sistema mediante fattorizzazione LU<a class="headerlink" href="#risolvere-un-sistema-mediante-fattorizzazione-lu" title="Link to this heading">#</a></h2>
 <p>Consideriamo ora il sistema</p>
 <div class="math notranslate nohighlight">
 \[
@@ -611,8 +586,7 @@ L\mathbf{y}=\mathbf{b},
 \qquad
 U\mathbf{x}=\mathbf{y}.
 \]</div>
-<section id="esempio">
-<h2>Esempio<a class="headerlink" href="#esempio" title="Link to this heading">#</a></h2>
+<p><em>Esempio</em></p>
 <p>Consideriamo ora il sistema</p>
 <div class="math notranslate nohighlight">
 \[
@@ -655,9 +629,7 @@ L=
 -1&amp;-1&amp;1
 \end{pmatrix}.
 \end{split}\]</div>
-</section>
-<section id="primo-passaggio-l-mathbf-y-mathbf-b">
-<h2>Primo passaggio: <span class="math notranslate nohighlight">\(L\mathbf{y}=\mathbf{b}\)</span><a class="headerlink" href="#primo-passaggio-l-mathbf-y-mathbf-b" title="Link to this heading">#</a></h2>
+<p><strong>Primo passaggio: <span class="math notranslate nohighlight">\(L\mathbf{y}=\mathbf{b}\)</span></strong></p>
 <p>La sostituzione in avanti fornisce</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -666,9 +638,7 @@ L=
 5\\-12\\2
 \end{pmatrix}.
 \end{split}\]</div>
-</section>
-<section id="secondo-passaggio-u-mathbf-x-mathbf-y">
-<h2>Secondo passaggio: <span class="math notranslate nohighlight">\(U\mathbf{x}=\mathbf{y}\)</span><a class="headerlink" href="#secondo-passaggio-u-mathbf-x-mathbf-y" title="Link to this heading">#</a></h2>
+<p><strong>Secondo passaggio: <span class="math notranslate nohighlight">\(U\mathbf{x}=\mathbf{y}\)</span></strong></p>
 <p>La sostituzione all’indietro fornisce</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -734,7 +704,7 @@ Norma del residuo = 0.0
 </div>
 </section>
 <section id="risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">
-<h2>Risoluzione di un sistema con fattorizzazione Lu con pivoting<a class="headerlink" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting" title="Link to this heading">#</a></h2>
+<h2>6.5 Risoluzione di un sistema con fattorizzazione Lu con pivoting<a class="headerlink" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting" title="Link to this heading">#</a></h2>
 <p>Quando la matrice <span class="math notranslate nohighlight">\(A\)</span> è fattorizzata con pivoting, si ha che:</p>
 <p><span class="math notranslate nohighlight">\(PA=LU\)</span> dove <span class="math notranslate nohighlight">\(P\)</span> è una matrice di permutazione.</p>
 <p>Allora il sistema lineare <span class="math notranslate nohighlight">\(Ax=b\)</span> è equivalente al sistema: <span class="math notranslate nohighlight">\(PAx=Pb\)</span>, cioè <span class="math notranslate nohighlight">\(LUx=Pb\)</span>.</p>
@@ -849,7 +819,7 @@ Norma del residuo = 12.057803489856683
 </div>
 </section>
 <section id="risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">
-<h2>Risoluzione di un sistema con fattorizzazione di Cholesky<a class="headerlink" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky" title="Link to this heading">#</a></h2>
+<h2>6.6 Risoluzione di un sistema con fattorizzazione di Cholesky<a class="headerlink" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky" title="Link to this heading">#</a></h2>
 <p>Se <span class="math notranslate nohighlight">\(A\)</span> è una matrice simmetrica e definita positiva, abbiamo visti che si può fattorizzare tramite l’algoritmo di Cholesky come: <span class="math notranslate nohighlight">\(A=LL^T\)</span>.</p>
 <p>Allora  il sistema</p>
 <div class="math notranslate nohighlight">
@@ -868,9 +838,7 @@ L\mathbf{y}=\mathbf{b},
 \qquad
 L^T\mathbf{x}=\mathbf{y}.
 \]</div>
-</section>
-<section id="esercizi">
-<h2>Esercizi<a class="headerlink" href="#esercizi" title="Link to this heading">#</a></h2>
+<p><em>Esercizi</em></p>
 <ol class="arabic">
 <li><p>Verificare manualmente che le matrici <span class="math notranslate nohighlight">\(L\)</span> e <span class="math notranslate nohighlight">\(U\)</span> dell’esempio soddisfino <span class="math notranslate nohighlight">\(LU=A\)</span>.</p></li>
 <li><p>Risolvere lo stesso sistema con <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code> e confrontare il risultato.</p></li>
@@ -887,15 +855,12 @@ L^T\mathbf{x}=\mathbf{y}.
 </li>
 </ol>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="condizionamento-dei-sistemi-lineari">
-<h1>Condizionamento dei sistemi lineari<a class="headerlink" href="#condizionamento-dei-sistemi-lineari" title="Link to this heading">#</a></h1>
+<section id="condizionamento-dei-sistemi-lineari">
+<h2>6.7 Condizionamento dei sistemi lineari<a class="headerlink" href="#condizionamento-dei-sistemi-lineari" title="Link to this heading">#</a></h2>
 <p>Quando risolviamo un sistema lineare <span class="math notranslate nohighlight">\(Ax=b\)</span>, i dati <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(b\)</span> sono spesso affetti da errori di misura, arrotondamento o discretizzazione. Il <strong>condizionamento</strong> descrive quanto la soluzione è sensibile a queste perturbazioni.</p>
 <blockquote>
 <div><p>Il condizionamento è una proprietà del <strong>problema</strong>. La stabilità, invece, è una proprietà dell’<strong>algoritmo</strong> usato per risolverlo.</p>
 </div></blockquote>
-<section id="il-problema-perturbato">
-<h2>Il problema perturbato<a class="headerlink" href="#il-problema-perturbato" title="Link to this heading">#</a></h2>
 <p>Indichiamo con <span class="math notranslate nohighlight">\(x\)</span> la soluzione esatta e con <span class="math notranslate nohighlight">\(x+\delta x\)</span> la soluzione ottenuta dopo avere perturbato i dati:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -909,9 +874,6 @@ Ax=b, \qquad (A+\Delta A)(x+\delta x)=b+\delta b.
 \frac{\|\delta x\|}{\|x\|}.
 \]</div>
 <p>Il problema è <strong>ben condizionato</strong> se piccole variazioni relative nei dati producono piccole variazioni relative nella soluzione; è <strong>mal condizionato</strong> quando gli errori possono essere fortemente amplificati.</p>
-</section>
-<section id="un-esempio-mal-condizionato">
-<h2>Un esempio mal condizionato<a class="headerlink" href="#un-esempio-mal-condizionato" title="Link to this heading">#</a></h2>
 <p>Consideriamo</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -955,9 +917,7 @@ Cambiamento relativo di x:   1.581e+00
 </div>
 </div>
 </div>
-</section>
-<section id="numero-di-condizionamento">
-<h2>Numero di condizionamento<a class="headerlink" href="#numero-di-condizionamento" title="Link to this heading">#</a></h2>
+<p><strong>Numero di condizionamento</strong></p>
 <p>Se <span class="math notranslate nohighlight">\(A\)</span> è invertibile, rispetto a una norma matriciale indotta si definisce</p>
 <div class="math notranslate nohighlight">
 \[
@@ -978,9 +938,7 @@ Cambiamento relativo di x:   1.581e+00
 \frac{\|\delta b\|}{\|b\|}
 \right).
 \]</div>
-</section>
-<section id="condizionamento-nella-norma-2">
-<h2>Condizionamento nella norma 2<a class="headerlink" href="#condizionamento-nella-norma-2" title="Link to this heading">#</a></h2>
+<p><em>Condizionamento nella norma 2</em></p>
 <p>Se <span class="math notranslate nohighlight">\(\sigma_{\max}\)</span> e <span class="math notranslate nohighlight">\(\sigma_{\min}\)</span> sono il massimo e il minimo valore singolare di <span class="math notranslate nohighlight">\(A\)</span>, allora</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1016,9 +974,7 @@ mal condizionata  : kappa_2 =   2083.67, err_rel(b) = 1.0e-06, err_rel(x) = 1.98
 </div>
 </div>
 </div>
-</section>
-<section id="la-matrice-di-hilbert">
-<h2>La matrice di Hilbert<a class="headerlink" href="#la-matrice-di-hilbert" title="Link to this heading">#</a></h2>
+<p><em>La matrice di Hilbert</em></p>
 <p>Un esempio classico di matrice mal condizionata è la matrice di Hilbert:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1050,9 +1006,7 @@ n = 10   kappa_2(H) =  1.603e+13
 </div>
 </div>
 </div>
-</section>
-<section id="osservazioni-pratiche">
-<h2>Osservazioni pratiche<a class="headerlink" href="#osservazioni-pratiche" title="Link to this heading">#</a></h2>
+<p><strong>Osservazioni pratiche</strong></p>
 <ul class="simple">
 <li><p>Un valore di <span class="math notranslate nohighlight">\(\kappa(A)\)</span> vicino a <span class="math notranslate nohighlight">\(1\)</span> indica un problema ben condizionato; un valore molto grande indica potenziale amplificazione degli errori.</p></li>
 <li><p>Il valore dipende dalla norma: NumPy calcola <code class="docutils literal notranslate"><span class="pre">np.linalg.cond(A,</span> <span class="pre">p)</span></code>; senza specificare <code class="docutils literal notranslate"><span class="pre">p</span></code> usa la norma 2.</p></li>
@@ -1093,6 +1047,15 @@ n = 10   kappa_2(H) =  1.603e+13
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="fattorizzazione-matrici2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Decomposizione ai valori singolari (SVD)</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -1109,34 +1072,14 @@ n = 10   kappa_2(H) =  1.603e+13
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sistemi lineari</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita-della-soluzione">Esistenza e unicità della soluzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-non-si-calcola-l-inversa">Perché non si calcola l’inversa?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-diretti-e-metodi-iterativi">Metodi diretti e metodi iterativi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrici-particolari-sistemi-triangolari">Matrici particolari: sistemi triangolari</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#costo-computazionale">Costo computazionale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita-della-soluzione">6.1 Esistenza e unicità della soluzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-diretti-e-metodi-iterativi">6.2 Metodi diretti e metodi iterativi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrici-particolari-sistemi-triangolari">6.3 Matrici particolari: sistemi triangolari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risolvere-un-sistema-mediante-fattorizzazione-lu">6.3  Risolvere un sistema mediante fattorizzazione LU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">6.5 Risoluzione di un sistema con fattorizzazione Lu con pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">6.6 Risoluzione di un sistema con fattorizzazione di Cholesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condizionamento-dei-sistemi-lineari">6.7 Condizionamento dei sistemi lineari</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#risolvere-un-sistema-mediante-fattorizzazione-lu">Risolvere un sistema mediante fattorizzazione LU</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio">Esempio</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primo-passaggio-l-mathbf-y-mathbf-b">Primo passaggio: <span class="math notranslate nohighlight">\(L\mathbf{y}=\mathbf{b}\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#secondo-passaggio-u-mathbf-x-mathbf-y">Secondo passaggio: <span class="math notranslate nohighlight">\(U\mathbf{x}=\mathbf{y}\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">Risoluzione di un sistema con fattorizzazione Lu con pivoting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">Risoluzione di un sistema con fattorizzazione di Cholesky</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#condizionamento-dei-sistemi-lineari">Condizionamento dei sistemi lineari</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-problema-perturbato">Il problema perturbato</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-esempio-mal-condizionato">Un esempio mal condizionato</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-condizionamento">Numero di condizionamento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condizionamento-nella-norma-2">Condizionamento nella norma 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-matrice-di-hilbert">La matrice di Hilbert</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazioni-pratiche">Osservazioni pratiche</a></li>
-</ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
