@@ -1181,15 +1181,14 @@ f_{\boldsymbol{\theta}}(\mathbf{x}_{\mathrm{new}})
 <h3>2.8 L’obiettivo: generalizzare<a class="headerlink" href="#l-obiettivo-generalizzare" title="Link to this heading">#</a></h3>
 <p>Lo scopo non è riprodurre perfettamente gli esempi già osservati, ma ottenere buone previsioni su dati nuovi. Questa capacità prende il nome di <strong>generalizzazione</strong>.</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/training_validation_test.png"><img alt="../_images/training_validation_test.png" src="../_images/training_validation_test.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/training_test.png"><img alt="../_images/training_test.png" src="../_images/training_test.png" style="width: 100%;" />
 </a>
 </figure>
 <!-- <p align="center">
-  <img src="immagini_sorgente/training_validation_test.png" width="700">
+  <img src="immagini_sorgente/training_test.png" width="700">
 </p> -->
 <ul class="simple">
 <li><p>Il <strong>training set</strong> serve ad apprendere i parametri del modello.</p></li>
-<li><p>Il <strong>validation set</strong> serve a confrontare scelte e configurazioni.</p></li>
 <li><p>Il <strong>test set</strong> deve essere usato soltanto per la valutazione finale.</p></li>
 </ul>
 <p>Un modello troppo semplice può non cogliere la struttura dei dati (<strong>underfitting</strong>); un modello che si adatta anche al rumore del training set può invece non funzionare su nuovi dati (<strong>overfitting</strong>).</p>
