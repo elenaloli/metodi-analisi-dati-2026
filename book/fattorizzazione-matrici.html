@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/fattorizzazione-matrici';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. Decomposizione ai valori singolari (SVD)" href="fattorizzazione-matrici2.html" />
+    <link rel="next" title="Decomposizione ai valori singolari (SVD)" href="fattorizzazione-matrici2.html" />
     <link rel="prev" title="Perché l’algebra lineare è fondamentale nell’analisi dei dati?" href="algebra_lineare.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -191,7 +191,7 @@
 <li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">5. Decomposizione ai valori singolari (SVD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
 
 </ul>
 
@@ -390,10 +390,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-fattorizzare-una-matrice">3.1 Perché fattorizzare una matrice?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-lu">3.2 Fattorizzazione LU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#secondo-passo">Secondo passo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting">3.3.1 Pivoting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-parziale">3.3.2 Pivoting parziale</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-matrice-di-permutazione">La matrice di permutazione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-e-stabilita">Pivoting e stabilità</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-di-cholesky">3.4 Fattorizzazione di Cholesky</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-agli-autovalori-teoria-e-numpy">4.   Fattorizzazione agli autovalori: teoria e NumPy</a></li>
 </ul>
@@ -448,13 +446,16 @@ align: center
 </ol>
 <p><strong>Una prima classificazione</strong></p>
 <p>Nel seguito considereremo due grandi famiglie di fattorizzazioni.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/mappa_fattorizzazioni.png"><img alt="../_images/mappa_fattorizzazioni.png" src="../_images/mappa_fattorizzazioni.png" style="width: 100%;" />
-</a>
-</figure>
+<p><img alt="" src="../_images/mappa_fattorizzazioni.png" /></p>
+<!-- ```{figure} immagini_sorgente/mappa_fattorizzazioni.png
+---
+width: 100%
+align: center
+---
+```
 <p align="center">
   <img src="immagini_sorgente/mappa_fattorizzazioni.png" width="700">
-</p>
+</p> -->
 <p>Le <strong>fattorizzazioni triangolari</strong> sono particolarmente adatte alla soluzione di sistemi lineari. Le fattorizzazioni basate su <strong>matrici ortogonali</strong> sono fondamentali per minimi quadrati, autovalori, valori singolari e analisi dei dati.</p>
 </section>
 <section id="fattorizzazione-lu">
@@ -469,18 +470,121 @@ A=LU,
 <li><p><span class="math notranslate nohighlight">\(L\)</span> è triangolare inferiore, generalmente con elementi diagonali uguali a <span class="math notranslate nohighlight">\(1\)</span>;</p></li>
 <li><p><span class="math notranslate nohighlight">\(U\)</span> è triangolare superiore.</p></li>
 </ul>
-<p>Infatti, il sistema <span class="math notranslate nohighlight">\(A\mathbf{x}=\mathbf{b}\)</span> diventa</p>
+<p><strong>Metodo di eliminazione di Gauss per calcolare le matrici L ed U</strong></p>
+<p>Esempio 3x3</p>
+<p>Sia</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A=
+\begin{pmatrix}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+a_{21} &amp; a_{22} &amp; a_{23}\\
+a_{31} &amp; a_{32} &amp; a_{33}
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Il metodo di Gauss trasforma <span class="math notranslate nohighlight">\(A\)</span> in una matrice triangolare superiore <span class="math notranslate nohighlight">\(U\)</span> annullando gli elementi sotto la diagonale principale.</p>
+<p>Al primo passo si assume</p>
 <div class="math notranslate nohighlight">
 \[
-LU\mathbf{x}=\mathbf{b}.
+a_{11}\neq 0
 \]</div>
-<p>Ponendo <span class="math notranslate nohighlight">\(\mathbf{y}=U\mathbf{x}\)</span>, risolviamo in successione</p>
+<p>e si usa la matrice elementare</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L_1=
+\begin{pmatrix}
+1 &amp; 0 &amp; 0\\
+-\dfrac{a_{21}}{a_{11}} &amp; 1 &amp; 0\\
+-\dfrac{a_{31}}{a_{11}} &amp; 0 &amp; 1
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Allora</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L_1A=
+\begin{pmatrix}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+0 &amp; a_{22}^{(1)} &amp; a_{23}^{(1)}\\
+0 &amp; a_{32}^{(1)} &amp; a_{33}^{(1)}
+\end{pmatrix},
+\end{split}\]</div>
+<p>dove</p>
 <div class="math notranslate nohighlight">
 \[
-L\mathbf{y}=\mathbf{b},
-\qquad
-U\mathbf{x}=\mathbf{y}.
+a_{ij}^{(1)}=
+a_{ij}-\frac{a_{i1}}{a_{11}}a_{1j},
+\qquad i,j=2,3.
 \]</div>
+</section>
+<section id="secondo-passo">
+<h2>Secondo passo<a class="headerlink" href="#secondo-passo" title="Link to this heading">#</a></h2>
+<p>Al secondo passo si assume</p>
+<div class="math notranslate nohighlight">
+\[
+a_{22}^{(1)}\neq 0
+\]</div>
+<p>e si annulla <span class="math notranslate nohighlight">\(a_{32}^{(1)}\)</span> tramite</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L_2=
+\begin{pmatrix}
+1&amp;0&amp;0\\
+0&amp;1&amp;0\\
+0&amp;-\dfrac{a_{32}^{(1)}}{a_{22}^{(1)}}&amp;1
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Quindi</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L_2L_1A=
+\begin{pmatrix}
+a_{11} &amp; a_{12} &amp; a_{13}\\
+0 &amp; a_{22}^{(1)} &amp; a_{23}^{(1)}\\
+0 &amp; 0 &amp; a_{33}^{(2)}
+\end{pmatrix}
+=U,
+\end{split}\]</div>
+<p>con</p>
+<div class="math notranslate nohighlight">
+\[
+a_{33}^{(2)}
+=
+a_{33}^{(1)}
+-
+\frac{a_{32}^{(1)}}{a_{22}^{(1)}}a_{23}^{(1)}.
+\]</div>
+<p>Poiché</p>
+<div class="math notranslate nohighlight">
+\[
+U=L_2L_1A,
+\]</div>
+<p>si ha</p>
+<div class="math notranslate nohighlight">
+\[
+A=(L_2L_1)^{-1}U=L_1^{-1}L_2^{-1}U.
+\]</div>
+<p>Ponendo</p>
+<div class="math notranslate nohighlight">
+\[
+L=L_1^{-1}L_2^{-1},
+\]</div>
+<p>si ottiene</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{A=LU}.
+\]</div>
+<p>Nel caso <span class="math notranslate nohighlight">\(3\times 3\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L=
+\begin{pmatrix}
+1 &amp; 0 &amp; 0\\
+\dfrac{a_{21}}{a_{11}} &amp; 1 &amp; 0\\
+\dfrac{a_{31}}{a_{11}} &amp;
+\dfrac{a_{32}^{(1)}}{a_{22}^{(1)}} &amp; 1
+\end{pmatrix}.
+\end{split}\]</div>
+<p>La matrice <span class="math notranslate nohighlight">\(L\)</span> è triangolare inferiore a diagonale unitaria, mentre <span class="math notranslate nohighlight">\(U\)</span> è triangolare superiore.</p>
 <p>L’eliminazione di Gauss trasforma <span class="math notranslate nohighlight">\(A\)</span> in una matrice triangolare superiore <span class="math notranslate nohighlight">\(U\)</span> eliminando, colonna dopo colonna, gli elementi al di sotto della diagonale.</p>
 <p>Al passo <span class="math notranslate nohighlight">\(k\)</span>, per eliminare l’elemento <span class="math notranslate nohighlight">\(a_{ik}\)</span> con <span class="math notranslate nohighlight">\(i&gt;k\)</span>, si utilizza il moltiplicatore</p>
 <div class="math notranslate nohighlight">
@@ -499,7 +603,7 @@ R_i\leftarrow R_i-m_{ik}R_k.
 \frac{2}{3}n^3
 \]</div>
 <p>operazioni in virgola mobile, mentre la soluzione dei due sistemi triangolari costa circa <span class="math notranslate nohighlight">\(2n^2\)</span> operazioni.</p>
-<p><strong>Esempio completo su una matrice <span class="math notranslate nohighlight">\(3\times3\)</span></strong></p>
+<p><strong>Esempio numerico su una matrice <span class="math notranslate nohighlight">\(3\times3\)</span></strong></p>
 <p>Consideriamo</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -634,56 +738,140 @@ m_{21}=\frac{1}{\varepsilon},
 \]</div>
 <p>che può essere molto grande. Le operazioni coinvolgono allora numeri di grandezza molto diversa e possono causare cancellazione e perdita di cifre significative.</p>
 <p>Scambiando le righe, il pivot diventa <span class="math notranslate nohighlight">\(1\)</span> e il moltiplicatore diventa <span class="math notranslate nohighlight">\(\varepsilon\)</span>.</p>
-</section>
-<section id="pivoting-parziale">
-<h2>3.3.2 Pivoting parziale<a class="headerlink" href="#pivoting-parziale" title="Link to this heading">#</a></h2>
+<p><strong>Matrici di permutazione</strong></p>
+<p>Una matrice di permutazione si ottiene permutando (ovvero scambiando) le righe della matrice identità.</p>
+<p>Ad esempio, partendo dalla matrice identità di ordine 3,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+I_3=
+\begin{pmatrix}
+1&amp;0&amp;0\\
+0&amp;1&amp;0\\
+0&amp;0&amp;1
+\end{pmatrix},
+\end{split}\]</div>
+<p>scambiando la prima e la terza riga si ottiene la matrice di permutazione</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P=
+\begin{pmatrix}
+0&amp;0&amp;1\\
+0&amp;1&amp;0\\
+1&amp;0&amp;0
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Se</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A=
+\begin{pmatrix}
+a_{11}&amp;a_{12}&amp;a_{13}\\
+a_{21}&amp;a_{22}&amp;a_{23}\\
+a_{31}&amp;a_{32}&amp;a_{33}
+\end{pmatrix},
+\end{split}\]</div>
+<p>allora</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+PA=
+\begin{pmatrix}
+a_{31}&amp;a_{32}&amp;a_{33}\\
+a_{21}&amp;a_{22}&amp;a_{23}\\
+a_{11}&amp;a_{12}&amp;a_{13}
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Quindi <span class="math notranslate nohighlight">\(PA\)</span> è la matrice ottenuta da <span class="math notranslate nohighlight">\(A\)</span> scambiando la prima e la terza riga.</p>
+<p>In generale, se <span class="math notranslate nohighlight">\(P\)</span> è una matrice di permutazione:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(PA\)</span> permuta le righe di <span class="math notranslate nohighlight">\(A\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(AP\)</span> permuta le colonne di <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ul>
+<p>Queste matrici permettono di descrivere formalmente gli scambi di righe usati nel <em>pivoting</em> che verrà introdotto nella sezione seguente.</p>
+<p>Inoltre,</p>
+<div class="math notranslate nohighlight">
+\[
+P^{-1}=P^T.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_demo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mf">4.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">],</span>
+                   <span class="p">[</span><span class="mf">7.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">,</span> <span class="mf">9.</span><span class="p">]])</span>
+
+<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+              <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+              <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A =&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_demo</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">P @ A: righe permutate&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">A_demo</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">A @ P: colonne permutate&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_demo</span> <span class="o">@</span> <span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">A_demo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>                    <span class="p">[</span><span class="mf">4.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>                    <span class="p">[</span><span class="mf">7.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">,</span> <span class="mf">9.</span><span class="p">]])</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>               <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>               <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A =&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li></li>
+</ul>
+<p>Con scambio di righe si cerca una matrice di permutazione <span class="math notranslate nohighlight">\(P\)</span> tale che</p>
+<div class="math notranslate nohighlight">
+\[
+PA=LU.
+\]</div>
+<p><strong>Teorema.</strong><br />
+Per ogni matrice</p>
+<div class="math notranslate nohighlight">
+\[
+A\in\mathbb{R}^{n\times n}
+\]</div>
+<p>esiste una matrice di permutazione <span class="math notranslate nohighlight">\(P\)</span> tale che</p>
+<div class="math notranslate nohighlight">
+\[
+PA=LU,
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(L\)</span> è triangolare inferiore con diagonale unitaria e <span class="math notranslate nohighlight">\(U\)</span> è triangolare superiore.</p>
+<p>Se <span class="math notranslate nohighlight">\(A\)</span> è non singolare, la fattorizzazione si effettua in <span class="math notranslate nohighlight">\(n-1\)</span> passi.</p>
+<p>Se <span class="math notranslate nohighlight">\(A\)</span> è singolare, il procedimento si arresta quando si incontra un pivot nullo non eliminabile.</p>
 <p>Al passo <span class="math notranslate nohighlight">\(k\)</span> del <strong>pivoting parziale</strong> cerchiamo, nella colonna corrente, l’elemento di modulo massimo tra le righe non ancora utilizzate:</p>
 <div class="math notranslate nohighlight">
 \[
 p=\operatorname*{argmax}_{i=k,\ldots,n}|u_{ik}|.
 \]</div>
 <p>Se <span class="math notranslate nohighlight">\(p\neq k\)</span>, scambiamo le righe <span class="math notranslate nohighlight">\(k\)</span> e <span class="math notranslate nohighlight">\(p\)</span>. Solo dopo lo scambio procediamo con l’eliminazione.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/pivoting_parziale.png"><img alt="../_images/pivoting_parziale.png" src="../_images/pivoting_parziale.png" style="width: 100%;" />
-</a>
-</figure>
+<p><img alt="" src="../_images/pivoting_parziale.png" /></p>
+<!-- ```{figure} immagini_sorgente/pivoting_parziale.png
+---
+width: 100%
+align: center
+---
+```
 <p align="center">
   <img src="immagini_sorgente/pivoting_parziale.png" width="700">
-</p>
+</p> -->
 <p>La scelta del massimo garantisce che, nella colonna corrente,</p>
 <div class="math notranslate nohighlight">
 \[
 |m_{ik}|=\left|\frac{u_{ik}}{u_{kk}}\right|\leq1.
 \]</div>
 <p>Il pivoting parziale è la strategia usata normalmente per matrici dense generali.</p>
-</section>
-<section id="la-matrice-di-permutazione">
-<h2>La matrice di permutazione<a class="headerlink" href="#la-matrice-di-permutazione" title="Link to this heading">#</a></h2>
-<p>Gli scambi di righe vengono rappresentati mediante una <strong>matrice di permutazione</strong> <span class="math notranslate nohighlight">\(P\)</span>. Essa si ottiene dalla matrice identità eseguendo gli stessi scambi applicati ad <span class="math notranslate nohighlight">\(A\)</span>.</p>
-<p>Le matrici di permutazione sono ortogonali:</p>
-<div class="math notranslate nohighlight">
-\[
-P^{-1}=P^T.
-\]</div>
-<p>Con il pivoting, l’eliminazione non fattorizza direttamente <span class="math notranslate nohighlight">\(A\)</span>, ma la matrice con le righe permutate:</p>
-<div class="math notranslate nohighlight">
-\[
-PA=LU.
-\]</div>
-<p>Per risolvere <span class="math notranslate nohighlight">\(A\mathbf{x}=\mathbf{b}\)</span> moltiplichiamo anche il termine noto per <span class="math notranslate nohighlight">\(P\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-PA\mathbf{x}=P\mathbf{b}
-\quad\Longrightarrow\quad
-LU\mathbf{x}=P\mathbf{b}.
-\]</div>
-<p>Risolviamo quindi</p>
-<div class="math notranslate nohighlight">
-\[
-L\mathbf{y}=P\mathbf{b},
-\qquad
-U\mathbf{x}=\mathbf{y}.
-\]</div>
 <p><strong>Esempio <span class="math notranslate nohighlight">\(3\times3\)</span> con pivoting parziale</strong></p>
 <p>Consideriamo</p>
 <div class="math notranslate nohighlight">
@@ -811,20 +999,11 @@ True
 </div>
 </div>
 </div>
-</section>
-<section id="pivoting-e-stabilita">
-<h2>Pivoting e stabilità<a class="headerlink" href="#pivoting-e-stabilita" title="Link to this heading">#</a></h2>
 <p>Il pivoting parziale riduce il rischio di crescita eccessiva dei moltiplicatori ed è molto efficace nella pratica. Non modifica l’ordine di complessità della fattorizzazione, che resta</p>
 <div class="math notranslate nohighlight">
 \[
 \mathcal{O}(n^3).
 \]</div>
-<p>È importante però distinguere due concetti:</p>
-<ul class="simple">
-<li><p>il <strong>pivoting</strong> riguarda la stabilità dell’algoritmo di eliminazione;</p></li>
-<li><p>il <strong>condizionamento</strong> riguarda la sensibilità del problema rispetto a perturbazioni nei dati.</p></li>
-</ul>
-<p>Il pivoting non può rendere ben condizionata una matrice mal condizionata. Può però evitare di aggiungere instabilità numerica non necessaria durante il calcolo.</p>
 </section>
 <section id="fattorizzazione-di-cholesky">
 <h2>3.4 Fattorizzazione di Cholesky<a class="headerlink" href="#fattorizzazione-di-cholesky" title="Link to this heading">#</a></h2>
@@ -1052,7 +1231,7 @@ Verifica A @ V = V @ Lambda: True
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">5. Decomposizione ai valori singolari (SVD)</p>
+        <p class="prev-next-title">Decomposizione ai valori singolari (SVD)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1074,10 +1253,8 @@ Verifica A @ V = V @ Lambda: True
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-fattorizzare-una-matrice">3.1 Perché fattorizzare una matrice?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-lu">3.2 Fattorizzazione LU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#secondo-passo">Secondo passo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting">3.3.1 Pivoting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-parziale">3.3.2 Pivoting parziale</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-matrice-di-permutazione">La matrice di permutazione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivoting-e-stabilita">Pivoting e stabilità</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-di-cholesky">3.4 Fattorizzazione di Cholesky</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-agli-autovalori-teoria-e-numpy">4.   Fattorizzazione agli autovalori: teoria e NumPy</a></li>
 </ul>
