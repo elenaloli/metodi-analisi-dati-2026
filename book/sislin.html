@@ -769,6 +769,49 @@ L\mathbf{y}=\mathbf{b},
 \qquad
 L^T\mathbf{x}=\mathbf{y}.
 \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Matrice casuale simmetrica definita positiva</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">B</span> <span class="o">@</span> <span class="n">B</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># Soluzione esatta e termine noto</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span>
+
+<span class="c1"># Fattorizzazione di Cholesky</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># Risoluzione dei due sistemi: L z = y e L.T x_calcolata = z</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">x_calcolata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+<span class="c1"># Errore relativo in norma euclidea</span>
+<span class="n">errore_relativo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x_calcolata</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soluzione esatta:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">printoptions</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;float_kind&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.16e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soluzione calcolata:&quot;</span><span class="p">,</span> <span class="n">x_calcolata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Errore relativo: </span><span class="si">{</span><span class="n">errore_relativo</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Soluzione esatta: [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+Soluzione calcolata: [9.9999999999999978e-01 9.9999999999999978e-01 1.0000000000000000e+00
+ 1.0000000000000013e+00 9.9999999999999856e-01 1.0000000000000004e+00
+ 9.9999999999999922e-01 9.9999999999999667e-01 1.0000000000000027e+00
+ 1.0000000000000004e+00]
+Errore relativo: 1.521e-15
+</pre></div>
+</div>
+</div>
+</div>
 <p><em>Esercizi</em></p>
 <ol class="arabic">
 <li><p>Verificare manualmente che le matrici <span class="math notranslate nohighlight">\(L\)</span> e <span class="math notranslate nohighlight">\(U\)</span> dell’esempio soddisfino <span class="math notranslate nohighlight">\(LU=A\)</span>.</p></li>
