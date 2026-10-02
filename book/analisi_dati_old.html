@@ -59,11 +59,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'book/analisi_dati';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/analisi_dati_old';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Perché l’algebra lineare è fondamentale nell’analisi dei dati?" href="algebra_lineare.html" />
-    <link rel="prev" title="I numeri finiti e il calcolo scientifico" href="numeri_finiti.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,6 +124,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -181,13 +181,13 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
@@ -265,7 +265,7 @@
       
       
       
-      <li><a href="https://github.com/elenaloli/computational-imaging.git/issues/new?title=Issue%20on%20page%20%2Fbook/analisi_dati.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/elenaloli/computational-imaging.git/issues/new?title=Issue%20on%20page%20%2Fbook/analisi_dati_old.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -295,7 +295,7 @@
       
       
       
-      <li><a href="../_sources/book/analisi_dati.ipynb" target="_blank"
+      <li><a href="../_sources/book/analisi_dati_old.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -397,17 +397,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-ciclo-di-vita-dell-analisi-dei-dati">1.2 Il ciclo di vita dell’analisi dei dati</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-qualita-dei-dati">1.3 La qualità dei dati</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-servono-i-metodi-numerici">1.4 Perché servono i metodi numerici?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-focus-del-corso-l-analisi-predittiva">1.3 Il focus del corso: l’analisi predittiva</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-primo-esempio">1.4 Un primo esempio</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dall-analisi-descrittiva-all-analisi-predittiva">2. Dall’analisi descrittiva all’analisi predittiva</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-cos-e-un-classificatore">2.1 Che cos’è un classificatore?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apprendimento-supervisionato">2.3 Apprendimento supervisionato</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#una-prima-idea-di-classificazione">2.4 Una prima idea di classificazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apprendimento-e-valutazione">2.5 Apprendimento e valutazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domande-per-la-discussione">Domande per la discussione</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-scelta-del-modello">2.6 La scelta del modello</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.6 La scelta del modello</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-modelli-famiglie-parametriche-di-funzioni">2.6 I modelli: famiglie parametriche di funzioni</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-approccio-del-machine-learning">2.7 L’approccio del Machine Learning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-obiettivo-generalizzare">2.8 L’obiettivo: generalizzare</a></li>
@@ -591,475 +582,29 @@ y^\delta = y + \eta,
 <div><p>L’analisi dei dati non consiste semplicemente nell’applicare un algoritmo. Consiste nel formulare correttamente una domanda, rappresentare i dati, scegliere un modello, calcolare una soluzione e valutarne criticamente l’affidabilità.</p>
 </div></blockquote>
 </section>
-<section id="il-focus-del-corso-l-analisi-predittiva">
-<h3>1.3 Il focus del corso: l’analisi predittiva<a class="headerlink" href="#il-focus-del-corso-l-analisi-predittiva" title="Link to this heading">#</a></h3>
-<p>In questo corso ci concentreremo soprattutto sull’<strong>analisi predittiva</strong>. A partire da esempi per i quali conosciamo già la risposta, cercheremo di costruire una funzione capace di fornire una previsione su nuove osservazioni.</p>
-<p>In forma schematica:</p>
-<div class="math notranslate nohighlight">
-\[
-\text{dati di esempio}
-\longrightarrow
-\text{apprendimento di un modello}
-\longrightarrow
-\text{previsione su nuovi dati}.
-\]</div>
-<p>Due problemi predittivi fondamentali sono:</p>
-<ul class="simple">
-<li><p>la <strong>classificazione</strong>, quando la risposta è una categoria;</p></li>
-<li><p>la <strong>regressione</strong>, quando la risposta è una quantità numerica.</p></li>
-</ul>
-<p>Cominciamo dall’idea di classificazione.</p>
-</section>
-<section id="un-primo-esempio">
-<h3>1.4 Un primo esempio<a class="headerlink" href="#un-primo-esempio" title="Link to this heading">#</a></h3>
-<p>Supponiamo di conoscere, per un insieme di studenti:</p>
-<ul class="simple">
-<li><p>il numero di ore dedicate allo studio;</p></li>
-<li><p>la percentuale di lezioni frequentate;</p></li>
-<li><p>il voto ottenuto all’esame.</p></li>
-</ul>
-<p>A partire da questi dati possiamo formulare diverse domande:</p>
-<ul class="simple">
-<li><p>Qual è il voto medio?</p></li>
-<li><p>Quanto sono variabili i risultati?</p></li>
-<li><p>Esiste una relazione tra ore di studio e voto?</p></li>
-<li><p>Sono presenti studenti con un comportamento anomalo?</p></li>
-<li><p>Possiamo dividere gli studenti in gruppi con caratteristiche simili?</p></li>
-</ul>
-<p>Prima di scegliere un algoritmo dobbiamo quindi chiarire <strong>quale domanda vogliamo porre ai dati</strong>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="n">studenti</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s1">&#39;Studente&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Anna&#39;</span><span class="p">,</span> <span class="s1">&#39;Bruno&#39;</span><span class="p">,</span> <span class="s1">&#39;Carla&#39;</span><span class="p">,</span> <span class="s1">&#39;Davide&#39;</span><span class="p">,</span> <span class="s1">&#39;Elena&#39;</span><span class="p">,</span> <span class="s1">&#39;Fabio&#39;</span><span class="p">,</span> <span class="s1">&#39;Giulia&#39;</span><span class="p">,</span> <span class="s1">&#39;Luca&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;Ore_studio&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
-    <span class="s1">&#39;Frequenza&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">65</span><span class="p">],</span>
-    <span class="s1">&#39;Voto&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
-<span class="p">})</span>
-
-<span class="n">studenti</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Studente</th>
-      <th>Ore_studio</th>
-      <th>Frequenza</th>
-      <th>Voto</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Anna</td>
-      <td>12</td>
-      <td>70</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Bruno</td>
-      <td>25</td>
-      <td>90</td>
-      <td>28</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Carla</td>
-      <td>18</td>
-      <td>80</td>
-      <td>25</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Davide</td>
-      <td>8</td>
-      <td>60</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Elena</td>
-      <td>22</td>
-      <td>85</td>
-      <td>27</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Fabio</td>
-      <td>15</td>
-      <td>75</td>
-      <td>23</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Giulia</td>
-      <td>28</td>
-      <td>95</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Luca</td>
-      <td>10</td>
-      <td>65</td>
-      <td>20</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>Nella tabella precedente:</p>
-<ul class="simple">
-<li><p>ogni <strong>riga</strong> corrisponde a un’osservazione, cioè a uno studente;</p></li>
-<li><p>ogni <strong>colonna</strong> corrisponde a una variabile;</p></li>
-<li><p>le variabili numeriche possono essere utilizzate nei calcoli;</p></li>
-<li><p>il nome dello studente è invece una variabile identificativa.</p></li>
-</ul>
-<p><strong>Per riflettere</strong></p>
-<p>Consideriamo un’applicazione che deve analizzare automaticamente immagini mediche.</p>
-<ol class="arabic simple">
-<li><p>Che cosa rappresentano le osservazioni?</p></li>
-<li><p>Quali potrebbero essere le variabili o feature?</p></li>
-<li><p>Da quali sorgenti potrebbe provenire il rumore?</p></li>
-<li><p>Quali conseguenze potrebbe avere un errore dell’algoritmo?</p></li>
-<li><p>L’accuratezza numerica è l’unico criterio con cui valutarlo?</p></li>
-</ol>
-<p>Queste domande mostrano perché l’analisi dei dati richiede sia strumenti matematici e computazionali sia una conoscenza del contesto applicativo.</p>
-</section>
-</section>
-<section id="dall-analisi-descrittiva-all-analisi-predittiva">
-<h2>2. Dall’analisi descrittiva all’analisi predittiva<a class="headerlink" href="#dall-analisi-descrittiva-all-analisi-predittiva" title="Link to this heading">#</a></h2>
-<p>Descrivere i dati disponibili è soltanto una parte dell’analisi dei dati. Molto spesso vogliamo utilizzare ciò che abbiamo osservato per formulare una <strong>previsione su nuovi dati</strong>.</p>
-<p>Esempi di domande predittive sono:</p>
-<ul class="simple">
-<li><p>un messaggio di posta elettronica è <em>spam</em> oppure <em>non spam</em>?</p></li>
-<li><p>un’immagine contiene un gatto, un cane oppure un altro animale?</p></li>
-<li><p>una transazione bancaria è regolare oppure fraudolenta?</p></li>
-<li><p>un’immagine medica mostra un tessuto sano oppure patologico?</p></li>
-</ul>
-<p>Quando il risultato da prevedere appartiene a un insieme finito di categorie, abbiamo un problema di <strong>classificazione</strong>.</p>
-<p><strong>Due problemi predittivi fondamentali</strong></p>
-<p>Nell’apprendimento supervisionato distinguiamo soprattutto:</p>
-<ul class="simple">
-<li><p><strong>classificazione</strong>, se <span class="math notranslate nohighlight">\(y\)</span> è una categoria;</p></li>
-<li><p><strong>regressione</strong>, se <span class="math notranslate nohighlight">\(y\)</span> è una quantità numerica.</p></li>
-</ul>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/classificazione_regressione.png"><img alt="../_images/classificazione_regressione.png" src="../_images/classificazione_regressione.png" style="width: 100%;" />
-</a>
-</figure>
-<!-- <p align="center">
-  <img src="immagini_sorgente/classificazione_regressione.png" width="700">
-</p> -->
-<p>In entrambi i casi il modello deve individuare una relazione tra gli input e gli output osservati, per poi applicarla a nuovi dati. Cambiano il tipo di risposta e le misure utilizzate per valutare l’errore.</p>
-<section id="che-cos-e-un-classificatore">
-<h3>2.1 Che cos’è un classificatore?<a class="headerlink" href="#che-cos-e-un-classificatore" title="Link to this heading">#</a></h3>
-<p>Ogni oggetto viene descritto mediante un insieme di caratteristiche numeriche, dette <strong>feature</strong>. Queste caratteristiche formano un vettore</p>
-<div class="math notranslate nohighlight">
-\[
-\mathbf{x}=(x_1,x_2,\ldots,x_n)\in\mathbb{R}^n.
-\]</div>
-<p>Un classificatore riceve il vettore <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> e gli assegna una classe:</p>
-<div class="math notranslate nohighlight">
-\[
-f:\mathbb{R}^n\longrightarrow\{C_1,C_2,\ldots,C_K\}.
-\]</div>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/schema_classificazione.png"><img alt="../_images/schema_classificazione.png" src="../_images/schema_classificazione.png" style="width: 100%;" />
-</a>
-</figure>
-<!-- <p align="center">
-  <img src="immagini_sorgente/schema_classificazione.png" width="700">
-</p> --></section>
-<section id="apprendimento-supervisionato">
-<h3>2.3 Apprendimento supervisionato<a class="headerlink" href="#apprendimento-supervisionato" title="Link to this heading">#</a></h3>
-<p>Come possiamo costruire la funzione <span class="math notranslate nohighlight">\(f\)</span>? Disponiamo di un insieme di esempi per i quali la classe corretta è già nota:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{D}=\{(\mathbf{x}_i,y_i)\}_{i=1}^m,
-\]</div>
-<p>dove <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> contiene le caratteristiche dell’osservazione <span class="math notranslate nohighlight">\(i\)</span> e <span class="math notranslate nohighlight">\(y_i\)</span> è la sua <strong>etichetta</strong>, o <em>label</em>.</p>
-<p>Si parla di <strong>apprendimento supervisionato</strong> perché durante l’apprendimento il metodo conosce sia i dati in ingresso sia le risposte corrette.</p>
-<p><em>Un piccolo dataset a due classi</em></p>
-<p>Consideriamo dodici oggetti. Ogni oggetto è descritto da due caratteristiche, <span class="math notranslate nohighlight">\(x_1\)</span> e <span class="math notranslate nohighlight">\(x_2\)</span>, ed è associato alla <strong>classe A</strong> oppure alla <strong>classe B</strong>. Poiché ci sono soltanto due possibili etichette, questo è un problema di <strong>classificazione binaria</strong>.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/dati_due_classi.png"><img alt="../_images/dati_due_classi.png" src="../_images/dati_due_classi.png" style="width: 100%;" />
-</a>
-</figure>
-<!-- <p align="center">
-  <img src="immagini_sorgente/dati_due_classi.png" width="700">
-</p> -->
-<p>Ogni punto rappresenta un’osservazione. La sua posizione dipende dalle caratteristiche, mentre il colore e la forma indicano la classe nota.</p>
-<p>Se le possibili etichette fossero più di due, per esempio gatto, cane e cavallo, parleremmo invece di <strong>classificazione multiclasse</strong>.</p>
-<p>Il classificatore suddivide lo spazio delle caratteristiche in regioni associate alle diverse classi. Il confine tra queste regioni prende il nome di <strong>frontiera di decisione</strong>.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/frontiera_classificazione.png"><img alt="../_images/frontiera_classificazione.png" src="../_images/frontiera_classificazione.png" style="width: 100%;" />
-</a>
-</figure>
-<!-- <p align="center">
-  <img src="immagini_sorgente/frontiera_classificazione.png" width="700">
-</p> -->
-<p>Una volta costruita la frontiera, una nuova osservazione viene classificata in base alla regione in cui si trova.</p>
-<blockquote>
-<div><p>La frontiera mostrata nella figura serve soltanto a illustrare il concetto: nei problemi reali deve essere appresa dai dati.</p>
-</div></blockquote>
-</section>
-<section id="una-prima-idea-di-classificazione">
-<h3>2.4 Una prima idea di classificazione<a class="headerlink" href="#una-prima-idea-di-classificazione" title="Link to this heading">#</a></h3>
-<p>Consideriamo un insieme di fiori descritti mediante due caratteristiche:</p>
-<ul class="simple">
-<li><p>la lunghezza del petalo;</p></li>
-<li><p>la larghezza del petalo.</p></li>
-</ul>
-<p>Per ogni fiore conosciamo inoltre la specie, che può essere <strong>Setosa</strong> oppure <strong>Versicolor</strong>. La specie è la <strong>classe</strong> o <strong>etichetta</strong> (<em>label</em>) che vogliamo prevedere.</p>
-<p>Il nostro obiettivo è usare gli esempi disponibili per assegnare una classe a un nuovo fiore.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Un piccolo dataset ispirato al dataset Iris</span>
-<span class="n">fiori</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s1">&#39;Lunghezza_petalo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span>
-                         <span class="mf">4.7</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.9</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">],</span>
-    <span class="s1">&#39;Larghezza_petalo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span>
-                         <span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span>
-    <span class="s1">&#39;Specie&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Setosa&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;Versicolor&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span>
-<span class="p">})</span>
-
-<span class="n">fiori</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Lunghezza_petalo</th>
-      <th>Larghezza_petalo</th>
-      <th>Specie</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1.4</td>
-      <td>0.2</td>
-      <td>Setosa</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1.3</td>
-      <td>0.2</td>
-      <td>Setosa</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1.5</td>
-      <td>0.2</td>
-      <td>Setosa</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1.7</td>
-      <td>0.4</td>
-      <td>Setosa</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1.4</td>
-      <td>0.3</td>
-      <td>Setosa</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>1.6</td>
-      <td>0.2</td>
-      <td>Setosa</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>4.7</td>
-      <td>1.4</td>
-      <td>Versicolor</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>4.5</td>
-      <td>1.5</td>
-      <td>Versicolor</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>4.9</td>
-      <td>1.5</td>
-      <td>Versicolor</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>4.0</td>
-      <td>1.3</td>
-      <td>Versicolor</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>4.6</td>
-      <td>1.5</td>
-      <td>Versicolor</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>4.4</td>
-      <td>1.3</td>
-      <td>Versicolor</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>In un problema di apprendimento supervisionato ogni osservazione è formata da:</p>
-<div class="math notranslate nohighlight">
-\[
-(\mathbf{x}_i,y_i), \qquad i=1,\ldots,m,
-\]</div>
-<p>dove</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\mathbf{x}_i=
-\begin{bmatrix}
-\text{lunghezza del petalo}\\
-\text{larghezza del petalo}
-\end{bmatrix}
-\in\mathbb{R}^2
-\end{split}\]</div>
-<p>è il vettore delle caratteristiche e <span class="math notranslate nohighlight">\(y_i\)</span> è l’etichetta associata al fiore.</p>
-<p>In questo esempio cerchiamo quindi una funzione</p>
-<div class="math notranslate nohighlight">
-\[
-f:\mathbb{R}^2\longrightarrow\{\text{Setosa},\text{Versicolor}\}.
-\]</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colori</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Setosa&#39;</span><span class="p">:</span> <span class="s1">&#39;royalblue&#39;</span><span class="p">,</span> <span class="s1">&#39;Versicolor&#39;</span><span class="p">:</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">}</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">specie</span><span class="p">,</span> <span class="n">gruppo</span> <span class="ow">in</span> <span class="n">fiori</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Specie&#39;</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gruppo</span><span class="p">[</span><span class="s1">&#39;Lunghezza_petalo&#39;</span><span class="p">],</span> <span class="n">gruppo</span><span class="p">[</span><span class="s1">&#39;Larghezza_petalo&#39;</span><span class="p">],</span>
-                <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colori</span><span class="p">[</span><span class="n">specie</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">specie</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Lunghezza del petalo (cm)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Larghezza del petalo (cm)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Due classi nello spazio delle caratteristiche&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/fb50b2fffdf04136a9a30eab5bd47f129ac5e358e095f83f4a58b01ebc457e27.png" src="../_images/fb50b2fffdf04136a9a30eab5bd47f129ac5e358e095f83f4a58b01ebc457e27.png" />
-</div>
-</div>
-<p>Nel grafico ogni punto rappresenta un fiore. La posizione dipende dalle sue caratteristiche, mentre il colore indica la classe nota.</p>
-<p>Osserviamo che le due specie occupano regioni differenti dello spazio. Un metodo di classificazione cerca di ricavare dai dati una <strong>regola di decisione</strong> che separi tali regioni.</p>
-<p>Per un nuovo fiore con caratteristiche</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\mathbf{x}_{\mathrm{new}}=
-\begin{bmatrix}
-4.2\\1.4
-\end{bmatrix},
-\end{split}\]</div>
-<p>quale classe assegneremmo osservando il grafico?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuovo_fiore</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4.2</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">])</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">specie</span><span class="p">,</span> <span class="n">gruppo</span> <span class="ow">in</span> <span class="n">fiori</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Specie&#39;</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gruppo</span><span class="p">[</span><span class="s1">&#39;Lunghezza_petalo&#39;</span><span class="p">],</span> <span class="n">gruppo</span><span class="p">[</span><span class="s1">&#39;Larghezza_petalo&#39;</span><span class="p">],</span>
-                <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colori</span><span class="p">[</span><span class="n">specie</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">specie</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">nuovo_fiore</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nuovo_fiore</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">260</span><span class="p">,</span>
-            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Nuovo fiore&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Lunghezza del petalo (cm)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Larghezza del petalo (cm)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Classificare una nuova osservazione&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/a3ef453e59e22596da7403b0d70b8def8a82f9410f1f9ece368f81d130689ec0.png" src="../_images/a3ef453e59e22596da7403b0d70b8def8a82f9410f1f9ece368f81d130689ec0.png" />
-</div>
-</div>
-</section>
-<section id="apprendimento-e-valutazione">
-<h3>2.5 Apprendimento e valutazione<a class="headerlink" href="#apprendimento-e-valutazione" title="Link to this heading">#</a></h3>
-<p>I dati usati per costruire la regola di classificazione costituiscono il <strong>training set</strong>. Valutare il modello sugli stessi esempi, però, non ci dice quanto sarà efficace su dati mai osservati.</p>
-<p>Per questo si separano normalmente i dati in:</p>
-<ul class="simple">
-<li><p><strong>training set</strong>, utilizzato per apprendere il modello;</p></li>
-<li><p><strong>test set</strong>, utilizzato per valutarne la capacità predittiva su nuovi dati.</p></li>
-</ul>
-<p>Una prima misura di prestazione è l’<strong>accuratezza</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-\operatorname{accuracy}=
-\frac{\text{numero di classificazioni corrette}}
-{\text{numero totale di esempi nel test set}}.
-\]</div>
-<p>Nei problemi reali l’accuratezza non è sempre sufficiente: il significato e il costo dei diversi tipi di errore possono essere molto differenti.</p>
-</section>
-<section id="domande-per-la-discussione">
-<h3>Domande per la discussione<a class="headerlink" href="#domande-per-la-discussione" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>Quali informazioni costituiscono l’input del classificatore?</p></li>
-<li><p>Qual è l’output?</p></li>
-<li><p>Il problema è binario o multiclasse?</p></li>
-<li><p>Che cosa accadrebbe se le due nuvole di punti si sovrapponessero?</p></li>
-<li><p>È possibile ottenere un’accuratezza perfetta sul training set ma commettere errori sui nuovi dati?</p></li>
-<li><p>In una diagnosi medica, tutti gli errori di classificazione avrebbero lo stesso costo?</p></li>
-</ol>
-</section>
 <section id="la-scelta-del-modello">
 <h3>2.6 La scelta del modello<a class="headerlink" href="#la-scelta-del-modello" title="Link to this heading">#</a></h3>
+<p>Gli stessi dati possono essere rappresentati utilizzando <em>modelli</em> differenti. Per esempio, possiamo scegliere come modello una retta oppure una parabola.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/modelli_lineare_quadratico.png"><img alt="../_images/modelli_lineare_quadratico.png" src="../_images/modelli_lineare_quadratico.png" style="width: 100%;" />
+</a>
+</figure>
+<!-- <p align="center">
+  <img src="immagini_sorgente/modelli_lineare_quadratico.png" width="700">
+</p> -->
+<p>Nel primo caso il modello ha la forma</p>
+<div class="math notranslate nohighlight">
+\[
+f(x;\boldsymbol{\theta})=\theta_0+\theta_1x,
+\]</div>
+<p>mentre nel secondo caso ha la forma</p>
+<div class="math notranslate nohighlight">
+\[
+f(x;\boldsymbol{\theta})=\theta_0+\theta_1x+\theta_2x^2.
+\]</div>
+</section>
+<section id="id1">
+<h3>2.6 La scelta del modello<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>Gli stessi dati possono essere rappresentati utilizzando <em>modelli</em> differenti. Per esempio, possiamo scegliere come modello una retta oppure una parabola.</p>
 <figure class="align-center">
 <a class="reference internal image-reference" href="../_images/modelli_lineare_quadratico.png"><img alt="../_images/modelli_lineare_quadratico.png" src="../_images/modelli_lineare_quadratico.png" style="width: 100%;" />
@@ -1132,13 +677,16 @@ f(x;\boldsymbol{\theta})=\theta_0+\theta_1 e^{\alpha x}.
 <h3>2.7 L’approccio del Machine Learning<a class="headerlink" href="#l-approccio-del-machine-learning" title="Link to this heading">#</a></h3>
 <p>Nella programmazione tradizionale il programmatore specifica esplicitamente le regole che trasformano i dati in risultati. Questo approccio diventa difficile quando le regole sono troppo numerose, complesse o impossibili da descrivere in modo preciso.</p>
 <p>Nel <strong>Machine Learning</strong> non scriviamo direttamente tutte le regole: forniamo esempi a un algoritmo, che cerca nei dati le regolarità utili per costruire un modello predittivo.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/tradizionale_vs_ml.png"><img alt="../_images/tradizionale_vs_ml.png" src="../_images/tradizionale_vs_ml.png" style="width: 100%;" />
-</a>
-</figure>
+<p><img alt="" src="../_images/tradizionale_vs_ml.png" /></p>
+<!-- ```{figure} immagini_sorgente/tradizionale_vs_ml.png
+---
+width: 100%
+align: center
+---
+```
 <p align="center">
   <img src="immagini_sorgente/tradizionale_vs_ml.png" width="700">
-</p>
+</p> -->
 <blockquote>
 <div><p>Un sistema di Machine Learning apprende dai dati una regola che non è stata programmata esplicitamente.</p>
 </div></blockquote>
@@ -1149,13 +697,16 @@ f(x;\boldsymbol{\theta})=\theta_0+\theta_1 e^{\alpha x}.
 <li><p>durante il <strong>test</strong>, affronta domande nuove;</p></li>
 <li><p>la <strong>valutazione</strong> misura quanto ciò che ha appreso sia trasferibile a situazioni mai viste.</p></li>
 </ul>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/studying_training_evaluation.png"><img alt="../_images/studying_training_evaluation.png" src="../_images/studying_training_evaluation.png" style="width: 100%;" />
-</a>
-</figure>
+<p><img alt="" src="book/studying_training_evaluation.png" /></p>
+<!-- ```{figure} immagini_sorgente/studying_training_evaluation.png
+---
+width: 100%
+align: center
+---
+```
 <!-- <p align="center">
   <img src="immagini_sorgente/studying_training_evaluation.png" width="700">
-</p> -->
+</p> --> -->
 <p>Se le domande dell’esame fossero identiche agli esercizi studiati, non potremmo capire se lo studente ha davvero imparato. Analogamente, un modello deve essere valutato su dati non utilizzati durante il training.</p>
 <p>Nell’<strong>apprendimento supervisionato</strong> disponiamo di un insieme di esempi</p>
 <div class="math notranslate nohighlight">
@@ -1181,13 +732,16 @@ f_{\boldsymbol{\theta}}(\mathbf{x}_{\mathrm{new}})
 <section id="l-obiettivo-generalizzare">
 <h3>2.8 L’obiettivo: generalizzare<a class="headerlink" href="#l-obiettivo-generalizzare" title="Link to this heading">#</a></h3>
 <p>Lo scopo non è riprodurre perfettamente gli esempi già osservati, ma ottenere buone previsioni su dati nuovi. Questa capacità prende il nome di <strong>generalizzazione</strong>.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/training_test.png"><img alt="../_images/training_test.png" src="../_images/training_test.png" style="width: 100%;" />
-</a>
-</figure>
+<p><img alt="" src="../_images/training_test.png" /></p>
+<!-- ```{figure} immagini_sorgente/training_test.png
+---
+width: 100%
+align: center
+---
+```
 <!-- <p align="center">
   <img src="immagini_sorgente/training_test.png" width="700">
-</p> -->
+</p> --> -->
 <ul class="simple">
 <li><p>Il <strong>training set</strong> serve ad apprendere i parametri del modello.</p></li>
 <li><p>Il <strong>test set</strong> deve essere usato soltanto per la valutazione finale.</p></li>
@@ -1230,24 +784,6 @@ f_{\boldsymbol{\theta}}(\mathbf{x}_{\mathrm{new}})
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="numeri_finiti.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">I numeri finiti e il calcolo scientifico</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="algebra_lineare.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1272,17 +808,8 @@ f_{\boldsymbol{\theta}}(\mathbf{x}_{\mathrm{new}})
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-ciclo-di-vita-dell-analisi-dei-dati">1.2 Il ciclo di vita dell’analisi dei dati</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-qualita-dei-dati">1.3 La qualità dei dati</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-servono-i-metodi-numerici">1.4 Perché servono i metodi numerici?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-focus-del-corso-l-analisi-predittiva">1.3 Il focus del corso: l’analisi predittiva</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-primo-esempio">1.4 Un primo esempio</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dall-analisi-descrittiva-all-analisi-predittiva">2. Dall’analisi descrittiva all’analisi predittiva</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-cos-e-un-classificatore">2.1 Che cos’è un classificatore?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apprendimento-supervisionato">2.3 Apprendimento supervisionato</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#una-prima-idea-di-classificazione">2.4 Una prima idea di classificazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apprendimento-e-valutazione">2.5 Apprendimento e valutazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domande-per-la-discussione">Domande per la discussione</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-scelta-del-modello">2.6 La scelta del modello</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.6 La scelta del modello</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-modelli-famiglie-parametriche-di-funzioni">2.6 I modelli: famiglie parametriche di funzioni</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-approccio-del-machine-learning">2.7 L’approccio del Machine Learning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-obiettivo-generalizzare">2.8 L’obiettivo: generalizzare</a></li>

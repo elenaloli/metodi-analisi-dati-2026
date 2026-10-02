@@ -458,13 +458,16 @@ A\mathbf{x}=\mathbf{b}
 </section>
 <section id="metodi-diretti-e-metodi-iterativi">
 <h2>6.2 Metodi diretti e metodi iterativi<a class="headerlink" href="#metodi-diretti-e-metodi-iterativi" title="Link to this heading">#</a></h2>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/metodi_diretti_iterativi.png"><img alt="../_images/metodi_diretti_iterativi.png" src="../_images/metodi_diretti_iterativi.png" style="width: 100%;" />
-</a>
-</figure>
+<p><img alt="" src="../_images/metodi_diretti_iterativi.png" /></p>
+<!-- ```{figure} immagini_sorgente/metodi_diretti_iterativi.png
+---
+width: 100%
+align: center
+---
+```
 <p align="center">
   <img src="immagini_sorgente/metodi_diretti_iterativi.png" width="700">
-</p>
+</p> -->
 <p>I <strong>metodi diretti</strong> producono la soluzione dopo un numero finito di operazioni, se si lavora in aritmetica esatta. Sono basati principalmente sull’eliminazione di Gauss e sulle fattorizzazioni della matrice.</p>
 <p>I <strong>metodi iterativi</strong> costruiscono invece una successione di approssimazioni</p>
 <div class="math notranslate nohighlight">
@@ -513,40 +516,6 @@ x_i=\frac{1}{u_{ii}}
 \qquad i=n,n-1,\ldots,1.
 \]</div>
 <p>Questo procedimento è detto <strong>sostituzione all’indietro</strong> e ha anch’esso complessità <span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">sostituzione_avanti</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">1e-14</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Elemento diagonale nullo&#39;</span><span class="p">)</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="n">i</span><span class="p">]</span> <span class="o">@</span> <span class="n">x</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">x</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">sostituzione_indietro</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">1e-14</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Elemento diagonale nullo&#39;</span><span class="p">)</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">@</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p><strong>Costo computazionale</strong></p>
 <p>Per un sistema triangolare di ordine <span class="math notranslate nohighlight">\(n\)</span>, il numero complessivo di termini presenti nelle somme è</p>
 <div class="math notranslate nohighlight">
@@ -567,13 +536,16 @@ x_i=\frac{1}{u_{ii}}
 \[
 A\mathbf{x}=\mathbf{b}
 \]</div>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/risoluzione_con_lu.png"><img alt="../_images/risoluzione_con_lu.png" src="../_images/risoluzione_con_lu.png" style="width: 100%;" />
-</a>
-</figure>
+<p>![] (immagini_sorgente/risoluzione_con_lu.png)</p>
+<!-- ```{figure} immagini_sorgente/risoluzione_con_lu.png
+---
+width: 100%
+align: center
+---
+```
 <p align="center">
   <img src="immagini_sorgente/risoluzione_con_lu.png" width="700">
-</p>
+</p> -->
 <p>Infatti, il sistema <span class="math notranslate nohighlight">\(A\mathbf{x}=\mathbf{b}\)</span> diventa</p>
 <div class="math notranslate nohighlight">
 \[
@@ -647,61 +619,6 @@ L=
 1\\1\\2
 \end{pmatrix}.
 \end{split}\]</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
-              <span class="p">[</span> <span class="mf">4.</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
-              <span class="p">[</span><span class="o">-</span><span class="mf">2.</span><span class="p">,</span>  <span class="mf">7.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
-
-<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
-              <span class="p">[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
-              <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
-
-<span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">],</span>
-              <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">],</span>
-              <span class="p">[</span><span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">]])</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;L @ U =</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">L</span> <span class="o">@</span> <span class="n">U</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">A = L @ U?&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">L</span> <span class="o">@</span> <span class="n">U</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Errore di fattorizzazione:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">L</span> <span class="o">@</span> <span class="n">U</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L @ U =
- [[ 2.  1.  1.]
- [ 4. -6.  0.]
- [-2.  7.  2.]]
-
-A = L @ U? True
-Errore di fattorizzazione: 0.0
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">9.</span><span class="p">])</span>
-
-<span class="n">y</span> <span class="o">=</span> <span class="n">sostituzione_avanti</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">sostituzione_indietro</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y =&#39;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x =&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Residuo b - Ax =&#39;</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Norma del residuo =&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y = [  5. -12.   2.]
-x = [1. 1. 2.]
-Residuo b - Ax = [0. 0. 0.]
-Norma del residuo = 0.0
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">
 <h2>6.5 Risoluzione di un sistema con fattorizzazione Lu con pivoting<a class="headerlink" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting" title="Link to this heading">#</a></h2>
@@ -752,67 +669,81 @@ L\mathbf{y}=P\mathbf{b}
 \end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_piv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mf">2.</span><span class="p">,</span>  <span class="mf">3.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">]])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">lu_factor</span><span class="p">,</span> <span class="n">lu_solve</span>
 
-<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
-              <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
-              <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+<span class="c1"># Matrice non casuale e non singolare</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
-<span class="n">L_piv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span>     <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>    <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mf">0.</span><span class="p">,</span>   <span class="o">-</span><span class="mi">4</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="c1"># Soluzione esatta: vettore con tutti gli elementi uguali a uno</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-<span class="n">U_piv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span>  <span class="mf">3.</span><span class="p">,</span>    <span class="mf">1.</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span>
-                  <span class="p">[</span><span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>   <span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+<span class="c1"># Termine noto: prodotto matrice-vettore</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P @ A =</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">P</span> <span class="o">@</span> <span class="n">A_piv</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">L @ U =</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">L_piv</span> <span class="o">@</span> <span class="n">U_piv</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">P @ A = L @ U?&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">A_piv</span><span class="p">,</span> <span class="n">L_piv</span> <span class="o">@</span> <span class="n">U_piv</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Errore di fattorizzazione:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">A_piv</span> <span class="o">-</span> <span class="n">L_piv</span> <span class="o">@</span> <span class="n">U_piv</span><span class="p">))</span>
+<span class="c1"># Fattorizzazione LU con pivoting</span>
+<span class="n">lu</span><span class="p">,</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">lu_factor</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># Soluzione numerica del sistema A @ x_calcolata = y</span>
+<span class="n">x_calcolata</span> <span class="o">=</span> <span class="n">lu_solve</span><span class="p">((</span><span class="n">lu</span><span class="p">,</span> <span class="n">piv</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Errore relativo in norma euclidea</span>
+<span class="n">errore_relativo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x_calcolata</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Termine noto y:&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soluzione esatta:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soluzione calcolata:&quot;</span><span class="p">,</span> <span class="n">x_calcolata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Errore relativo: </span><span class="si">{</span><span class="n">errore_relativo</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P @ A =
- [[ 2.  3.  1.]
- [ 1. -2. -3.]
- [ 0.  2.  1.]]
-
-L @ U =
- [[ 2.  3.  1.]
- [ 1. -2. -3.]
- [ 0.  2.  1.]]
-
-P @ A = L @ U? True
-Errore di fattorizzazione: 0.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Termine noto y: [ 6. 15. 25.]
+Soluzione esatta: [1. 1. 1.]
+Soluzione calcolata: [1. 1. 1.]
+Errore relativo: 2.867e-16
 </pre></div>
 </div>
 </div>
 </div>
+<p>Altro esempio con matrice di numeri casuali di dimensione nxn:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_piv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">lu_factor</span><span class="p">,</span> <span class="n">lu_solve</span>
 
-<span class="n">y_piv</span> <span class="o">=</span> <span class="n">sostituzione_avanti</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">P</span> <span class="o">@</span> <span class="n">b_piv</span><span class="p">)</span>
-<span class="n">x_piv</span> <span class="o">=</span> <span class="n">sostituzione_indietro</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">y_piv</span><span class="p">)</span>
+<span class="c1"># Dimensione della matrice</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P @ b =&#39;</span><span class="p">,</span> <span class="n">P</span> <span class="o">@</span> <span class="n">b_piv</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y =&#39;</span><span class="p">,</span> <span class="n">y_piv</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x =&#39;</span><span class="p">,</span> <span class="n">x_piv</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Residuo b - Ax =&#39;</span><span class="p">,</span> <span class="n">b_piv</span> <span class="o">-</span> <span class="n">A_piv</span> <span class="o">@</span> <span class="n">x_piv</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Norma del residuo =&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b_piv</span> <span class="o">-</span> <span class="n">A_piv</span> <span class="o">@</span> <span class="n">x_piv</span><span class="p">))</span>
+<span class="c1"># Matrice con numeri casuali uniformi nell&#39;intervallo [0, 1)</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+<span class="c1"># Soluzione esatta</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># Termine noto</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span>
+
+<span class="c1"># Fattorizzazione LU con pivoting e soluzione del sistema</span>
+<span class="n">lu</span><span class="p">,</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">lu_factor</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">x_calcolata</span> <span class="o">=</span> <span class="n">lu_solve</span><span class="p">((</span><span class="n">lu</span><span class="p">,</span> <span class="n">piv</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Errore relativo in norma euclidea</span>
+<span class="n">errore_relativo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x_calcolata</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soluzione esatta:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soluzione calcolata:&quot;</span><span class="p">,</span> <span class="n">x_calcolata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Errore relativo: </span><span class="si">{</span><span class="n">errore_relativo</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P @ b = [7. 0. 3.]
-y = [  7. -14.  -4.]
-x = [ 4.125  2.75  -4.   ]
-Residuo b - Ax = [  1.5   -10.625  -5.5  ]
-Norma del residuo = 12.057803489856683
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Soluzione esatta: [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+Soluzione calcolata: [1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+Errore relativo: 3.144e-15
 </pre></div>
 </div>
 </div>
