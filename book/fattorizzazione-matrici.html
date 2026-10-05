@@ -193,6 +193,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
 </ul>
 
     </div>
@@ -589,20 +590,20 @@ L=
 <p>Al passo <span class="math notranslate nohighlight">\(k\)</span>, per eliminare l’elemento <span class="math notranslate nohighlight">\(a_{ik}\)</span> con <span class="math notranslate nohighlight">\(i&gt;k\)</span>, si utilizza il moltiplicatore</p>
 <div class="math notranslate nohighlight">
 \[
-m_{ik}=\frac{a_{ik}^{(k)}}{a_{kk}^{(k)}}
+m_{ik}=-\frac{a_{ik}^{(k)}}{a_{kk}^{(k)}}
 \]</div>
 <p>e si esegue l’operazione di riga</p>
 <div class="math notranslate nohighlight">
 \[
-R_i\leftarrow R_i-m_{ik}R_k.
+R_i\leftarrow R_i+m_{ik}R_k.
 \]</div>
 <p>I moltiplicatori dell’eliminazione vengono memorizzati nella parte triangolare inferiore di <span class="math notranslate nohighlight">\(L\)</span>. La matrice finale dell’eliminazione è <span class="math notranslate nohighlight">\(U\)</span>.</p>
 <p>Per una matrice densa <span class="math notranslate nohighlight">\(n\times n\)</span>, la costruzione dei fattori richiede circa</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{2}{3}n^3
+\frac{1}{3}n^3
 \]</div>
-<p>operazioni in virgola mobile, mentre la soluzione dei due sistemi triangolari costa circa <span class="math notranslate nohighlight">\(2n^2\)</span> operazioni.</p>
+<p>operazioni in virgola mobile.</p>
 <p><strong>Esempio numerico su una matrice <span class="math notranslate nohighlight">\(3\times3\)</span></strong></p>
 <p>Consideriamo</p>
 <div class="math notranslate nohighlight">
@@ -617,17 +618,21 @@ A=
 <p>Il primo pivot è <span class="math notranslate nohighlight">\(a_{11}=2\)</span>. I moltiplicatori della prima colonna sono</p>
 <div class="math notranslate nohighlight">
 \[
-m_{21}=\frac{4}{2}=2,
+m_{21}=-\frac{4}{2}=-2,
 \qquad
-m_{31}=\frac{-2}{2}=-1.
+m_{31}=-(\frac{-2}{2})=1.
 \]</div>
-<p>Eseguiamo</p>
+<p>Quindi:</p>
 <div class="math notranslate nohighlight">
-\[
-R_2\leftarrow R_2-2R_1,
-\qquad
-R_3\leftarrow R_3+R_1,
-\]</div>
+\[\begin{split}
+L_1=
+\begin{pmatrix}
+1 &amp; 0 &amp; 0\\
+-2 &amp; 1 &amp; 0\\
+1 &amp; 0 &amp; 1
+\end{pmatrix}.
+\end{split}\]</div>
+<p>Eseguiamo <span class="math notranslate nohighlight">\(A^{(2)}=L_1A\)</span></p>
 <p>ottenendo</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -638,17 +643,22 @@ A^{(2)}=
 0&amp;8&amp;3
 \end{pmatrix}.
 \end{split}\]</div>
-<p>Il secondo moltiplicatore è</p>
+<p>Passo 2. Il secondo moltiplicatore è</p>
 <div class="math notranslate nohighlight">
 \[
-m_{32}=\frac{8}{-8}=-1.
+m_{32}=-(\frac{8}{-8})=1.
 \]</div>
-<p>Eseguiamo quindi</p>
+<p>e quindi:</p>
 <div class="math notranslate nohighlight">
-\[
-R_3\leftarrow R_3-(-1)R_2=R_3+R_2
-\]</div>
-<p>e otteniamo la matrice triangolare superiore</p>
+\[\begin{split}
+L_2=
+\begin{pmatrix}
+1&amp;0&amp;0\\
+0&amp;1&amp;0\\
+0&amp;1&amp;1
+\end{pmatrix}.
+\end{split}\]</div>
+<p>e moltiplicando <span class="math notranslate nohighlight">\(L_2 A^{(2)}\)</span> otteniamo la matrice triangolare superiore</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 U=
@@ -658,7 +668,7 @@ U=
 0&amp;0&amp;1
 \end{pmatrix}.
 \end{split}\]</div>
-<p>Inserendo i moltiplicatori sotto la diagonale unitaria costruiamo</p>
+<p>Inserendo i moltiplicatori di segno cambiato sotto la diagonale unitaria costruiamo</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 L=
@@ -679,7 +689,7 @@ LU=A.
 <p>Nell’eliminazione di Gauss il numero utilizzato come divisore al passo <span class="math notranslate nohighlight">\(k\)</span> è il <strong>pivot</strong> <span class="math notranslate nohighlight">\(u_{kk}\)</span>. Per eliminare gli elementi sotto il pivot calcoliamo</p>
 <div class="math notranslate nohighlight">
 \[
-m_{ik}=\frac{u_{ik}}{u_{kk}},
+m_{ik}=-\frac{u_{ik}}{u_{kk}},
 \qquad i=k+1,\ldots,n.
 \]</div>
 <p>Possono verificarsi due problemi:</p>
@@ -734,7 +744,7 @@ A=
 <p>Senza scambiare le righe, il primo moltiplicatore è</p>
 <div class="math notranslate nohighlight">
 \[
-m_{21}=\frac{1}{\varepsilon},
+m_{21}=-\frac{1}{\varepsilon},
 \]</div>
 <p>che può essere molto grande. Le operazioni coinvolgono allora numeri di grandezza molto diversa e possono causare cancellazione e perdita di cifre significative.</p>
 <p>Scambiando le righe, il pivot diventa <span class="math notranslate nohighlight">\(1\)</span> e il moltiplicatore diventa <span class="math notranslate nohighlight">\(\varepsilon\)</span>.</p>
@@ -914,16 +924,11 @@ PA=
 <p>Dopo lo scambio, il pivot è <span class="math notranslate nohighlight">\(2\)</span>. I moltiplicatori sono</p>
 <div class="math notranslate nohighlight">
 \[
-m_{21}=\frac{1}{2},
+m_{21}=-\frac{1}{2},
 \qquad
 m_{31}=0.
 \]</div>
-<p>Eseguiamo</p>
-<div class="math notranslate nohighlight">
-\[
-R_2\leftarrow R_2-\frac12R_1,
-\]</div>
-<p>ottenendo</p>
+<p>La matrice <span class="math notranslate nohighlight">\(A^{(2)}\)</span> che si ottiene:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{pmatrix}
@@ -937,7 +942,7 @@ R_2\leftarrow R_2-\frac12R_1,
 <p>Il moltiplicatore della seconda colonna è</p>
 <div class="math notranslate nohighlight">
 \[
-m_{32}=\frac{2}{-7/2}=-\frac47.
+m_{32}=-(\frac{2}{-7/2})=\frac47.
 \]</div>
 <p>Dopo l’ultima eliminazione otteniamo</p>
 <div class="math notranslate nohighlight">
@@ -947,16 +952,6 @@ U=
 2&amp;3&amp;1\\
 0&amp;-\frac72&amp;-\frac72\\
 0&amp;0&amp;-1
-\end{pmatrix}.
-\end{split}\]</div>
-<p>I moltiplicatori formano</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-L=
-\begin{pmatrix}
-1&amp;0&amp;0\\
-\frac12&amp;1&amp;0\\
-0&amp;-\frac47&amp;1
 \end{pmatrix}.
 \end{split}\]</div>
 <p>La fattorizzazione ottenuta è</p>
@@ -1006,7 +1001,7 @@ True
 <p>Il pivoting parziale riduce il rischio di crescita eccessiva dei moltiplicatori ed è molto efficace nella pratica. Non modifica l’ordine di complessità della fattorizzazione, che resta</p>
 <div class="math notranslate nohighlight">
 \[
-\mathcal{O}(n^3).
+\mathcal{O}(n^3/3).
 \]</div>
 </section>
 <section id="fattorizzazione-di-cholesky">
@@ -1018,11 +1013,13 @@ True
 \mathbf{x}^TA\mathbf{x}&gt;0
 \qquad\text{per ogni }\mathbf{x}\neq\mathbf{0}.
 \]</div>
+<p><strong>N.B. Una matrice simmetrica definita positiva ha tutti gli autovalori strettamente positivi</strong></p>
 <p>In tal caso esiste un’unica matrice triangolare inferiore <span class="math notranslate nohighlight">\(L\)</span>, con elementi diagonali positivi, tale che</p>
 <div class="math notranslate nohighlight">
 \[
 A=LL^T.
 \]</div>
+<p><em>La fattorizzazione di Cholesky ha complessità computazionale <span class="math notranslate nohighlight">\(O(n^3/6)\)</span>, quindi la metà rispetto alla fattorizzazione LU.</em></p>
 <p><em>Un esempio</em> <span class="math notranslate nohighlight">\(3\times3\)</span></p>
 <p>Consideriamo la matrice simmetrica definita positiva</p>
 <div class="math notranslate nohighlight">
