@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/sislin';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Il problema lineare dei minimi quadrati" href="minimi_quadrati.html" />
     <link rel="prev" title="Decomposizione ai valori singolari (SVD)" href="fattorizzazione-matrici2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -193,6 +194,8 @@
 <li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Sistemi lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
 </ul>
 
     </div>
@@ -831,10 +834,12 @@ Errore relativo: 1.521e-15
 </section>
 <section id="condizionamento-dei-sistemi-lineari">
 <h2>6.7 Condizionamento dei sistemi lineari<a class="headerlink" href="#condizionamento-dei-sistemi-lineari" title="Link to this heading">#</a></h2>
-<p>Quando risolviamo un sistema lineare <span class="math notranslate nohighlight">\(Ax=b\)</span>, i dati <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(b\)</span> sono spesso affetti da errori di misura, arrotondamento o discretizzazione. Il <strong>condizionamento</strong> descrive quanto la soluzione è sensibile a queste perturbazioni.</p>
+<p>Quando risolviamo un qualsiasi problema matematico rappresentato in generale come <span class="math notranslate nohighlight">\(y=f(x)\)</span>, i dati di input <span class="math notranslate nohighlight">\(x\)</span> sono spesso affetti da errori di misura, arrotondamento o discretizzazione. Il <strong>condizionamento</strong> descrive quanto la soluzione è sensibile a queste perturbazioni.</p>
 <blockquote>
 <div><p>Il condizionamento è una proprietà del <strong>problema</strong>. La stabilità, invece, è una proprietà dell’<strong>algoritmo</strong> usato per risolverlo.</p>
 </div></blockquote>
+<p><img alt="" src="../_images/cond1.png" /></p>
+<p><em>Caso particolare: risoluzione di un sistema lineare</em></p>
 <p>Indichiamo con <span class="math notranslate nohighlight">\(x\)</span> la soluzione esatta e con <span class="math notranslate nohighlight">\(x+\delta x\)</span> la soluzione ottenuta dopo avere perturbato i dati:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -848,6 +853,7 @@ Ax=b, \qquad (A+\Delta A)(x+\delta x)=b+\delta b.
 \frac{\|\delta x\|}{\|x\|}.
 \]</div>
 <p>Il problema è <strong>ben condizionato</strong> se piccole variazioni relative nei dati producono piccole variazioni relative nella soluzione; è <strong>mal condizionato</strong> quando gli errori possono essere fortemente amplificati.</p>
+<p><img alt="" src="../_images/cond2.png" /></p>
 <p>Consideriamo</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1029,6 +1035,15 @@ n = 10   kappa_2(H) =  1.603e+13
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Decomposizione ai valori singolari (SVD)</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="minimi_quadrati.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Il problema lineare dei minimi quadrati</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

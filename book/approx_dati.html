@@ -1,0 +1,972 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/approx_dati';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Il problema lineare dei minimi quadrati" href="minimi_quadrati.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mnad.png" class="logo__image only-light" alt="Metodi numerici per l'analisi dei dati - Home"/>
+    <script>document.write(`<img src="../_static/mnad.png" class="logo__image only-dark" alt="Metodi numerici per l'analisi dei dati - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Metodi numerici per l’Analisi dei dati
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/elenaloli/computational-imaging.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/elenaloli/computational-imaging.git/issues/new?title=Issue%20on%20page%20%2Fbook/approx_dati.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/approx_dati.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#famiglie-parametriche-di-funzioni">Famiglie parametriche di funzioni</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-calcolo-dei-parametri-come-problema-di-minimo">Il calcolo dei parametri come problema di minimo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-dell-errore-che-cosa-ci-dicono">Misure dell’errore: che cosa ci dicono?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sse-somma-dei-quadrati-dei-residui">SSE: somma dei quadrati dei residui</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mse-e-rmse-dall-errore-complessivo-a-una-misura-per-osservazione">MSE e RMSE: dall’errore complessivo a una misura per osservazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-coefficiente-di-determinazione-r-2-confronto-con-la-media">Il coefficiente di determinazione <span class="math notranslate nohighlight">\(R^2\)</span>: confronto con la media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-risultati-dell-esempio">Interpretazione dei risultati dell’esempio</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-nella-regressione-polinomiale">Overfitting nella regressione polinomiale</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="il-problema-dei-minimi-quadrati-nell-approssimazione-dei-dati-i-modelli-predittivi">
+<h1>Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi<a class="headerlink" href="#il-problema-dei-minimi-quadrati-nell-approssimazione-dei-dati-i-modelli-predittivi" title="Link to this heading">#</a></h1>
+<p>Supponiamo di avere un insieme di dati</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{D}=\{(x_i,y_i)\}_{i=1}^{n},
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(x_i\)</span> è il dato in ingresso e <span class="math notranslate nohighlight">\(y_i\)</span> è il valore osservato.</p>
+<p>L’obiettivo è determinare una funzione che rappresenti nel modo migliore possibile la relazione tra <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span> e che possa essere utilizzata per prevedere il valore corrispondente a un nuovo dato in ingresso.</p>
+<p><strong>La scelta del modello</strong></p>
+<p>Gli stessi dati possono essere rappresentati utilizzando famiglie di funzioni differenti. Per esempio, possiamo scegliere come modello una retta oppure una parabola.</p>
+<p><img alt="" src="../_images/modelli_lineare_quadratico.png" /></p>
+<!-- ```{figure} immagini_sorgente/modelli_lineare_quadratico.png
+---
+width: 100%
+align: center
+---
+```
+<p align="center">
+  <img src="immagini_sorgente/modelli_lineare_quadratico.png" width="700">
+</p> -->
+<p>Nel primo caso il modello ha la forma</p>
+<div class="math notranslate nohighlight">
+\[
+f(x;\boldsymbol{\theta})=\theta_0+\theta_1x,
+\]</div>
+<p>mentre nel secondo caso ha la forma</p>
+<div class="math notranslate nohighlight">
+\[
+f(x;\boldsymbol{\theta})=\theta_0+\theta_1x+\theta_2x^2.
+\]</div>
+<p>La famiglia scelta non deve necessariamente essere quella dei polinomi. Per esempio, possiamo considerare una combinazione lineare di una funzione esponenziale e di una costante:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x;\boldsymbol{\theta})=\theta_0+\theta_1 e^{\alpha x}.
+\]</div>
+<p><img alt="" src="../_images/modello_esponenziale.png" /></p>
+<!-- ```{figure} immagini_sorgente/modello_esponenziale.png
+---
+width: 100%
+align: center
+---
+```
+<p align="center">
+  <img src="immagini_sorgente/modello_esponenziale.png" width="700">
+</p> -->
+<p>La scelta della famiglia di funzioni dipende dal fenomeno che vogliamo descrivere e dalle informazioni disponibili sui dati.</p>
+<section id="famiglie-parametriche-di-funzioni">
+<h2>Famiglie parametriche di funzioni<a class="headerlink" href="#famiglie-parametriche-di-funzioni" title="Link to this heading">#</a></h2>
+<p>Scelta una famiglia di funzioni <span class="math notranslate nohighlight">\(f(x;\boldsymbol{\theta})\)</span>, occorre determinare i parametri</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\theta}=(\theta_0,\theta_1,\ldots,\theta_{k-1})^T\in\mathbb{R}^{k}
+\]</div>
+<p>che identificano la particolare funzione della famiglia che meglio rappresenta i dati.</p>
+<p>Per esempio, scegliendo come famiglia le rette del piano, dobbiamo determinare</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\theta}=(\theta_0,\theta_1)^T,
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(\theta_0\)</span> è l’intercetta e <span class="math notranslate nohighlight">\(\theta_1\)</span> è il coefficiente angolare. Il problema consiste quindi nel trovare la retta che meglio approssima i punti dati.</p>
+<p><strong>Come confrontare due modelli?</strong></p>
+<p>Per stabilire se una funzione rappresenta i dati meglio di un’altra dobbiamo introdurre una misura di vicinanza tra i valori previsti e quelli osservati.</p>
+<p>Questo viene fatto definendo una <strong>funzione di costo</strong>, detta anche <strong>funzione di perdita</strong> o <em>loss function</em>. Indicata con <span class="math notranslate nohighlight">\(h\)</span> la perdita relativa a una singola osservazione, definiamo</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\boldsymbol{\theta})
+=\sum_{i=1}^{n}h\bigl(f(x_i;\boldsymbol{\theta}),y_i\bigr).
+\]</div>
+<p>La funzione di costo dipende dai parametri perché, al variare di <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>, cambiano le previsioni del modello.</p>
+</section>
+<section id="il-calcolo-dei-parametri-come-problema-di-minimo">
+<h2>Il calcolo dei parametri come problema di minimo<a class="headerlink" href="#il-calcolo-dei-parametri-come-problema-di-minimo" title="Link to this heading">#</a></h2>
+<p>I parametri ottimali sono quelli che rendono minima la funzione di costo:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\theta}^{*}
+=\operatorname*{argmin}_{\boldsymbol{\theta}\in\mathbb{R}^{k}}
+\mathcal{L}(\boldsymbol{\theta}).
+\]</div>
+<p>La funzione <span class="math notranslate nohighlight">\(f(x;\boldsymbol{\theta}^{*})\)</span>, i cui parametri sono stati stimati minimizzando la funzione di perdita, prende il nome di <strong>funzione di regressione</strong>.</p>
+<blockquote>
+<div><p>Il problema di costruire un modello predittivo viene così trasformato in un problema di minimizzazione.</p>
+</div></blockquote>
+<p><strong>Regressione e perdita quadratica</strong></p>
+<p>Nella regressione si utilizza frequentemente la perdita quadratica</p>
+<div class="math notranslate nohighlight">
+\[
+h\bigl(f(x_i;\boldsymbol{\theta}),y_i\bigr)
+=\bigl(f(x_i;\boldsymbol{\theta})-y_i\bigr)^2.
+\]</div>
+<p>La funzione di costo diventa quindi</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\boldsymbol{\theta})
+=\sum_{i=1}^{n}\bigl(f(x_i;\boldsymbol{\theta})-y_i\bigr)^2.
+\]</div>
+<p>Ogni termine misura il quadrato del residuo relativo all’osservazione <span class="math notranslate nohighlight">\(i\)</span>. Gli errori di segno opposto non si cancellano e gli errori grandi vengono penalizzati maggiormente.</p>
+<p>Nel caso della <strong>regressione lineare</strong>, il polinomio è una retta:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x;\boldsymbol{\theta})=\theta_0+\theta_1x.
+\]</div>
+<p>Nel caso della <strong>regressione quadratica</strong>, il polinomio è una parabola:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x;\boldsymbol{\theta})=\theta_0+\theta_1x+\theta_2x^2.
+\]</div>
+<p>In generale, un polinomio di grado <span class="math notranslate nohighlight">\(k\)</span> dipende da <span class="math notranslate nohighlight">\(k+1\)</span> parametri:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x;\boldsymbol{\theta})
+=\theta_0+\theta_1x+\theta_2x^2+\cdots+\theta_kx^k.
+\]</div>
+<p><em>La funzione di perdita per la regressione polinomiale</em></p>
+<p>Sostituendo il modello polinomiale nella perdita quadratica otteniamo</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\boldsymbol{\theta})
+=\sum_{i=1}^{n}
+\left(\theta_0+\theta_1x_i+\theta_2x_i^2+\cdots+\theta_kx_i^k-y_i\right)^2.
+\]</div>
+<p>Introduciamo i vettori</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\theta}=(\theta_0,\theta_1,\ldots,\theta_k)^T,
+\qquad
+\mathbf{y}=(y_1,y_2,\ldots,y_n)^T,
+\]</div>
+<p>e la matrice</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Phi=
+\begin{pmatrix}
+x_1^0 &amp; x_1^1 &amp; \cdots &amp; x_1^k\\
+x_2^0 &amp; x_2^1 &amp; \cdots &amp; x_2^k\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+x_n^0 &amp; x_n^1 &amp; \cdots &amp; x_n^k
+\end{pmatrix}
+\in\mathbb{R}^{n\times(k+1)}.
+\end{split}\]</div>
+<p>La matrice <span class="math notranslate nohighlight">\(\Phi\)</span> viene spesso chiamata <strong>matrice del modello</strong> o <strong>design matrix</strong>.</p>
+<p><em>Formulazione matriciale</em></p>
+<p>Il vettore delle previsioni del modello sui punti osservati è</p>
+<div class="math notranslate nohighlight">
+\[
+\widehat{\mathbf{y}}=\Phi\boldsymbol{\theta}.
+\]</div>
+<p>Il vettore dei residui è quindi</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{r}=\Phi\boldsymbol{\theta}-\mathbf{y},
+\]</div>
+<p>e la funzione di perdita può essere scritta in forma compatta come</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\boldsymbol{\theta})
+=\|\Phi\boldsymbol{\theta}-\mathbf{y}\|_2^2.
+\]</div>
+<p>La determinazione dei coefficienti del polinomio conduce quindi al problema dei minimi quadrati lineari.</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\boldsymbol{\theta}\in\mathbb{R}^{k+1}}
+\|\Phi\boldsymbol{\theta}-\mathbf{y}\|_2^2,
+\]</div>
+<p><em>Il problema</em></p>
+<p>Supponiamo di osservare coppie <span class="math notranslate nohighlight">\((t_i,y_i)\)</span> e di voler descrivere la relazione con una retta</p>
+<div class="math notranslate nohighlight">
+\[
+y_i\approx\beta_0+\beta_1t_i.
+\]</div>
+<p>Per tutte le osservazioni il modello diventa</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\underbrace{\begin{bmatrix}
+1&amp;t_1\\1&amp;t_2\\\vdots&amp;\vdots\\1&amp;t_m
+\end{bmatrix}}_{A}
+\underbrace{\begin{bmatrix}\theta_0\\\theta_1\end{bmatrix}}_{x}
+\approx
+\underbrace{\begin{bmatrix}y_1\\y_2\\\vdots\\y_m\end{bmatrix}}_{b}.
+\end{split}\]</div>
+<p>La prima colonna di uno permette di rappresentare l’intercetta <span class="math notranslate nohighlight">\(\beta_0\)</span>. Stimare la retta significa risolvere un problema lineare ai minimi quadrati.</p>
+<p><em>Esempio: spesa pubblicitaria e vendite</em></p>
+<p>Consideriamo un piccolo dataset in cui <span class="math notranslate nohighlight">\(t\)</span> rappresenta la spesa pubblicitaria e <span class="math notranslate nohighlight">\(y\)</span> le vendite. Cerchiamo la retta che descrive meglio la relazione media tra le due variabili.</p>
+<p>I segmenti verticali nel grafico rappresenteranno i residui <span class="math notranslate nohighlight">\(y_i-\widehat y_i\)</span>.</p>
+<!-- ```{figure} immagini_sorgente/fig_regressione_residui.png
+---
+width: 100%
+align: center
+---
+```
+
+<p align="center">
+  <img src="immagini_sorgente/fig_regressione_residui.png" width="700">
+</p> --><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pubblicita</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mf">18.</span><span class="p">])</span>
+<span class="n">vendite</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mf">42.</span><span class="p">])</span>
+<span class="n">A_reg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pubblicita</span><span class="p">)),</span> <span class="n">pubblicita</span><span class="p">))</span>
+<span class="n">theta</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">A_reg</span><span class="p">,</span> <span class="n">vendite</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">vendite_stimate</span> <span class="o">=</span> <span class="n">A_reg</span> <span class="o">@</span> <span class="n">theta</span>
+
+<span class="n">griglia</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">pubblicita</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">pubblicita</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">retta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">griglia</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pubblicita</span><span class="p">,</span> <span class="n">vendite</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;dati osservati&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">griglia</span><span class="p">,</span> <span class="n">retta</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;retta LSQ&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">,</span> <span class="n">yh_i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pubblicita</span><span class="p">,</span> <span class="n">vendite</span><span class="p">,</span> <span class="n">vendite_stimate</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x_i</span><span class="p">,</span> <span class="n">x_i</span><span class="p">],</span> <span class="p">[</span><span class="n">yh_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.55&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Spesa pubblicitaria&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Vendite&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Regressione lineare mediante minimi quadrati&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Intercetta  = </span><span class="si">{</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Pendenza   = </span><span class="si">{</span><span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pubblicita</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mf">18.</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">vendite</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mf">42.</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">A_reg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pubblicita</span><span class="p">)),</span> <span class="n">pubblicita</span><span class="p">))</span>
+
+<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Interpretazione dei coefficienti</em></p>
+<p>Nel modello</p>
+<div class="math notranslate nohighlight">
+\[
+\widehat y=\theta_0+\theta_1t,
+\]</div>
+<p>l’intercetta <span class="math notranslate nohighlight">\(\theta_0\)</span> è il valore previsto quando <span class="math notranslate nohighlight">\(t=0\)</span>, mentre la pendenza <span class="math notranslate nohighlight">\(\theta_1\)</span> è la variazione media prevista di <span class="math notranslate nohighlight">\(y\)</span> associata a un aumento unitario di <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>Questa interpretazione deve essere fatta nel dominio osservato: estrapolare molto oltre i valori presenti nei dati può essere inaffidabile. Inoltre una relazione statistica non implica automaticamente un rapporto causale.</p>
+</section>
+<section id="misure-dell-errore-che-cosa-ci-dicono">
+<h2>Misure dell’errore: che cosa ci dicono?<a class="headerlink" href="#misure-dell-errore-che-cosa-ci-dicono" title="Link to this heading">#</a></h2>
+<p>Una volta calcolata la retta, vogliamo capire <strong>quanto le sue previsioni si avvicinano ai valori osservati</strong>. Indichiamo con:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m\)</span> il numero di osservazioni;</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_i\)</span> il valore osservato per il dato <span class="math notranslate nohighlight">\(i\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\widehat y_i\)</span> il valore previsto dal modello per lo stesso dato;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\overline y=\frac{1}{m}\sum_{i=1}^{m}y_i\)</span> la media dei valori osservati.</p></li>
+</ul>
+<p>Il <strong>residuo</strong> è</p>
+<div class="math notranslate nohighlight">
+\[
+e_i=y_i-\widehat y_i.
+\]</div>
+<p>Nel grafico è lo scarto verticale, con segno, tra il punto osservato e la retta. Se <span class="math notranslate nohighlight">\(e_i&gt;0\)</span>, il modello <strong>sottostima</strong> il valore osservato; se <span class="math notranslate nohighlight">\(e_i&lt;0\)</span>, lo <strong>sovrastima</strong>; se <span class="math notranslate nohighlight">\(e_i=0\)</span>, la previsione coincide con il dato.</p>
+<p>Per esempio, se le vendite osservate sono <span class="math notranslate nohighlight">\(30\)</span> e quelle previste sono <span class="math notranslate nohighlight">\(28\)</span>, il residuo è <span class="math notranslate nohighlight">\(2\)</span>. Se il modello prevede <span class="math notranslate nohighlight">\(32\)</span>, il residuo è <span class="math notranslate nohighlight">\(-2\)</span>. Sommando semplicemente i residui, questi due errori si cancellerebbero: per misurare l’errore complessivo usiamo quindi i loro quadrati.</p>
+<p>Il residuo è uno scarto rispetto al dato osservato, che può contenere rumore: non coincide necessariamente con l’errore rispetto a un valore vero non conosciuto.</p>
+<section id="sse-somma-dei-quadrati-dei-residui">
+<h3>SSE: somma dei quadrati dei residui<a class="headerlink" href="#sse-somma-dei-quadrati-dei-residui" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{SSE}=\sum_{i=1}^{m}e_i^2
+=\sum_{i=1}^{m}(y_i-\widehat y_i)^2.
+\]</div>
+<p>La SSE (<em>sum of squared errors</em>), chiamata anche RSS (<em>residual sum of squares</em>), misura lo <strong>scostamento quadratico complessivo</strong> tra dati e previsioni. È proprio la quantità che minimizziamo nel problema dei minimi quadrati.</p>
+<p>Ogni osservazione contribuisce con <span class="math notranslate nohighlight">\(e_i^2\)</span>: un residuo di ampiezza <span class="math notranslate nohighlight">\(4\)</span> pesa quattro volte più di un residuo di ampiezza <span class="math notranslate nohighlight">\(2\)</span>, perché <span class="math notranslate nohighlight">\(4^2=16\)</span> e <span class="math notranslate nohighlight">\(2^2=4\)</span>. Gli scarti grandi sono quindi penalizzati maggiormente.</p>
+<p>La SSE è sempre non negativa ed è zero solo se tutte le previsioni coincidono con i dati. A parità di dati, una SSE più piccola indica un migliore adattamento. Essendo una somma, dipende anche dal numero di osservazioni: non è adatta a confrontare direttamente insiemi di dimensioni diverse. Se <span class="math notranslate nohighlight">\(y\)</span> è misurata in euro, la SSE è misurata in euro al quadrato.</p>
+</section>
+<section id="mse-e-rmse-dall-errore-complessivo-a-una-misura-per-osservazione">
+<h3>MSE e RMSE: dall’errore complessivo a una misura per osservazione<a class="headerlink" href="#mse-e-rmse-dall-errore-complessivo-a-una-misura-per-osservazione" title="Link to this heading">#</a></h3>
+<p>L’<strong>errore quadratico medio</strong> è</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{MSE}=\frac{1}{m}\sum_{i=1}^{m}e_i^2
+=\frac{\mathrm{SSE}}{m}.
+\]</div>
+<p>La MSE (<em>mean squared error</em>) divide la SSE per il numero di dati e rappresenta quindi il <strong>quadrato del residuo mediato sulle osservazioni</strong>. Per confrontare i valori ottenuti su insiemi diversi occorre comunque considerare la stessa variabile, nella stessa unità di misura, e popolazioni confrontabili. Per <span class="math notranslate nohighlight">\(m\)</span> fissato, minimizzare MSE o SSE produce lo stesso modello.</p>
+<p>Poiché anche la MSE ha unità di misura al quadrato, spesso si considera la sua radice:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{RMSE}=\sqrt{\mathrm{MSE}}
+=\sqrt{\frac{1}{m}\sum_{i=1}^{m}e_i^2}.
+\]</div>
+<p>La RMSE (<em>root mean squared error</em>) ha <strong>la stessa unità di misura di <span class="math notranslate nohighlight">\(y\)</span></strong> e dà una misura della dimensione tipica degli scarti, attribuendo maggior peso a quelli grandi. Per esempio, una RMSE di <span class="math notranslate nohighlight">\(50\)</span> euro indica una scala degli scarti di <span class="math notranslate nohighlight">\(50\)</span> euro secondo questa misura quadratica: non significa che ogni previsione sbagli di <span class="math notranslate nohighlight">\(50\)</span> euro, né che lo scarto assoluto medio sia <span class="math notranslate nohighlight">\(50\)</span> euro.</p>
+<p>SSE, MSE e RMSE sono tutte migliori quando sono <strong>più piccole</strong>. Quanto sia accettabile una certa RMSE dipende dalla scala dei dati e dall’applicazione.</p>
+<p><em>Nota:</em> qui la MSE è una misura di errore predittivo con denominatore <span class="math notranslate nohighlight">\(m\)</span>. Non va confusa con la stima della varianza del rumore, per la quale nella regressione lineare classica si usa <span class="math notranslate nohighlight">\(\mathrm{SSE}/(m-p)\)</span>, sotto le opportune ipotesi, con <span class="math notranslate nohighlight">\(p\)</span> numero di parametri indipendenti stimati, inclusa l’intercetta.</p>
+</section>
+<section id="il-coefficiente-di-determinazione-r-2-confronto-con-la-media">
+<h3>Il coefficiente di determinazione <span class="math notranslate nohighlight">\(R^2\)</span>: confronto con la media<a class="headerlink" href="#il-coefficiente-di-determinazione-r-2-confronto-con-la-media" title="Link to this heading">#</a></h3>
+<p>Un errore piccolo in valore assoluto non basta a capire quanto sia utile il modello. Introduciamo allora un riferimento molto semplice: <strong>prevedere sempre la media <span class="math notranslate nohighlight">\(\overline y\)</span></strong>, senza usare la spesa pubblicitaria.</p>
+<p>L’errore quadratico complessivo di questa previsione costante è</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{SST}=\sum_{i=1}^{m}(y_i-\overline y)^2.
+\]</div>
+<p>La SST (<em>total sum of squares</em>) misura quanto i valori osservati sono dispersi attorno alla loro media. Confrontiamo l’errore del nostro modello con questo riferimento:</p>
+<div class="math notranslate nohighlight">
+\[
+R^2=1-\frac{\mathrm{SSE}}{\mathrm{SST}}
+=1-\frac{\sum_{i=1}^{m}(y_i-\widehat y_i)^2}
+{\sum_{i=1}^{m}(y_i-\overline y)^2}.
+\]</div>
+<p>Il rapporto <span class="math notranslate nohighlight">\(\mathrm{SSE}/\mathrm{SST}\)</span> è la <strong>quota di errore quadratico rimasta rispetto alla previsione costante basata sulla media</strong>. Sottraendola da <span class="math notranslate nohighlight">\(1\)</span> otteniamo la riduzione relativa dell’errore. Per esempio, <span class="math notranslate nohighlight">\(R^2=0{,}80\)</span> significa che l’errore quadratico è il <span class="math notranslate nohighlight">\(20\%\)</span> di quello del riferimento: il modello lo ha ridotto dell’<span class="math notranslate nohighlight">\(80\%\)</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Valore</p></th>
+<th class="head text-left"><p>Significato sui dati valutati</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(R^2=1\)</span></p></td>
+<td class="text-left"><p>La SSE è zero: tutte le previsioni coincidono con i valori osservati.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(0&lt;R^2&lt;1\)</span></p></td>
+<td class="text-left"><p>Il modello ha un errore quadratico inferiore alla previsione costante <span class="math notranslate nohighlight">\(\overline y\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(R^2=0\)</span></p></td>
+<td class="text-left"><p>Il modello ha lo stesso errore quadratico della previsione costante <span class="math notranslate nohighlight">\(\overline y\)</span>. Non deve necessariamente produrre le stesse previsioni.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(R^2&lt;0\)</span></p></td>
+<td class="text-left"><p>Il modello ha un errore quadratico maggiore della previsione costante <span class="math notranslate nohighlight">\(\overline y\)</span>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span class="math notranslate nohighlight">\(R^2\)</span> è <strong>adimensionale</strong> e si preferiscono valori più alti. Se <span class="math notranslate nohighlight">\(\mathrm{SST}&gt;0\)</span>, non supera <span class="math notranslate nohighlight">\(1\)</span>, ma può essere negativo e non ha un limite inferiore finito.</p>
+<p>Per una regressione ordinaria ai minimi quadrati <strong>con intercetta</strong>, valutata sugli stessi dati usati per stimare i coefficienti, vale <span class="math notranslate nohighlight">\(0\le R^2\le1\)</span>: la previsione costante è una delle possibilità del modello, quindi il minimo non può essere peggiore di quel riferimento. Su dati nuovi, o in assenza di intercetta, questa garanzia non vale. Se tutti gli <span class="math notranslate nohighlight">\(y_i\)</span> sono uguali, <span class="math notranslate nohighlight">\(\mathrm{SST}=0\)</span> e la formula di <span class="math notranslate nohighlight">\(R^2\)</span> non è definita.</p>
+<p><strong>Un <span class="math notranslate nohighlight">\(R^2\)</span> elevato non è una percentuale di previsioni corrette</strong>, non dimostra un rapporto di causa-effetto e non garantisce buone previsioni su nuovi dati. Aggiungendo variabili o aumentando il grado di un polinomio in modelli ai minimi quadrati annidati, <span class="math notranslate nohighlight">\(R^2\)</span> sui dati di addestramento non diminuisce, anche se la capacità predittiva può peggiorare. Per questo le metriche vanno calcolate anche su dati non usati per stimare il modello.</p>
+<p>Quando si calcola la formula standard di <span class="math notranslate nohighlight">\(R^2\)</span> su un test set, <span class="math notranslate nohighlight">\(\overline y\)</span> è la media dei valori osservati <strong>nel test set</strong>: serve soltanto come riferimento per la valutazione, non per addestrare il modello.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">errori</span> <span class="o">=</span> <span class="n">vendite</span> <span class="o">-</span> <span class="n">vendite_stimate</span>
+<span class="n">SSE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">errori</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">MSE</span> <span class="o">=</span> <span class="n">SSE</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">vendite</span><span class="p">)</span>
+<span class="n">RMSE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">MSE</span><span class="p">)</span>
+
+<span class="c1"># Errore del riferimento che prevede sempre la media dei valori osservati.</span>
+<span class="n">media_vendite</span> <span class="o">=</span> <span class="n">vendite</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">SST</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">vendite</span> <span class="o">-</span> <span class="n">media_vendite</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">R2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">SSE</span> <span class="o">/</span> <span class="n">SST</span> <span class="k">if</span> <span class="n">SST</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Media delle vendite = </span><span class="si">{</span><span class="n">media_vendite</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SSE  = </span><span class="si">{</span><span class="n">SSE</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MSE  = </span><span class="si">{</span><span class="n">MSE</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;RMSE = </span><span class="si">{</span><span class="n">RMSE</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SST  = </span><span class="si">{</span><span class="n">SST</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;R^2  = </span><span class="si">{</span><span class="n">R2</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Media delle vendite = 28.0000
+SSE  = 9.6033
+MSE  = 0.9603
+RMSE = 0.9800
+SST  = 664.0000
+R^2  = 0.9855
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretazione-dei-risultati-dell-esempio">
+<h3>Interpretazione dei risultati dell’esempio<a class="headerlink" href="#interpretazione-dei-risultati-dell-esempio" title="Link to this heading">#</a></h3>
+<p>Per i dieci dati su spesa pubblicitaria e vendite, la media delle vendite è <span class="math notranslate nohighlight">\(\overline y=28\)</span>. I risultati sono:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{SSE}\approx9{,}6033,\qquad
+\mathrm{MSE}\approx0{,}9603,\qquad
+\mathrm{RMSE}\approx0{,}9800.
+\]</div>
+<p>La retta produce quindi scarti dell’ordine di <strong>una unità di vendita</strong>, secondo la misura quadratica. La previsione costante <span class="math notranslate nohighlight">\(\widehat y_i=28\)</span> avrebbe invece un errore complessivo <span class="math notranslate nohighlight">\(\mathrm{SST}=664\)</span>. Pertanto</p>
+<div class="math notranslate nohighlight">
+\[
+R^2=1-\frac{9{,}6033}{664}\approx0{,}9855.
+\]</div>
+<p>Questi risultati descrivono l’adattamento sui dati usati per calcolare la retta. Non dimostrano che il 98,55% delle vendite sia causato dalla pubblicità, né che le previsioni future avranno lo stesso errore.</p>
+</section>
+</section>
+<section id="overfitting-nella-regressione-polinomiale">
+<h2>Overfitting nella regressione polinomiale<a class="headerlink" href="#overfitting-nella-regressione-polinomiale" title="Link to this heading">#</a></h2>
+<p>Un polinomio che passa per tutti i punti osservati è sempre il modello migliore? <strong>No: può adattarsi anche al rumore e prevedere male i valori in altri punti.</strong></p>
+<p>Costruiamo due esempi con 11 punti del piano. Confrontiamo un modello troppo semplice (<em>underfitting</em>), uno che rappresenta bene l’andamento e uno eccessivamente flessibile (<em>overfitting</em>).</p>
+<p>In entrambi i casi i dati sono generati da</p>
+<div class="math notranslate nohighlight">
+\[y_i=f(x_i)+\varepsilon_i,\qquad \varepsilon_i\sim\mathcal N(0,0.16^2).\]</div>
+<p>Il polinomio di grado <span class="math notranslate nohighlight">\(d\)</span> è stimato con i minimi quadrati:</p>
+<div class="math notranslate nohighlight">
+\[p_d(x)=\sum_{j=0}^{d}\theta_j x^j,\qquad
+\min_{\theta_0,\ldots,\theta_d}\sum_{i=1}^{11}(p_d(x_i)-y_i)^2.\]</div>
+<p>Il grado 10 ha 11 coefficienti e, per 11 ascisse distinte, può interpolare tutti i punti (a meno degli errori numerici). Questo non garantisce che descriva bene la funzione che ha generato i dati.</p>
+<p><em>Esempio 1</em></p>
+<p>La funzione generatrice è <span class="math notranslate nohighlight">\(f(x)=0.5+1.2x^2\)</span>. Le ordinate osservate sono perturbate da un piccolo rumore.</p>
+<ul class="simple">
+<li><p><strong>Grado 1:</strong> una retta non può rappresentare la curvatura della parabola.</p></li>
+<li><p><strong>Grado 2:</strong> il modello ha la forma corretta e segue l’andamento generale senza inseguire ogni perturbazione.</p></li>
+<li><p><strong>Grado 10:</strong> il polinomio passa per tutti gli 11 punti, ma presenta forti oscillazioni tra i punti, soprattutto vicino agli estremi.</p></li>
+</ul>
+<p>La curva tratteggiata mostra la funzione generatrice, nota perché l’esempio è simulato. I punti scuri sono gli stessi in tutti e tre i pannelli.</p>
+<p><img alt="Confronto dei gradi 1, 2 e 10 per dati quadratici." src="../_images/01_parabola.png" /></p>
+<p><strong>Che cosa osservare:</strong> l’errore di training del grado 10 è quasi nullo, ma l’errore sui nuovi dati è maggiore di quello del grado 2. Le oscillazioni avvengono dentro l’intervallo osservato: non si tratta di estrapolazione.</p>
+<p><em>Esempio 2</em></p>
+<p>Ora la funzione generatrice è <span class="math notranslate nohighlight">\(f(x)=\sin(\pi x)\)</span>, sempre per <span class="math notranslate nohighlight">\(x\in[-1,1]\)</span>. La funzione vera non è un polinomio, ma può essere ben approssimata da un polinomio di grado moderato sull’intervallo considerato.</p>
+<p>Confrontiamo i gradi <strong>1, 5 e 10</strong>. Il grado 5 segue l’andamento sinusoidale; il grado 10 segue anche le perturbazioni dei singoli dati e produce oscillazioni che non appartengono alla funzione generatrice.</p>
+<p><img alt="Confronto dei gradi 1, 5 e 10 per dati sinusoidali." src="../_images/02_sinusoide.png" /></p>
+<p><em>Errore sui dati osservati ed errore su dati nuovi</em></p>
+<p>Per ogni grado da 1 a 10, calcoliamo:</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{RMSE}_{\mathrm{train}}=
+\sqrt{\frac{1}{11}\sum_{i=1}^{11}(y_i-p_d(x_i))^2},\]</div>
+<div class="math notranslate nohighlight">
+\[\operatorname{RMSE}_{\mathrm{test}}=
+\sqrt{\frac{1}{N_{\mathrm{test}}}\sum_{j=1}^{N_{\mathrm{test}}}
+(y_j^{\mathrm{test}}-p_d(x_j^{\mathrm{test}}))^2}.\]</div>
+<p>I 2000 punti di test sono generati indipendentemente nello stesso intervallo, con lo stesso livello di rumore; non sono usati per stimare i coefficienti. Il test misura quindi l’errore su <strong>nuove osservazioni rumorose</strong>, non soltanto la distanza dalla curva tratteggiata.</p>
+<p>Con i minimi quadrati non regolarizzati, aumentando il grado l’errore di training non aumenta: ogni famiglia contiene le precedenti. L’errore di test può invece crescere. È questo peggioramento sui nuovi dati, insieme all’ottimo adattamento ai dati osservati, a evidenziare l’overfitting.</p>
+<p>La linea orizzontale <span class="math notranslate nohighlight">\(\sigma=0.16\)</span> indica la RMSE teorica della funzione generatrice rispetto a nuove osservazioni, nel limite di molti dati: il rumore nei nuovi dati resta anche se conosciamo <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p><img alt="RMSE di training e test al crescere del grado, nei due esempi." src="../_images/03_errori_grado.png" /></p>
+<p><em>Interpretazione e limiti</em></p>
+<p><strong>L’overfitting è l’adattamento a caratteristiche specifiche del campione, incluso il rumore, che peggiora la previsione su altri dati.</strong> Un basso errore di training, anche nullo, non basta per scegliere il modello.</p>
+<p>Un grado alto non implica sempre overfitting: contano il numero e la distribuzione dei dati, il rumore e la complessità della relazione vera. Qui usiamo pochi punti equispaziati e un polinomio interpolante per rendere il fenomeno evidente. L’oscillazione vicino ai bordi riflette anche la sensibilità dell’interpolazione polinomiale globale su questi nodi.</p>
+<p>Questi esempi sono costruiti per illustrare il fenomeno: i gradi intermedi sono scelte didattiche, non sono presentati come ottimali per ogni campione. Nell’uso pratico, il grado si sceglie mediante validazione o cross-validation e si valuta una sola volta il modello scelto su un test set indipendente. Se si usa ripetutamente un insieme per scegliere il grado, quell’insieme svolge il ruolo di validazione.</p>
+<p>Per esplorare il comportamento, modifica il livello di rumore, il seed o il numero di punti n. Se cambi il numero di punti, adegua anche i gradi: il polinomio interpolante(cioè che passa per i punti) ha grado al più <span class="math notranslate nohighlight">\(n-1\)</span> per <span class="math notranslate nohighlight">\(n\)</span> ascisse distinte.</p>
+<p><em>Addestramento e valutazione predittiva</em></p>
+<p>Un errore piccolo sui dati usati per stimare i coefficienti non garantisce buone previsioni su nuovi dati. In un’applicazione predittiva bisogna:</p>
+<ol class="arabic simple">
+<li><p>separare i dati in training set e test set;</p></li>
+<li><p>stimare i coefficienti usando soltanto il training set;</p></li>
+<li><p>applicare il modello al test set;</p></li>
+<li><p>calcolare RMSE o altre metriche sui dati non utilizzati nell’addestramento.</p></li>
+</ol>
+<p>Questa distinzione riguarda la capacità di generalizzazione del modello, non soltanto la soluzione numerica del problema LSQ.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="minimi_quadrati.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Il problema lineare dei minimi quadrati</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#famiglie-parametriche-di-funzioni">Famiglie parametriche di funzioni</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-calcolo-dei-parametri-come-problema-di-minimo">Il calcolo dei parametri come problema di minimo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-dell-errore-che-cosa-ci-dicono">Misure dell’errore: che cosa ci dicono?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sse-somma-dei-quadrati-dei-residui">SSE: somma dei quadrati dei residui</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mse-e-rmse-dall-errore-complessivo-a-una-misura-per-osservazione">MSE e RMSE: dall’errore complessivo a una misura per osservazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-coefficiente-di-determinazione-r-2-confronto-con-la-media">Il coefficiente di determinazione <span class="math notranslate nohighlight">\(R^2\)</span>: confronto con la media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-risultati-dell-esempio">Interpretazione dei risultati dell’esempio</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-nella-regressione-polinomiale">Overfitting nella regressione polinomiale</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Elena Loli Piccolomini
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
