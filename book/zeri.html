@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/zeri';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi" href="approx_dati.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -181,7 +180,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
 
@@ -196,6 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
 <li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Risoluzione di equazioni non lineari</a></li>
 </ul>
 
     </div>
@@ -393,17 +393,10 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-introduttivo">Esempio introduttivo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-soluzioni-di-un-equazione-non-lineare">Numero di soluzioni di un’equazione non lineare</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bis-molteplicita-di-una-radice">2bis. Molteplicità di una radice</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazione-geometrica">Osservazione geometrica</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordine-di-convergenza-per-iterazioni-funzionali">17. Ordine di convergenza per iterazioni funzionali</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">8.1 Metodo di bisezione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-iterazioni-richieste">Numero di iterazioni richieste</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">8.2 Metodo del punto fisso</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">8.3 Metodo di Newton</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazione-geometrica">Osservazione geometrica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">Metodo di bisezione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">Metodo del punto fisso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">Metodo di Newton</a></li>
 </ul>
             </nav>
         </div>
@@ -473,10 +466,18 @@ f(2)=2&gt;0.
 <p>Il cambio di segno suggerisce, per continuità, che esiste almeno uno zero fra 1 e 2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">f_intro</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_intro</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span>
 
 <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
@@ -604,9 +605,7 @@ e^{-x}-x=0,
 <img alt="../_images/e29e762bd5474f2c353acaaac8c21efb2aac62898370502c9281b930ed00981f.png" src="../_images/e29e762bd5474f2c353acaaac8c21efb2aac62898370502c9281b930ed00981f.png" />
 </div>
 </div>
-</section>
-<section id="bis-molteplicita-di-una-radice">
-<h2>2bis. Molteplicità di una radice<a class="headerlink" href="#bis-molteplicita-di-una-radice" title="Link to this heading">#</a></h2>
+<p><strong>Molteplicità di una radice</strong></p>
 <p>Una radice <span class="math notranslate nohighlight">\(\alpha\)</span> di una funzione <span class="math notranslate nohighlight">\(f\)</span> è detta <strong>radice di molteplicità</strong> <span class="math notranslate nohighlight">\(m\)</span> se si può scrivere</p>
 <div class="math notranslate nohighlight">
 \[
@@ -668,8 +667,9 @@ q(\alpha)\neq 0.
 <img alt="../_images/d1aad140620085f6b052889b7c703451785675e9e1ff4e77c4e275cb977e31bd.png" src="../_images/d1aad140620085f6b052889b7c703451785675e9e1ff4e77c4e275cb977e31bd.png" />
 </div>
 </div>
+</section>
 <section id="osservazione-geometrica">
-<h3>Osservazione geometrica<a class="headerlink" href="#osservazione-geometrica" title="Link to this heading">#</a></h3>
+<h2>Osservazione geometrica<a class="headerlink" href="#osservazione-geometrica" title="Link to this heading">#</a></h2>
 <p>Se la molteplicità è pari, la funzione spesso tocca l’asse <span class="math notranslate nohighlight">\(x\)</span> senza attraversarlo.<br />
 Questo significa che metodi basati sul cambio di segno, come la bisezione, possono non individuare direttamente la radice.</p>
 <p>Se la molteplicità è dispari, la funzione attraversa l’asse <span class="math notranslate nohighlight">\(x\)</span>, ma può farlo in modo molto piatto.<br />
@@ -705,7 +705,7 @@ Schema algoritmo iterativo:</p></li>
 <p>end</p>
 <p>Sono da specificare nel singolo metodo le condizioni di convergenza
 che  regolano l’arresto del ciclo “ripeti”.</p>
-<p><strong>Ordine di converegenza dei metodi iterativi</strong></p>
+<p><strong>Ordine di convergenza dei metodi iterativi</strong></p>
 <p>Si dice che la successione <span class="math notranslate nohighlight">\({x_k}\)</span> generata da un metodo iterativo
 converge ad <span class="math notranslate nohighlight">\(x^*\)</span> con ordine <span class="math notranslate nohighlight">\(p\geq 1\)</span> se:
 $<span class="math notranslate nohighlight">\( \frac{|x_{k+1}-x^*a|}{|x_k-x^*|^p}= C, \forall
@@ -754,36 +754,6 @@ convergenza.</em></p>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="ordine-di-convergenza-per-iterazioni-funzionali">
-<h2>17. Ordine di convergenza per iterazioni funzionali<a class="headerlink" href="#ordine-di-convergenza-per-iterazioni-funzionali" title="Link to this heading">#</a></h2>
-<p>Se <span class="math notranslate nohighlight">\(g\)</span> è sufficientemente regolare e <span class="math notranslate nohighlight">\(x^{*}\)</span> è un punto fisso, lo sviluppo di Taylor dà:</p>
-<div class="math notranslate nohighlight">
-\[
-g(x_k)-g(x^{*})
-=
-g'(x^{*})(x_k-x^{*})
-+
-\frac{g''(x^{*})}{2}(x_k-x^{*})^2
-+
-\cdots
-+
-\frac{g^{(p)}(x^{*})}{p!}(x_k-x^{*})^p
-+
-\cdots
-\]</div>
-<p>Se</p>
-<div class="math notranslate nohighlight">
-\[
-g'(x^{*})=g''(x^{*})=\cdots=g^{(p-1)}(x^{*})=0
-\]</div>
-<p>e</p>
-<div class="math notranslate nohighlight">
-\[
-g^{(p)}(x^{*})\neq 0,
-\]</div>
-<p>allora l’ordine di convergenza è <span class="math notranslate nohighlight">\(p\)</span>.</p>
 <p>In generale la convergenza di un
 metodo iterativo per la risoluzione di un’equazione non lineare
 dipende dalla scelta del valore iniziale <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
@@ -799,8 +769,9 @@ esatta.</p>
 <li><p>Metodo del punto fisso</p></li>
 <li><p>Metodo di Newton</p></li>
 </ul>
+</section>
 <section id="metodo-di-bisezione">
-<h3>8.1 Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link to this heading">#</a></h3>
+<h2>Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link to this heading">#</a></h2>
 <p>Si costruisce una successione di
 intervalli (<span class="math notranslate nohighlight">\(f(a_1)&lt;0,f(b_1)&gt;0\)</span>):
 $<span class="math notranslate nohighlight">\(I_1=[a_1,b_1],I_2=[a_2,b_2], \ldots ,I_k=[a_k,b_k]\)</span><span class="math notranslate nohighlight">\(
@@ -858,7 +829,7 @@ $<span class="math notranslate nohighlight">\(\frac{1}{2^k}(b-a)&lt;\delta \Righ
 occorrono 2 valutazioni di funzione.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">return_history</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">return_history</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="n">fa</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 
@@ -893,6 +864,24 @@ occorrono 2 valutazioni di funzione.</p>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="p">,</span> <span class="n">niter</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">bisection</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">return_history</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Radice approssimata:&quot;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iterazioni:&quot;</span><span class="p">,</span> <span class="n">niter</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Errore rispetto a sqrt(2):&quot;</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">root</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Radice approssimata: 1.414213562372879
+Iterazioni: 41
+Errore rispetto a sqrt(2): 2.1604940059205546e-13
+</pre></div>
+</div>
+</div>
+</div>
 <p>La tabella seguente mostra come si restringe l’intervallo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -903,21 +892,21 @@ occorrono 2 valutazioni di funzione.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">hist</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">k</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">fm</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">row</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;k=</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">, a=</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">, m=</span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">, f(m)=</span><span class="si">{</span><span class="n">fm</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">, ampiezza=</span><span class="si">{</span><span class="n">width</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;hist&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k= 1, a=1.000000000000, b=2.000000000000, m=1.500000000000, f(m)=2.500e-01, ampiezza=1.000e+00
+k= 2, a=1.000000000000, b=1.500000000000, m=1.250000000000, f(m)=-4.375e-01, ampiezza=5.000e-01
+k= 3, a=1.250000000000, b=1.500000000000, m=1.375000000000, f(m)=-1.094e-01, ampiezza=2.500e-01
+k= 4, a=1.375000000000, b=1.500000000000, m=1.437500000000, f(m)=6.641e-02, ampiezza=1.250e-01
+k= 5, a=1.375000000000, b=1.437500000000, m=1.406250000000, f(m)=-2.246e-02, ampiezza=6.250e-02
+k= 6, a=1.406250000000, b=1.437500000000, m=1.421875000000, f(m)=2.173e-02, ampiezza=3.125e-02
+k= 7, a=1.406250000000, b=1.421875000000, m=1.414062500000, f(m)=-4.272e-04, ampiezza=1.562e-02
+k= 8, a=1.414062500000, b=1.421875000000, m=1.417968750000, f(m)=1.064e-02, ampiezza=7.812e-03
+k= 9, a=1.414062500000, b=1.417968750000, m=1.416015625000, f(m)=5.100e-03, ampiezza=3.906e-03
+k=10, a=1.414062500000, b=1.416015625000, m=1.415039062500, f(m)=2.336e-03, ampiezza=1.953e-03
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="numero-di-iterazioni-richieste">
-<h3>Numero di iterazioni richieste<a class="headerlink" href="#numero-di-iterazioni-richieste" title="Link to this heading">#</a></h3>
+<p><em>Numero di iterazioni richieste</em></p>
 <p>Se vogliamo un errore finale di al più <span class="math notranslate nohighlight">\(\mathrm{tol}\)</span>, dobbiamo avere</p>
 <div class="math notranslate nohighlight">
 \[
@@ -966,7 +955,7 @@ tol=1e-12, iterazioni richieste circa: 40
 </ul>
 </section>
 <section id="metodo-del-punto-fisso">
-<h3>8.2 Metodo del punto fisso<a class="headerlink" href="#metodo-del-punto-fisso" title="Link to this heading">#</a></h3>
+<h2>Metodo del punto fisso<a class="headerlink" href="#metodo-del-punto-fisso" title="Link to this heading">#</a></h2>
 <p>Il problema
 di cercare una radice di $<span class="math notranslate nohighlight">\(f(x)=0\)</span><span class="math notranslate nohighlight">\( viene spostato nel problema di
 cercare una soluzione dell'equazione \)</span><span class="math notranslate nohighlight">\(x=g(x)\)</span><span class="math notranslate nohighlight">\( cioè un punto
@@ -1171,7 +1160,7 @@ contemporaneamente:</p>
 assegnate e <span class="math notranslate nohighlight">\(f_{\max}=\max_{x\in I_\rho}|f(x)|\)</span></p>
 </section>
 <section id="metodo-di-newton">
-<h3>8.3 Metodo di Newton<a class="headerlink" href="#metodo-di-newton" title="Link to this heading">#</a></h3>
+<h2>Metodo di Newton<a class="headerlink" href="#metodo-di-newton" title="Link to this heading">#</a></h2>
 <p>Data l’equazione <span class="math notranslate nohighlight">\(f(x)=0\)</span>, si può determinare la soluzione
 <span class="math notranslate nohighlight">\(x^*\)</span> come punto fisso di</p>
 <div class="math notranslate nohighlight">
@@ -1252,7 +1241,7 @@ L’intersezione della tangente con l’asse <span class="math notranslate nohig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/eb209e62a0ac2bbf0879f970c65ec8f562fef74910995c160d4a785de2f6a4ac.png" src="../_images/eb209e62a0ac2bbf0879f970c65ec8f562fef74910995c160d4a785de2f6a4ac.png" />
+<img alt="../_images/2956766170adbf288f22af77abb324baea6005742cc12f340ed842a46fc5f67d.png" src="../_images/2956766170adbf288f22af77abb324baea6005742cc12f340ed842a46fc5f67d.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x0 = 2.2
 x1 = 1.5545454545454547
 radice alpha = 1.4142135623730951
@@ -1363,7 +1352,6 @@ il metodo richiede due valutazioni di funzioni per passo.</p></li>
 </ul>
 </section>
 </section>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1395,6 +1383,15 @@ il metodo richiede due valutazioni di funzioni per passo.</p></li>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="approx_dati.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -1413,17 +1410,10 @@ il metodo richiede due valutazioni di funzioni per passo.</p></li>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-introduttivo">Esempio introduttivo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-soluzioni-di-un-equazione-non-lineare">Numero di soluzioni di un’equazione non lineare</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bis-molteplicita-di-una-radice">2bis. Molteplicità di una radice</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazione-geometrica">Osservazione geometrica</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordine-di-convergenza-per-iterazioni-funzionali">17. Ordine di convergenza per iterazioni funzionali</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">8.1 Metodo di bisezione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-iterazioni-richieste">Numero di iterazioni richieste</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">8.2 Metodo del punto fisso</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">8.3 Metodo di Newton</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazione-geometrica">Osservazione geometrica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">Metodo di bisezione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">Metodo del punto fisso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">Metodo di Newton</a></li>
 </ul>
   </nav></div>
 
