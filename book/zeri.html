@@ -62,7 +62,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/zeri';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Il problema lineare dei minimi quadrati e i modelli predittivi" href="minimi_quadrati.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,6 +124,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,7 +181,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
 
@@ -193,9 +194,8 @@
 <li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati e i modelli predittivi</a></li>
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Risoluzione di equazioni non lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
 </ul>
 
     </div>
@@ -391,9 +391,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">8.1 Metodo di bisezione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">8.2 Metodo del punto fisso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">8.3 Metodo di Newton</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-introduttivo">Esempio introduttivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-soluzioni-di-un-equazione-non-lineare">Numero di soluzioni di un’equazione non lineare</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bis-molteplicita-di-una-radice">2bis. Molteplicità di una radice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazione-geometrica">Osservazione geometrica</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordine-di-convergenza-per-iterazioni-funzionali">17. Ordine di convergenza per iterazioni funzionali</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">8.1 Metodo di bisezione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-iterazioni-richieste">Numero di iterazioni richieste</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">8.2 Metodo del punto fisso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">8.3 Metodo di Newton</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -415,6 +425,255 @@ Questa equazione in generale non è risolubile con tecnoche analitiche, a meno d
 <p><em>Condizioni di esistenza e unicità della soluzione nel continuo</em></p>
 <p>Se <span class="math notranslate nohighlight">\(f\)</span> è una funzione continua in [a,b] e tale che <span class="math notranslate nohighlight">\(f(a)f(b)&lt;0\)</span>,
 allora esiste almeno uno zero di <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\((a,b)\)</span>.</p>
+<p>Il problema è determinare le radici di un’equazione non lineare</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=0,
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(f\)</span> è una funzione reale di variabile reale.</p>
+<p>Una radice, o zero, è un valore <span class="math notranslate nohighlight">\(x^{*}\)</span> tale che</p>
+<div class="math notranslate nohighlight">
+\[
+f(x^{*})=0.
+\]</div>
+<p>Nelle applicazioni, raramente esiste una formula esplicita per calcolare <span class="math notranslate nohighlight">\(x^{*}\)</span>.<br />
+Per questo motivo si usano <strong>metodi numerici iterativi</strong>.</p>
+<p>Un metodo iterativo costruisce una successione</p>
+<div class="math notranslate nohighlight">
+\[
+x_0, x_1, x_2, \ldots
+\]</div>
+<p>che, sotto opportune ipotesi, converge alla radice desiderata:</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{k\to\infty}x_k=x^{*}.
+\]</div>
+<section id="esempio-introduttivo">
+<h2>Esempio introduttivo<a class="headerlink" href="#esempio-introduttivo" title="Link to this heading">#</a></h2>
+<p>Consideriamo</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=x^2-2.
+\]</div>
+<p>Le radici sono</p>
+<div class="math notranslate nohighlight">
+\[
+x=\pm\sqrt{2}.
+\]</div>
+<p>Se vogliamo approssimare la radice positiva, possiamo cercarla numericamente nell’intervallo <span class="math notranslate nohighlight">\([1,2]\)</span>, perché</p>
+<div class="math notranslate nohighlight">
+\[
+f(1)=-1&lt;0,
+\]</div>
+<p>mentre</p>
+<div class="math notranslate nohighlight">
+\[
+f(2)=2&gt;0.
+\]</div>
+<p>Il cambio di segno suggerisce, per continuità, che esiste almeno uno zero fra 1 e 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f_intro</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">f_intro</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="n">f_intro</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">f_intro</span><span class="p">(</span><span class="mi">2</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Esempio: f(x)=x^2-2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/acdd7d36d5ef50463392cdb5d085032b718d3c007bd62a97771bb20e05d657f4.png" src="../_images/acdd7d36d5ef50463392cdb5d085032b718d3c007bd62a97771bb20e05d657f4.png" />
+</div>
+</div>
+</section>
+<section id="numero-di-soluzioni-di-un-equazione-non-lineare">
+<h2>Numero di soluzioni di un’equazione non lineare<a class="headerlink" href="#numero-di-soluzioni-di-un-equazione-non-lineare" title="Link to this heading">#</a></h2>
+<p>Un’equazione non lineare può avere comportamenti molto diversi rispetto al numero di soluzioni.</p>
+<p>Una equazione del tipo</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=0
+\]</div>
+<p>può avere:</p>
+<ul class="simple">
+<li><p>nessuna soluzione reale;</p></li>
+<li><p>una sola soluzione reale;</p></li>
+<li><p>due o più soluzioni reali;</p></li>
+<li><p>un numero arbitrariamente grande di soluzioni;</p></li>
+<li><p>infinite soluzioni.</p></li>
+</ul>
+<p>Questo è uno dei motivi per cui non esiste un unico metodo universale che risolva automaticamente tutte le equazioni non lineari.<br />
+Prima di applicare un metodo numerico è spesso utile osservare il grafico della funzione o studiarne alcune proprietà qualitative.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Esempi di equazioni non lineari con diverso numero di soluzioni reali.</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span>
+
+<span class="n">funzioni</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;nessuna soluzione&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$f(x)=x^2+1$&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;due soluzioni&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$f(x)=x^2-1$&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s2">&quot;infinite soluzioni&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$f(x)=\sin(x)$&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">titolo</span><span class="p">,</span> <span class="n">formula</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">funzioni</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">titolo</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">formula</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+    <span class="c1"># Evidenziamo gli zeri visibili nei casi in cui sono noti.</span>
+    <span class="k">if</span> <span class="n">titolo</span> <span class="o">==</span> <span class="s2">&quot;due soluzioni&quot;</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">titolo</span> <span class="o">==</span> <span class="s2">&quot;infinite soluzioni&quot;</span><span class="p">:</span>
+        <span class="n">zeri</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+        <span class="n">zeri</span> <span class="o">=</span> <span class="n">zeri</span><span class="p">[(</span><span class="n">zeri</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">zeri</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">())]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">zeri</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">zeri</span><span class="p">),</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5f4a1bbff7cc14408ad5a0249f859ed65edcf8cd1d33d374594c7deecf156ce5.png" src="../_images/5f4a1bbff7cc14408ad5a0249f859ed65edcf8cd1d33d374594c7deecf156ce5.png" />
+</div>
+</div>
+<p>Una equazione come</p>
+<div class="math notranslate nohighlight">
+\[
+x^2-2=0
+\]</div>
+<p>ha una soluzione nota in forma chiusa.</p>
+<p>Ma equazioni come</p>
+<div class="math notranslate nohighlight">
+\[
+\cos(x)-x=0,
+\]</div>
+<p>oppure</p>
+<div class="math notranslate nohighlight">
+\[
+e^{-x}-x=0,
+\]</div>
+<p>non hanno, in generale, una soluzione esprimibile con funzioni elementari.</p>
+<p>In questi casi vogliamo calcolare una approssimazione <span class="math notranslate nohighlight">\(\tilde{x}\)</span> tale che:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\tilde{x}\)</span> sia vicina alla radice vera <span class="math notranslate nohighlight">\(x^{*}\)</span>;</p></li>
+<li><p>il <em>residuo</em> <span class="math notranslate nohighlight">\(|f(\tilde{x})|\)</span> sia piccolo;</p></li>
+<li><p>il calcolo sia stabile e non troppo costoso.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_cos</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">f_cos</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Equazione cos(x)-x=0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e29e762bd5474f2c353acaaac8c21efb2aac62898370502c9281b930ed00981f.png" src="../_images/e29e762bd5474f2c353acaaac8c21efb2aac62898370502c9281b930ed00981f.png" />
+</div>
+</div>
+</section>
+<section id="bis-molteplicita-di-una-radice">
+<h2>2bis. Molteplicità di una radice<a class="headerlink" href="#bis-molteplicita-di-una-radice" title="Link to this heading">#</a></h2>
+<p>Una radice <span class="math notranslate nohighlight">\(\alpha\)</span> di una funzione <span class="math notranslate nohighlight">\(f\)</span> è detta <strong>radice di molteplicità</strong> <span class="math notranslate nohighlight">\(m\)</span> se si può scrivere</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=(x-\alpha)^m q(x),
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(q\)</span> è una funzione continua e</p>
+<div class="math notranslate nohighlight">
+\[
+q(\alpha)\neq 0.
+\]</div>
+<p>In particolare:</p>
+<ul class="simple">
+<li><p>se <span class="math notranslate nohighlight">\(m=1\)</span>, la radice è <strong>semplice</strong>;</p></li>
+<li><p>se <span class="math notranslate nohighlight">\(m&gt;1\)</span>, la radice è <strong>multipla</strong>.</p></li>
+</ul>
+<p>Per i polinomi, questa definizione coincide con il numero di volte in cui il fattore <span class="math notranslate nohighlight">\((x-\alpha)\)</span> compare nella fattorizzazione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Radici semplici, doppie e triple a confronto.</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">f_simple</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">f_double</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">f_triple</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_simple</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">alpha</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;radice semplice&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$f(x)=x$&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_double</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">alpha</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;radice doppia&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$f(x)=x^2$&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_triple</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">alpha</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;radice tripla&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$f(x)=x^3$&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d1aad140620085f6b052889b7c703451785675e9e1ff4e77c4e275cb977e31bd.png" src="../_images/d1aad140620085f6b052889b7c703451785675e9e1ff4e77c4e275cb977e31bd.png" />
+</div>
+</div>
+<section id="osservazione-geometrica">
+<h3>Osservazione geometrica<a class="headerlink" href="#osservazione-geometrica" title="Link to this heading">#</a></h3>
+<p>Se la molteplicità è pari, la funzione spesso tocca l’asse <span class="math notranslate nohighlight">\(x\)</span> senza attraversarlo.<br />
+Questo significa che metodi basati sul cambio di segno, come la bisezione, possono non individuare direttamente la radice.</p>
+<p>Se la molteplicità è dispari, la funzione attraversa l’asse <span class="math notranslate nohighlight">\(x\)</span>, ma può farlo in modo molto piatto.<br />
+Anche in questo caso il problema può essere più difficile numericamente.</p>
 <p><em>Algoritmi per calcolare la soluzione: metodi iterativi</em></p>
 <ul class="simple">
 <li><p>Non è possibile in
@@ -430,9 +689,9 @@ ad ogni passo k:</p></li>
 <ul class="simple">
 <li><p>Si crea quindi una successione che deve avere la proprieta di essere convergente e di convergere alla soluzione esatta, cioè sotto opportune
 condizioni gli iterati <span class="math notranslate nohighlight">\(x_k\)</span> convergono alla soluzione <span class="math notranslate nohighlight">\(x^*\)</span> (tale
-che <span class="math notranslate nohighlight">\(f(x^*)=0\)</span>) per <span class="math notranslate nohighlight">\(k \rightarrow \infty\)</span>.</p></li>
+che <span class="math notranslate nohighlight">\(f(x^*)=0\)</span>) per <span class="math notranslate nohighlight">\(k \rightarrow \infty\)</span>.
+Schema algoritmo iterativo:</p></li>
 </ul>
-<p>Schema algoritmo iterativo:</p>
 <ol class="arabic simple">
 <li><p>Dati: <span class="math notranslate nohighlight">\(x_0\)</span></p></li>
 </ol>
@@ -463,6 +722,68 @@ C&gt;0 &amp; se &amp;p&gt;1 \\
 <p><em>Osservazione</em>. nel caso <span class="math notranslate nohighlight">\(p=1\)</span> per avere convergenza deve
 essere <span class="math notranslate nohighlight">\(C&lt;1\)</span>. In questo caso <span class="math notranslate nohighlight">\(C\)</span> prende il nome di <em>fattore di
 convergenza.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulazione di convergenza lineare e quadratica</span>
+
+<span class="n">errors_linear</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-1</span><span class="p">]</span>
+<span class="n">errors_quad</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">errors_linear</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">errors_linear</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">errors_quad</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">errors_quad</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;k   lineare        quadratica&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">eq</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">errors_linear</span><span class="p">,</span> <span class="n">errors_quad</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">1d</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="n">el</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">      </span><span class="si">{</span><span class="n">eq</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k   lineare        quadratica
+0   1.000e-01      1.000e-01
+1   5.000e-02      2.000e-02
+2   2.500e-02      8.000e-04
+3   1.250e-02      1.280e-06
+4   6.250e-03      3.277e-12
+5   3.125e-03      2.147e-23
+6   1.563e-03      9.223e-46
+7   7.813e-04      1.701e-90
+8   3.906e-04      5.790e-180
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ordine-di-convergenza-per-iterazioni-funzionali">
+<h2>17. Ordine di convergenza per iterazioni funzionali<a class="headerlink" href="#ordine-di-convergenza-per-iterazioni-funzionali" title="Link to this heading">#</a></h2>
+<p>Se <span class="math notranslate nohighlight">\(g\)</span> è sufficientemente regolare e <span class="math notranslate nohighlight">\(x^{*}\)</span> è un punto fisso, lo sviluppo di Taylor dà:</p>
+<div class="math notranslate nohighlight">
+\[
+g(x_k)-g(x^{*})
+=
+g'(x^{*})(x_k-x^{*})
++
+\frac{g''(x^{*})}{2}(x_k-x^{*})^2
++
+\cdots
++
+\frac{g^{(p)}(x^{*})}{p!}(x_k-x^{*})^p
++
+\cdots
+\]</div>
+<p>Se</p>
+<div class="math notranslate nohighlight">
+\[
+g'(x^{*})=g''(x^{*})=\cdots=g^{(p-1)}(x^{*})=0
+\]</div>
+<p>e</p>
+<div class="math notranslate nohighlight">
+\[
+g^{(p)}(x^{*})\neq 0,
+\]</div>
+<p>allora l’ordine di convergenza è <span class="math notranslate nohighlight">\(p\)</span>.</p>
 <p>In generale la convergenza di un
 metodo iterativo per la risoluzione di un’equazione non lineare
 dipende dalla scelta del valore iniziale <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
@@ -479,7 +800,7 @@ esatta.</p>
 <li><p>Metodo di Newton</p></li>
 </ul>
 <section id="metodo-di-bisezione">
-<h2>8.1 Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link to this heading">#</a></h2>
+<h3>8.1 Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link to this heading">#</a></h3>
 <p>Si costruisce una successione di
 intervalli (<span class="math notranslate nohighlight">\(f(a_1)&lt;0,f(b_1)&gt;0\)</span>):
 $<span class="math notranslate nohighlight">\(I_1=[a_1,b_1],I_2=[a_2,b_2], \ldots ,I_k=[a_k,b_k]\)</span><span class="math notranslate nohighlight">\(
@@ -535,9 +856,117 @@ $<span class="math notranslate nohighlight">\(\frac{1}{2^k}(b-a)&lt;\delta \Righ
 \)</span><span class="math notranslate nohighlight">\(k\geq log_2\frac{b-a}{\delta}\)</span>$
 <strong>Complessità computazionale del metodo</strong>: ad ogni iterazione
 occorrono 2 valutazioni di funzione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">return_history</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">fa</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">fa</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">return_history</span> <span class="k">else</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fb</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">return_history</span> <span class="k">else</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">fa</span> <span class="o">*</span> <span class="n">fb</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;La funzione deve cambiare segno in [a,b].&quot;</span><span class="p">)</span>
+
+    <span class="n">history</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">fm</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+        <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">fm</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tol</span> <span class="ow">or</span> <span class="n">fm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_history</span> <span class="k">else</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">fa</span> <span class="o">*</span> <span class="n">fm</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">m</span>
+            <span class="n">fb</span> <span class="o">=</span> <span class="n">fm</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">m</span>
+            <span class="n">fa</span> <span class="o">=</span> <span class="n">fm</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">),</span> <span class="n">max_iter</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_history</span> <span class="k">else</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">),</span> <span class="n">max_iter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La tabella seguente mostra come si restringe l’intervallo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">hist</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="n">k</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">fm</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">row</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;k=</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">, a=</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">, m=</span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">, f(m)=</span><span class="si">{</span><span class="n">fm</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">, ampiezza=</span><span class="si">{</span><span class="n">width</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">hist</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">k</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">fm</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">row</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;k=</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">, a=</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">, m=</span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">, f(m)=</span><span class="si">{</span><span class="n">fm</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">, ampiezza=</span><span class="si">{</span><span class="n">width</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;hist&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="numero-di-iterazioni-richieste">
+<h3>Numero di iterazioni richieste<a class="headerlink" href="#numero-di-iterazioni-richieste" title="Link to this heading">#</a></h3>
+<p>Se vogliamo un errore finale di al più <span class="math notranslate nohighlight">\(\mathrm{tol}\)</span>, dobbiamo avere</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{b_0-a_0}{2^{k+1}}\le \mathrm{tol}.
+\]</div>
+<p>Da cui</p>
+<div class="math notranslate nohighlight">
+\[
+k\ge \log_2\left(\frac{b_0-a_0}{2 \mathrm{tol}}\right).
+\]</div>
+<p>Quindi il numero di iterazioni cresce solo logaritmicamente rispetto alla tolleranza, ma il metodo rimane relativamente lento perché a ogni passo guadagna circa una cifra binaria.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bisection_iterations_needed</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">((</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">tol</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">tol</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="mf">1e-9</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;tol=</span><span class="si">{</span><span class="n">tol</span><span class="si">:</span><span class="s2">.0e</span><span class="si">}</span><span class="s2">, iterazioni richieste circa:&quot;</span><span class="p">,</span> <span class="n">bisection_iterations_needed</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">tol</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tol=1e-03, iterazioni richieste circa: 10
+tol=1e-06, iterazioni richieste circa: 20
+tol=1e-09, iterazioni richieste circa: 30
+tol=1e-12, iterazioni richieste circa: 40
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Limiti del metodo di bisezione</strong></p>
+<p>Vantaggi:</p>
+<ul class="simple">
+<li><p>è semplice;</p></li>
+<li><p>è robusto;</p></li>
+<li><p>converge sempre se <span class="math notranslate nohighlight">\(f\)</span> è continua e cambia segno;</p></li>
+<li><p>non richiede di valutare la funzione, ma solo il suo segno;</p></li>
+<li><p>non richiede derivate.</p></li>
+</ul>
+<p>Svantaggi:</p>
+<ul class="simple">
+<li><p>converge lentamente;</p></li>
+<li><p>usa solo il segno di <span class="math notranslate nohighlight">\(f\)</span>, non la sua forma. Di conseguenza può richiedere infinite iterazioni per calcolare lo zero di una retta <span class="math notranslate nohighlight">\(f(x)=ax+b\)</span>;</p></li>
+<li><p>se in un intervallo ci sono più radici, ne approssima una sola;</p></li>
+<li><p>non funziona direttamente per radici di molteplicità pari se non c’è cambio di segno.</p></li>
+</ul>
 </section>
 <section id="metodo-del-punto-fisso">
-<h2>8.2 Metodo del punto fisso<a class="headerlink" href="#metodo-del-punto-fisso" title="Link to this heading">#</a></h2>
+<h3>8.2 Metodo del punto fisso<a class="headerlink" href="#metodo-del-punto-fisso" title="Link to this heading">#</a></h3>
 <p>Il problema
 di cercare una radice di $<span class="math notranslate nohighlight">\(f(x)=0\)</span><span class="math notranslate nohighlight">\( viene spostato nel problema di
 cercare una soluzione dell'equazione \)</span><span class="math notranslate nohighlight">\(x=g(x)\)</span><span class="math notranslate nohighlight">\( cioè un punto
@@ -559,6 +988,26 @@ che:</p>
 </ol>
 <p>Geometricamente è l’intersezione delle due curve:
 $<span class="math notranslate nohighlight">\(y=x \ \ \ y=g(x)\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fixed_point</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">return_history</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">x_new</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_new</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_history</span> <span class="k">else</span> <span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x_new</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_history</span> <span class="k">else</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>Per potere applicare il metodo numerico, o l’algoritmo, nel caso discreto devono essercinin generale delle condizioni da verificare nel caso continuo. Se non si verificano queste condizioni e quindi non è possibile calcolare la soluzione nel caso continuo, allora non ha senso applicare l’algortimo anche nel caso discreto.</p>
 <p>Questo teorema è un esempio di tali condizioni.</p>
 <p><strong>Teorema di esistenza e unicità del punto fisso nel modello continuo</strong></p>
@@ -568,11 +1017,22 @@ $<span class="math notranslate nohighlight">\(|g(x)-g(y)|\leq L|x-y|\)</span><sp
 ossia \)</span>g<span class="math notranslate nohighlight">\( è una contrazione in \)</span>[a,b]<span class="math notranslate nohighlight">\(. Allora esiste un unico
 punto fisso \)</span>x^*<span class="math notranslate nohighlight">\( di \)</span>g(x)<span class="math notranslate nohighlight">\( in \)</span>[a,b]$.</p>
 <p>Come tutti i teoremi ha una dimostrazione che non tratteremo in questo corso (così come in geerale le dimostrazioni dei teoremi) poichè non è la parte teorica il focus del corso e visto il tempo ridotto a disposizione. Per chi ha interesse a vederla potete consultare il testo….</p>
-<p><em>Osservazione</em></p>
-<p>Se <span class="math notranslate nohighlight">\(g(x)\)</span> è derivabile in <span class="math notranslate nohighlight">\([a,b]\)</span> con
-<span class="math notranslate nohighlight">\(|g'(x)|\leq L&lt;1\)</span> per <span class="math notranslate nohighlight">\(x \in [a,b]\)</span>, allora <span class="math notranslate nohighlight">\(g(x)\)</span> è una
-contrazione. Il viceversa non è vero perchè <span class="math notranslate nohighlight">\(g(x)\)</span> può non
-essere derivabile.</p>
+<p>Esempio</p>
+<p>L’equazione</p>
+<div class="math notranslate nohighlight">
+\[
+\cos(x)-x=0
+\]</div>
+<p>può essere scritta come</p>
+<div class="math notranslate nohighlight">
+\[
+x=\cos(x).
+\]</div>
+<p>Quindi usiamo</p>
+<div class="math notranslate nohighlight">
+\[
+g(x)=\cos(x).
+\]</div>
 <p><strong>Algoritmo del punto fisso</strong></p>
 <p>Data una approssimazione iniziale <span class="math notranslate nohighlight">\(x_0\)</span> di <span class="math notranslate nohighlight">\(x^*\)</span>, punto fisso di <span class="math notranslate nohighlight">\(g(x)\)</span> in
 <span class="math notranslate nohighlight">\([a,b]\)</span>, si genera una successione di iterati mediante il metodo delle
@@ -581,6 +1041,42 @@ funzionale:</p>
 <div class="math notranslate nohighlight">
 \[x_{k+1}=g(x_k)\]</div>
 <p><strong>N.B. in un metodo iterativo, dopo avere espresso la regola per costruire la successione <span class="math notranslate nohighlight">\(x_0,x_1, \ldots x_k \ldots\)</span> si devono dare le condizioni per cui questa successione è effettiamnte convergente alla soluzione cercata. Altrimenti non è utilizzabile.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="p">,</span> <span class="n">it</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">fixed_point</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">return_history</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Punto fisso:&quot;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iterazioni:&quot;</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Residuo cos(x)-x:&quot;</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">-</span> <span class="n">root</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">xk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hist</span><span class="p">[:</span><span class="mi">10</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;k=</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">, x_k=</span><span class="si">{</span><span class="n">xk</span><span class="si">:</span><span class="s2">.12f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Punto fisso: 0.7390851332147725
+Iterazioni: 69
+Residuo cos(x)-x: 6.495914917081791e-13
+k= 0, x_k=1.000000000000
+k= 1, x_k=0.540302305868
+k= 2, x_k=0.857553215846
+k= 3, x_k=0.654289790498
+k= 4, x_k=0.793480358743
+k= 5, x_k=0.701368773623
+k= 6, x_k=0.763959682901
+k= 7, x_k=0.722102425027
+k= 8, x_k=0.750417761764
+k= 9, x_k=0.731404042423
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Osservazione</em></p>
+<p>Se <span class="math notranslate nohighlight">\(g(x)\)</span> è derivabile in <span class="math notranslate nohighlight">\([a,b]\)</span> con
+<span class="math notranslate nohighlight">\(|g'(x)|\leq L&lt;1\)</span> per <span class="math notranslate nohighlight">\(x \in [a,b]\)</span>, allora <span class="math notranslate nohighlight">\(g(x)\)</span> è una
+contrazione. Il viceversa non è vero perchè <span class="math notranslate nohighlight">\(g(x)\)</span> può non
+essere derivabile.</p>
 <p>In questo caso ci sono due teoremi che assicurano la convergenza: il primo pone le condizioni affibchè la successione creata sia una successione che converge a un certo punto <span class="math notranslate nohighlight">\(x^*\)</span>, il secondo teorema assicura che il punto <span class="math notranslate nohighlight">\(x^*\)</span> è esattamente il punto voluto, cioè uno zero della funzione <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
 <p><em>Teorema 1 (la successione converge a un punto).</em></p>
 <p>Se <span class="math notranslate nohighlight">\(g(x)\)</span> è continua e la successione <span class="math notranslate nohighlight">\(\{x_k\}\)</span> converge per <span class="math notranslate nohighlight">\(k
@@ -675,7 +1171,7 @@ contemporaneamente:</p>
 assegnate e <span class="math notranslate nohighlight">\(f_{\max}=\max_{x\in I_\rho}|f(x)|\)</span></p>
 </section>
 <section id="metodo-di-newton">
-<h2>8.3 Metodo di Newton<a class="headerlink" href="#metodo-di-newton" title="Link to this heading">#</a></h2>
+<h3>8.3 Metodo di Newton<a class="headerlink" href="#metodo-di-newton" title="Link to this heading">#</a></h3>
 <p>Data l’equazione <span class="math notranslate nohighlight">\(f(x)=0\)</span>, si può determinare la soluzione
 <span class="math notranslate nohighlight">\(x^*\)</span> come punto fisso di</p>
 <div class="math notranslate nohighlight">
@@ -683,10 +1179,151 @@ assegnate e <span class="math notranslate nohighlight">\(f_{\max}=\max_{x\in I_\
 <p>Quindi l’iterazione del metodo di Newton è:</p>
 <div class="math notranslate nohighlight">
 \[x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)}\]</div>
-<p><em>Interpretazione geometrica del metodo di Newton</em></p>
-<p align="center">
-  <img src="immagini_sorgente\fig7.png"  width="600">
-</p><p><em>Teorema di convergenza locale del metodo di Newton</em></p>
+<p><em>Interpretazione geometrica</em></p>
+<p>Il metodo di Newton sostituisce la funzione con la retta tangente nel punto <span class="math notranslate nohighlight">\(x_k\)</span>.</p>
+<p>La tangente a <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\(x_k\)</span> è</p>
+<div class="math notranslate nohighlight">
+\[
+y=f(x_k)+f'(x_k)(x-x_k).
+\]</div>
+<p>L’intersezione della tangente con l’asse <span class="math notranslate nohighlight">\(x\)</span> si ottiene imponendo <span class="math notranslate nohighlight">\(y=0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+0=f(x_k)+f'(x_k)(x_{k+1}-x_k),
+\]</div>
+<p>da cui</p>
+<div class="math notranslate nohighlight">
+\[
+x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)}.
+\]</div>
+<p>Il grafico seguente mostra un singolo passo del metodo di Newton.</p>
+<p>A partire da <span class="math notranslate nohighlight">\(x_0\)</span>, si costruisce la tangente alla curva <span class="math notranslate nohighlight">\(y=f(x)\)</span> nel punto <span class="math notranslate nohighlight">\((x_0,f(x_0))\)</span>.<br />
+L’intersezione della tangente con l’asse <span class="math notranslate nohighlight">\(x\)</span> è il nuovo iterato <span class="math notranslate nohighlight">\(x_1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interpretazione geometrica di un passo del metodo di Newton.</span>
+<span class="c1"># Scelgo x0=2.2, così il nuovo iterato x1 è ben distinto dalla radice sqrt(2).</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span>
+<span class="n">df</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">2.2</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span><span class="o">/</span><span class="n">df</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">tangent</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="o">+</span> <span class="n">df</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">xs</span> <span class="o">-</span> <span class="n">x0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)=x^2-2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">tangent</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;tangente in x0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Punti importanti</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">x0</span><span class="p">],</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)],</span> <span class="n">s</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;punto di tangenza&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">x1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;x1: intersezione tangente-asse x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">alpha</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;radice alpha&quot;</span><span class="p">)</span>
+
+<span class="c1"># Linee verticali per rendere distinguibili x1 e alpha</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;x0&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">x0</span><span class="o">+</span><span class="mf">0.03</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.55</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">x1</span><span class="o">+</span><span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">alpha</span><span class="o">-</span><span class="mf">0.35</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.55</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;(x0, f(x0))&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">1.25</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span><span class="o">+</span><span class="mf">0.6</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Metodo di Newton: tangente e nuovo iterato&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x0 =&quot;</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x1 =&quot;</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;radice alpha =&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;|x1-alpha| =&quot;</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="n">alpha</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/eb209e62a0ac2bbf0879f970c65ec8f562fef74910995c160d4a785de2f6a4ac.png" src="../_images/eb209e62a0ac2bbf0879f970c65ec8f562fef74910995c160d4a785de2f6a4ac.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x0 = 2.2
+x1 = 1.5545454545454547
+radice alpha = 1.4142135623730951
+|x1-alpha| = 0.14033189217235953
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol_x</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">tol_f</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">return_history</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">x_old</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_old</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x_old</span><span class="p">),</span> <span class="kc">None</span><span class="p">)]</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_old</span><span class="p">)</span>
+        <span class="n">dfx</span> <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">x_old</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dfx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">tiny</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;Derivata troppo piccola o nulla.&quot;</span><span class="p">)</span>
+
+        <span class="n">x_new</span> <span class="o">=</span> <span class="n">x_old</span> <span class="o">-</span> <span class="n">fx</span> <span class="o">/</span> <span class="n">dfx</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_new</span> <span class="o">-</span> <span class="n">x_old</span><span class="p">)</span>
+
+        <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">x_new</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x_new</span><span class="p">),</span> <span class="n">step</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">step</span> <span class="o">&lt;=</span> <span class="n">tol_x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_new</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_old</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">history</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_history</span> <span class="k">else</span> <span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x_new</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">tol_f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">history</span><span class="p">,</span> <span class="s2">&quot;residual&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_history</span> <span class="k">else</span> <span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+        <span class="n">x_old</span> <span class="o">=</span> <span class="n">x_new</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">x_old</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">,</span> <span class="n">history</span><span class="p">,</span> <span class="s2">&quot;max_iter&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">return_history</span> <span class="k">else</span> <span class="p">(</span><span class="n">x_old</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span>
+<span class="n">df</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+
+<span class="n">root</span><span class="p">,</span> <span class="n">it</span><span class="p">,</span> <span class="n">hist</span><span class="p">,</span> <span class="n">reason</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">return_history</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Radice:&quot;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iterazioni:&quot;</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Motivo arresto:&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Errore:&quot;</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">root</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">xk</span><span class="p">,</span> <span class="n">fxk</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">hist</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;k=</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">, x=</span><span class="si">{</span><span class="n">xk</span><span class="si">:</span><span class="s2">.15f</span><span class="si">}</span><span class="s2">, f(x)=</span><span class="si">{</span><span class="n">fxk</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">, step=</span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Radice: 1.4142135623730951
+Iterazioni: 5
+Motivo arresto: residual
+Errore: 0.0
+k= 0, x=1.000000000000000, f(x)=-1.000e+00, step=None
+k= 1, x=1.500000000000000, f(x)=2.500e-01, step=0.5
+k= 2, x=1.416666666666667, f(x)=6.944e-03, step=0.08333333333333326
+k= 3, x=1.414215686274510, f(x)=6.007e-06, step=0.002450980392156854
+k= 4, x=1.414213562374690, f(x)=4.511e-12, step=2.123899820016817e-06
+k= 5, x=1.414213562373095, f(x)=4.441e-16, step=1.5947243525715749e-12
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Teorema di convergenza locale del metodo di Newton</em></p>
 <p>Sia <span class="math notranslate nohighlight">\(x^*\)</span> uno zero di <span class="math notranslate nohighlight">\(f(x)\)</span>. Sia <span class="math notranslate nohighlight">\(f(x)\)</span> continua insieme alle sue derivate prima,
 seconda e terza.</p>
 <p>Sia <span class="math notranslate nohighlight">\(f'(x)\neq 0\)</span> per <span class="math notranslate nohighlight">\(x\)</span> in un opportuno intorno di <span class="math notranslate nohighlight">\(x^*\)</span> e sia
@@ -726,6 +1363,7 @@ il metodo richiede due valutazioni di funzioni per passo.</p></li>
 </ul>
 </section>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -757,15 +1395,6 @@ il metodo richiede due valutazioni di funzioni per passo.</p></li>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="minimi_quadrati.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Il problema lineare dei minimi quadrati e i modelli predittivi</p>
-      </div>
-    </a>
 </div>
                 </footer>
               
@@ -782,9 +1411,19 @@ il metodo richiede due valutazioni di funzioni per passo.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">8.1 Metodo di bisezione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">8.2 Metodo del punto fisso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">8.3 Metodo di Newton</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-introduttivo">Esempio introduttivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-soluzioni-di-un-equazione-non-lineare">Numero di soluzioni di un’equazione non lineare</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bis-molteplicita-di-una-radice">2bis. Molteplicità di una radice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazione-geometrica">Osservazione geometrica</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordine-di-convergenza-per-iterazioni-funzionali">17. Ordine di convergenza per iterazioni funzionali</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">8.1 Metodo di bisezione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-iterazioni-richieste">Numero di iterazioni richieste</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">8.2 Metodo del punto fisso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">8.3 Metodo di Newton</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
