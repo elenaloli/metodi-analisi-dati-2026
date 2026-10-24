@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/approx_dati';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Risoluzione di equazioni non lineari" href="zeri.html" />
     <link rel="prev" title="Il problema lineare dei minimi quadrati" href="minimi_quadrati.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -195,6 +196,8 @@
 <li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
 <li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">Ottimizzazione numerica</a></li>
 </ul>
 
     </div>
@@ -903,7 +906,7 @@ R^2=1-\frac{9{,}6033}{664}\approx0{,}9855.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e564260be6067e20343090b9016ddf54f51ffef47a7f75a40f13f3da941417bd.png" src="../_images/e564260be6067e20343090b9016ddf54f51ffef47a7f75a40f13f3da941417bd.png" />
+<img alt="../_images/802476f79f1ee8441162fc7190ebc4d6cafb99f70a92ee29d5aa946cc255d689.png" src="../_images/802476f79f1ee8441162fc7190ebc4d6cafb99f70a92ee29d5aa946cc255d689.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -965,7 +968,7 @@ R^2=1-\frac{9{,}6033}{664}\approx0{,}9855.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d01c040c14fa6ee912063fb34f426267d5d0d05fdfeb19ec03f671f8bb78a0d5.png" src="../_images/d01c040c14fa6ee912063fb34f426267d5d0d05fdfeb19ec03f671f8bb78a0d5.png" />
+<img alt="../_images/3bb3fdfcafa5f97007a37a5f5aac980ba840b7660ab96895df5b7b474942459d.png" src="../_images/3bb3fdfcafa5f97007a37a5f5aac980ba840b7660ab96895df5b7b474942459d.png" />
 </div>
 </div>
 </section>
@@ -997,12 +1000,12 @@ R^2=1-\frac{9{,}6033}{664}\approx0{,}9855.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Residuo per d = 0: 1.379594.
-Residuo per d = 1: 0.310912.
-Residuo per d = 2: 0.133681.
-Residuo per d = 3: 0.119131.
-Residuo per d = 4: 0.116285.
-Residuo per d = 5: 0.109562.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Residuo per d = 0: 1.577451.
+Residuo per d = 1: 0.307809.
+Residuo per d = 2: 0.074069.
+Residuo per d = 3: 0.069714.
+Residuo per d = 4: 0.067635.
+Residuo per d = 5: 0.067621.
 </pre></div>
 </div>
 </div>
@@ -1092,7 +1095,7 @@ X^T X \alpha - X^T y + \lambda \alpha = 0,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/21e3dbabe71d9b7e89f1cc16c95cf722961097fc78376d9ea6f817d3eb891965.png" src="../_images/21e3dbabe71d9b7e89f1cc16c95cf722961097fc78376d9ea6f817d3eb891965.png" />
+<img alt="../_images/6aa7229cc3d2ef3f8aa4af88cc4ef43eae070a113515e1c160efe338d1a3784c.png" src="../_images/6aa7229cc3d2ef3f8aa4af88cc4ef43eae070a113515e1c160efe338d1a3784c.png" />
 </div>
 </div>
 <p>E’ dunque abbastanza palese come, per valori relativamente piccoli di <span class="math notranslate nohighlight">\(\lambda\)</span>, la soluzione ottenuta è molto migliore di quella che avevamo visto nel caso precedente in cui non era presente il termine di regolarizzazione, e come questo metodo permette di ottenere un buon modello approssimante anche senza stimare in maniera precisa il grado <em>corretto</em> del polinomio.</p>
@@ -1148,6 +1151,15 @@ X^T X \alpha - X^T y + \lambda \alpha = 0,
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Il problema lineare dei minimi quadrati</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="zeri.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Risoluzione di equazioni non lineari</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
