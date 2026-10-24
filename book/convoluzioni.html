@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Convoluzioni &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+    <title>Dati come immagini &#8212; Metodi numerici per l&#39;analisi dei dati</title>
   
   
   
@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/convoluzioni';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -186,11 +188,16 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">1. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">3. Operazioni sulle matrici: fattorizzazione di matrici</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">5. Decomposizione ai valori singolari (SVD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">Ottimizzazione numerica</a></li>
 </ul>
 
     </div>
@@ -363,7 +370,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -374,11 +383,26 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Convoluzioni</h1>
+    <h1>Dati come immagini</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dati come immagini</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduzione">Introduzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convoluzione">Convoluzione</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pratica-guida-alla-convoluzione-di-immagini">Pratica guida alla convoluzione di immagini</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemi-di-formazione-dell-immagine">Sistemi di formazione dell’immagine</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -388,8 +412,190 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="convoluzioni">
-<h1>Convoluzioni<a class="headerlink" href="#convoluzioni" title="Link to this heading">#</a></h1>
+  <section id="dati-come-immagini">
+<h1>Dati come immagini<a class="headerlink" href="#dati-come-immagini" title="Link to this heading">#</a></h1>
+<section id="introduzione">
+<h2>Introduzione<a class="headerlink" href="#introduzione" title="Link to this heading">#</a></h2>
+<p>Supponiamo di avere di fronte un foglio quadrettato, avere a disposizione una tavolozza di pastelli
+e che un vostro amico vi chieda di ritrarre sul foglio, al meglio delle vostre possibilità, un certo fiore;
+tuttavia, impone una condizione: ogni casella del foglio dovrà essere colorata unicamente da un singolo pastello a vostra scelta.</p>
+<p>Ecco cosa potremmo aspettarci che accada:</p>
+<p><img alt="" src="../_images/fig1_2.png" /></p>
+<p>Il processo di conversione di un immagine da analogica a digitale è concettualmente simile all’esempio di cui sopra.
+Infatti, se si è stati in grado di colorare ogni singola cella del foglio quadrettato, con un unico colore di una certa sfumatura ed intensità, ottendo
+un buon risultato; allora, si sarà anche in grado di definire una matrice, delle stesse dimensioni della griglia sul foglio, i cui coefficienti (in qualche modo)
+rappresentino la sfumatura e l’intensità luminosa del colore utilizzato per riempire il corrispondente quadretto sul foglio.</p>
+<p>In sostanza, ogni immagine digitale di <span class="math notranslate nohighlight">\(M \times N\)</span> pixel, informaticamente parlando, non è altro che una matrice di dimensioni <span class="math notranslate nohighlight">\(M \times N\)</span> ed i suoi coefficienti, ai fatti, rappresentano quali sfumature di colore verrano mostrate e in quale posizione.</p>
+<p>Per esempio, nel caso di immagini in scala di grigi, ogni pixel dell’immagine
+conterrà solo sfumature di grigio. Per convenzione, la matrice corrispettiva ad un immagine del genere,
+avrà come coefficienti soltanto valori interi da un minimo di 0 ad un massimo di 255;
+dove: 0 rappresenta il colore nero e 255 rappresenta il colore bianco.</p>
+<p>Invece, poichè un immagine a colori è ottenuta tramite la sovrapposizione di
+tre rappresentazioni della stessa immagine: una in scala di rossi, una in scala di verdi ed una in scala di blu; sarà quindi richiesto che il colore di ogni pixel di questa immagine sia rappresentato da vettore di tre valori, ciascuno per ogni intesità del colore rosso, verde e blu.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Leggi l&#39;immagine: i canali sono già in ordine RGB</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;immagini_sorgente/peppers1.tif&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Minimo assoluto: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Massimo assoluto: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Converti in float e normalizza se l&#39;immagine ha valori interi</span>
+<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">):</span>
+    <span class="n">img2</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">max</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">img2</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>  <span class="c1"># Si assumono valori già in [0, 1]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;original&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
+<span class="n">img_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">img2</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_d</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;darkened&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>
+<span class="n">img_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">img2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_b</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;brightened&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">img2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;inverted&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimo assoluto: 0
+Massimo assoluto: 229
+</pre></div>
+</div>
+<img alt="../_images/500f39083a70b3682aa6fe1f6b260060e1713e17834542ceb986848e6038f220.png" src="../_images/500f39083a70b3682aa6fe1f6b260060e1713e17834542ceb986848e6038f220.png" />
+</div>
+</div>
+</section>
+<section id="convoluzione">
+<h2>Convoluzione<a class="headerlink" href="#convoluzione" title="Link to this heading">#</a></h2>
+<p>In generale, la convoluzione è
+un’operazione matematica (simbolo: *)
+che, date due funzioni, ne produce una
+terza che è calcolata come segue:</p>
+<div class="math notranslate nohighlight">
+\[
+ (f*g)(t)=\int{f(\tau)g(t-\tau)d\tau}
+ \]</div>
+<p>Nell’imaging, <span class="math notranslate nohighlight">\(f\)</span> e <span class="math notranslate nohighlight">\(g\)</span> sono funzioni discrete bidimensionali, cioè
+matrici,corrispondenti ad immagini.\
+La convoluzione discreta 2D diventa quindi:</p>
+<div class="math notranslate nohighlight">
+\[
+(f*g)(x,y)=\sum_{i=0}^M \sum_{j=1}^N f(x,y) g(x-i,y-j), \ \ x,y=0, \ldots N
+\]</div>
+<p>L’applicazione delle convoluzioni in imaging
+può essere più facilmente spiegata
+graficamente come segue:</p>
+<ul class="simple">
+<li><p>consideriamo una matrice <span class="math notranslate nohighlight">\(K\)</span> di dimensione  nxn (di solito n è dispari) il cui punto centrale viene fatto coincidere con un pixel dell’immagine <span class="math notranslate nohighlight">\(f\)</span> a cui applicare la convoluzione</p></li>
+<li><p>moltiplichiamo i valori nella matrice con i valori dei
+pixel corrispondenti, e sommiamo tutti i risultati</p></li>
+<li><p>ll valore ottenuto è il valore del pixel centrale nel
+risultato</p></li>
+<li><p>l’operazione viene ripetuta (spostando la matrice)
+per tutti i pixel dell’immagine</p></li>
+</ul>
+<p>All’interno del contesto di questa definizione, la matrice <span class="math notranslate nohighlight">\(K\)</span> prenderà il nome di <strong>nucleo di convoluzione</strong> o <strong>kernel di convoluzione</strong></p>
+<p><img alt="" src="../_images/conv.png" /></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pratica-guida-alla-convoluzione-di-immagini">
+<h1>Pratica guida alla convoluzione di immagini<a class="headerlink" href="#pratica-guida-alla-convoluzione-di-immagini" title="Link to this heading">#</a></h1>
+<p>Mostriamo un esempio di come applicare le definizioni sinora presentate.</p>
+<p>In primo luogo, come già evidenziato precedentemente, un immagine non è altro che una matrice (di qualche dimensione) i cui coefficienti rappresentato l’intensità di uno o più colori.</p>
+<p>Dunque, assumiamo che la seguente immagine:</p>
+<p><img alt="alt-text" src="../_images/bc_zero_cropped.png" /></p>
+<p>sia la nostra matrice <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>E supponiamo che la seguente matrice, sia il nostro nucleo di convoluzione <span class="math notranslate nohighlight">\(K\)</span>:</p>
+<p><img alt="alt-text" src="../_images/fig103_ker.png" /></p>
+<p>Adesso dobbiamo scegliere come estendere la matrice <span class="math notranslate nohighlight">\(A\)</span>. Ecco alcune opzioni:</p>
+<p><img alt="alt-text" src="../_images/cond_bordo.png" /></p>
+<p>tutti i diversi modi di estendere diversamente la matrice <span class="math notranslate nohighlight">\(A\)</span> prendono il nome di: <strong>condizioni al bordo</strong>.</p>
+<p><strong>ATTENZIONE</strong>: la matrice <span class="math notranslate nohighlight">\(A\)</span> ha dimensioni <span class="math notranslate nohighlight">\(503 \times 503\)</span> e <span class="math notranslate nohighlight">\(K\)</span> ha dimensioni <span class="math notranslate nohighlight">\(3 \times 3\)</span>, quindi ci occorre un estensione di <span class="math notranslate nohighlight">\(A\)</span> di dimensioni <span class="math notranslate nohighlight">\(503 + (3-1) \times (503 + (3-1)\)</span>.
+Ne segue, che le estensioni mostrate hanno dimensioni <strong>ben più estese di quanto dovrebbero!</strong> Sono solo da considerarsi come esempi utili di diverse condizioni al bordo.</p>
+<!---**Attenzione**: la funzione di convoluzione $[K * (\cdot) \; | \; \mathcal{P}]$ **può** essere una funzione lineare. Vale a dire che **per delle opportune scelte del pattern di estensione $\mathcal{P}$**
+potrà essere vero che, $\forall \; \alpha,\beta \in \mathbb{R}$:
+
+$$ [K * (\alpha \; X + \beta \; Y) \; | \; \mathcal{P}] = \alpha \; [K * X \; | \; \mathcal{P}] + \beta \; [K * Y \; | \; \mathcal{P}] $$
+
+di qui in avanti, si assumerà che qualunque sia il pattern di estensione $\mathcal{P}$ renda sempre la funzione di convoluzione lineare.---!><!---**Osservazione**: Poichè abbiamo presupposto che $[K * (\cdot) \; | \; \mathcal{P}]$ sia una funzione lineare. Allora, sappiamo che esiste un **unica** matrice $T$ di dimensioni $(N*M) \times (N*M)$, tale che:
+
+$$T \, \mathcal{L}(X) = \mathcal{L}( \; [K * X \; | \; \mathcal{P}] \; )$$---!><p><img alt="alt text" src="../_images/fig100_2.png" /></p>
+<p>In questo caso, il kernel utilizzato sostituisce il valore di ogni pixel con la media aritmetica dei valori contenuti nei quattro pixel ad esso adiacenti.</p>
+<p>Ottenendo il seguente effetto di sfocatura:</p>
+<p><img alt="alt text" src="../_images/fig103.png" /></p>
+<p>Consideriamo ora il seguente kernel:</p>
+<p><img alt="alt text" src="../_images/kernel_bordi.png" /></p>
+<p>Osserviamo che, poichè la somma dei coefficienti è 0, sappiamo che se un pixel ha approssimativamente lo stesso colore dei quattro che
+gli sono adiacenti, allora verrà rimpiazzato da un valore prossimo a zero; in altre parole, il pixer divverà di colore nero.</p>
+<p>Ne segue che tutti e soli i pixel che avranno un valore non nullo, saranno quelli posizionati in mezzo a due regioni di colori contrastanti.
+Pertanto, questo è un filtro che evidenzia i bordi dell’immagine</p>
+<p><img alt="alt text" src="../_images/fig104.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="sistemi-di-formazione-dell-immagine">
+<h1>Sistemi di formazione dell’immagine<a class="headerlink" href="#sistemi-di-formazione-dell-immagine" title="Link to this heading">#</a></h1>
+<p>In tempi recenti, siamo tutti abituati ad avere nelle nostre tasche fotocamere che, in una frazione di secondo, sono in grado di rappresentare
+in maniera più che realistica la maggior parte del mondo che ci circonda.</p>
+<p>L’enorme diffusione di questa tecnologia può portare, erroneamente, a credere che il processo di conversione di un immagine da analogica a digitale, sia relativamente semplice:
+basta avere un foto-sensore, esporlo a della luce, leggere i voltaggi delle correnti risultati e convertire questi valori in una matrice di pixel, no?</p>
+<p>Per iniziare, supponiamo di voler fotografare una singola fonte luminosa puntiforme (per esempio, una stella della volta celeste) ed osserviamo
+cosa succederebbe se seguissimo questa procedura intuitiva .</p>
+<p>quindi, di seguito, troviamo l’oggetto che vorremmo rappresentare:</p>
+<p><img alt="alt text" src="../_images/fig26_bis.png" /></p>
+<p>mentre questa è l’immagine ottenuta:</p>
+<p><img alt="alt text" src="../_images/fig26.png" /></p>
+<p>come possiamo notare, anzichè avere un immagine con piccolo gruppo di pixel chiari circondati tutti  pixel scuri, l’immagine ottenuta è più simile ad una macchia
+centrata nel punto in cui avremmo dovuto vedere la nostra fonte luminosa puntiforme.</p>
+<p>Questo fenomeno di ‘allargamento’ delle fonti luminose puntiformi è del tutto <strong>deterministico</strong> e specificatamente legato all’apparecchiatura
+utilizzata per catturare l’immagine.</p>
+<p>Matematicamente, possiamo modellizzare il fenomeno così: definiamo una funzione <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> che operi come illustrato:</p>
+<p><img alt="alt text" src="../_images/psf.png" />
+<img alt="alt text" src="../_images/fig25.jpg" /></p>
+<p>questa funzione <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> prenderà il nome di <strong>Point Spread Function (PSF)</strong>. Un ottima proprietà che molti sistemi di formazione di immagini possiedono, è che la ‘forma’ della macchia ottenuta
+in seguito all’allargamento <strong>NON</strong> dipende dalla posizione della fonte luminosa puntiforme. Per questa ragione, questi sistemi sono denominati <strong>spazio invarianti</strong>.
+Altrimenti detto, la PSF <strong>è la stessa</strong> per tutte le possibili posizioni della fonte luminosa puntiforme all’interno dell’immagine.</p>
+<p><img alt="alt text" src="../_images/fig27.jpg" /></p>
+<p>Ad essere più precisi, se <span class="math notranslate nohighlight">\(x\)</span> è un immagine che rappresenta perfettamente il nostro oggetto originale e <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> è la nostra PSF, avremo che:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{A}(x) = [K * x \; | \; \mathcal{P}]\]</div>
+<p>dove <span class="math notranslate nohighlight">\(K\)</span> è un qualche kernel di convoluzione e <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> è un pattern di estensione.</p>
+<p>Fino a questo punto, sono state descritte fonti <strong>deterministiche</strong> di errore nella rappresentazione di oggetti.
+Chiaramente, queste non sono le sole. Infatti, nel corso dell’acquisizione dell’immagine fenomeni aleatori e sostanzialmente imprevedibili danneggiano ulteriormente la nitidezza dell’immagine ottenuta.</p>
+<p>Definiamo ora, un immagine <span class="math notranslate nohighlight">\(w\)</span> i cui valori dei pixel siano stati selezionati aleatoriamente, secondo la distribuzione del <em>rumore Gaussiano bianco</em>.</p>
+<p>A questo punto, possiamo fornire un modello matematico <strong>discreto</strong> che spieghi come si sia formata l’immagine <span class="math notranslate nohighlight">\(g\)</span> (quella restituita dal nostro sistema di formazione di immagini), a partire da <span class="math notranslate nohighlight">\(x\)</span>, l’immagine che rappresenta veramente l’oggetto:</p>
+<div class="math notranslate nohighlight">
+\[y^{\delta} = \mathcal{A}(x) + w = [K * x \; | \; \mathcal{P}] + w\]</div>
+<p>dove <span class="math notranslate nohighlight">\(K\)</span> è un qualche kernel di convoluzione, <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> è un pattern di estensione, <span class="math notranslate nohighlight">\(w\)</span> è il medesimo di cui sopra e <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> è la point spread function.</p>
+<p><img alt="alt-text" src="../_images/fig28.jpg" />
+<img alt="alt-text" src="book/immagini_sorgente/fig24.jpg" /></p>
+<p>Più esplicitamente, sapremo:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y^{\delta}\)</span>, l’immagine sfuocata (dal sistema di formazione di immagini) e rumorosa (a causa di aleatorie fonti d’errore);</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{A}(\cdot)\)</span>, la PSF legata al nostro sistema di formazione di immagini;</p></li>
+</ul>
+<p>Dovremo ricavare <span class="math notranslate nohighlight">\(x\)</span>, l’immagine originaria.</p>
+<p><img alt="alt-text" src="../_images/pb_inversi.png" /></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -428,6 +634,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dati come immagini</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduzione">Introduzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convoluzione">Convoluzione</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pratica-guida-alla-convoluzione-di-immagini">Pratica guida alla convoluzione di immagini</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemi-di-formazione-dell-immagine">Sistemi di formazione dell’immagine</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>

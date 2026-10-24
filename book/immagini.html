@@ -1,0 +1,861 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduzione &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/immagini';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mnad.png" class="logo__image only-light" alt="Metodi numerici per l'analisi dei dati - Home"/>
+    <script>document.write(`<img src="../_static/mnad.png" class="logo__image only-dark" alt="Metodi numerici per l'analisi dei dati - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Metodi numerici per l’Analisi dei dati
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">Ottimizzazione numerica</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/elenaloli/computational-imaging.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/elenaloli/computational-imaging.git/issues/new?title=Issue%20on%20page%20%2Fbook/immagini.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/book/immagini.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduzione</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduzione</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#convoluzione">Convoluzione</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pratica-guida-alla-convoluzione-di-immagini">Pratica guida alla convoluzione di immagini</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemi-di-formazione-dell-immagine">Sistemi di formazione dell’immagine</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluzione-naive">Soluzione naive</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metriche-di-valutazione-per-la-ricostruzione">Metriche di valutazione per la ricostruzione</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="introduzione">
+<h1>Introduzione<a class="headerlink" href="#introduzione" title="Link to this heading">#</a></h1>
+<p>Supponiamo di avere di fronte un foglio quadrettato, avere a disposizione una tavolozza di pastelli
+e che un vostro amico vi chieda di ritrarre sul foglio, al meglio delle vostre possibilità, un certo fiore;
+tuttavia, impone una condizione: ogni casella del foglio dovrà essere colorata unicamente da un singolo pastello a vostra scelta.</p>
+<p>Ecco cosa potremmo aspettarci che accada:</p>
+<p><img alt="alt text" src="../_images/fig1.png" /></p>
+<p>Il processo di conversione di un immagine da analogica a digitale è concettualmente simile all’esempio di cui sopra.
+Infatti, se si è stati in grado di colorare ogni singola cella del foglio quadrettato, con un unico colore di una certa sfumatura ed intensità, ottendo
+un buon risultato; allora, si sarà anche in grado di definire una matrice, delle stesse dimensioni della griglia sul foglio, i cui coefficienti (in qualche modo)
+rappresentino la sfumatura e l’intensità luminosa del colore utilizzato per riempire il corrispondente quadretto sul foglio.</p>
+<p>In sostanza, ogni immagine digitale di <span class="math notranslate nohighlight">\(M \times N\)</span> pixel, informaticamente parlando, non è altro che una matrice di dimensioni <span class="math notranslate nohighlight">\(M \times N\)</span> ed i suoi coefficienti, ai fatti, rappresentano quali sfumature di colore verrano mostrate e in quale posizione.</p>
+<p>Per esempio, nel caso di immagini in scala di grigi, ogni pixel dell’immagine
+conterrà solo sfumature di grigio. Per convenzione, la matrice corrispettiva ad un immagine del genere,
+avrà come coefficienti soltanto valori interi da un minimo di 0 ad un massimo di 255;
+dove: 0 rappresenta il colore nero e 255 rappresenta il colore bianco.</p>
+<p>Invece, poichè un immagine a colori è ottenuta tramite la sovrapposizione di
+tre rappresentazioni della stessa immagine: una in scala di rossi, una in scala di verdi ed una in scala di blu; sarà quindi richiesto che il colore di ogni pixel di questa immagine sia rappresentato da vettore di tre valori, ciascuno per ogni intesità del colore rosso, verde e blu.</p>
+</section>
+<section id="convoluzione">
+<h1>Convoluzione<a class="headerlink" href="#convoluzione" title="Link to this heading">#</a></h1>
+<p>In generale, la convoluzione è
+un’operazione matematica (simbolo: *)
+che, date due funzioni, ne produce una
+terza che è calcolata come segue:
+$<span class="math notranslate nohighlight">\( (f*g)(t)=\int{f(\tau)g(t-\tau)d\tau}\)</span><span class="math notranslate nohighlight">\(
+Nell'imaging, \)</span>f<span class="math notranslate nohighlight">\( e \)</span>g<span class="math notranslate nohighlight">\( sono funzioni discrete bidimensionali, cioè 
+matrici,corrispondenti ad immagini.\\
+La convoluzione discreta 2D diventa quindi:
+\)</span><span class="math notranslate nohighlight">\((f*g)(x,y)=\sum_{i=0}^M \sum_{j=1}^N f(x,y) g(x-i,y-j), \ \ x,y=0, \ldots N\)</span>$</p>
+<p>L’applicazione delle convoluzioni in imaging
+può essere più facilmente spiegata
+graficamente come segue:</p>
+<ul class="simple">
+<li><p>consideriamo una matrice <span class="math notranslate nohighlight">\(K\)</span> di dimensione  nxn (di solito n è dispari) il cui punto centrale viene fatto coincidere con un pixel dell’immagine <span class="math notranslate nohighlight">\(f\)</span> a cui applicare la convoluzione</p></li>
+<li><p>moltiplichiamo i valori nella matrice con i valori dei
+pixel corrispondenti, e sommiamo tutti i risultati</p></li>
+<li><p>ll valore ottenuto è il valore del pixel centrale nel
+risultato</p></li>
+<li><p>l’operazione viene ripetuta (spostando la matrice)
+per tutti i pixel dell’immagine</p></li>
+</ul>
+<p>All’interno del contesto di questa definizione, la matrice <span class="math notranslate nohighlight">\(K\)</span> prenderà il nome di <strong>nucleo di convoluzione</strong> o <strong>kernel di convoluzione</strong></p>
+<p><img alt="alt text" src="../_images/conv.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pratica-guida-alla-convoluzione-di-immagini">
+<h1>Pratica guida alla convoluzione di immagini<a class="headerlink" href="#pratica-guida-alla-convoluzione-di-immagini" title="Link to this heading">#</a></h1>
+<p>Mostriamo un esempio di come applicare le definizioni sinora presentate.</p>
+<p>In primo luogo, come già evidenziato precedentemente, un immagine non è altro che una matrice (di qualche dimensione) i cui coefficienti rappresentato l’intensità di uno o più colori.</p>
+<p>Dunque, assumiamo che la seguente immagine:</p>
+<p><img alt="alt-text" src="../_images/bc_zero_cropped.png" /></p>
+<p>sia la nostra matrice <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>E supponiamo che la seguente matrice, sia il nostro nucleo di convoluzione <span class="math notranslate nohighlight">\(K\)</span>:</p>
+<p><img alt="alt-text" src="../_images/fig103_ker.png" /></p>
+<p>Adesso dobbiamo scegliere come estendere la matrice <span class="math notranslate nohighlight">\(A\)</span>. Ecco alcune opzioni:</p>
+<p><img alt="alt-text" src="../_images/cond_bordo.png" /></p>
+<p>tutti i diversi modi di estendere diversamente la matrice <span class="math notranslate nohighlight">\(A\)</span> prendono il nome di: <strong>condizioni al bordo</strong>.</p>
+<p><strong>ATTENZIONE</strong>: la matrice <span class="math notranslate nohighlight">\(A\)</span> ha dimensioni <span class="math notranslate nohighlight">\(503 \times 503\)</span> e <span class="math notranslate nohighlight">\(K\)</span> ha dimensioni <span class="math notranslate nohighlight">\(3 \times 3\)</span>, quindi ci occorre un estensione di <span class="math notranslate nohighlight">\(A\)</span> di dimensioni <span class="math notranslate nohighlight">\(503 + (3-1) \times (503 + (3-1)\)</span>.
+Ne segue, che le estensioni mostrate hanno dimensioni <strong>ben più estese di quanto dovrebbero!</strong> Sono solo da considerarsi come esempi utili di diverse condizioni al bordo.</p>
+<!---**Attenzione**: la funzione di convoluzione $[K * (\cdot) \; | \; \mathcal{P}]$ **può** essere una funzione lineare. Vale a dire che **per delle opportune scelte del pattern di estensione $\mathcal{P}$**
+potrà essere vero che, $\forall \; \alpha,\beta \in \mathbb{R}$:
+
+$$ [K * (\alpha \; X + \beta \; Y) \; | \; \mathcal{P}] = \alpha \; [K * X \; | \; \mathcal{P}] + \beta \; [K * Y \; | \; \mathcal{P}] $$
+
+di qui in avanti, si assumerà che qualunque sia il pattern di estensione $\mathcal{P}$ renda sempre la funzione di convoluzione lineare.---!><!---**Osservazione**: Poichè abbiamo presupposto che $[K * (\cdot) \; | \; \mathcal{P}]$ sia una funzione lineare. Allora, sappiamo che esiste un **unica** matrice $T$ di dimensioni $(N*M) \times (N*M)$, tale che:
+
+$$T \, \mathcal{L}(X) = \mathcal{L}( \; [K * X \; | \; \mathcal{P}] \; )$$---!><p><img alt="alt text" src="../_images/fig100.png" /></p>
+<p>In questo caso, il kernel utilizzato sostituisce il valore di ogni pixel con la media aritmetica dei valori contenuti nei quattro pixel ad esso adiacenti.</p>
+<p>Ottenendo il seguente effetto di sfocatura:</p>
+<p><img alt="alt text" src="../_images/fig103.png" /></p>
+<p>Consideriamo ora il seguente kernel:</p>
+<p><img alt="alt text" src="../_images/kernel_bordi.png" /></p>
+<p>Osserviamo che, poichè la somma dei coefficienti è 0, sappiamo che se un pixel ha approssimativamente lo stesso colore dei quattro che
+gli sono adiacenti, allora verrà rimpiazzato da un valore prossimo a zero; in altre parole, il pixer divverà di colore nero.</p>
+<p>Ne segue che tutti e soli i pixel che avranno un valore non nullo, saranno quelli posizionati in mezzo a due regioni di colori contrastanti.
+Pertanto, questo è un filtro che evidenzia i bordi dell’immagine</p>
+<p><img alt="alt text" src="../_images/fig104.png" /></p>
+<p><img alt="alt text" src="book/immagini_sorgente/fig106.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="sistemi-di-formazione-dell-immagine">
+<h1>Sistemi di formazione dell’immagine<a class="headerlink" href="#sistemi-di-formazione-dell-immagine" title="Link to this heading">#</a></h1>
+<p>In tempi recenti, siamo tutti abituati ad avere nelle nostre tasche fotocamere che, in una frazione di secondo, sono in grado di rappresentare
+in maniera più che realistica la maggior parte del mondo che ci circonda.</p>
+<p>L’enorme diffusione di questa tecnologia può portare, erroneamente, a credere che il processo di conversione di un immagine da analogica a digitale, sia relativamente semplice:
+basta avere un foto-sensore, esporlo a della luce, leggere i voltaggi delle correnti risultati e convertire questi valori in una matrice di pixel, no?</p>
+<p>Per iniziare, supponiamo di voler fotografare una singola fonte luminosa puntiforme (per esempio, una stella della volta celeste) ed osserviamo
+cosa succederebbe se seguissimo questa procedura intuitiva .</p>
+<p>quindi, di seguito, troviamo l’oggetto che vorremmo rappresentare:</p>
+<p><img alt="alt text" src="../_images/fig26_bis.png" /></p>
+<p>mentre questa è l’immagine ottenuta:</p>
+<p><img alt="alt text" src="../_images/fig26.png" /></p>
+<p>come possiamo notare, anzichè avere un immagine con piccolo gruppo di pixel chiari circondati tutti  pixel scuri, l’immagine ottenuta è più simile ad una macchia
+centrata nel punto in cui avremmo dovuto vedere la nostra fonte luminosa puntiforme.</p>
+<p>Questo fenomeno di ‘allargamento’ delle fonti luminose puntiformi è del tutto <strong>deterministico</strong> e specificatamente legato all’apparecchiatura
+utilizzata per catturare l’immagine.</p>
+<p>Matematicamente, possiamo modellizzare il fenomeno così: definiamo una funzione <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> che operi come illustrato:</p>
+<p><img alt="alt text" src="../_images/psf.png" />
+<img alt="alt text" src="../_images/fig25.jpg" /></p>
+<p>questa funzione <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> prenderà il nome di <strong>Point Spread Function (PSF)</strong>. Un ottima proprietà che molti sistemi di formazione di immagini possiedono, è che la ‘forma’ della macchia ottenuta
+in seguito all’allargamento <strong>NON</strong> dipende dalla posizione della fonte luminosa puntiforme. Per questa ragione, questi sistemi sono denominati <strong>spazio invarianti</strong>.
+Altrimenti detto, la PSF <strong>è la stessa</strong> per tutte le possibili posizioni della fonte luminosa puntiforme all’interno dell’immagine.</p>
+<p><img alt="alt text" src="../_images/fig27.jpg" /></p>
+<p>Ad essere più precisi, se <span class="math notranslate nohighlight">\(x\)</span> è un immagine che rappresenta perfettamente il nostro oggetto originale e <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> è la nostra PSF, avremo che:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{A}(x) = [K * x \; | \; \mathcal{P}]\]</div>
+<p>dove <span class="math notranslate nohighlight">\(K\)</span> è un qualche kernel di convoluzione e <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> è un pattern di estensione.</p>
+<p>Fino a questo punto, sono state descritte fonti <strong>deterministiche</strong> di errore nella rappresentazione di oggetti.
+Chiaramente, queste non sono le sole. Infatti, nel corso dell’acquisizione dell’immagine fenomeni aleatori e sostanzialmente imprevedibili danneggiano ulteriormente la nitidezza dell’immagine ottenuta.</p>
+<p>Definiamo ora, un immagine <span class="math notranslate nohighlight">\(w\)</span> i cui valori dei pixel siano stati selezionati aleatoriamente, secondo la distribuzione del <em>rumore Gaussiano bianco</em>.</p>
+<p>A questo punto, possiamo fornire un modello matematico <strong>discreto</strong> che spieghi come si sia formata l’immagine <span class="math notranslate nohighlight">\(g\)</span> (quella restituita dal nostro sistema di formazione di immagini), a partire da <span class="math notranslate nohighlight">\(x\)</span>, l’immagine che rappresenta veramente l’oggetto:</p>
+<div class="math notranslate nohighlight">
+\[y^{\delta} = \mathcal{A}(x) + w = [K * x \; | \; \mathcal{P}] + w\]</div>
+<p>dove <span class="math notranslate nohighlight">\(K\)</span> è un qualche kernel di convoluzione, <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> è un pattern di estensione, <span class="math notranslate nohighlight">\(w\)</span> è il medesimo di cui sopra e <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> è la point spread function.</p>
+<p><img alt="alt-text" src="../_images/fig28.jpg" />
+<img alt="alt-text" src="book/immagini_sorgente/fig24.jpg" /></p>
+<p>Più esplicitamente, sapremo:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y^{\delta}\)</span>, l’immagine sfuocata (dal sistema di formazione di immagini) e rumorosa (a causa di aleatorie fonti d’errore);</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{A}(\cdot)\)</span>, la PSF legata al nostro sistema di formazione di immagini;</p></li>
+</ul>
+<p>Dovremo ricavare <span class="math notranslate nohighlight">\(x\)</span>, l’immagine originaria.</p>
+<p><img alt="alt-text" src="../_images/pb_inversi.png" /></p>
+<!---Alternativamente, utilizzando le osservazioni del capitolo precedente possiamo riscrivere il modello nella seguente forma matriciale:
+
+$$F = \mathcal{A}(f) + w = [K * f \; | \; \mathcal{P}] + w \iff$$
+
+$$\mathcal{L}(F) = \mathcal{L}( \; [K * f \; | \; \mathcal{P}] + w \; ) = \mathcal{L}( \; [K * f \; | \; \mathcal{P}] ) + \mathcal{L}(w) \iff$$
+$$\mathcal{L}(F) = T \, \mathcal{L}(f) + \mathcal{L}(w)$$ ---!><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># CRAZIONE di un PROBLEMA TEST</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ProblemiInversi</span><span class="w"> </span><span class="kn">import</span> <span class="n">operators</span><span class="p">,</span> <span class="n">solvers</span><span class="p">,</span> <span class="n">utilities</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
+
+<span class="c1"># Lettura dei dati da skimage</span>
+<span class="c1"># x = data.camera()</span>
+
+<span class="n">x</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;Baboon.bmp&quot;</span><span class="p">)</span>
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="c1"># Normalizzazione (nel range [0, 1])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Originale&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Definizione kernel di blur e operatore associato</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">gaussian2d_kernel</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">operators</span><span class="o">.</span><span class="n">ConvolutionOperator</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+
+<span class="c1"># Visualizzazione kernel di blur (PSF)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Sfocatura dell&#39;immagine e aggiunta di rumore</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y_delta</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">utilities</span><span class="o">.</span><span class="n">gaussian_noise</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">noise_level</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="c1"># Visualizzazione problema test</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Originale&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">y_delta</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Corrotta&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># CRAZIONE di un PROBLEMA TEST</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">ProblemiInversi</span><span class="w"> </span><span class="kn">import</span> <span class="n">operators</span><span class="p">,</span> <span class="n">solvers</span><span class="p">,</span> <span class="n">utilities</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;ProblemiInversi&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<!--Alternativamente,  possiamo riscrivere il modello nella seguente forma matriciale:
+
+
+$$ y^{\delta}=Ax+w$$ 
+
+dove A e'una matrice di dimensione $(M*N)*(M*N)* che contiene le informazioni del nucleo di convoluzione ed e'tale che:
+
+$$Ax=K*x$$
+
+Un primo possibile approccio si potrebbe ottenere riformulando il problema nel formato di quello ai minimi quadrati; vale a dire, localizzare $x$ tale che:
+
+$$ \lVert A \, x  - (y^{\delta} - w) \rVert_{2} $$
+
+sia minimizzata.
+
+Tuttavia, questa prima formulazione non ha la fortuna di condurci a delle buone soluzioni, in quanto è numericamente instabile e decisamente mal condizionata.
+
+Infatti questa formulazione è del tutto equivalente a calcolare:
+
+$$x = T^{-1} \, g - T^{-1} \, e$$
+
+e purtroppo $T^{-1} \, e$ (anche chiamato rumore inverso) tenderà, quasi sempre, a risaltare eccessivamente nelle soluzioni $x$, localizzate con questo metodo.
+
+Ecco, due esempi di cosa potrebbe succedere se utilizzassimo questo approccio per ricostruire delle immagini:--!><p>Alternativamente,  possiamo riscrivere il modello nella seguente forma matriciale:</p>
+<div class="math notranslate nohighlight">
+\[ y^{\delta}=Ax+w\]</div>
+<p>dove A e’una matrice di dimensione $(M<em>N)</em>(M<em>N)</em> che contiene le informazioni del nucleo di convoluzione ed e’tale che:</p>
+<div class="math notranslate nohighlight">
+\[Ax=K*x\]</div>
+<section id="soluzione-naive">
+<h2>Soluzione naive<a class="headerlink" href="#soluzione-naive" title="Link to this heading">#</a></h2>
+<p>La <em><strong>soluzione naive</strong></em> è quella ottenuta risolvendo il problema di minimi quadrati:</p>
+<div class="math notranslate nohighlight">
+\[min_x ||Ax-y^{\delta}||_2^2\]</div>
+<p><img alt="alt-text" src="../_images/fig29.jpg" />
+<img alt="alt-text" src="../_images/soluzione_naive.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Calcolo della soluzione NAIVE come soluzione del problema dei minimi quadrati</span>
+<span class="c1"># con le equazioni normali</span>
+
+<span class="c1"># CGLS</span>
+<span class="n">cgls_solver</span> <span class="o">=</span> <span class="n">solvers</span><span class="o">.</span><span class="n">CGLS</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># Scelta di x0, kmax, atolf, tolx</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">kmax</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">tolf</span> <span class="o">=</span> <span class="mf">1e-8</span>
+<span class="n">tolx</span> <span class="o">=</span> <span class="mf">1e-8</span>
+
+<span class="c1"># Soluzione</span>
+<span class="n">x_cgls</span> <span class="o">=</span> <span class="n">cgls_solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">y_delta</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">kmax</span><span class="p">,</span> <span class="n">tolf</span><span class="p">,</span> <span class="n">tolx</span><span class="p">)</span>
+
+
+
+<span class="c1"># Visualizzazione ricostruzione</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Originale&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">y_delta</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Corrotta&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_cgls</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Ricostruzione&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/698bcd5a493a9ab34278e9b128421919a57487c63a7128208f01e49ea81f954f.png" src="../_images/698bcd5a493a9ab34278e9b128421919a57487c63a7128208f01e49ea81f954f.png" />
+</div>
+</div>
+<p>Essendo la matrice A di dimensione non molto piccola, calcolare la soluzione con la SVD è troppo costoso (ricordiamo che la complessità computazionale della fattorizzazione SVD è <span class="math notranslate nohighlight">\(O(4/3 mn^2)\)</span> per una matrice di dimensione m*n).
+Quindi si risolvono le equazioni normali:</p>
+<div class="math notranslate nohighlight">
+\[A^TAx=A^Ty^{\delta}\]</div>
+<p>Il sistema ha matrice simmetrica e definita positiva (supponiamo A di rango massimo) e per ragioni computazionali è convenirente utilizzare un metodo iterativo. Quindi applichiamo il CGLS al sistema delle equazioni normali.</p>
+<section id="metriche-di-valutazione-per-la-ricostruzione">
+<h3>Metriche di valutazione per la ricostruzione<a class="headerlink" href="#metriche-di-valutazione-per-la-ricostruzione" title="Link to this heading">#</a></h3>
+<p>In un problema test, per valutare la qualita’ della ricostruzione ottenuta, oltre ad una valutazione visiva,  si utilizzano delle <em><strong>metriche</strong></em>.
+Queste sono costituite da un numero che deve rappresentare l’ accuratezza della soluzione. In generale non rispecchiano sempre quella che e’la valutazione visiva, anche perche’ un solo numero difficilmente potrebbe rispecchiare la  complessita’di una immagine. Ci sono diverse metriche, proprio per avere diversi punti di vista, che in generale richiedono la conoscenza di <span class="math notranslate nohighlight">\(x_{GT}\)</span>, la ground truth.</p>
+<p>In particolare, considereremo (detta <span class="math notranslate nohighlight">\(x\)</span> l ímmagine ricostruita):</p>
+<ul class="simple">
+<li><p>L’ errore relativo (ER) definito come:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ER=\frac{||x-x_{GT}||_2^2}{||x_{GT}||_2^2}\]</div>
+<ul class="simple">
+<li><p>Il rapporto segnale-rumore misurato come Peak to Signal Noise Ratio (PSNR) definito come:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[PSNR= 10 log_{10}\frac{(max_{i,j}|x_{i,j}|)^2}{MSE}\]</div>
+<p>dove MSE indica l’ Errore Quadratico Medio (Mean Squared Error):</p>
+<div class="math notranslate nohighlight">
+\[MSE=\frac{||x-x_{GT}||_2^2}{M*N}\]</div>
+<p>Dove M,N sono le dimensioni dell’ immagine.
+Ha valori in [0,100] e piu’ e’alto il valore migliore e’il rapporto sganle rumore (quindi meno rumorosa e’ l’immagine).</p>
+<ul class="simple">
+<li><p>Structural Similarity Index (<span class="math notranslate nohighlight">\(SSIM\)</span>). Questo indice ha una definizione piuttosto complessa che non riportiamo qui. Dovrebbe essere quello piu’ fedele alla qualita’ visiva dell’immagine ed ha valori in [0,1]. Piu’ e’ vicino a uno, migliore e’ la qualita’ dell’  immagine.</p></li>
+</ul>
+<p>La ricostruzione del problema inverso è chiaramente corrotta da rumore e di qualità molto scadente. E’ lo stesso fenomeno che avevamo osservato nel caso dei problemi inversi 1D, dovuto al mal condizionamento della matrice e alle condizioni di Picard non completamente soddisfatte.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Calcolo metrice di errore</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ER&#39;</span><span class="p">,</span><span class="n">utilities</span><span class="o">.</span><span class="n">rel_err</span><span class="p">(</span><span class="n">x_cgls</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PSNR&#39;</span><span class="p">,</span><span class="n">utilities</span><span class="o">.</span><span class="n">psnr</span><span class="p">(</span><span class="n">x_cgls</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SSIM&#39;</span><span class="p">,</span><span class="n">utilities</span><span class="o">.</span><span class="n">ssim</span><span class="p">(</span><span class="n">x_cgls</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ER 0.5699410075397444
+PSNR 9.453682728524633
+SSIM 0.17084572024481376
+</pre></div>
+</div>
+</div>
+</div>
+<p>Definizione (conversione lessicografica per righe):</p>
+<p>Sia <span class="math notranslate nohighlight">\(A\)</span> una matrice <span class="math notranslate nohighlight">\(M \times N\)</span>, definiamo la funzione <span class="math notranslate nohighlight">\(\mathcal{L}: \mathbb{R}^{M \times N} \to \mathbb{R}^{N * M}\)</span> come segue:</p>
+<p><span class="math notranslate nohighlight">\(\mathcal{L}(A)\)</span> è un vettore di dimensione <span class="math notranslate nohighlight">\(N * M\)</span>, le cui:</p>
+<ul class="simple">
+<li><p>prime <span class="math notranslate nohighlight">\(N\)</span> componenti sono la prima riga di <span class="math notranslate nohighlight">\(A\)</span>, letta da sinistra a destra;</p></li>
+<li><p>seconde <span class="math notranslate nohighlight">\(N\)</span> componenti sono la seconda riga di <span class="math notranslate nohighlight">\(A\)</span>, letta da sinistra a destra;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\dots\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(M\)</span>-esime <span class="math notranslate nohighlight">\(N\)</span> componenti sono la <span class="math notranslate nohighlight">\(M\)</span>-esima riga di <span class="math notranslate nohighlight">\(A\)</span>, letta da sinistra a destra.</p></li>
+</ul>
+<p>Analogamente si definisce la conversione lessicografica per colonne.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduzione</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#convoluzione">Convoluzione</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pratica-guida-alla-convoluzione-di-immagini">Pratica guida alla convoluzione di immagini</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemi-di-formazione-dell-immagine">Sistemi di formazione dell’immagine</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluzione-naive">Soluzione naive</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metriche-di-valutazione-per-la-ricostruzione">Metriche di valutazione per la ricostruzione</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Elena Loli Piccolomini
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -193,8 +193,8 @@
 <li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati e i modelli predittivi</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Ottimizzazione numerica</a></li>
 </ul>
@@ -392,13 +392,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduzione">9.1 Introduzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definizioni-punti-di-minimo">9.2 Definizioni: punti di minimo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condizioni-di-ottimalita">9.3  Condizioni di ottimalità</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-punti-stazionari">9.3 Tipi di punti stazionari</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-caso-convesso">9.4 Il caso convesso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">9.5 Metodi di discesa per il calcolo del minimo di una funzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">9.6 Metodo del gradiente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduzione">Introduzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definizioni-punti-di-minimo">Definizioni: punti di minimo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-punti-stazionari">Tipi di punti stazionari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-caso-convesso">Il caso convesso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">Metodi di discesa per il calcolo del minimo di una funzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">Metodo del gradiente</a></li>
 </ul>
             </nav>
         </div>
@@ -413,7 +412,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="ottimizzazione-numerica">
 <h1>Ottimizzazione numerica<a class="headerlink" href="#ottimizzazione-numerica" title="Link to this heading">#</a></h1>
 <section id="introduzione">
-<h2>9.1 Introduzione<a class="headerlink" href="#introduzione" title="Link to this heading">#</a></h2>
+<h2>Introduzione<a class="headerlink" href="#introduzione" title="Link to this heading">#</a></h2>
 <p>L’ottimizzazione è il settore della matematica che studia come individuare la soluzione migliore tra tutte quelle possibili. In termini matematici, questo significa spesso determinare il punto in cui una funzione assume il suo valore minimo o massimo. I problemi di minimo sono particolarmente importanti perché molte situazioni reali possono essere descritte come la ricerca della configurazione che riduce al minimo un costo, un errore, un consumo di risorse o una distanza rispetto a un obiettivo.</p>
 <p>Esempi di problemi di ottimizzazione compaiono in moltissimi ambiti. Nell’ingegneria si cerca di progettare strutture efficienti e resistenti utilizzando la minore quantità possibile di materiale. Nella logistica si vogliono ridurre i tempi e i costi di trasporto. Nell’elaborazione delle immagini si cerca una ricostruzione che sia allo stesso tempo fedele ai dati osservati e priva di rumore. In economia si ottimizzano profitti, investimenti e allocazione delle risorse.</p>
 <p>L’ottimizzazione riveste un ruolo centrale anche nell’analisi dei dati, nel machine learning e nelle reti neurali. In questi contesti si introduce generalmente una funzione di costo, o funzione di perdita, che misura quanto le previsioni del modello siano lontane dai valori desiderati. Addestrare un modello significa quindi trovare i valori dei suoi parametri che rendono questa funzione il più piccola possibile.</p>
@@ -462,16 +461,9 @@ del problema deve sottostare per essere dichiarata accettabile.</p>
 <p class="admonition-title">Note</p>
 <p>In questo corso tratteremo ottimizzazione non vincolata.</p>
 </div>
-<p><strong>norma euclidea</strong></p>
-<p>Definiremo più acvanti nel corso il concetto di norma di un vettore o una matrice. In questo capitolo serve solo definire quella che chiamiamo <em>norma o distanza euclidea</em> di un vettore <span class="math notranslate nohighlight">\(x \in R^n\)</span> come:</p>
-<div class="math notranslate nohighlight">
-\[
-||x||_2=\sqrt{\sum_{i=1}^n x_i^2}
-\]</div>
-<p>Spesso si omette l’indice 2.</p>
 </section>
 <section id="definizioni-punti-di-minimo">
-<h2>9.2 Definizioni: punti di minimo<a class="headerlink" href="#definizioni-punti-di-minimo" title="Link to this heading">#</a></h2>
+<h2>Definizioni: punti di minimo<a class="headerlink" href="#definizioni-punti-di-minimo" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(x^*\)</span> è un punto di <strong>minimo locale</strong> di <span class="math notranslate nohighlight">\(f(x)\)</span> se
 esiste un <span class="math notranslate nohighlight">\(\epsilon&gt;0\)</span> tale</p></li>
@@ -499,24 +491,31 @@ stretto</strong> di <span class="math notranslate nohighlight">\(f(x)\)</span> s
 \[f(x^*) &lt; f(x) \quad \text{per ogni } x \in {R}^n, \quad x\neq x^*\]</div>
 <p><em>Esempi di minimi</em></p>
 <p>Una funzione <span class="math notranslate nohighlight">\(f\)</span> può avere un punto di minimo locale e tuttavia non avere un punto di minimo globale. Può inoltre non avere né minimi locali né globali, oppure avere sia minimi locali sia minimi globali.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/ott1.png"><img alt="../_images/ott1.png" src="../_images/ott1.png" style="width: 90%;" />
-</a>
-</figure>
+<p><img alt="" src="../_images/ott1.png" /></p>
+<!-- ```{figure} immagini_sorgente/ott1.png
+---
+width: 90%
+align: center
+---
+```
+
 <p align="center">
-  <img src="immagini_sorgente\ott1.png"  width="800">
+  <img src="immagini_sorgente\ott1.png"  width="800"> -->
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(y=(x-x^*)^2\)</span>: un unico punto di minimo;</p></li>
 <li><p><span class="math notranslate nohighlight">\(y=-2\cos(x-x^*)\)</span>: molti punti di minimo globale;</p></li>
 <li><p><span class="math notranslate nohighlight">\(y=0.015(x-x^*)^2-2\cos(x-x^*)\)</span>: un punto di minimo globale e molti punti di minimo locale.</p></li>
 </ul>
 <p>La figura seguente distingue graficamente minimi locali, minimi locali stretti e un minimo globale stretto.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/fig4m.png"><img alt="../_images/fig4m.png" src="../_images/fig4m.png" style="width: 70%;" />
-</a>
-</figure>
+<!-- 
+```{figure} immagini_sorgente/fig4m.png
+---
+width: 70%
+align: center
+---
+```
 <p align="center">
-  <img src="immagini_sorgente\fig4m.png"  width="700">
+  <img src="immagini_sorgente\fig4m.png"  width="700"> -->
 <p>I punti di massimo locale e globale di <span class="math notranslate nohighlight">\(f\)</span> sono definiti in maniera analoga ai punti di minimo.</p>
 <p><strong>Funzione differenziabile</strong></p>
 <p>Una funzione <span class="math notranslate nohighlight">\(f:\mathbb{R}^n\to\mathbb{R}\)</span> si dice <strong>differenziabile</strong> in un punto <span class="math notranslate nohighlight">\(\mathbf{x}^*\in\mathbb{R}^n\)</span> se esiste un’applicazione lineare <span class="math notranslate nohighlight">\(L:\mathbb{R}^n\to\mathbb{R}\)</span> tale che</p>
@@ -533,9 +532,7 @@ stretto</strong> di <span class="math notranslate nohighlight">\(f(x)\)</span> s
 <li><p>Se <span class="math notranslate nohighlight">\(f\)</span> è differenziabile in <span class="math notranslate nohighlight">\(\mathbf{x}^*\)</span>, tutte le derivate parziali di <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\(\mathbf{x}^*\)</span> esistono.</p></li>
 <li><p>Se <span class="math notranslate nohighlight">\(f\)</span> è differenziabile in <span class="math notranslate nohighlight">\(\mathbf{x}^*\)</span>, allora <span class="math notranslate nohighlight">\(f\)</span> è continua in <span class="math notranslate nohighlight">\(\mathbf{x}^*\)</span>.</p></li>
 </ul>
-</section>
-<section id="condizioni-di-ottimalita">
-<h2>9.3  Condizioni di ottimalità<a class="headerlink" href="#condizioni-di-ottimalita" title="Link to this heading">#</a></h2>
+<p><em>Condizioni di ottimalità</em></p>
 <ul class="simple">
 <li><p>Una <strong>condizione di ottimalità</strong> è una condizione affinché un punto <span class="math notranslate nohighlight">\(\mathbf{x}^*\)</span> risulti una soluzione ottima, locale o globale, del problema.</p></li>
 <li><p>Una condizione di ottimalità è significativa se è più semplice da verificare della definizione stessa.</p></li>
@@ -556,13 +553,16 @@ stretto</strong> di <span class="math notranslate nohighlight">\(f(x)\)</span> s
 \mathbf{x}^*\text{ punto stazionario}.
 \]</div>
 <p>La condizione <span class="math notranslate nohighlight">\(\nabla f(\mathbf{x}^*)=\mathbf{0}\)</span> non è sufficiente: un punto stazionario può essere un punto di minimo locale, un punto di massimo locale oppure un punto di sella.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/fig7m.png"><img alt="../_images/fig7m.png" src="../_images/fig7m.png" style="width: 100%;" />
-</a>
-</figure>
+<p>![] (immagini_sorgente/fig7m.png)</p>
+<!-- ```{figure} immagini_sorgente/fig7m.png
+---
+width: 100%
+align: center
+---
+```
 <p align="center">
   <img src="immagini_sorgente\fig7m.png"  width="900">
-</p>
+</p> -->
 <p><em>Matrici definite positive</em></p>
 <p>Una matrice simmetrica <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{n\times n}\)</span> si dice:</p>
 <ul>
@@ -666,23 +666,26 @@ stretto</strong> di <span class="math notranslate nohighlight">\(f(x)\)</span> s
 <p>Le funzioni <span class="math notranslate nohighlight">\(x^2\)</span>, <span class="math notranslate nohighlight">\(x^3\)</span> e <span class="math notranslate nohighlight">\(-x^4\)</span> mostrano come un Hessiano nullo nel punto stazionario non sia sufficiente per classificare il punto.</p>
 </section>
 <section id="tipi-di-punti-stazionari">
-<h2>9.3 Tipi di punti stazionari<a class="headerlink" href="#tipi-di-punti-stazionari" title="Link to this heading">#</a></h2>
+<h2>Tipi di punti stazionari<a class="headerlink" href="#tipi-di-punti-stazionari" title="Link to this heading">#</a></h2>
 <p>La forma locale della superficie dipende dalla definitezza dell’Hessiano:</p>
 <ul class="simple">
 <li><p>Hessiano definito positivo: funzione localmente convessa, minimo;</p></li>
 <li><p>Hessiano definito negativo: funzione localmente concava, massimo;</p></li>
 <li><p>Hessiano indefinito: curvature di segno opposto, punto di sella.</p></li>
 </ul>
-<p align="center">
+<p><img alt="" src="book/immagini_sorgente%5Cfig6m.png" /></p>
+<!-- <p align="center">
   <img src="immagini_sorgente\fig6m.png"  width="800">
 </p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/fig6m.png"><img alt="../_images/fig6m.png" src="../_images/fig6m.png" style="width: 80%;" />
-</a>
-</figure>
-</section>
+
+```{figure} immagini_sorgente/fig6m.png
+---
+width: 80%
+align: center
+---
+``` --></section>
 <section id="il-caso-convesso">
-<h2>9.4 Il caso convesso<a class="headerlink" href="#il-caso-convesso" title="Link to this heading">#</a></h2>
+<h2>Il caso convesso<a class="headerlink" href="#il-caso-convesso" title="Link to this heading">#</a></h2>
 <p>Una funzione <span class="math notranslate nohighlight">\(f\)</span> è <strong>convessa</strong> in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> se</p>
 <div class="math notranslate nohighlight">
 \[
@@ -751,15 +754,18 @@ f_3(x,y)=-x^2-y^2.
 \]</div>
 </section>
 <section id="metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">
-<h2>9.5 Metodi di discesa per il calcolo del minimo di una funzione<a class="headerlink" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione" title="Link to this heading">#</a></h2>
+<h2>Metodi di discesa per il calcolo del minimo di una funzione<a class="headerlink" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione" title="Link to this heading">#</a></h2>
 <p>Una funzione non convessa può possedere più punti stazionari e più minimi locali. Un metodo iterativo può convergere verso punti diversi a seconda dell’iterato iniziale e della strategia adottata.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/fig8m.png"><img alt="../_images/fig8m.png" src="../_images/fig8m.png" style="width: 100%;" />
-</a>
-</figure>
+<p><img alt="" src="../_images/fig8m.png" /></p>
+<!-- ```{figure} immagini_sorgente/fig8m.png
+---
+width: 100%
+align: center
+---
+```
 <p align="center">
   <img src="immagini_sorgente/fig8m.png"  width="700">
-</p>
+</p> -->
 <p>Si consideri il problema della minimizzazione non vincolata di una funzione</p>
 <div class="math notranslate nohighlight">
 \[
@@ -788,13 +794,16 @@ f(x_{k+1})&lt;f(x_k),\qquad k=0,1,\ldots
 \[
  f(x+\alpha p)&lt;f(x)\qquad \text{per ogni }\alpha\in(0,\bar\alpha].
  \]</div>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/fig9m.png"><img alt="../_images/fig9m.png" src="../_images/fig9m.png" style="width: 100%;" />
-</a>
-</figure>
+<p><img alt="" src="../_images/fig9m.png" /></p>
+<!-- ```{figure} immagini_sorgente/fig9m.png
+---
+width: 100%
+align: center
+---
+```
 <p align="center">
   <img src="immagini_sorgente\fig9m.png"  width="700">
-</p>
+</p> -->
 <blockquote>
 <div><p><strong>Proposizione.</strong> Sia <span class="math notranslate nohighlight">\(f:\mathbb{R}^n\to\mathbb{R}\)</span> continuamente differenziabile nell’intorno di un punto <span class="math notranslate nohighlight">\(x\in\mathbb{R}^n\)</span> e sia <span class="math notranslate nohighlight">\(p\in\mathbb{R}^n\)</span> un vettore non nullo. Se</p>
 <div class="math notranslate nohighlight">
@@ -873,13 +882,17 @@ x=x_k+\alpha p_k
 \[
 p_k^T\nabla f(x_k)&lt;0.
 \]</div>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/fig10m.png"><img alt="../_images/fig10m.png" src="../_images/fig10m.png" style="width: 100%;" />
-</a>
-</figure>
+<p><img alt="" src="../_images/fig10m.png" /></p>
+<!-- 
+```{figure} immagini_sorgente/fig10m.png
+---
+width: 100%
+align: center
+---
+```
 <p align="center">
   <img src="immagini_sorgente\fig10m.png"  width="700">
-</p>
+</p> -->
 <ul class="simple">
 <li><p>Se <span class="math notranslate nohighlight">\(p^T\nabla f(x)&lt;0\)</span>, allora <span class="math notranslate nohighlight">\(p\)</span> è una direzione di <strong>discesa</strong> per <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
 <li><p>Se <span class="math notranslate nohighlight">\(p^T\nabla f(x)&gt;0\)</span>, allora <span class="math notranslate nohighlight">\(p\)</span> è una direzione di <strong>salita</strong> per <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
@@ -903,7 +916,7 @@ p^T\nabla f(x)=-\lVert\nabla f(x)\rVert^2&lt;0.
 \]</div>
 </section>
 <section id="metodo-del-gradiente">
-<h2>9.6 Metodo del gradiente<a class="headerlink" href="#metodo-del-gradiente" title="Link to this heading">#</a></h2>
+<h2>Metodo del gradiente<a class="headerlink" href="#metodo-del-gradiente" title="Link to this heading">#</a></h2>
 <p>La direzione di ricerca è</p>
 <div class="math notranslate nohighlight">
 \[
@@ -952,12 +965,16 @@ p_k^T\nabla f(x_k)=1\cdot 2x_k=-2(1+2^{1-k})&lt;0.
 </ul>
 </li>
 </ul>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/right_alpha.png"><img alt="../_images/right_alpha.png" src="../_images/right_alpha.png" style="width: 90%;" />
-</a>
-</figure>
+<p><img alt="" src="../_images/right_alpha.png" /></p>
+<!-- ```{figure} immagini_sorgente/right_alpha.png
+---
+width: 90%
+align: center
+---
+```
+  
 <p align="center">
-  <img src="immagini_sorgente\right_alpha.png"  width="800">
+  <img src="immagini_sorgente\right_alpha.png"  width="800"> -->
 <ul class="simple">
 <li><p><strong>ricerca  in linea inesatta</strong>: è il metodo in generale più efficiente anche se computazionalmente più costoso.</p></li>
 </ul>
@@ -1156,13 +1173,12 @@ x_0=(1,1)^T,
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduzione">9.1 Introduzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definizioni-punti-di-minimo">9.2 Definizioni: punti di minimo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condizioni-di-ottimalita">9.3  Condizioni di ottimalità</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-punti-stazionari">9.3 Tipi di punti stazionari</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-caso-convesso">9.4 Il caso convesso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">9.5 Metodi di discesa per il calcolo del minimo di una funzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">9.6 Metodo del gradiente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduzione">Introduzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definizioni-punti-di-minimo">Definizioni: punti di minimo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-punti-stazionari">Tipi di punti stazionari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-caso-convesso">Il caso convesso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">Metodi di discesa per il calcolo del minimo di una funzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">Metodo del gradiente</a></li>
 </ul>
   </nav></div>
 
