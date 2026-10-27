@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -709,17 +709,19 @@ Schema algoritmo iterativo:</p></li>
 che  regolano l’arresto del ciclo “ripeti”.</p>
 <p><strong>Ordine di convergenza dei metodi iterativi</strong></p>
 <p>Si dice che la successione <span class="math notranslate nohighlight">\({x_k}\)</span> generata da un metodo iterativo
-converge ad <span class="math notranslate nohighlight">\(x^*\)</span> con ordine <span class="math notranslate nohighlight">\(p\geq 1\)</span> se:
-$<span class="math notranslate nohighlight">\( \frac{|x_{k+1}-x^*a|}{|x_k-x^*|^p}= C, \forall
-k\geq k_0\)</span><span class="math notranslate nohighlight">\(dove \)</span>k_0<span class="math notranslate nohighlight">\( \eg un intero opportuno e \)</span>C \in R$ tale che:</p>
+converge ad <span class="math notranslate nohighlight">\(x^*\)</span> con ordine <span class="math notranslate nohighlight">\(p\geq 1\)</span> se:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\bigg \{
+\[ 
+\frac{|x_{k+1}-x^*a|}{|x_k-x^*|^p}= C, \forall
+k\geq k_0
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(k_0\)</span> \eg un intero opportuno e <span class="math notranslate nohighlight">\(C \in R\)</span> tale che:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\bigg \{
 \begin{array}{rrl}
 0&lt;C\leq 1 &amp; se &amp; p=1 \\
 C&gt;0 &amp; se &amp;p&gt;1 \\
-\end{array}
-\end{split}\]</div>
+\end{array}\end{split}\]</div>
 <p>In tal caso si dice che <strong>il metodo è di ordine<span class="math notranslate nohighlight">\(p\)</span></strong>.</p>
 <p><em>Osservazione</em>. nel caso <span class="math notranslate nohighlight">\(p=1\)</span> per avere convergenza deve
 essere <span class="math notranslate nohighlight">\(C&lt;1\)</span>. In questo caso <span class="math notranslate nohighlight">\(C\)</span> prende il nome di <em>fattore di
@@ -775,27 +777,43 @@ esatta.</p>
 <section id="metodo-di-bisezione">
 <h2>Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link to this heading">#</a></h2>
 <p>Si costruisce una successione di
-intervalli (<span class="math notranslate nohighlight">\(f(a_1)&lt;0,f(b_1)&gt;0\)</span>):
-$<span class="math notranslate nohighlight">\(I_1=[a_1,b_1],I_2=[a_2,b_2], \ldots ,I_k=[a_k,b_k]\)</span><span class="math notranslate nohighlight">\(
-tali che:\)</span><span class="math notranslate nohighlight">\(I_k\subset I_{k-1} \subset \ldots \subset I_1\)</span><span class="math notranslate nohighlight">\( con
-\)</span>f(a_k)f(b_k)&lt;0, k=1,2 \ldots<span class="math notranslate nohighlight">\(. (\)</span>a_1=a,b_1=b<span class="math notranslate nohighlight">\(). Al passo \)</span>k<span class="math notranslate nohighlight">\( si
-calcola \)</span><span class="math notranslate nohighlight">\(c_k=\frac{a_k+b_k}{2}, \quad k=1,2 \ldots \)</span><span class="math notranslate nohighlight">\(e il valore
-\)</span>f(c_k)<span class="math notranslate nohighlight">\(. Se \)</span>f(c_k)=0,c_k=x^*<span class="math notranslate nohighlight">\(, altrimenti:
-\)</span><span class="math notranslate nohighlight">\([a_{k+1},b_{k+1}]=\left\{
+intervalli (<span class="math notranslate nohighlight">\(f(a_1)&lt;0,f(b_1)&gt;0\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+I_1=[a_1,b_1],I_2=[a_2,b_2], \ldots ,I_k=[a_k,b_k]
+\]</div>
+<p>tali che:</p>
+<div class="math notranslate nohighlight">
+\[
+I_k\subset I_{k-1} \subset \ldots \subset I_1
+\]</div>
+<p>con</p>
+<p><span class="math notranslate nohighlight">\(f(a_k)f(b_k)&lt;0, k=1,2 \ldots\)</span>. (<span class="math notranslate nohighlight">\(a_1=a,b_1=b\)</span>).
+Al passo <span class="math notranslate nohighlight">\(k\)</span> si
+calcola</p>
+<div class="math notranslate nohighlight">
+\[
+c_k=\frac{a_k+b_k}{2}, \quad k=1,2 \ldots
+ \]</div>
+<p>e il valore
+<span class="math notranslate nohighlight">\(f(c_k)\)</span>. Se <span class="math notranslate nohighlight">\(f(c_k)=0,c_k=x^*\)</span>, altrimenti:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+[a_{k+1},b_{k+1}]=\left\{
                       \begin{array}{ll}
-                        [a_k,c_k], &amp; \hbox{se \)</span>f(c_k)&gt;0<span class="math notranslate nohighlight">\(}\\
-                        1 [c_k,b_k], &amp; \hbox{se \)</span>f(c_k)&lt;0<span class="math notranslate nohighlight">\(.}
+                        [a_k,c_k], &amp; \hbox{se $f(c_k)&gt;0$}\\
+                        1 [c_k,b_k], &amp; \hbox{se $f(c_k)&lt;0$.}
                       \end{array}
                     \right.
-\)</span>$</p>
+\end{split}\]</div>
 <p><em>Osservazioni sulla implementazione dell’algoritmo con i numeri finiti</em></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(c=a+\frac{b-a}{2}\)</span> altrimenti <span class="math notranslate nohighlight">\(c_{k+1}\)</span> pu\og cadere esterno
+<li><p><span class="math notranslate nohighlight">\(c=a+\frac{b-a}{2}\)</span> altrimenti <span class="math notranslate nohighlight">\(c_{k+1}\)</span> può cadere esterno
 all’intervallo <span class="math notranslate nohighlight">\([a_k,b_k]\)</span>.</p></li>
 </ul>
 <p>esempio: <span class="math notranslate nohighlight">\(a=0.983,b=0.986\)</span>,<span class="math notranslate nohighlight">\(\mathbb{F}(10,3,-5,5)\)</span>.</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(f(a)f(b)\)</span> pu\og non essere rappresentabile sulla macchina.
+<li><p><span class="math notranslate nohighlight">\(f(a)f(b)\)</span> può non essere rappresentabile sulla macchina.
 per verificare il segno conviene quindi usare la funzione <span class="math notranslate nohighlight">\(sign(f)\)</span></p></li>
 <li><p>L’algoritmo in aritmetica
 finita pu\og non avere fine.</p></li>
@@ -803,8 +821,13 @@ finita pu\og non avere fine.</p></li>
 <p>esempio: <span class="math notranslate nohighlight">\(a_k=98.5\)</span>, <span class="math notranslate nohighlight">\(b_k=98.6\)</span>, <span class="math notranslate nohighlight">\(\epsilon=0.004\)</span> in
 <span class="math notranslate nohighlight">\(\mathbb{F}(10,3,-5,5)\)</span>. Infatti <span class="math notranslate nohighlight">\(c_k=98.55\)</span>, ma <span class="math notranslate nohighlight">\(fl(c_k)=0.985\cdot
 10^{2}\)</span>, quindi si genera una successione di iterati costanti.</p>
-<p>Test modificato: $<span class="math notranslate nohighlight">\(|b_k-a_k|&lt;\epsilon +eps\cdot max(|b|,|a|) \quad
-\&amp; \quad iter&lt;itmax\)</span><span class="math notranslate nohighlight">\( dove \)</span>eps$ è la precisione di
+<p>Test modificato:</p>
+<div class="math notranslate nohighlight">
+\[
+ |b_k-a_k|&lt;\epsilon +eps\cdot max(|b|,|a|) \quad
+\&amp; \quad iter&lt;itmax
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(eps\)</span> è la precisione di
 macchina.</p>
 <p><strong>Convergenza del metodo di bisezione</strong></p>
 <p>Al passo <span class="math notranslate nohighlight">\(k\)</span>,
@@ -823,12 +846,18 @@ convergenza pari a quella della successione <span class="math notranslate nohigh
 <p>Il metodo fornisce inoltre una maggiorazione dell’errore, cioè
 fissata una tolleranza <span class="math notranslate nohighlight">\(\delta\)</span> è possibile determinare il numero
 minimo di iterazioni <span class="math notranslate nohighlight">\(k\)</span> per ottenere un errore minore di <span class="math notranslate nohighlight">\(\delta\)</span>.
-Infatti <span class="math notranslate nohighlight">\(k\)</span> è tale che:
-$<span class="math notranslate nohighlight">\(\frac{1}{2^k}(b-a)&lt;\delta \Rightarrow 2^k\geq
-\frac{b-a}{\delta}\Rightarrow\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(k\geq log_2\frac{b-a}{\delta}\)</span>$
-<strong>Complessità computazionale del metodo</strong>: ad ogni iterazione
-occorrono 2 valutazioni di funzione.</p>
+Infatti <span class="math notranslate nohighlight">\(k\)</span> è tale che:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{2^k}(b-a)&lt;\delta \Rightarrow 2^k\geq
+\frac{b-a}{\delta}\Rightarrow
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k\geq log_2\frac{b-a}{\delta}
+\]</div>
+<p><strong>Complessità computazionale del metodo</strong>: ad ogni iterazione
+occorre 1 valutazione di funzione.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">return_history</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -1003,10 +1032,13 @@ $<span class="math notranslate nohighlight">\(y=x \ \ \ y=g(x)\)</span>$</p>
 <p>Questo teorema è un esempio di tali condizioni.</p>
 <p><strong>Teorema di esistenza e unicità del punto fisso nel modello continuo</strong></p>
 <p>Sia <span class="math notranslate nohighlight">\(g(x)\)</span> continua in <span class="math notranslate nohighlight">\([a,b]\)</span> e tale che <span class="math notranslate nohighlight">\(g(x) \in [a,b]\)</span>. Sia <span class="math notranslate nohighlight">\(L\)</span>
-una costante  <span class="math notranslate nohighlight">\(0\leq L&lt;1\)</span> tale che, per ogni <span class="math notranslate nohighlight">\(x, y \in [a,b]\)</span> si ha:
-$<span class="math notranslate nohighlight">\(|g(x)-g(y)|\leq L|x-y|\)</span><span class="math notranslate nohighlight">\(
-ossia \)</span>g<span class="math notranslate nohighlight">\( è una contrazione in \)</span>[a,b]<span class="math notranslate nohighlight">\(. Allora esiste un unico
-punto fisso \)</span>x^*<span class="math notranslate nohighlight">\( di \)</span>g(x)<span class="math notranslate nohighlight">\( in \)</span>[a,b]$.</p>
+una costante  <span class="math notranslate nohighlight">\(0\leq L&lt;1\)</span> tale che, per ogni <span class="math notranslate nohighlight">\(x, y \in [a,b]\)</span> si ha:</p>
+<div class="math notranslate nohighlight">
+\[
+|g(x)-g(y)|\leq L|x-y|
+\]</div>
+<p>ossia <span class="math notranslate nohighlight">\(g\)</span> è una contrazione in <span class="math notranslate nohighlight">\([a,b]\)</span>. Allora esiste un unico
+punto fisso <span class="math notranslate nohighlight">\(x^*\)</span> di <span class="math notranslate nohighlight">\(g(x)\)</span> in <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
 <p>Come tutti i teoremi ha una dimostrazione che non tratteremo in questo corso (così come in geerale le dimostrazioni dei teoremi) poichè non è la parte teorica il focus del corso e visto il tempo ridotto a disposizione. Per chi ha interesse a vederla potete consultare il testo….</p>
 <p>Esempio</p>
 <p>L’equazione</p>
@@ -1079,12 +1111,15 @@ x_{k})=g(\lim_{k \rightarrow \infty} x_{k})=g(x^*)\]</div>
 <p>Geometricamente, il metodo dell’iterazione funzionale equivale alla
 costruzione di una poligonale orientata con lati orizzontali e
 verticali nel piano <span class="math notranslate nohighlight">\(xy\)</span>.</p>
-<p align="center">
+<p><img alt="" src="../_images/fig100.png" /></p>
+<p><img alt="" src="../_images/fig101.png" /></p>
+<!-- <p align="center">
   <img src="immagini_sorgente\fig100.png"  width="800">
 </p>
+
 <p align="center">
   <img src="immagini_sorgente\fig101.png"  width="600">
-</p><p><em>Teorema 2 (il punto di convergenza è uno zero della funzione). Convergenza globale</em></p>
+</p> --><p><em>Teorema 2 (il punto di convergenza è uno zero della funzione). Convergenza globale</em></p>
 <p>Sia <span class="math notranslate nohighlight">\(g(x)\)</span> una funzione definita in <span class="math notranslate nohighlight">\([a,b]\)</span>. Sia:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(g(x)\)</span>
@@ -1096,13 +1131,17 @@ continua in <span class="math notranslate nohighlight">\([a,b]\)</span>,</p></li
 <span class="math notranslate nohighlight">\(\{x_k\}\)</span> con <span class="math notranslate nohighlight">\(x_k=g(x_{k-1}), k=1,2 \ldots\)</span> converge per <span class="math notranslate nohighlight">\(k
 \rightarrow \infty\)</span> all’unico punto fisso <span class="math notranslate nohighlight">\(x^+\)</span> di <span class="math notranslate nohighlight">\(g(x)\)</span> in
 <span class="math notranslate nohighlight">\([a,b]\)</span>.
-Inoltre vale:
-$<span class="math notranslate nohighlight">\(|x_k-x^*|\leq \frac{\lambda^k}{1-\lambda}|x_1-x_0|\)</span>$</p>
+Inoltre vale:</p>
+<div class="math notranslate nohighlight">
+\[|x_k-x^*|\leq \frac{L^k}{1-L}|x_1-x_0|\]</div>
+<p>dove <span class="math notranslate nohighlight">\(L\)</span> è la costante di contrazione vista prima.</p>
 <p>Distinguiamo la <em>convergenza globale</em> dalla <em>convergenza locale</em>.
 Convergenza globale significa che il metodo, sotto opportune condizioni, converge <strong>per ogni iterato iniziale <span class="math notranslate nohighlight">\(x_0\)</span></strong> nell’intervallo di riferimento, mentre convergenza locale significa che il metodo converge <strong>se <span class="math notranslate nohighlight">\(x_0\)</span> appartiene ad un opportuno intorno della soluzione</strong> (intorno che oviamente non si conosce).</p>
 <p>Esempio.</p>
 <div class="math notranslate nohighlight">
-\[f(x)=x^3+4x^2-10=0, \ \  x \in [1,2]\]</div>
+\[
+f(x)=x^3+4x^2-10=0, \ \  x \in [1,2]
+\]</div>
 <p>si considera <span class="math notranslate nohighlight">\(x_0=1.5\)</span>.</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(x=x-x^3-4x^2+10=g_1(x)\)</span></p></li>
@@ -1114,9 +1153,10 @@ Convergenza globale significa che il metodo, sotto opportune condizioni, converg
 <li><p><span class="math notranslate nohighlight">\(xx-\frac{x^3+4x^2-10}{3x^2+8x}=g_5(x)\)</span> (da
 <span class="math notranslate nohighlight">\(x=x-\frac{f(x)}{f'(x)}\)</span>).</p></li>
 </ol>
-<p align="center">
+<p><img alt="" src="../_images/fig6.png" /></p>
+<!-- <p align="center">
   <img src="immagini_sorgente\fig6.png"  width="900">
-</p>
+</p> -->
 <p>Non tutte le
 scelte portano ad un metodo convergente (caso 1) o ben definito
 (caso 2). Inoltre la velocità di convergenza del metodo è
@@ -1166,10 +1206,14 @@ assegnate e <span class="math notranslate nohighlight">\(f_{\max}=\max_{x\in I_\
 <p>Data l’equazione <span class="math notranslate nohighlight">\(f(x)=0\)</span>, si può determinare la soluzione
 <span class="math notranslate nohighlight">\(x^*\)</span> come punto fisso di</p>
 <div class="math notranslate nohighlight">
-\[x=x-\phi(x)f(x)=g(x)\]</div>
+\[
+x=x-\phi(x)f(x)=g(x)
+\]</div>
 <p>Quindi l’iterazione del metodo di Newton è:</p>
 <div class="math notranslate nohighlight">
-\[x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)}\]</div>
+\[
+x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)}
+\]</div>
 <p><em>Interpretazione geometrica</em></p>
 <p>Il metodo di Newton sostituisce la funzione con la retta tangente nel punto <span class="math notranslate nohighlight">\(x_k\)</span>.</p>
 <p>La tangente a <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\(x_k\)</span> è</p>
@@ -1329,17 +1373,23 @@ metodo di Newton converge a <span class="math notranslate nohighlight">\(x^*\)</
 <p><span class="math notranslate nohighlight">\(f'(x)=\cos(x)-\frac{x}{2}; \qquad f''(x)=-\sin(x)-\frac{1}{2}\)</span></p>
 <p><span class="math notranslate nohighlight">\(\displaystyle{x_{k+1}=x_k-\frac{\sin(x_k)-\left(\frac{x_k}{2}\right)^2}{\cos(x)-\frac{x_k}{2}}}\)</span></p>
 <p>costante asintotica d’errore <span class="math notranslate nohighlight">\(\frac{g''(x^*)}{2}=\frac{f''(x^*)}{2f'(x^*)}\simeq0.54\)</span></p>
-<p align="center">
+<p><img alt="" src="../_images/fig108.png" /></p>
+<!-- <p align="center">
   <img src="immagini_sorgente\fig108.png"  width="800">
-</p><p>Esempio 2</p>
+</p> --><p>Esempio 2</p>
 <p><span class="math notranslate nohighlight">\(x^2-\gamma=0\)</span></p>
 <p><span class="math notranslate nohighlight">\(\displaystyle{x_{k+1}=x_k-\frac{x_k^2-\gamma}{2x_k}}=\frac{1}{2}\left( x_k + \frac{\gamma}{x_k}\right)\)</span></p>
 <p>Per <span class="math notranslate nohighlight">\(\gamma=2\)</span> e <span class="math notranslate nohighlight">\([1,2]\)</span> si ha:</p>
-<p align="center">
+<p><img alt="" src="book/immagini_sorgente%5Cfig109.png" /></p>
+<!-- <p align="center">
   <img src="immagini_sorgente\fig109.png"  width="250">
-</p>
+</p> -->
 <p><em>costante asintotica d’errore</em></p>
-<p><span class="math notranslate nohighlight">\(\frac{f''(x^*)}{2f'(x^*)}=\frac{1}{2\sqrt{\gamma}}\)</span>; se <span class="math notranslate nohighlight">\(\gamma\)</span>
+<div class="math notranslate nohighlight">
+\[
+\frac{f''(x^*)}{2f'(x^*)}=\frac{1}{2\sqrt{\gamma}}
+\]</div>
+<p>se <span class="math notranslate nohighlight">\(\gamma\)</span>
 è piccolo, la convergenza può essere lenta.</p>
 <p><em>Considerazioni algoritmiche</em></p>
 <ul class="simple">
