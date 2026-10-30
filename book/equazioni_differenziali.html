@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/equazioni_differenziali';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Ottimizzazione numerica" href="Ottimizzazione.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -181,7 +180,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
 <li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
 
@@ -198,6 +197,7 @@
 <li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">Ottimizzazione numerica</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduzione alle equazioni differenziali e ai problemi di Cauchy</a></li>
 </ul>
 
     </div>
@@ -393,18 +393,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obiettivi-didattici">Obiettivi didattici</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-studiare-le-equazioni-differenziali">Perché studiare le equazioni differenziali?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equazioni-differenziali-ordinarie">Equazioni differenziali ordinarie</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-problema-di-cauchy">Il problema di Cauchy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dalla-soluzione-continua-ai-valori-numerici">Dalla soluzione continua ai valori numerici</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-metodo-di-eulero-esplicito">Il metodo di Eulero esplicito</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo">Algoritmo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-e-convergenza">Errore e convergenza</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-passo-e-la-stabilita-numerica">Il passo e la stabilità numerica</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemi-di-equazioni-differenziali">Sistemi di equazioni differenziali</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-studiare-le-equazioni-differenziali">Perché studiare le equazioni differenziali?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equazioni-differenziali-ordinarie">Equazioni differenziali ordinarie</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-problema-di-cauchy">Il problema di Cauchy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dalla-soluzione-continua-ai-valori-numerici">Dalla soluzione continua ai valori numerici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-metodo-di-eulero-esplicito">Il metodo di Eulero esplicito</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo">Algoritmo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-e-convergenza">Errore e convergenza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-passo-e-la-stabilita-numerica">Il passo e la stabilità numerica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemi-di-equazioni-differenziali">Sistemi di equazioni differenziali</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riepilogo">Riepilogo</a></li>
 </ul>
             </nav>
@@ -419,8 +416,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduzione-alle-equazioni-differenziali-e-ai-problemi-di-cauchy">
 <h1>Introduzione alle equazioni differenziali e ai problemi di Cauchy<a class="headerlink" href="#introduzione-alle-equazioni-differenziali-e-ai-problemi-di-cauchy" title="Link to this heading">#</a></h1>
-<section id="obiettivi-didattici">
-<h2>Obiettivi didattici<a class="headerlink" href="#obiettivi-didattici" title="Link to this heading">#</a></h2>
 <p>Al termine del notebook saremo in grado di:</p>
 <ul class="simple">
 <li><p>riconoscere un’equazione differenziale ordinaria e il suo ordine;</p></li>
@@ -431,7 +426,7 @@ document.write(`
 <li><p>riconoscere l’effetto del passo sulla stabilità numerica.</p></li>
 </ul>
 <section id="perche-studiare-le-equazioni-differenziali">
-<h3>Perché studiare le equazioni differenziali?<a class="headerlink" href="#perche-studiare-le-equazioni-differenziali" title="Link to this heading">#</a></h3>
+<h2>Perché studiare le equazioni differenziali?<a class="headerlink" href="#perche-studiare-le-equazioni-differenziali" title="Link to this heading">#</a></h2>
 <p>Molti fenomeni vengono descritti più naturalmente specificando <strong>come una quantità varia</strong> anziché fornendo direttamente il suo valore. Se <span class="math notranslate nohighlight">\(y(t)\)</span> indica una grandezza dipendente dal tempo, la derivata <span class="math notranslate nohighlight">\(y'(t)\)</span> ne rappresenta il tasso di variazione.</p>
 <p>Esempi:</p>
 <ul class="simple">
@@ -444,7 +439,7 @@ document.write(`
 <p>Un’equazione che lega una funzione incognita alle sue derivate è detta <strong>equazione differenziale</strong>.</p>
 </section>
 <section id="equazioni-differenziali-ordinarie">
-<h3>Equazioni differenziali ordinarie<a class="headerlink" href="#equazioni-differenziali-ordinarie" title="Link to this heading">#</a></h3>
+<h2>Equazioni differenziali ordinarie<a class="headerlink" href="#equazioni-differenziali-ordinarie" title="Link to this heading">#</a></h2>
 <p>Un’<strong>equazione differenziale ordinaria</strong> (ODE, <em>Ordinary Differential Equation</em>) contiene derivate rispetto a una sola variabile indipendente.</p>
 <p>L’<strong>ordine</strong> dell’equazione è l’ordine massimo delle derivate presenti. Per esempio:</p>
 <div class="math notranslate nohighlight">
@@ -466,7 +461,7 @@ document.write(`
 <p>soddisfano l’equazione. L’equazione differenziale, da sola, non determina quindi un’unica soluzione: occorre un’informazione aggiuntiva.</p>
 </section>
 <section id="il-problema-di-cauchy">
-<h3>Il problema di Cauchy<a class="headerlink" href="#il-problema-di-cauchy" title="Link to this heading">#</a></h3>
+<h2>Il problema di Cauchy<a class="headerlink" href="#il-problema-di-cauchy" title="Link to this heading">#</a></h2>
 <p>Un <strong>problema di Cauchy</strong> per un’ODE del primo ordine consiste nel trovare una funzione <span class="math notranslate nohighlight">\(y(t)\)</span> tale che</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -494,7 +489,7 @@ y(t_0)=y_0.
 </div></blockquote>
 </section>
 <section id="dalla-soluzione-continua-ai-valori-numerici">
-<h3>Dalla soluzione continua ai valori numerici<a class="headerlink" href="#dalla-soluzione-continua-ai-valori-numerici" title="Link to this heading">#</a></h3>
+<h2>Dalla soluzione continua ai valori numerici<a class="headerlink" href="#dalla-soluzione-continua-ai-valori-numerici" title="Link to this heading">#</a></h2>
 <p>In generale non è possibile esprimere la soluzione di un problema di Cauchy mediante una formula chiusa. Cerchiamo allora approssimazioni in un insieme discreto di istanti.</p>
 <p>Dividiamo <span class="math notranslate nohighlight">\([t_0,T]\)</span> in <span class="math notranslate nohighlight">\(N\)</span> sottointervalli di ampiezza costante</p>
 <div class="math notranslate nohighlight">
@@ -502,7 +497,7 @@ y(t_0)=y_0.
 <p>Indichiamo con <span class="math notranslate nohighlight">\(y_n\)</span> un’approssimazione del valore esatto <span class="math notranslate nohighlight">\(y(t_n)\)</span>. Il numero <span class="math notranslate nohighlight">\(h\)</span> è detto <strong>passo di discretizzazione</strong>.</p>
 </section>
 <section id="il-metodo-di-eulero-esplicito">
-<h3>Il metodo di Eulero esplicito<a class="headerlink" href="#il-metodo-di-eulero-esplicito" title="Link to this heading">#</a></h3>
+<h2>Il metodo di Eulero esplicito<a class="headerlink" href="#il-metodo-di-eulero-esplicito" title="Link to this heading">#</a></h2>
 <p>Dalla definizione di derivata, per <span class="math notranslate nohighlight">\(h\)</span> piccolo,</p>
 <div class="math notranslate nohighlight">
 \[y'(t_n)\approx\frac{y(t_{n+1})-y(t_n)}{h}.\]</div>
@@ -515,7 +510,7 @@ y(t_0)=y_0.
 <p>Il metodo è <strong>esplicito</strong> perché <span class="math notranslate nohighlight">\(y_{n+1}\)</span> si calcola direttamente usando quantità già note. Geometricamente, a ogni passo si prosegue lungo la retta tangente determinata dalla pendenza <span class="math notranslate nohighlight">\(f(t_n,y_n)\)</span>.</p>
 </section>
 <section id="algoritmo">
-<h3>Algoritmo<a class="headerlink" href="#algoritmo" title="Link to this heading">#</a></h3>
+<h2>Algoritmo<a class="headerlink" href="#algoritmo" title="Link to this heading">#</a></h2>
 <p><strong>Input:</strong> funzione <span class="math notranslate nohighlight">\(f\)</span>, estremi <span class="math notranslate nohighlight">\(t_0,T\)</span>, dato iniziale <span class="math notranslate nohighlight">\(y_0\)</span>, numero di passi <span class="math notranslate nohighlight">\(N\)</span>.</p>
 <ol class="arabic simple">
 <li><p>Calcola <span class="math notranslate nohighlight">\(h=(T-t_0)/N\)</span>.</p></li>
@@ -629,7 +624,7 @@ y(0)=1,
 </div>
 </section>
 <section id="errore-e-convergenza">
-<h3>Errore e convergenza<a class="headerlink" href="#errore-e-convergenza" title="Link to this heading">#</a></h3>
+<h2>Errore e convergenza<a class="headerlink" href="#errore-e-convergenza" title="Link to this heading">#</a></h2>
 <p>L’<strong>errore globale</strong> al nodo <span class="math notranslate nohighlight">\(t_n\)</span> è</p>
 <div class="math notranslate nohighlight">
 \[e_n=y(t_n)-y_n.\]</div>
@@ -692,7 +687,7 @@ y(0)=1,
 </div>
 </section>
 <section id="il-passo-e-la-stabilita-numerica">
-<h3>Il passo e la stabilità numerica<a class="headerlink" href="#il-passo-e-la-stabilita-numerica" title="Link to this heading">#</a></h3>
+<h2>Il passo e la stabilità numerica<a class="headerlink" href="#il-passo-e-la-stabilita-numerica" title="Link to this heading">#</a></h2>
 <p>Un passo piccolo non serve soltanto a migliorare l’accuratezza: può essere necessario per evitare comportamenti numerici non fisici. Consideriamo l’equazione test</p>
 <div class="math notranslate nohighlight">
 \[y'=\lambda y, \qquad \lambda&lt;0.\]</div>
@@ -768,7 +763,7 @@ P(0)=P_0.
 </div>
 </section>
 <section id="sistemi-di-equazioni-differenziali">
-<h3>Sistemi di equazioni differenziali<a class="headerlink" href="#sistemi-di-equazioni-differenziali" title="Link to this heading">#</a></h3>
+<h2>Sistemi di equazioni differenziali<a class="headerlink" href="#sistemi-di-equazioni-differenziali" title="Link to this heading">#</a></h2>
 <p>Le stesse idee valgono quando l’incognita è un vettore <span class="math notranslate nohighlight">\(\mathbf y(t)\in\mathbb{R}^m\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf y'(t)=\mathbf f(t,\mathbf y(t)), \qquad \mathbf y(t_0)=\mathbf y_0.\]</div>
@@ -828,13 +823,8 @@ v'=-\omega^2x-\gamma v.
 Per il problema <span class="math notranslate nohighlight">\(y'=y-t\)</span>, <span class="math notranslate nohighlight">\(y(0)=1\)</span>, calcolare a mano i primi tre passi di Eulero con <span class="math notranslate nohighlight">\(h=0.1\)</span>.</p>
 <p>*Esercizio 2 — <em>Confronto con la soluzione esatta</em>
 Applicare Eulero a <span class="math notranslate nohighlight">\(y'=3y\)</span>, <span class="math notranslate nohighlight">\(y(0)=2\)</span> nell’intervallo <span class="math notranslate nohighlight">\([0,1]\)</span>. Confrontare con <span class="math notranslate nohighlight">\(y(t)=2e^{3t}\)</span> usando <span class="math notranslate nohighlight">\(N=10,20,40\)</span>. Che cosa accade all’errore quando <span class="math notranslate nohighlight">\(N\)</span> raddoppia?</p>
-<p><em>Esercizio 3 — Stabilità</em>
-Per <span class="math notranslate nohighlight">\(y'=-20y\)</span>, determinare teoricamente l’intervallo di valori di <span class="math notranslate nohighlight">\(h\)</span> per cui Eulero è stabile. Verificare numericamente con due passi: uno interno e uno esterno all’intervallo.</p>
-<p><em>Esercizio 4 — Dati e modello logistico</em>
-Modificare <span class="math notranslate nohighlight">\(r\)</span>, <span class="math notranslate nohighlight">\(K\)</span> e <span class="math notranslate nohighlight">\(P_0\)</span> nell’esempio logistico. Descrivere separatamente l’effetto di ciascun parametro sulla curva.</p>
-<p><em>Esercizio 5 — Sistema</em>
+<p><em>Esercizio 3 — Sistema</em>
 Nel modello dell’oscillatore, porre <span class="math notranslate nohighlight">\(\gamma=0\)</span>. Ripetere l’esperimento con diversi valori di <span class="math notranslate nohighlight">\(h\)</span> e osservare se l’ampiezza numerica rimane costante.</p>
-</section>
 </section>
 <section id="riepilogo">
 <h2>Riepilogo<a class="headerlink" href="#riepilogo" title="Link to this heading">#</a></h2>
@@ -879,6 +869,15 @@ Nel modello dell’oscillatore, porre <span class="math notranslate nohighlight"
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="Ottimizzazione.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ottimizzazione numerica</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -895,18 +894,15 @@ Nel modello dell’oscillatore, porre <span class="math notranslate nohighlight"
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obiettivi-didattici">Obiettivi didattici</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-studiare-le-equazioni-differenziali">Perché studiare le equazioni differenziali?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equazioni-differenziali-ordinarie">Equazioni differenziali ordinarie</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-problema-di-cauchy">Il problema di Cauchy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dalla-soluzione-continua-ai-valori-numerici">Dalla soluzione continua ai valori numerici</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-metodo-di-eulero-esplicito">Il metodo di Eulero esplicito</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo">Algoritmo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-e-convergenza">Errore e convergenza</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-passo-e-la-stabilita-numerica">Il passo e la stabilità numerica</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemi-di-equazioni-differenziali">Sistemi di equazioni differenziali</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perche-studiare-le-equazioni-differenziali">Perché studiare le equazioni differenziali?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equazioni-differenziali-ordinarie">Equazioni differenziali ordinarie</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-problema-di-cauchy">Il problema di Cauchy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dalla-soluzione-continua-ai-valori-numerici">Dalla soluzione continua ai valori numerici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-metodo-di-eulero-esplicito">Il metodo di Eulero esplicito</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo">Algoritmo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-e-convergenza">Errore e convergenza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-passo-e-la-stabilita-numerica">Il passo e la stabilità numerica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemi-di-equazioni-differenziali">Sistemi di equazioni differenziali</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#riepilogo">Riepilogo</a></li>
 </ul>
   </nav></div>
