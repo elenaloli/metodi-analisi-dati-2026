@@ -398,6 +398,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-problema-di-cauchy">Il problema di Cauchy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dalla-soluzione-continua-ai-valori-numerici">Dalla soluzione continua ai valori numerici</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-metodo-di-eulero-esplicito">Il metodo di Eulero esplicito</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-grafica-del-metodo-di-eulero">Interpretazione grafica del metodo di Eulero</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo">Algoritmo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-e-convergenza">Errore e convergenza</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-passo-e-la-stabilita-numerica">Il passo e la stabilità numerica</a></li>
@@ -508,6 +509,20 @@ y(t_0)=y_0.
 <div class="math notranslate nohighlight">
 \[\boxed{y_{n+1}=y_n+h f(t_n,y_n)}, \qquad y_0\text{ assegnato}.\]</div>
 <p>Il metodo è <strong>esplicito</strong> perché <span class="math notranslate nohighlight">\(y_{n+1}\)</span> si calcola direttamente usando quantità già note. Geometricamente, a ogni passo si prosegue lungo la retta tangente determinata dalla pendenza <span class="math notranslate nohighlight">\(f(t_n,y_n)\)</span>.</p>
+</section>
+<section id="interpretazione-grafica-del-metodo-di-eulero">
+<h2>Interpretazione grafica del metodo di Eulero<a class="headerlink" href="#interpretazione-grafica-del-metodo-di-eulero" title="Link to this heading">#</a></h2>
+<p>La figura illustra la discretizzazione dell’intervallo e la costruzione delle approssimazioni per il problema <span class="math notranslate nohighlight">\(y'=-2y\)</span>, <span class="math notranslate nohighlight">\(y(0)=1\)</span>, su <span class="math notranslate nohighlight">\([0,2]\)</span>.</p>
+<p><img alt="" src="../_images/metodo_eulero_schema.png" /></p>
+<ol class="arabic simple">
+<li><p><strong>Discretizziamo l’intervallo:</strong> scegliamo <span class="math notranslate nohighlight">\(N=10\)</span> sottointervalli, quindi <span class="math notranslate nohighlight">\(h=(2-0)/10=0.2\)</span> e <span class="math notranslate nohighlight">\(t_n=nh\)</span>. Otteniamo <span class="math notranslate nohighlight">\(N+1=11\)</span> nodi.</p></li>
+<li><p><strong>Calcoliamo le approssimazioni:</strong> partendo dal dato iniziale, costruiamo i punti <span class="math notranslate nohighlight">\((t_n,y_n)\)</span>. I segmenti che li collegano formano la spezzata di Eulero, confrontata con la soluzione esatta in blu.</p></li>
+<li><p><strong>Avanziamo di un passo:</strong> nel punto numerico <span class="math notranslate nohighlight">\((t_n,y_n)\)</span> valutiamo la pendenza <span class="math notranslate nohighlight">\(f(t_n,y_n)\)</span>; allo spostamento orizzontale <span class="math notranslate nohighlight">\(h\)</span> corrisponde una variazione verticale <span class="math notranslate nohighlight">\(h f(t_n,y_n)\)</span>.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[y_{n+1}=y_n+h f(t_n,y_n).\]</div>
+<p>Nell’ingrandimento, <span class="math notranslate nohighlight">\(n=1\)</span>, <span class="math notranslate nohighlight">\(t_1=0.2\)</span> e <span class="math notranslate nohighlight">\(y_1=0.6\)</span>: la pendenza è <span class="math notranslate nohighlight">\(-2(0.6)=-1.2\)</span>, perciò <span class="math notranslate nohighlight">\(y_2=0.6+0.2(-1.2)=0.36\)</span>.</p>
+<p><strong>Attenzione:</strong> la retta usata da Eulero è tangente alla soluzione locale che passa per il punto numerico <span class="math notranslate nohighlight">\((t_n,y_n)\)</span> (curva verde tratteggiata). Dopo il primo passo, questo punto non coincide in generale con il punto della soluzione esatta del problema iniziale. A ogni nodo la pendenza viene ricalcolata.</p>
 </section>
 <section id="algoritmo">
 <h2>Algoritmo<a class="headerlink" href="#algoritmo" title="Link to this heading">#</a></h2>
@@ -899,6 +914,7 @@ Nel modello dell’oscillatore, porre <span class="math notranslate nohighlight"
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-problema-di-cauchy">Il problema di Cauchy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dalla-soluzione-continua-ai-valori-numerici">Dalla soluzione continua ai valori numerici</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-metodo-di-eulero-esplicito">Il metodo di Eulero esplicito</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-grafica-del-metodo-di-eulero">Interpretazione grafica del metodo di Eulero</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo">Algoritmo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-e-convergenza">Errore e convergenza</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-passo-e-la-stabilita-numerica">Il passo e la stabilità numerica</a></li>
