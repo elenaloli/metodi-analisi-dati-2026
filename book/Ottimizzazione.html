@@ -817,10 +817,13 @@ align: center
 </p> -->
 <blockquote>
 <div><p><strong>Proposizione.</strong> Sia <span class="math notranslate nohighlight">\(f:\mathbb{R}^n\to\mathbb{R}\)</span> continuamente differenziabile nell’intorno di un punto <span class="math notranslate nohighlight">\(x\in\mathbb{R}^n\)</span> e sia <span class="math notranslate nohighlight">\(p\in\mathbb{R}^n\)</span> un vettore non nullo. Se</p>
-<div class="math notranslate nohighlight">
-\[
-&gt; p^T\nabla f(x)&lt;0, \tag{2}
-&gt; \]</div>
+<p>$$</p>
+</div></blockquote>
+<blockquote>
+<div><p>p^T\nabla f(x)&lt;0, \tag{2}</p>
+</div></blockquote>
+<blockquote>
+<div><p>$$</p>
 <p>allora <span class="math notranslate nohighlight">\(p\)</span> è una direzione di discesa per <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\(x\)</span>.</p>
 </div></blockquote>
 <p><em>Esempio 1</em></p>
@@ -1067,14 +1070,18 @@ alpha_k = alpha
 <li><p>determinare una direzione di discesa <span class="math notranslate nohighlight">\(p_k\)</span>;</p></li>
 <li><p>determinare una lunghezza del passo <span class="math notranslate nohighlight">\(\alpha_k\)</span>;</p></li>
 <li><p>porre
-$<span class="math notranslate nohighlight">\(
-x_{k+1}=x_k+\alpha_kp_k.
-\)</span>$</p></li>
+$$</p></li>
 </ol>
 </div></blockquote>
+<blockquote>
+<div><p>x_{k+1}=x_k+\alpha_kp_k.</p>
+</div></blockquote>
+<blockquote>
+<div><p>$$</p>
+</div></blockquote>
 <p><strong>Scelta dell’iterato iniziale</strong></p>
-<p>IL’algoritmo di discesa del gradiente (GD) chiede in inout un iterqto iniziale <span class="math notranslate nohighlight">\(x_0 \in  \mathbb{R}^n\)</span>.Se le condizioni di convergenza sonio soddisfatte, poichè sono condizioni di converegenza <em>globali</em> per ogni iterato iniziale <span class="math notranslate nohighlight">\(x_0\)</span> il metodo converge a un <strong>punto stazionario</strong> di of <span class="math notranslate nohighlight">\(\mathcal{fx}()\)</span>, i.e.a un punto tale che  <span class="math notranslate nohighlight">\(\nabla_x \mathcal{f}(x) = 0\)</span>.</p>
-<p>Se <span class="math notranslate nohighlight">\(f(x)\)</span> è convessa, allora il punto di cinvergenza è di mininmo locale.
+<p>IL’algoritmo di discesa del gradiente (GD) chiede in inout un iterqto iniziale <span class="math notranslate nohighlight">\(x_0 \in  \mathbb{R}^n\)</span>.Se le condizioni di convergenza sonio soddisfatte, poichè sono condizioni di converegenza <em>globali</em> per ogni iterato iniziale <span class="math notranslate nohighlight">\(x_0\)</span> il metodo converge a un <strong>punto stazionario</strong> di  <span class="math notranslate nohighlight">\(\mathcal{f}(x)\)</span>, i.e. a un punto tale che  <span class="math notranslate nohighlight">\(\nabla_x \mathcal{f}(x) = 0\)</span>.</p>
+<p>Se <span class="math notranslate nohighlight">\(f(x)\)</span> è convessa, allora il punto di convergenza è di mininmo locale.
 Questo implica che la scelta di <span class="math notranslate nohighlight">\(x_0\)</span> non è importante e possiamo settare per esempio <span class="math notranslate nohighlight">\(x_0=0\)</span>. D’altra parte, quando <span class="math notranslate nohighlight">\(f(x)\)</span> non è convessa, dobbiamo scegliere <span class="math notranslate nohighlight">\(x_0\)</span> il più vicino possibile al <em>giusto</em> punto stazionario per umentare la probabilità di calcolare il punto di interesse (cioè il minimo globale).</p>
 <p><strong>Criteri di arresto e fallimenti</strong></p>
 <ul>
