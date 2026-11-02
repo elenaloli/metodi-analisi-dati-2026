@@ -399,12 +399,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-punti-stazionari">Tipi di punti stazionari</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-caso-convesso">Il caso convesso</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">Metodi di discesa per il calcolo del minimo di una funzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">Metodo del gradiente</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dal-gradiente-completo-al-gradiente-stocastico">Dal gradiente completo al gradiente stocastico</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">Mini-batch gradient descent</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-del-gradiente-stocastico-mini-batch">Algoritmo del gradiente stocastico mini-batch</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-e-comportamento-del-metodo">Learning rate e comportamento del metodo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vantaggi-e-limiti">Vantaggi e limiti</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">Metodo del gradiente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dal-gradiente-completo-al-gradiente-stocastico">Dal gradiente completo al gradiente stocastico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">Mini-batch gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-cosa-misuriamo-e-come-confrontiamo-i-costi">3. Che cosa misuriamo e come confrontiamo i costi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-traiettorie-sul-piano">4. Le traiettorie sul piano</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risultati-numerici-e-interpretazione">6. Risultati numerici e interpretazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esperimenti-per-gli-studenti">Esperimenti per gli studenti</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vantaggi">Vantaggi</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiti">Limiti</a></li>
 </ul>
@@ -1126,9 +1127,14 @@ x_0=(1,1)^T,
 <li><p>Tutti i metodi considerati consentono di determinare <strong>punti stazionari</strong> di <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
 <li><p>Nel caso non convesso, la determinazione di punti stazionari non fornisce una soluzione globale e, in generale, non è neanche possibile garantire che sia raggiunto un punto di minimo locale.</p></li>
 </ul>
-</section>
 <section id="dal-gradiente-completo-al-gradiente-stocastico">
-<h2>Dal gradiente completo al gradiente stocastico<a class="headerlink" href="#dal-gradiente-completo-al-gradiente-stocastico" title="Link to this heading">#</a></h2>
+<h3>Dal gradiente completo al gradiente stocastico<a class="headerlink" href="#dal-gradiente-completo-al-gradiente-stocastico" title="Link to this heading">#</a></h3>
+<p>Condìsderiamo particolari funzioni obiettivo che si possono scrivere come:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)=\sum_{i=1}^n f_i(x)
+\]</div>
+<p>Questa, come abbiamo visto in una precedente lezione, è la forma generale della <em>loss function (funzione di perdita)</em> utilizzata nell’addestramento di algoritmi di deep learning.</p>
 <p>Scelto casualmente un indice <span class="math notranslate nohighlight">\(i_k\in\{1,\ldots,N\}\)</span>, si pone</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1140,20 +1146,16 @@ g_k=\nabla f_{i_k}(x_k)
 x_{k+1}=x_k-\alpha_k g_k,
 \]</div>
 <p>dove <span class="math notranslate nohighlight">\(\alpha_k&gt;0\)</span> è la lunghezza del passo, detta spesso <strong>learning rate</strong>.</p>
-<p>Se <span class="math notranslate nohighlight">\(i_k\)</span> è scelto uniformemente, allora</p>
-<div class="math notranslate nohighlight">
-\[
-\mathbb{E}[g_k\mid x_k]=\nabla F(x_k).
-\]</div>
-<p>Quindi <span class="math notranslate nohighlight">\(g_k\)</span> è uno stimatore non distorto del gradiente completo. Possiamo scrivere</p>
-<div class="math notranslate nohighlight">
-\[
+<!-- Se $i_k$ è scelto uniformemente, allora
+ $g_k$ è uno stimatore non distorto del gradiente completo. Possiamo scrivere
+
+$$
 g_k=\nabla F(x_k)+\varepsilon_k,
-\]</div>
-<p>dove <span class="math notranslate nohighlight">\(\varepsilon_k\)</span> è l’errore casuale dovuto al campionamento.</p>
-</section>
+$$
+
+dove $\varepsilon_k$ è l'errore casuale dovuto al campionamento. --></section>
 <section id="mini-batch-gradient-descent">
-<h2>Mini-batch gradient descent<a class="headerlink" href="#mini-batch-gradient-descent" title="Link to this heading">#</a></h2>
+<h3>Mini-batch gradient descent<a class="headerlink" href="#mini-batch-gradient-descent" title="Link to this heading">#</a></h3>
 <p>Nella pratica si utilizza un sottoinsieme <span class="math notranslate nohighlight">\(B_k\)</span> degli indici, chiamato <strong>mini-batch</strong>. Si calcola</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1171,9 +1173,7 @@ x_{k+1}=x_k-\alpha_k g_k.
 <li><p><span class="math notranslate nohighlight">\(|B_k|=N\)</span>: metodo del gradiente completo.</p></li>
 </ul>
 <p>Una visita completa di tutti gli <span class="math notranslate nohighlight">\(N\)</span> dati prende il nome di <strong>epoca</strong> (<em>epoch</em>).</p>
-</section>
-<section id="algoritmo-del-gradiente-stocastico-mini-batch">
-<h2>Algoritmo del gradiente stocastico mini-batch<a class="headerlink" href="#algoritmo-del-gradiente-stocastico-mini-batch" title="Link to this heading">#</a></h2>
+<p><strong>Algoritmo del gradiente stocastico mini-batch</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Scegliere il punto iniziale x_0
 
 per epoch = 0, 1, ..., numero_epoche - 1:
@@ -1190,9 +1190,7 @@ per epoch = 0, 1, ..., numero_epoche - 1:
 </pre></div>
 </div>
 <p>Mescolare i dati all’inizio di ogni epoca evita che l’ordine degli esempi introduca un comportamento sistematico indesiderato.</p>
-</section>
-<section id="learning-rate-e-comportamento-del-metodo">
-<h2>Learning rate e comportamento del metodo<a class="headerlink" href="#learning-rate-e-comportamento-del-metodo" title="Link to this heading">#</a></h2>
+<p><em>Learning rate e comportamento del metodo</em></p>
 <p>Con un learning rate costante,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1213,9 +1211,322 @@ per epoch = 0, 1, ..., numero_epoche - 1:
 <li><p>la media della funzione obiettivo;</p></li>
 <li><p>l’errore su un insieme di validazione.</p></li>
 </ul>
+<p><strong>Esempio di Gradiente completo e gradiente stocastico con minibatch</strong></p>
+<p>Confrontiamo i metodi su una funzione quadratica di due variabili con <strong>minimo noto</strong>. Studiamo il valore della funzione obiettivo, l’errore rispetto alla soluzione, la norma del gradiente completo e le traiettorie degli iterati.</p>
+<p><strong>1. Una funzione obiettivo come media di molti termini</strong></p>
+<p>Consideriamo <span class="math notranslate nohighlight">\(N=200\)</span> punti <span class="math notranslate nohighlight">\(c_i=(a_i,b_i)^T\)</span> e definiamo</p>
+<div class="math notranslate nohighlight">
+\[F(x)=\frac1N\sum_{i=1}^N f_i(x),\qquad
+f_i(x)=\frac12\left[(x_1-a_i)^2+4(x_2-b_i)^2\right].\]</div>
+<p>Ogni termine misura una distanza quadratica pesata da uno dei punti. Il problema consiste nel trovare un unico punto che minimizza la media di queste distanze.</p>
+<p>I gradienti sono</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\nabla f_i(x)=\begin{pmatrix}x_1-a_i\\4(x_2-b_i)\end{pmatrix},\qquad
+\nabla F(x)=\begin{pmatrix}x_1-\bar a\\4(x_2-\bar b)\end{pmatrix},\end{split}\]</div>
+<p>dove <span class="math notranslate nohighlight">\(\bar a=N^{-1}\sum_i a_i\)</span> e <span class="math notranslate nohighlight">\(\bar b=N^{-1}\sum_i b_i\)</span>. L’Hessiano è <span class="math notranslate nohighlight">\(H=\operatorname{diag}(1,4)\)</span>, definito positivo: esiste un unico minimo globale</p>
+<div class="math notranslate nohighlight">
+\[x^*=(\bar a,\bar b)^T.\]</div>
+<p>Generiamo i punti in modo che la loro media sia <span class="math notranslate nohighlight">\((1,-1)^T\)</span>. La funzione si può allora scrivere anche come</p>
+<div class="math notranslate nohighlight">
+\[\boxed{F(x)=F(x^*)+\frac12(x_1-1)^2+2(x_2+1)^2.}\]</div>
+<p>La costante <span class="math notranslate nohighlight">\(F(x^*)\)</span> è generalmente positiva perché i punti <span class="math notranslate nohighlight">\(c_i\)</span> non coincidono tra loro. <strong>La convergenza non richiede che la funzione obiettivo tenda a zero.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Parametri modificabili</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">20</span>       <span class="c1"># Scegli un intero tra 1 e N</span>
+<span class="n">numero_epoche</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">alpha0</span> <span class="o">=</span> <span class="mf">0.15</span>         <span class="c1"># Passo iniziale</span>
+<span class="n">scala_decay</span> <span class="o">=</span> <span class="mf">5.0</span>     <span class="c1"># Riduzione del passo ogni circa 5 epoche</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="n">seed_dati</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">seed_batch</span> <span class="o">=</span> <span class="mi">7</span>
+
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">))</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">batch_size</span> <span class="o">&lt;=</span> <span class="n">N</span>
+<span class="k">assert</span> <span class="n">numero_epoche</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">scala_decay</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">alpha0</span> <span class="o">&lt;</span> <span class="mf">0.5</span>  <span class="c1"># 2 / lambda_max(H) = 0.5</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed_dati</span><span class="p">)</span>
+<span class="n">centri</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">centri</span> <span class="o">-=</span> <span class="n">centri</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">centri</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">])</span>
+
+<span class="n">pesi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="n">x_star</span> <span class="o">=</span> <span class="n">centri</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">F_star</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pesi</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_star</span> <span class="o">-</span> <span class="n">centri</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Minimo x*:&quot;</span><span class="p">,</span> <span class="n">x_star</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valore minimo F(x*): </span><span class="si">{</span><span class="n">F_star</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Batch: </span><span class="si">{</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">; aggiornamenti SGD per epoca: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">batch_size</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimo x*: [ 1. -1.]
+Valore minimo F(x*): 2.709681
+Batch: 20; aggiornamenti SGD per epoca: 10
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>2. I tre metodi confrontati</strong></p>
+<p><strong>Gradiente completo (GD):</strong> a ogni passo usiamo tutti i termini,</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}=x_k-\alpha_0\frac1N\sum_{i=1}^N\nabla f_i(x_k).\]</div>
+<p><strong>SGD a minibatch:</strong> mescoliamo gli indici a ogni epoca e li suddividiamo in gruppi <span class="math notranslate nohighlight">\(B_k\)</span>; per ciascun gruppo calcoliamo</p>
+<div class="math notranslate nohighlight">
+\[g_k=\frac1{|B_k|}\sum_{i\in B_k}\nabla f_i(x_k),\qquad
+x_{k+1}=x_k-\alpha_k g_k.\]</div>
+<p>Confrontiamo due scelte per il passo stocastico:</p>
+<ol class="arabic simple">
+<li><p><strong>Costante:</strong> <span class="math notranslate nohighlight">\(\alpha_k=\alpha_0\)</span>.</p></li>
+<li><p><strong>Decrescente:</strong> nell’epoca <span class="math notranslate nohighlight">\(e=0,1,\ldots\)</span> usiamo <span class="math notranslate nohighlight">\(\alpha_k=\alpha_0/(1+e/\tau)\)</span>, con <span class="math notranslate nohighlight">\(\tau=5\)</span>.</p></li>
+</ol>
+<p>Le due varianti SGD usano le <strong>stesse permutazioni</strong> dei dati, per isolare l’effetto del passo. L’ultimo minibatch può essere più piccolo se <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> non divide <span class="math notranslate nohighlight">\(N\)</span>: la media usa sempre la sua dimensione effettiva.</p>
+<p>Qui usiamo un passo prefissato anziché la ricerca in linea introdotta precedentemente. Per questa quadratica, <span class="math notranslate nohighlight">\(0&lt;\alpha_0&lt;2/\lambda_{\max}(H)=0.5\)</span> garantisce la convergenza del gradiente completo; scegliamo <span class="math notranslate nohighlight">\(0.15\)</span>. Non implica che il metodo stocastico faccia diminuire <span class="math notranslate nohighlight">\(F\)</span> a ogni passo.</p>
+<p><strong>Perché SGD oscilla?</strong> In <span class="math notranslate nohighlight">\(x^*\)</span> il gradiente completo è nullo, ma i gradienti dei singoli termini e dei minibatch sono generalmente diversi da zero. Con un passo costante gli aggiornamenti possono continuare a spostare l’iterato intorno al minimo.</p>
+<p><em>Nota sul campionamento.</em> Questo codice usa rimescolamento senza reinserimento entro ogni epoca (<em>random reshuffling</em>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">funzione_obiettivo</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Media di tutti i termini, valutata sul dataset completo.&quot;&quot;&quot;</span>
+    <span class="n">differenze</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">centri</span>
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pesi</span> <span class="o">*</span> <span class="n">differenze</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">gradiente</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">indici</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gradiente completo o media dei gradienti del minibatch.&quot;&quot;&quot;</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">centri</span> <span class="k">if</span> <span class="n">indici</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">centri</span><span class="p">[</span><span class="n">indici</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">C</span><span class="p">)</span> <span class="o">*</span> <span class="n">pesi</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ottimizza</span><span class="p">(</span><span class="n">tipo</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decrescente</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">traiettoria</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
+    <span class="n">dati_usati</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">conteggio</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">epoca</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numero_epoche</span><span class="p">):</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">epoca</span> <span class="o">/</span> <span class="n">scala_decay</span><span class="p">)</span> <span class="k">if</span> <span class="n">decrescente</span> <span class="k">else</span> <span class="n">alpha0</span>
+
+        <span class="k">if</span> <span class="n">tipo</span> <span class="o">==</span> <span class="s2">&quot;GD&quot;</span><span class="p">:</span>
+            <span class="n">gruppi</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="n">tipo</span> <span class="o">==</span> <span class="s2">&quot;SGD&quot;</span><span class="p">:</span>
+            <span class="n">ordine</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+            <span class="n">gruppi</span> <span class="o">=</span> <span class="p">[</span><span class="n">ordine</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;tipo deve essere &#39;GD&#39; oppure &#39;SGD&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">B</span> <span class="ow">in</span> <span class="n">gruppi</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">gradiente</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+            <span class="n">conteggio</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+            <span class="n">traiettoria</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+            <span class="n">dati_usati</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">conteggio</span><span class="p">)</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">traiettoria</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">X</span> <span class="o">-</span> <span class="n">x_star</span>
+    <span class="c1"># Identità esatta per la quadratica: evita cancellazione in F(x)-F(x*).</span>
+    <span class="n">gap</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pesi</span> <span class="o">*</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">X</span><span class="p">,</span>
+        <span class="s2">&quot;iterazioni&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)),</span>
+        <span class="s2">&quot;epoche&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dati_usati</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span><span class="p">,</span>
+        <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">funzione_obiettivo</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]),</span>
+        <span class="s2">&quot;gap&quot;</span><span class="p">:</span> <span class="n">gap</span><span class="p">,</span>
+        <span class="s2">&quot;errore&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="s2">&quot;norma_gradiente&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">pesi</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="n">risultati</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Gradiente completo&quot;</span><span class="p">:</span> <span class="n">ottimizza</span><span class="p">(</span><span class="s2">&quot;GD&quot;</span><span class="p">),</span>
+    <span class="sa">f</span><span class="s2">&quot;SGD, batch=</span><span class="si">{</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">, passo costante&quot;</span><span class="p">:</span> <span class="n">ottimizza</span><span class="p">(</span><span class="s2">&quot;SGD&quot;</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed_batch</span><span class="p">),</span>
+    <span class="sa">f</span><span class="s2">&quot;SGD, batch=</span><span class="si">{</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">, passo decrescente&quot;</span><span class="p">:</span> <span class="n">ottimizza</span><span class="p">(</span><span class="s2">&quot;SGD&quot;</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">seed_batch</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">colori</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#1464A5&quot;</span><span class="p">,</span> <span class="s2">&quot;#D76B16&quot;</span><span class="p">,</span> <span class="s2">&quot;#16836C&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="vantaggi-e-limiti">
-<h2>Vantaggi e limiti<a class="headerlink" href="#vantaggi-e-limiti" title="Link to this heading">#</a></h2>
+<section id="che-cosa-misuriamo-e-come-confrontiamo-i-costi">
+<h3>3. Che cosa misuriamo e come confrontiamo i costi<a class="headerlink" href="#che-cosa-misuriamo-e-come-confrontiamo-i-costi" title="Link to this heading">#</a></h3>
+<p>Per ogni iterato registriamo:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Quantità</p></th>
+<th class="head"><p>Definizione</p></th>
+<th class="head"><p>Interpretazione</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Funzione obiettivo</p></td>
+<td><p><span class="math notranslate nohighlight">\(F(x_k)\)</span></p></td>
+<td><p>Costo medio su <strong>tutti</strong> i 200 termini</p></td>
+</tr>
+<tr class="row-odd"><td><p>Scarto dal minimo</p></td>
+<td><p><span class="math notranslate nohighlight">\(F(x_k)-F(x^*)\)</span></p></td>
+<td><p>Quanto manca al valore ottimo</p></td>
+</tr>
+<tr class="row-even"><td><p>Errore sull’iterato</p></td>
+<td><p><span class="math notranslate nohighlight">\(e_k=|x_k-x^*|_2\)</span></p></td>
+<td><p>Distanza dalla soluzione nota</p></td>
+</tr>
+<tr class="row-odd"><td><p>Norma del gradiente completo</p></td>
+<td><p><span class="math notranslate nohighlight">\(|\nabla F(x_k)|_2\)</span></p></td>
+<td><p>Misura della stazionarietà</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>L’errore <span class="math notranslate nohighlight">\(e_k\)</span> non è l’errore di stima del gradiente <span class="math notranslate nohighlight">\(\|g_k-\nabla F(x_k)\|\)</span>: stiamo misurando l’accuratezza della soluzione numerica. Anche nella curva SGD, la norma riportata è quella del <strong>gradiente completo</strong>, non del gradiente del minibatch.</p>
+<p>Confrontare soltanto le iterazioni può essere fuorviante: un aggiornamento GD usa <span class="math notranslate nohighlight">\(N\)</span> gradienti individuali, mentre uno SGD ne usa circa <span class="math notranslate nohighlight">\(b\)</span>. Perciò i grafici principali usano sull’asse orizzontale</p>
+<div class="math notranslate nohighlight">
+\[\text{epoche equivalenti}=\frac{\text{numero cumulativo di termini usati negli aggiornamenti}}{N}.\]</div>
+<p>Nel nostro codice ogni epoca visita tutti i dati una volta. Con <span class="math notranslate nohighlight">\(N=200\)</span> e <span class="math notranslate nohighlight">\(b=20\)</span>, un’epoca comprende <strong>1 aggiornamento GD oppure 10 aggiornamenti SGD</strong>.</p>
+<p>Questo asse rappresenta il lavoro sugli aggiornamenti, <strong>non il tempo di esecuzione</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;axes.spines.top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                     <span class="s2">&quot;axes.spines.right&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">assi</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">))</span>
+<span class="n">metriche</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Funzione obiettivo completa&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$F(x_k)$&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;gap&quot;</span><span class="p">,</span> <span class="s2">&quot;Scarto dal valore minimo&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$F(x_k)-F(x^*)$&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;errore&quot;</span><span class="p">,</span> <span class="s2">&quot;Errore rispetto alla soluzione&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\|x_k-x^*\|_2$&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;norma_gradiente&quot;</span><span class="p">,</span> <span class="s2">&quot;Norma del gradiente completo&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\|\nabla F(x_k)\|_2$&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">chiave</span><span class="p">,</span> <span class="n">titolo</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">assi</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">metriche</span><span class="p">):</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">nome</span><span class="p">,</span> <span class="n">r</span><span class="p">),</span> <span class="n">colore</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">risultati</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">colori</span><span class="p">):</span>
+        <span class="n">valori</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">chiave</span><span class="p">],</span> <span class="mf">1e-16</span><span class="p">)</span> <span class="k">if</span> <span class="n">log</span> <span class="k">else</span> <span class="n">r</span><span class="p">[</span><span class="n">chiave</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;epoche&quot;</span><span class="p">],</span> <span class="n">valori</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">nome</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colore</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">titolo</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Epoche equivalenti&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">assi</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">F_star</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">assi</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">numero_epoche</span> <span class="o">*</span> <span class="mf">0.70</span><span class="p">,</span> <span class="n">F_star</span> <span class="o">+</span> <span class="mf">1.2</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$F(x^*)$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">assi</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper center&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.94</span><span class="p">),</span>
+           <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Gradiente completo e minibatch: confronto a parità di epoche&quot;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.99</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">rect</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.83</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/334c023f6a922b4f033e0dca18f55e2da17971214a84a656b1ea7b596dce533e.png" src="../_images/334c023f6a922b4f033e0dca18f55e2da17971214a84a656b1ea7b596dce533e.png" />
+</div>
+</div>
+</section>
+<section id="le-traiettorie-sul-piano">
+<h3>4. Le traiettorie sul piano<a class="headerlink" href="#le-traiettorie-sul-piano" title="Link to this heading">#</a></h3>
+<p>Le curve di livello rappresentano lo scarto <span class="math notranslate nohighlight">\(F(x)-F(x^*)\)</span>: avvicinandosi al centro delle ellissi ci si avvicina al minimo. Il pannello a destra ingrandisce la regione attorno a <span class="math notranslate nohighlight">\(x^*\)</span> e aiuta a riconoscere le oscillazioni stocastiche.</p>
+<p>Ogni segmento collega due iterati consecutivi. Il punto di partenza è uguale per tutti i metodi; il gradiente completo produce una traiettoria regolare, mentre SGD risente dei diversi minibatch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">assi</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">finestre</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="mf">3.4</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">x_star</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">x_star</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.35</span><span class="p">,</span>
+             <span class="n">x_star</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">x_star</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.35</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">limiti</span><span class="p">,</span> <span class="n">titolo</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">assi</span><span class="p">,</span> <span class="n">finestre</span><span class="p">,</span>
+                              <span class="p">[</span><span class="s2">&quot;Traiettorie complete&quot;</span><span class="p">,</span> <span class="s2">&quot;Ingrandimento attorno al minimo&quot;</span><span class="p">]):</span>
+    <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">limiti</span>
+    <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span>
+                         <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="mi">250</span><span class="p">))</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">xx</span> <span class="o">-</span> <span class="n">x_star</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">yy</span> <span class="o">-</span> <span class="n">x_star</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">livelli</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">),</span> <span class="n">Z</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">livelli</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;#BCC5CD&quot;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">nome</span><span class="p">,</span> <span class="n">r</span><span class="p">),</span> <span class="n">colore</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">risultati</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">colori</span><span class="p">):</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colore</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">nome</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colore</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">x_star</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">),</span> <span class="n">xlabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$x_1$&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$x_2$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">,</span> <span class="n">adjustable</span><span class="o">=</span><span class="s2">&quot;box&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">titolo</span><span class="p">)</span>
+<span class="n">assi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">x0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">assi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x_0$&quot;</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Geometria della discesa — la stella indica il minimo&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">assi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower center&quot;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">rect</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.16</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e049e029a8e8cf8c635e230452474aa6c2e5d3a10925d01ebd258b9f86d3bcc7.png" src="../_images/e049e029a8e8cf8c635e230452474aa6c2e5d3a10925d01ebd258b9f86d3bcc7.png" />
+</div>
+</div>
+</section>
+<section id="risultati-numerici-e-interpretazione">
+<h3>6. Risultati numerici e interpretazione<a class="headerlink" href="#risultati-numerici-e-interpretazione" title="Link to this heading">#</a></h3>
+<p>La tabella riporta i risultati alla fine dello stesso numero di epoche. Le ultime colonne misurano l’errore finale e l’errore medio nell’ultima epoca; quest’ultimo aiuta a non giudicare un metodo stocastico da un unico punto casualmente favorevole.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Metodo&#39;</span><span class="si">:</span><span class="s2">&lt;44</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Update&#39;</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;F finale&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Errore finale&#39;</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Errore medio*&#39;</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">nome</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">risultati</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">ultima_epoca</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;epoche&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">numero_epoche</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nome</span><span class="si">:</span><span class="s2">&lt;44</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="si">:</span><span class="s2">7d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">12.6f</span><span class="si">}</span><span class="s2"> &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;errore&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">14.3e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;errore&#39;</span><span class="p">][</span><span class="n">ultima_epoca</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">14.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;* Media degli errori degli iterati prodotti nell&#39;ultima epoca.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Metodo                                        Update     F finale  Errore finale  Errore medio*
+Gradiente completo                                80     2.709681      9.028e-06      9.028e-06
+SGD, batch=20, passo costante                    800     2.710626      3.365e-02      1.051e-01
+SGD, batch=20, passo decrescente                 800     2.709690      2.120e-03      6.145e-03
+* Media degli errori degli iterati prodotti nell&#39;ultima epoca.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Con i parametri iniziali si osserva che:</p>
+<ul class="simple">
+<li><p><strong>GD:</strong> la funzione obiettivo diminuisce regolarmente e l’errore tende a zero. Per questa quadratica, <span class="math notranslate nohighlight">\(x_{k+1}-x^*=(I-\alpha_0H)(x_k-x^*)\)</span>; con <span class="math notranslate nohighlight">\(\alpha_0=0.15\)</span>, i fattori lungo gli assi sono <span class="math notranslate nohighlight">\(0.85\)</span> e <span class="math notranslate nohighlight">\(0.4\)</span>, entrambi minori di uno in modulo.</p></li>
+<li><p><strong>SGD a passo costante:</strong> sfrutta aggiornamenti economici e, a parità di epoche, può avvicinarsi rapidamente al minimo. In seguito rimangono oscillazioni; la funzione completa può aumentare fra due aggiornamenti.</p></li>
+<li><p><strong>SGD a passo decrescente:</strong> riducendo il passo si attenuano le oscillazioni e, in questo esperimento, si migliora l’accuratezza finale rispetto al passo costante. Una riduzione troppo rapida può però rallentare l’avvicinamento al minimo.</p></li>
+<li><p><strong>Funzione obiettivo ed errore non sono la stessa quantità:</strong> qui vale <span class="math notranslate nohighlight">\(F(x)-F(x^*)=\frac12(x-x^*)^TH(x-x^*)\)</span>, quindi lo scarto è quadratico nella distanza dal minimo. Il valore <span class="math notranslate nohighlight">\(F(x_k)\)</span> può apparire quasi costante anche quando l’errore sta ancora cambiando.</p></li>
+</ul>
+<p>Le curve stocastiche mostrate corrispondono a <strong>una sola realizzazione riproducibile</strong>. Cambiando <code class="docutils literal notranslate"><span class="pre">seed_batch</span></code> cambiano le oscillazioni; non si tratta di un confronto statistico su più esecuzioni.</p>
+</section>
+<section id="esperimenti-per-gli-studenti">
+<h3>Esperimenti per gli studenti<a class="headerlink" href="#esperimenti-per-gli-studenti" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Impostare <code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">=</span> <span class="pre">1</span></code>, poi <code class="docutils literal notranslate"><span class="pre">20</span></code>, <code class="docutils literal notranslate"><span class="pre">100</span></code> e infine <code class="docutils literal notranslate"><span class="pre">N</span></code>. Osservare oscillazioni e numero di aggiornamenti per epoca. Con <code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">=</span> <span class="pre">N</span></code>, SGD a passo costante coincide con GD, salvo arrotondamenti.</p></li>
+<li><p>Cambiare <code class="docutils literal notranslate"><span class="pre">alpha0</span></code> da <code class="docutils literal notranslate"><span class="pre">0.15</span></code> a <code class="docutils literal notranslate"><span class="pre">0.05</span></code> oppure <code class="docutils literal notranslate"><span class="pre">0.30</span></code>: come cambiano le traiettorie e la velocità del gradiente completo?</p></li>
+<li><p>Cambiare <code class="docutils literal notranslate"><span class="pre">scala_decay</span></code>: un valore piccolo riduce il passo prima; un valore grande lo mantiene alto più a lungo.</p></li>
+<li><p>Spiegare perché un piccolo gradiente di un singolo minibatch non basta per concludere che si è raggiunto il minimo della funzione completa.</p></li>
+</ol>
+<p>Il <strong>gradiente stocastico è utile soprattutto quando calcolare il gradiente completo è costoso</strong>. Il suo vantaggio principale è poter aggiornare i parametri usando pochi dati, accettando una direzione meno precisa.</p>
+<p><strong>Convergenza del gradiente completo.</strong> Il metodo utilizza a ogni iterazione tutta l’informazione disponibile. Con opportune ipotesi di regolarità e una scelta adeguata del passo, la funzione obiettivo diminuisce. Nel caso fortemente convesso, come nella quadratica dell’esempio, converge all’unico minimo globale e, con un passo costante opportuno, l’errore diminuisce geometricamente:
+[
+|x_k-x^*|\leq C\rho^k,\qquad 0&lt;\rho&lt;1.
+]
+Per funzioni non convesse, invece, le garanzie riguardano generalmente il raggiungimento della stazionarietà, non del minimo globale.</p>
+<p><strong>Convergenza del gradiente stocastico.</strong> Il gradiente calcolato su un minibatch contiene una componente di variabilità dovuta al campionamento. Di conseguenza, <strong>la funzione obiettivo completa non deve necessariamente diminuire a ogni aggiornamento</strong>: occasionali aumenti sono compatibili con un progresso complessivo verso il minimo.</p>
+<p>Con un <strong>passo costante</strong>, il metodo può avvicinarsi rapidamente alla soluzione, ma in presenza di rumore persistente tende a mantenere oscillazioni attorno al minimo. In termini di errore medio, si osserva spesso un livello residuo: un passo più piccolo può ridurlo, ma rallenta l’avvicinamento iniziale. Questo comportamento non è inevitabile in ogni problema: se anche i gradienti dei singoli termini si annullano al minimo, il rumore può scomparire.</p>
+<p>Con un <strong>passo decrescente</strong>, l’effetto degli aggiornamenti casuali viene progressivamente attenuato. Nel quadro classico del campionamento indipendente, sotto opportune ipotesi sulla funzione e sulla variabilità del gradiente, condizioni come
+[
+\sum_k\alpha_k=\infty,
+\qquad
+\sum_k\alpha_k^2&lt;\infty
+]
+consentono di ottenere risultati di convergenza. La prima evita che i passi si riducano troppo rapidamente; la seconda limita l’effetto cumulativo del rumore.</p>
+<p><strong>Ruolo del minibatch.</strong> Un minibatch piccolo rende gli aggiornamenti economici ma più variabili; aumentandolo si ottiene una stima più precisa, con un costo maggiore per aggiornamento. La scelta è quindi un compromesso fra costo, variabilità e possibilità di sfruttare il calcolo parallelo.</p>
+</section>
 <section id="vantaggi">
 <h3>Vantaggi<a class="headerlink" href="#vantaggi" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -1306,12 +1617,13 @@ per epoch = 0, 1, ..., numero_epoche - 1:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-punti-stazionari">Tipi di punti stazionari</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-caso-convesso">Il caso convesso</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">Metodi di discesa per il calcolo del minimo di una funzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">Metodo del gradiente</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dal-gradiente-completo-al-gradiente-stocastico">Dal gradiente completo al gradiente stocastico</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">Mini-batch gradient descent</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-del-gradiente-stocastico-mini-batch">Algoritmo del gradiente stocastico mini-batch</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-e-comportamento-del-metodo">Learning rate e comportamento del metodo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vantaggi-e-limiti">Vantaggi e limiti</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">Metodo del gradiente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dal-gradiente-completo-al-gradiente-stocastico">Dal gradiente completo al gradiente stocastico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">Mini-batch gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-cosa-misuriamo-e-come-confrontiamo-i-costi">3. Che cosa misuriamo e come confrontiamo i costi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-traiettorie-sul-piano">4. Le traiettorie sul piano</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risultati-numerici-e-interpretazione">6. Risultati numerici e interpretazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esperimenti-per-gli-studenti">Esperimenti per gli studenti</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vantaggi">Vantaggi</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiti">Limiti</a></li>
 </ul>
