@@ -1063,8 +1063,7 @@ alpha_k = alpha
 \tau\simeq 10^{-8}\text{--}10^{-10}.
 \]</div>
 <p>Un metodo di discesa ha il seguente schema generale.</p>
-<blockquote>
-<div><p><strong>Metodo con ricerca in linea</strong></p>
+<p><strong>Metodo con ricerca in linea</strong></p>
 <p>Dato <span class="math notranslate nohighlight">\(x_0\)</span>, per <span class="math notranslate nohighlight">\(k=0,1,2,\ldots\)</span>:</p>
 <ol class="arabic simple">
 <li><p>determinare una direzione di discesa <span class="math notranslate nohighlight">\(p_k\)</span>;</p></li>
@@ -1072,13 +1071,8 @@ alpha_k = alpha
 <li><p>porre
 $$</p></li>
 </ol>
-</div></blockquote>
-<blockquote>
-<div><p>x_{k+1}=x_k+\alpha_kp_k.</p>
-</div></blockquote>
-<blockquote>
-<div><p>$$</p>
-</div></blockquote>
+<p>x_{k+1}=x_k+\alpha_kp_k.</p>
+<p>$$</p>
 <p><strong>Scelta dell’iterato iniziale</strong></p>
 <p>IL’algoritmo di discesa del gradiente (GD) chiede in inout un iterqto iniziale <span class="math notranslate nohighlight">\(x_0 \in  \mathbb{R}^n\)</span>.Se le condizioni di convergenza sonio soddisfatte, poichè sono condizioni di converegenza <em>globali</em> per ogni iterato iniziale <span class="math notranslate nohighlight">\(x_0\)</span> il metodo converge a un <strong>punto stazionario</strong> di  <span class="math notranslate nohighlight">\(\mathcal{f}(x)\)</span>, i.e. a un punto tale che  <span class="math notranslate nohighlight">\(\nabla_x \mathcal{f}(x) = 0\)</span>.</p>
 <p>Se <span class="math notranslate nohighlight">\(f(x)\)</span> è convessa, allora il punto di convergenza è di mininmo locale.
