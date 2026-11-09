@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Il problema lineare dei minimi quadrati &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+    <title>10. Il problema lineare dei minimi quadrati &#8212; Metodi numerici per l&#39;analisi dei dati</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/minimi_quadrati';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi" href="approx_dati.html" />
-    <link rel="prev" title="Sistemi lineari" href="sislin.html" />
+    <link rel="next" title="11. Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi" href="approx_dati.html" />
+    <link rel="prev" title="9. Sistemi lineari" href="sislin.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,22 +182,20 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">1. Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">2. I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">3. Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">4. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">6. Operazioni sulle matrici: fattorizzazione di matrici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">7. Decomposizione ai valori singolari (SVD)</a></li>
 
-
-<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Il problema lineare dei minimi quadrati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">Ottimizzazione numerica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sislin.html">9. Sistemi lineari</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">11. Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zeri.html">12. Risoluzione di equazioni non lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">13. Ottimizzazione numerica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equazioni_differenziali.html">14. Introduzione alle equazioni differenziali e ai problemi di Cauchy</a></li>
 </ul>
 
     </div>
@@ -393,11 +391,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obiettivi">Obiettivi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#da-dove-nasce-il-problema">7.1. Da dove nasce il problema?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita">7.2 Esistenza e unicità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-geometrica-ed-equazioni-normali">Interpretazione geometrica ed equazioni normali</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-problema-di-minimi-quadrati-con-svd">Risoluzione di un problema di minimi quadrati con SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obiettivi">10.1. Obiettivi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#da-dove-nasce-il-problema">10.1.1. 7.1. Da dove nasce il problema?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita">10.1.2. 7.2 Esistenza e unicità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-geometrica-ed-equazioni-normali">10.1.3. Interpretazione geometrica ed equazioni normali</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-problema-di-minimi-quadrati-con-svd">10.1.4. Risoluzione di un problema di minimi quadrati con SVD</a></li>
 </ul>
 </li>
 </ul>
@@ -412,11 +410,11 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="il-problema-lineare-dei-minimi-quadrati">
-<h1>Il problema lineare dei minimi quadrati<a class="headerlink" href="#il-problema-lineare-dei-minimi-quadrati" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">10. </span>Il problema lineare dei minimi quadrati<a class="headerlink" href="#il-problema-lineare-dei-minimi-quadrati" title="Link to this heading">#</a></h1>
 <p>I minimi quadrati permettono di trovare una soluzione <strong>approssimata</strong> quando un sistema lineare non ammette una soluzione esatta. Sono inoltre alla base della regressione lineare e di numerosi metodi di analisi dei dati.</p>
 <p>In questo notebook introdurremo gradualmente il problema, la sua interpretazione geometrica e i principali metodi numerici per risolverlo.</p>
 <section id="obiettivi">
-<h2>Obiettivi<a class="headerlink" href="#obiettivi" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.1. </span>Obiettivi<a class="headerlink" href="#obiettivi" title="Link to this heading">#</a></h2>
 <p>Alla fine del notebook sapremo:</p>
 <ul class="simple">
 <li><p>riconoscere un problema lineare ai minimi quadrati;</p></li>
@@ -427,7 +425,7 @@ document.write(`
 <li><p>collegare i minimi quadrati ai modelli predittivi (in particolare la regressione polinomiale)</p></li>
 </ul>
 <section id="da-dove-nasce-il-problema">
-<h3>7.1. Da dove nasce il problema?<a class="headerlink" href="#da-dove-nasce-il-problema" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.1.1. </span>7.1. Da dove nasce il problema?<a class="headerlink" href="#da-dove-nasce-il-problema" title="Link to this heading">#</a></h3>
 <p>Consideriamo un sistema lineare</p>
 <div class="math notranslate nohighlight">
 \[
@@ -499,7 +497,7 @@ Somma dei quadrati: 0.6999999999999996
 </div>
 </section>
 <section id="esistenza-e-unicita">
-<h3>7.2 Esistenza e unicità<a class="headerlink" href="#esistenza-e-unicita" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.1.2. </span>7.2 Esistenza e unicità<a class="headerlink" href="#esistenza-e-unicita" title="Link to this heading">#</a></h3>
 <p>Il problema lineare ai minimi quadrati ammette sempre almeno una soluzione. L’unicità dipende dal rango di <span class="math notranslate nohighlight">\(A\)</span>:</p>
 <ul class="simple">
 <li><p>se <span class="math notranslate nohighlight">\(\operatorname{rank}(A)=n\)</span>, le colonne sono linearmente indipendenti e la soluzione è unica;</p></li>
@@ -508,7 +506,7 @@ Somma dei quadrati: 0.6999999999999996
 <p>Nel secondo caso è possibile scegliere, tra tutte le soluzioni, quella con norma euclidea minima.</p>
 </section>
 <section id="interpretazione-geometrica-ed-equazioni-normali">
-<h3>Interpretazione geometrica ed equazioni normali<a class="headerlink" href="#interpretazione-geometrica-ed-equazioni-normali" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.1.3. </span>Interpretazione geometrica ed equazioni normali<a class="headerlink" href="#interpretazione-geometrica-ed-equazioni-normali" title="Link to this heading">#</a></h3>
 <p>Il vettore <span class="math notranslate nohighlight">\(Ax\)</span> è una combinazione lineare delle colonne di <span class="math notranslate nohighlight">\(A\)</span>. Perciò, al variare di <span class="math notranslate nohighlight">\(x\)</span>, il vettore <span class="math notranslate nohighlight">\(Ax\)</span> appartiene sempre allo spazio generato dalle colonne di <span class="math notranslate nohighlight">\(A\)</span>, indicato con</p>
 <div class="math notranslate nohighlight">
 \[
@@ -630,7 +628,7 @@ Confronto con lstsq: 1.4812222630807097e-15
 </div>
 </section>
 <section id="risoluzione-di-un-problema-di-minimi-quadrati-con-svd">
-<h3>Risoluzione di un problema di minimi quadrati con SVD<a class="headerlink" href="#risoluzione-di-un-problema-di-minimi-quadrati-con-svd" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.1.4. </span>Risoluzione di un problema di minimi quadrati con SVD<a class="headerlink" href="#risoluzione-di-un-problema-di-minimi-quadrati-con-svd" title="Link to this heading">#</a></h3>
 <p>Vogliamo determinare una soluzione del problema</p>
 <div class="math notranslate nohighlight">
 \[
@@ -831,7 +829,7 @@ Soluzione SVD: [0.9 0.9]
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Sistemi lineari</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Sistemi lineari</p>
       </div>
     </a>
     <a class="right-next"
@@ -839,7 +837,7 @@ Soluzione SVD: [0.9 0.9]
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -859,11 +857,11 @@ Soluzione SVD: [0.9 0.9]
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obiettivi">Obiettivi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#da-dove-nasce-il-problema">7.1. Da dove nasce il problema?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita">7.2 Esistenza e unicità</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-geometrica-ed-equazioni-normali">Interpretazione geometrica ed equazioni normali</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-problema-di-minimi-quadrati-con-svd">Risoluzione di un problema di minimi quadrati con SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obiettivi">10.1. Obiettivi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#da-dove-nasce-il-problema">10.1.1. 7.1. Da dove nasce il problema?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita">10.1.2. 7.2 Esistenza e unicità</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-geometrica-ed-equazioni-normali">10.1.3. Interpretazione geometrica ed equazioni normali</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-problema-di-minimi-quadrati-con-svd">10.1.4. Risoluzione di un problema di minimi quadrati con SVD</a></li>
 </ul>
 </li>
 </ul>

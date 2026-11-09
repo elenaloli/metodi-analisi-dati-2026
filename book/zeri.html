@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Risoluzione di equazioni non lineari &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+    <title>12. Risoluzione di equazioni non lineari &#8212; Metodi numerici per l&#39;analisi dei dati</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/zeri';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Ottimizzazione numerica" href="Ottimizzazione.html" />
-    <link rel="prev" title="Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi" href="approx_dati.html" />
+    <link rel="next" title="13. Ottimizzazione numerica" href="Ottimizzazione.html" />
+    <link rel="prev" title="11. Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi" href="approx_dati.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,23 +182,20 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">1. Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">2. I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">3. Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">4. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">6. Operazioni sulle matrici: fattorizzazione di matrici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">7. Decomposizione ai valori singolari (SVD)</a></li>
 
-
-<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Risoluzione di equazioni non lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">Ottimizzazione numerica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="equazioni_differenziali.html">Introduzione alle equazioni differenziali e ai problemi di Cauchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sislin.html">9. Sistemi lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">10. Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">11. Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Risoluzione di equazioni non lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">13. Ottimizzazione numerica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equazioni_differenziali.html">14. Introduzione alle equazioni differenziali e ai problemi di Cauchy</a></li>
 </ul>
 
     </div>
@@ -394,12 +391,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-introduttivo">Esempio introduttivo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-soluzioni-di-un-equazione-non-lineare">Numero di soluzioni di un’equazione non lineare</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazione-geometrica">Osservazione geometrica</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">Metodo di bisezione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">Metodo del punto fisso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">Metodo di Newton</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-introduttivo">12.1. Esempio introduttivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-soluzioni-di-un-equazione-non-lineare">12.2. Numero di soluzioni di un’equazione non lineare</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazione-geometrica">12.3. Osservazione geometrica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">12.4. Metodo di bisezione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">12.5. Metodo del punto fisso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">12.6. Metodo di Newton</a></li>
 </ul>
             </nav>
         </div>
@@ -412,7 +409,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="risoluzione-di-equazioni-non-lineari">
-<h1>Risoluzione di equazioni non lineari<a class="headerlink" href="#risoluzione-di-equazioni-non-lineari" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">12. </span>Risoluzione di equazioni non lineari<a class="headerlink" href="#risoluzione-di-equazioni-non-lineari" title="Link to this heading">#</a></h1>
 <p>L’obiettivo è risolvere l’equazione:</p>
 <div class="math notranslate nohighlight">
 \[f(x)=0\]</div>
@@ -445,7 +442,7 @@ x_0, x_1, x_2, \ldots
 \lim_{k\to\infty}x_k=x^{*}.
 \]</div>
 <section id="esempio-introduttivo">
-<h2>Esempio introduttivo<a class="headerlink" href="#esempio-introduttivo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.1. </span>Esempio introduttivo<a class="headerlink" href="#esempio-introduttivo" title="Link to this heading">#</a></h2>
 <p>Consideriamo</p>
 <div class="math notranslate nohighlight">
 \[
@@ -504,7 +501,7 @@ f(2)=2&gt;0.
 </div>
 </section>
 <section id="numero-di-soluzioni-di-un-equazione-non-lineare">
-<h2>Numero di soluzioni di un’equazione non lineare<a class="headerlink" href="#numero-di-soluzioni-di-un-equazione-non-lineare" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.2. </span>Numero di soluzioni di un’equazione non lineare<a class="headerlink" href="#numero-di-soluzioni-di-un-equazione-non-lineare" title="Link to this heading">#</a></h2>
 <p>Un’equazione non lineare può avere comportamenti molto diversi rispetto al numero di soluzioni.</p>
 <p>Una equazione del tipo</p>
 <div class="math notranslate nohighlight">
@@ -672,7 +669,7 @@ q(\alpha)\neq 0.
 </div>
 </section>
 <section id="osservazione-geometrica">
-<h2>Osservazione geometrica<a class="headerlink" href="#osservazione-geometrica" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.3. </span>Osservazione geometrica<a class="headerlink" href="#osservazione-geometrica" title="Link to this heading">#</a></h2>
 <p>Se la molteplicità è pari, la funzione spesso tocca l’asse <span class="math notranslate nohighlight">\(x\)</span> senza attraversarlo.<br />
 Questo significa che metodi basati sul cambio di segno, come la bisezione, possono non individuare direttamente la radice.</p>
 <p>Se la molteplicità è dispari, la funzione attraversa l’asse <span class="math notranslate nohighlight">\(x\)</span>, ma può farlo in modo molto piatto.<br />
@@ -776,7 +773,7 @@ esatta.</p>
 </ul>
 </section>
 <section id="metodo-di-bisezione">
-<h2>Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.4. </span>Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link to this heading">#</a></h2>
 <p>Si costruisce una successione di
 intervalli (<span class="math notranslate nohighlight">\(f(a_1)&lt;0,f(b_1)&gt;0\)</span>):</p>
 <div class="math notranslate nohighlight">
@@ -987,7 +984,7 @@ tol=1e-12, iterazioni richieste circa: 40
 </ul>
 </section>
 <section id="metodo-del-punto-fisso">
-<h2>Metodo del punto fisso<a class="headerlink" href="#metodo-del-punto-fisso" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.5. </span>Metodo del punto fisso<a class="headerlink" href="#metodo-del-punto-fisso" title="Link to this heading">#</a></h2>
 <p>Il problema
 di cercare una radice di $<span class="math notranslate nohighlight">\(f(x)=0\)</span><span class="math notranslate nohighlight">\( viene spostato nel problema di
 cercare una soluzione dell'equazione \)</span><span class="math notranslate nohighlight">\(x=g(x)\)</span><span class="math notranslate nohighlight">\( cioè un punto
@@ -1203,7 +1200,7 @@ contemporaneamente:</p>
 assegnate e <span class="math notranslate nohighlight">\(f_{\max}=\max_{x\in I_\rho}|f(x)|\)</span></p>
 </section>
 <section id="metodo-di-newton">
-<h2>Metodo di Newton<a class="headerlink" href="#metodo-di-newton" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">12.6. </span>Metodo di Newton<a class="headerlink" href="#metodo-di-newton" title="Link to this heading">#</a></h2>
 <p>Data l’equazione <span class="math notranslate nohighlight">\(f(x)=0\)</span>, si può determinare la soluzione
 <span class="math notranslate nohighlight">\(x^*\)</span> come punto fisso di</p>
 <div class="math notranslate nohighlight">
@@ -1442,7 +1439,7 @@ il metodo richiede due valutazioni di funzioni per passo.</p></li>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</p>
       </div>
     </a>
     <a class="right-next"
@@ -1450,7 +1447,7 @@ il metodo richiede due valutazioni di funzioni per passo.</p></li>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ottimizzazione numerica</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Ottimizzazione numerica</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1470,12 +1467,12 @@ il metodo richiede due valutazioni di funzioni per passo.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-introduttivo">Esempio introduttivo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-soluzioni-di-un-equazione-non-lineare">Numero di soluzioni di un’equazione non lineare</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazione-geometrica">Osservazione geometrica</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">Metodo di bisezione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">Metodo del punto fisso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">Metodo di Newton</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-introduttivo">12.1. Esempio introduttivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-di-soluzioni-di-un-equazione-non-lineare">12.2. Numero di soluzioni di un’equazione non lineare</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osservazione-geometrica">12.3. Osservazione geometrica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">12.4. Metodo di bisezione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-punto-fisso">12.5. Metodo del punto fisso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">12.6. Metodo di Newton</a></li>
 </ul>
   </nav></div>
 

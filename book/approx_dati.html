@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+    <title>11. Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi &#8212; Metodi numerici per l&#39;analisi dei dati</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/approx_dati';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Risoluzione di equazioni non lineari" href="zeri.html" />
-    <link rel="prev" title="Il problema lineare dei minimi quadrati" href="minimi_quadrati.html" />
+    <link rel="next" title="12. Risoluzione di equazioni non lineari" href="zeri.html" />
+    <link rel="prev" title="10. Il problema lineare dei minimi quadrati" href="minimi_quadrati.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,22 +182,20 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">1. Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">2. I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">3. Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">4. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">6. Operazioni sulle matrici: fattorizzazione di matrici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">7. Decomposizione ai valori singolari (SVD)</a></li>
 
-
-<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">Ottimizzazione numerica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sislin.html">9. Sistemi lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">10. Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zeri.html">12. Risoluzione di equazioni non lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">13. Ottimizzazione numerica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equazioni_differenziali.html">14. Introduzione alle equazioni differenziali e ai problemi di Cauchy</a></li>
 </ul>
 
     </div>
@@ -393,18 +391,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#famiglie-parametriche-di-funzioni">Famiglie parametriche di funzioni</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-calcolo-dei-parametri-come-problema-di-minimo">Il calcolo dei parametri come problema di minimo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-dell-errore-che-cosa-ci-dicono">Misure dell’errore: che cosa ci dicono?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sse-somma-dei-quadrati-dei-residui">SSE: somma dei quadrati dei residui</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mse-e-rmse-dall-errore-complessivo-a-una-misura-per-osservazione">MSE e RMSE: dall’errore complessivo a una misura per osservazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-coefficiente-di-determinazione-r-2-confronto-con-la-media">Il coefficiente di determinazione <span class="math notranslate nohighlight">\(R^2\)</span>: confronto con la media</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-risultati-dell-esempio">Interpretazione dei risultati dell’esempio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#famiglie-parametriche-di-funzioni">11.1. Famiglie parametriche di funzioni</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-calcolo-dei-parametri-come-problema-di-minimo">11.2. Il calcolo dei parametri come problema di minimo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-dell-errore-che-cosa-ci-dicono">11.3. Misure dell’errore: che cosa ci dicono?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sse-somma-dei-quadrati-dei-residui">11.3.1. SSE: somma dei quadrati dei residui</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mse-e-rmse-dall-errore-complessivo-a-una-misura-per-osservazione">11.3.2. MSE e RMSE: dall’errore complessivo a una misura per osservazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-coefficiente-di-determinazione-r-2-confronto-con-la-media">11.3.3. Il coefficiente di determinazione <span class="math notranslate nohighlight">\(R^2\)</span>: confronto con la media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-risultati-dell-esempio">11.3.4. Interpretazione dei risultati dell’esempio</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-nella-regressione-polinomiale">Overfitting nella regressione polinomiale</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#underfit-overfit">Underfit/Overfit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regolarizzazione">Regolarizzazione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-nella-regressione-polinomiale">11.4. Overfitting nella regressione polinomiale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#underfit-overfit">11.5. Underfit/Overfit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regolarizzazione">11.6. Regolarizzazione</a></li>
 </ul>
             </nav>
         </div>
@@ -417,7 +415,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="il-problema-dei-minimi-quadrati-nell-approssimazione-dei-dati-i-modelli-predittivi">
-<h1>Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi<a class="headerlink" href="#il-problema-dei-minimi-quadrati-nell-approssimazione-dei-dati-i-modelli-predittivi" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">11. </span>Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi<a class="headerlink" href="#il-problema-dei-minimi-quadrati-nell-approssimazione-dei-dati-i-modelli-predittivi" title="Link to this heading">#</a></h1>
 <p>Vediamo ora una applicazione del problema dei minimi quadrati alla regressione lineare polinomiale.</p>
 <p>Supponiamo di avere un insieme di dati del tipo:</p>
 <div class="math notranslate nohighlight">
@@ -519,7 +517,7 @@ align: center
 </p> -->
 <p>La scelta della famiglia di funzioni dipende dal fenomeno che vogliamo descrivere e dalle informazioni disponibili sui dati.</p>
 <section id="famiglie-parametriche-di-funzioni">
-<h2>Famiglie parametriche di funzioni<a class="headerlink" href="#famiglie-parametriche-di-funzioni" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.1. </span>Famiglie parametriche di funzioni<a class="headerlink" href="#famiglie-parametriche-di-funzioni" title="Link to this heading">#</a></h2>
 <p>Scelta una famiglia di funzioni <span class="math notranslate nohighlight">\(f(x;\boldsymbol{\theta})\)</span>, occorre determinare i parametri</p>
 <div class="math notranslate nohighlight">
 \[
@@ -543,7 +541,7 @@ align: center
 <p>La funzione di costo dipende dai parametri perché, al variare di <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>, cambiano le previsioni del modello.</p>
 </section>
 <section id="il-calcolo-dei-parametri-come-problema-di-minimo">
-<h2>Il calcolo dei parametri come problema di minimo<a class="headerlink" href="#il-calcolo-dei-parametri-come-problema-di-minimo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.2. </span>Il calcolo dei parametri come problema di minimo<a class="headerlink" href="#il-calcolo-dei-parametri-come-problema-di-minimo" title="Link to this heading">#</a></h2>
 <p>I parametri ottimali sono quelli che rendono minima la funzione di costo:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -711,7 +709,7 @@ Pendenza   = 1.636
 <p>Questa interpretazione deve essere fatta nel dominio osservato: estrapolare molto oltre i valori presenti nei dati può essere inaffidabile. Inoltre una relazione statistica non implica automaticamente un rapporto causale.</p>
 </section>
 <section id="misure-dell-errore-che-cosa-ci-dicono">
-<h2>Misure dell’errore: che cosa ci dicono?<a class="headerlink" href="#misure-dell-errore-che-cosa-ci-dicono" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.3. </span>Misure dell’errore: che cosa ci dicono?<a class="headerlink" href="#misure-dell-errore-che-cosa-ci-dicono" title="Link to this heading">#</a></h2>
 <p>Una volta calcolata la retta, vogliamo capire <strong>quanto le sue previsioni si avvicinano ai valori osservati</strong>. Indichiamo con:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(m\)</span> il numero di osservazioni;</p></li>
@@ -728,7 +726,7 @@ e_i=y_i-\widehat y_i.
 <p>Per esempio, se le vendite osservate sono <span class="math notranslate nohighlight">\(30\)</span> e quelle previste sono <span class="math notranslate nohighlight">\(28\)</span>, il residuo è <span class="math notranslate nohighlight">\(2\)</span>. Se il modello prevede <span class="math notranslate nohighlight">\(32\)</span>, il residuo è <span class="math notranslate nohighlight">\(-2\)</span>. Sommando semplicemente i residui, questi due errori si cancellerebbero: per misurare l’errore complessivo usiamo quindi i loro quadrati.</p>
 <p>Il residuo è uno scarto rispetto al dato osservato, che può contenere rumore: non coincide necessariamente con l’errore rispetto a un valore vero non conosciuto.</p>
 <section id="sse-somma-dei-quadrati-dei-residui">
-<h3>SSE: somma dei quadrati dei residui<a class="headerlink" href="#sse-somma-dei-quadrati-dei-residui" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.3.1. </span>SSE: somma dei quadrati dei residui<a class="headerlink" href="#sse-somma-dei-quadrati-dei-residui" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 \mathrm{SSE}=\sum_{i=1}^{m}e_i^2
@@ -739,7 +737,7 @@ e_i=y_i-\widehat y_i.
 <p>La SSE è sempre non negativa ed è zero solo se tutte le previsioni coincidono con i dati. A parità di dati, una SSE più piccola indica un migliore adattamento. Essendo una somma, dipende anche dal numero di osservazioni: non è adatta a confrontare direttamente insiemi di dimensioni diverse. Se <span class="math notranslate nohighlight">\(y\)</span> è misurata in euro, la SSE è misurata in euro al quadrato.</p>
 </section>
 <section id="mse-e-rmse-dall-errore-complessivo-a-una-misura-per-osservazione">
-<h3>MSE e RMSE: dall’errore complessivo a una misura per osservazione<a class="headerlink" href="#mse-e-rmse-dall-errore-complessivo-a-una-misura-per-osservazione" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.3.2. </span>MSE e RMSE: dall’errore complessivo a una misura per osservazione<a class="headerlink" href="#mse-e-rmse-dall-errore-complessivo-a-una-misura-per-osservazione" title="Link to this heading">#</a></h3>
 <p>L’<strong>errore quadratico medio</strong> è</p>
 <div class="math notranslate nohighlight">
 \[
@@ -757,7 +755,7 @@ e_i=y_i-\widehat y_i.
 <p>SSE, MSE e RMSE sono tutte migliori quando sono <strong>più piccole</strong>. Quanto sia accettabile una certa RMSE dipende dalla scala dei dati e dall’applicazione.</p>
 </section>
 <section id="il-coefficiente-di-determinazione-r-2-confronto-con-la-media">
-<h3>Il coefficiente di determinazione <span class="math notranslate nohighlight">\(R^2\)</span>: confronto con la media<a class="headerlink" href="#il-coefficiente-di-determinazione-r-2-confronto-con-la-media" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.3.3. </span>Il coefficiente di determinazione <span class="math notranslate nohighlight">\(R^2\)</span>: confronto con la media<a class="headerlink" href="#il-coefficiente-di-determinazione-r-2-confronto-con-la-media" title="Link to this heading">#</a></h3>
 <p>Un errore piccolo in valore assoluto non basta a capire quanto sia utile il modello. Introduciamo allora un riferimento molto semplice: <strong>prevedere sempre la media <span class="math notranslate nohighlight">\(\overline y\)</span></strong>, senza usare la spesa pubblicitaria.</p>
 <p>L’errore quadratico complessivo di questa previsione costante è</p>
 <div class="math notranslate nohighlight">
@@ -832,7 +830,7 @@ R^2  = 0.9855
 </div>
 </section>
 <section id="interpretazione-dei-risultati-dell-esempio">
-<h3>Interpretazione dei risultati dell’esempio<a class="headerlink" href="#interpretazione-dei-risultati-dell-esempio" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.3.4. </span>Interpretazione dei risultati dell’esempio<a class="headerlink" href="#interpretazione-dei-risultati-dell-esempio" title="Link to this heading">#</a></h3>
 <p>Per i dieci dati su spesa pubblicitaria e vendite, la media delle vendite è <span class="math notranslate nohighlight">\(\overline y=28\)</span>. I risultati sono:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -849,7 +847,7 @@ R^2=1-\frac{9{,}6033}{664}\approx0{,}9855.
 </section>
 </section>
 <section id="overfitting-nella-regressione-polinomiale">
-<h2>Overfitting nella regressione polinomiale<a class="headerlink" href="#overfitting-nella-regressione-polinomiale" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.4. </span>Overfitting nella regressione polinomiale<a class="headerlink" href="#overfitting-nella-regressione-polinomiale" title="Link to this heading">#</a></h2>
 <p>Un polinomio che passa per tutti i punti osservati è sempre il modello migliore? <strong>No: può adattarsi anche al rumore e prevedere male i valori in altri punti.</strong></p>
 <p>Costruiamo due esempi con 11 punti del piano. Confrontiamo un modello troppo semplice (<em>underfitting</em>), uno che rappresenta bene l’andamento e uno eccessivamente flessibile (<em>overfitting</em>).</p>
 <p>In entrambi i casi i dati sono generati da</p>
@@ -973,7 +971,7 @@ R^2=1-\frac{9{,}6033}{664}\approx0{,}9855.
 </div>
 </section>
 <section id="underfit-overfit">
-<h2>Underfit/Overfit<a class="headerlink" href="#underfit-overfit" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.5. </span>Underfit/Overfit<a class="headerlink" href="#underfit-overfit" title="Link to this heading">#</a></h2>
 <p>Tra le curve della figura sopra, osserviamo tre comportamenti distinti:</p>
 <ul class="simple">
 <li><p>Se <span class="math notranslate nohighlight">\(d=1\)</span>, la curva rappresenta una retta, e non è quindi sufficientemente flessibile da riuscire a recuperare il comportamento <strong>complesso</strong> della curva corretta. Il risultato sarà una scarsa approssimazione, incapace di recuperare l’andamento corretto dei dati. Questo fenomeno è spesso noto con il termine <strong>underfit</strong>.</p></li>
@@ -1020,7 +1018,7 @@ Residuo per d = 5: 0.067621.
 <p>Nella prossima sezione, vediamo un metodo semplice ma efficace per attenuare (e sperabilmente risolvere) il problema dell’overfit, una volta che lo si è individuato.</p>
 </section>
 <section id="regolarizzazione">
-<h2>Regolarizzazione<a class="headerlink" href="#regolarizzazione" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.6. </span>Regolarizzazione<a class="headerlink" href="#regolarizzazione" title="Link to this heading">#</a></h2>
 <p>L’idea di questo approccio è la seguente: supponiamo che <span class="math notranslate nohighlight">\(d=3\)</span> sia il grado <strong>ottimale</strong> per l’approssimazione, ma noi scegliamo (scorrettamente) <span class="math notranslate nohighlight">\(d=5\)</span>. Se gli ultimi due valori di <span class="math notranslate nohighlight">\(\alpha\)</span> sono uguali a zero, allora il risultato ottenuto sarà come se avessimo scelto <span class="math notranslate nohighlight">\(d=3\)</span>.</p>
 <p>Chiaramente, non possiamo sapere a priori esattamente quanti parametri dovranno essere uguali a zero. Ci limitiamo quindi a richiedere la nostro modello di porre <em>il maggior numero possibile</em> di valori uguale a zero, riducendo al minimo l’impatto sull’approssimazione.</p>
 <p>Questo si riduce ad una formulazione del tipo seguente:</p>
@@ -1149,7 +1147,7 @@ X^T X \alpha - X^T y + \lambda \alpha = 0,
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Il problema lineare dei minimi quadrati</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Il problema lineare dei minimi quadrati</p>
       </div>
     </a>
     <a class="right-next"
@@ -1157,7 +1155,7 @@ X^T X \alpha - X^T y + \lambda \alpha = 0,
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Risoluzione di equazioni non lineari</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Risoluzione di equazioni non lineari</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1177,18 +1175,18 @@ X^T X \alpha - X^T y + \lambda \alpha = 0,
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#famiglie-parametriche-di-funzioni">Famiglie parametriche di funzioni</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-calcolo-dei-parametri-come-problema-di-minimo">Il calcolo dei parametri come problema di minimo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-dell-errore-che-cosa-ci-dicono">Misure dell’errore: che cosa ci dicono?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sse-somma-dei-quadrati-dei-residui">SSE: somma dei quadrati dei residui</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mse-e-rmse-dall-errore-complessivo-a-una-misura-per-osservazione">MSE e RMSE: dall’errore complessivo a una misura per osservazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-coefficiente-di-determinazione-r-2-confronto-con-la-media">Il coefficiente di determinazione <span class="math notranslate nohighlight">\(R^2\)</span>: confronto con la media</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-risultati-dell-esempio">Interpretazione dei risultati dell’esempio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#famiglie-parametriche-di-funzioni">11.1. Famiglie parametriche di funzioni</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-calcolo-dei-parametri-come-problema-di-minimo">11.2. Il calcolo dei parametri come problema di minimo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misure-dell-errore-che-cosa-ci-dicono">11.3. Misure dell’errore: che cosa ci dicono?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sse-somma-dei-quadrati-dei-residui">11.3.1. SSE: somma dei quadrati dei residui</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mse-e-rmse-dall-errore-complessivo-a-una-misura-per-osservazione">11.3.2. MSE e RMSE: dall’errore complessivo a una misura per osservazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#il-coefficiente-di-determinazione-r-2-confronto-con-la-media">11.3.3. Il coefficiente di determinazione <span class="math notranslate nohighlight">\(R^2\)</span>: confronto con la media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-dei-risultati-dell-esempio">11.3.4. Interpretazione dei risultati dell’esempio</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-nella-regressione-polinomiale">Overfitting nella regressione polinomiale</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#underfit-overfit">Underfit/Overfit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regolarizzazione">Regolarizzazione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-nella-regressione-polinomiale">11.4. Overfitting nella regressione polinomiale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#underfit-overfit">11.5. Underfit/Overfit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regolarizzazione">11.6. Regolarizzazione</a></li>
 </ul>
   </nav></div>
 

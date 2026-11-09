@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Decomposizione ai valori singolari (SVD) &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+    <title>7. Decomposizione ai valori singolari (SVD) &#8212; Metodi numerici per l&#39;analisi dei dati</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/fattorizzazione-matrici2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Sistemi lineari" href="sislin.html" />
-    <link rel="prev" title="Operazioni sulle matrici: fattorizzazione di matrici" href="fattorizzazione-matrici.html" />
+    <link rel="next" title="9. Sistemi lineari" href="sislin.html" />
+    <link rel="prev" title="6. Operazioni sulle matrici: fattorizzazione di matrici" href="fattorizzazione-matrici.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,22 +182,20 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">1. Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">2. I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">3. Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">4. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">6. Operazioni sulle matrici: fattorizzazione di matrici</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Decomposizione ai valori singolari (SVD)</a></li>
 
-
-<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Decomposizione ai valori singolari (SVD)</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">Ottimizzazione numerica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sislin.html">9. Sistemi lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">10. Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">11. Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zeri.html">12. Risoluzione di equazioni non lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">13. Ottimizzazione numerica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equazioni_differenziali.html">14. Introduzione alle equazioni differenziali e ai problemi di Cauchy</a></li>
 </ul>
 
     </div>
@@ -393,22 +391,22 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decomposizione ai valori singolari (SVD)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#richiamo-ortogonalita">5.1 Richiamo: ortogonalità</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-di-esistenza-della-svd">5.2 Teorema di esistenza della SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relazione-con-autovalori-e-autovettori">5.4 Relazione con autovalori e autovettori</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rango-immagine-e-nucleo">5.5 Rango, immagine e nucleo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-decomposizione-diadica">5.6 Una applicazione:  decomposizione diadica</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudoinversa-mediante-svd">5.7 Pseudoinversa mediante SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aspetti-numerici">5.8 Aspetti numerici</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximazione-mediante-diadi">5.9 Approximazione mediante diadi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-come-compressione">5.10 Interpretazione come compressione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-pca-mediante-svd">5.11 Una applicazione:  PCA mediante SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-il-dataset-iris">5.12 Esempio: il dataset Iris</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">7. Decomposizione ai valori singolari (SVD)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#richiamo-ortogonalita">7.1. 5.1 Richiamo: ortogonalità</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-di-esistenza-della-svd">7.2. 5.2 Teorema di esistenza della SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relazione-con-autovalori-e-autovettori">7.3. 5.4 Relazione con autovalori e autovettori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rango-immagine-e-nucleo">7.4. 5.5 Rango, immagine e nucleo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-decomposizione-diadica">7.5. 5.6 Una applicazione:  decomposizione diadica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudoinversa-mediante-svd">7.6. 5.7 Pseudoinversa mediante SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aspetti-numerici">7.7. 5.8 Aspetti numerici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximazione-mediante-diadi">7.8. 5.9 Approximazione mediante diadi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-come-compressione">7.9. 5.10 Interpretazione come compressione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-pca-mediante-svd">7.10. 5.11 Una applicazione:  PCA mediante SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-il-dataset-iris">7.11. 5.12 Esempio: il dataset Iris</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ricostruzione-con-un-numero-ridotto-di-componenti">Ricostruzione con un numero ridotto di componenti</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-sintesi">In sintesi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ricostruzione-con-un-numero-ridotto-di-componenti">8. Ricostruzione con un numero ridotto di componenti</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-sintesi">8.1. In sintesi</a></li>
 </ul>
 </li>
 </ul>
@@ -424,7 +422,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="decomposizione-ai-valori-singolari-svd">
-<h1>Decomposizione ai valori singolari (SVD)<a class="headerlink" href="#decomposizione-ai-valori-singolari-svd" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">7. </span>Decomposizione ai valori singolari (SVD)<a class="headerlink" href="#decomposizione-ai-valori-singolari-svd" title="Link to this heading">#</a></h1>
 <p>La <strong>Decomposizione in Valori Singolari (Singular Value Decomposition o SVD)</strong> è una delle fattorizzazioni più importanti dell’algebra lineare numerica. È definita per ogni matrice, anche rettangolare o di rango non massimo, e permette di descrivere in modo trasparente:</p>
 <ul class="simple">
 <li><p>l’azione geometrica di una matrice;</p></li>
@@ -433,7 +431,7 @@ document.write(`
 <li><p>approssimazioni a rango basso e compressione dei dati.</p></li>
 </ul>
 <section id="richiamo-ortogonalita">
-<h2>5.1 Richiamo: ortogonalità<a class="headerlink" href="#richiamo-ortogonalita" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.1. </span>5.1 Richiamo: ortogonalità<a class="headerlink" href="#richiamo-ortogonalita" title="Link to this heading">#</a></h2>
 <p>Due vettori <span class="math notranslate nohighlight">\(x,y\in\mathbb{R}^n\)</span> sono <em>ortogonali</em> se <span class="math notranslate nohighlight">\(x^Ty=0\)</span>. Un insieme di vettori è <strong>ortonormale</strong> se i vettori sono ortogonali tra loro e hanno norma euclidea unitaria.</p>
 <p>Una matrice quadrata <span class="math notranslate nohighlight">\(Q\)</span> è ortogonale quando le sue colonne formano una base ortonormale, cioè</p>
 <div class="math notranslate nohighlight">
@@ -474,7 +472,7 @@ Q^TQ=QQ^T=I, \qquad Q^{-1}=Q^T.
 </div>
 </section>
 <section id="teorema-di-esistenza-della-svd">
-<h2>5.2 Teorema di esistenza della SVD<a class="headerlink" href="#teorema-di-esistenza-della-svd" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.2. </span>5.2 Teorema di esistenza della SVD<a class="headerlink" href="#teorema-di-esistenza-della-svd" title="Link to this heading">#</a></h2>
 <p>Per ogni matrice reale <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{m\times n}\)</span> esistono due matrici ortogonali</p>
 <div class="math notranslate nohighlight">
 \[
@@ -592,7 +590,7 @@ V^T V =
 </div>
 </section>
 <section id="relazione-con-autovalori-e-autovettori">
-<h2>5.4 Relazione con autovalori e autovettori<a class="headerlink" href="#relazione-con-autovalori-e-autovettori" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.3. </span>5.4 Relazione con autovalori e autovettori<a class="headerlink" href="#relazione-con-autovalori-e-autovettori" title="Link to this heading">#</a></h2>
 <p>Dalla SVD segue</p>
 <div class="math notranslate nohighlight">
 \[
@@ -625,7 +623,7 @@ align: center
   <img src="immagini_sorgente/svd_ata.png" width="700">
 </p> --></section>
 <section id="rango-immagine-e-nucleo">
-<h2>5.5 Rango, immagine e nucleo<a class="headerlink" href="#rango-immagine-e-nucleo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.4. </span>5.5 Rango, immagine e nucleo<a class="headerlink" href="#rango-immagine-e-nucleo" title="Link to this heading">#</a></h2>
 <p>Se <span class="math notranslate nohighlight">\(A\)</span> ha rango <span class="math notranslate nohighlight">\(r\)</span>, la SVD rende immediatamente visibili i suoi sottospazi fondamentali:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -642,7 +640,7 @@ align: center
 <p>In aritmetica floating point non si verifica quasi mai se <span class="math notranslate nohighlight">\(\sigma_i\)</span> è esattamente zero: si confronta con una tolleranza dipendente da <span class="math notranslate nohighlight">\(\sigma_1\)</span>, dalle dimensioni della matrice e dalla precisione di macchina.</p>
 </section>
 <section id="una-applicazione-decomposizione-diadica">
-<h2>5.6 Una applicazione:  decomposizione diadica<a class="headerlink" href="#una-applicazione-decomposizione-diadica" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.5. </span>5.6 Una applicazione:  decomposizione diadica<a class="headerlink" href="#una-applicazione-decomposizione-diadica" title="Link to this heading">#</a></h2>
 <p>La SVD compatta può essere scritta come somma di matrici di rango uno:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -715,7 +713,7 @@ k=3: errore 2 = 0.0322 (sigma_4=0.0322), errore F = 0.0322 (teorico=0.0322)
 </div>
 </section>
 <section id="pseudoinversa-mediante-svd">
-<h2>5.7 Pseudoinversa mediante SVD<a class="headerlink" href="#pseudoinversa-mediante-svd" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.6. </span>5.7 Pseudoinversa mediante SVD<a class="headerlink" href="#pseudoinversa-mediante-svd" title="Link to this heading">#</a></h2>
 <p>La <em>pseudoinversa</em> si può definire per <strong>qualunque</strong> matrice A, mxn, di rango qualsiasi.
 Mentre ricordiamo che l’<em>inversa</em> di una matrice si definisce solo per una matrice A <strong>quadrata non singolare</strong>.</p>
 <p>Sia <span class="math notranslate nohighlight">\(A\)</span> una matrice <span class="math notranslate nohighlight">\(mxn\)</span> di rango <span class="math notranslate nohighlight">\(r\)</span>.</p>
@@ -734,7 +732,7 @@ A^+=V_r\Sigma_r^{-1}U_r^T,
 <p>Se <span class="math notranslate nohighlight">\(A\)</span> è quadrata e invertibile, allora <span class="math notranslate nohighlight">\(A^+=A^{-1}\)</span>.</p>
 </section>
 <section id="aspetti-numerici">
-<h2>5.8 Aspetti numerici<a class="headerlink" href="#aspetti-numerici" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.7. </span>5.8 Aspetti numerici<a class="headerlink" href="#aspetti-numerici" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Per una matrice densa <span class="math notranslate nohighlight">\(m\times n\)</span>, il costo della SVD completa è dell’ordine di <span class="math notranslate nohighlight">\(mn\min(m,n)\)</span>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">np.linalg.svd(A,</span> <span class="pre">full_matrices=False)</span></code> calcola la forma ridotta ed evita di memorizzare colonne non necessarie.</p></li>
@@ -744,7 +742,7 @@ A^+=V_r\Sigma_r^{-1}U_r^T,
 </ul>
 </section>
 <section id="approximazione-mediante-diadi">
-<h2>5.9 Approximazione mediante diadi<a class="headerlink" href="#approximazione-mediante-diadi" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.8. </span>5.9 Approximazione mediante diadi<a class="headerlink" href="#approximazione-mediante-diadi" title="Link to this heading">#</a></h2>
 <p>La decomposizione diadica ordina le componenti di <span class="math notranslate nohighlight">\(A\)</span> in base alla loro importanza:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -830,7 +828,7 @@ E_k=\frac{\sigma_1^2+\cdots+\sigma_k^2}
 <p>Se i valori singolari decrescono rapidamente, pochi termini descrivono bene la matrice. Se decadono lentamente, è necessario conservare molte diadi.</p>
 </section>
 <section id="interpretazione-come-compressione">
-<h2>5.10 Interpretazione come compressione<a class="headerlink" href="#interpretazione-come-compressione" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.9. </span>5.10 Interpretazione come compressione<a class="headerlink" href="#interpretazione-come-compressione" title="Link to this heading">#</a></h2>
 <p>Una matrice <span class="math notranslate nohighlight">\(A\in\mathbb{R}^{m\times n}\)</span> richiede <span class="math notranslate nohighlight">\(mn\)</span> numeri. Per memorizzare la sua approssimazione <span class="math notranslate nohighlight">\(A_k=U_k\Sigma_kV_k^T\)</span> sono sufficienti</p>
 <div class="math notranslate nohighlight">
 \[
@@ -844,7 +842,7 @@ k(m+n+1)&lt;mn.
 <p>La scelta di <span class="math notranslate nohighlight">\(k\)</span> realizza quindi un compromesso: valori piccoli producono maggiore compressione, mentre valori grandi riducono l’errore di approssimazione.</p>
 </section>
 <section id="una-applicazione-pca-mediante-svd">
-<h2>5.11 Una applicazione:  PCA mediante SVD<a class="headerlink" href="#una-applicazione-pca-mediante-svd" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.10. </span>5.11 Una applicazione:  PCA mediante SVD<a class="headerlink" href="#una-applicazione-pca-mediante-svd" title="Link to this heading">#</a></h2>
 <p>La <strong>Principal Component Analysis</strong> (PCA) cerca nuove direzioni ortogonali lungo le quali i dati presentano la massima variabilità. Può essere calcolata direttamente mediante la SVD della matrice dei dati centrati.</p>
 <p>Sia <span class="math notranslate nohighlight">\(X\in\mathbb{R}^{N\times p}\)</span> una matrice in cui le righe rappresentano gli oggetti osservati e le colonne le variabili. Prima di applicare la PCA si sottrae da ogni colonna la propria media:</p>
 <div class="math notranslate nohighlight">
@@ -875,7 +873,7 @@ Z=X_cV=U\Sigma.
 \]</div>
 </section>
 <section id="esempio-il-dataset-iris">
-<h2>5.12 Esempio: il dataset Iris<a class="headerlink" href="#esempio-il-dataset-iris" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.11. </span>5.12 Esempio: il dataset Iris<a class="headerlink" href="#esempio-il-dataset-iris" title="Link to this heading">#</a></h2>
 <p>Il dataset contiene 150 fiori appartenenti a tre specie. Ogni fiore è descritto da quattro variabili: lunghezza e larghezza del sepalo, lunghezza e larghezza del petalo.</p>
 <p>Calcoliamo la PCA usando soltanto <code class="docutils literal notranslate"><span class="pre">numpy.linalg.svd</span></code>. Le specie non vengono usate nel calcolo: serviranno unicamente per colorare il grafico finale.</p>
 <div class="cell docutils container">
@@ -990,7 +988,7 @@ z_i=X_cv_i.
 </section>
 </section>
 <section id="ricostruzione-con-un-numero-ridotto-di-componenti">
-<h1>Ricostruzione con un numero ridotto di componenti<a class="headerlink" href="#ricostruzione-con-un-numero-ridotto-di-componenti" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">8. </span>Ricostruzione con un numero ridotto di componenti<a class="headerlink" href="#ricostruzione-con-un-numero-ridotto-di-componenti" title="Link to this heading">#</a></h1>
 <p>Dopo aver conservato <span class="math notranslate nohighlight">\(k\)</span> componenti, i dati centrati si ricostruiscono mediante</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1027,7 +1025,7 @@ X_{c,k}=Z_kV_k^T=U_k\Sigma_kV_k^T.
 <p><strong>Una scelta importante: centrare o standardizzare?</strong></p>
 <p>La centratura è sempre necessaria. Se le variabili hanno unità di misura o scale molto diverse, è spesso opportuno anche dividerle per la deviazione standard. In tal caso la PCA viene applicata alla matrice standardizzata e non alla sola matrice centrata. La scelta dipende dal significato dei dati.</p>
 <section id="in-sintesi">
-<h2>In sintesi<a class="headerlink" href="#in-sintesi" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">8.1. </span>In sintesi<a class="headerlink" href="#in-sintesi" title="Link to this heading">#</a></h2>
 <p>La fattorizzazione</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1073,7 +1071,7 @@ A=U\Sigma V^T
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Operazioni sulle matrici: fattorizzazione di matrici</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Operazioni sulle matrici: fattorizzazione di matrici</p>
       </div>
     </a>
     <a class="right-next"
@@ -1081,7 +1079,7 @@ A=U\Sigma V^T
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Sistemi lineari</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Sistemi lineari</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1101,22 +1099,22 @@ A=U\Sigma V^T
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decomposizione ai valori singolari (SVD)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#richiamo-ortogonalita">5.1 Richiamo: ortogonalità</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-di-esistenza-della-svd">5.2 Teorema di esistenza della SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relazione-con-autovalori-e-autovettori">5.4 Relazione con autovalori e autovettori</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rango-immagine-e-nucleo">5.5 Rango, immagine e nucleo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-decomposizione-diadica">5.6 Una applicazione:  decomposizione diadica</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudoinversa-mediante-svd">5.7 Pseudoinversa mediante SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aspetti-numerici">5.8 Aspetti numerici</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximazione-mediante-diadi">5.9 Approximazione mediante diadi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-come-compressione">5.10 Interpretazione come compressione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-pca-mediante-svd">5.11 Una applicazione:  PCA mediante SVD</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-il-dataset-iris">5.12 Esempio: il dataset Iris</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">7. Decomposizione ai valori singolari (SVD)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#richiamo-ortogonalita">7.1. 5.1 Richiamo: ortogonalità</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-di-esistenza-della-svd">7.2. 5.2 Teorema di esistenza della SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relazione-con-autovalori-e-autovettori">7.3. 5.4 Relazione con autovalori e autovettori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rango-immagine-e-nucleo">7.4. 5.5 Rango, immagine e nucleo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-decomposizione-diadica">7.5. 5.6 Una applicazione:  decomposizione diadica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudoinversa-mediante-svd">7.6. 5.7 Pseudoinversa mediante SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aspetti-numerici">7.7. 5.8 Aspetti numerici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximazione-mediante-diadi">7.8. 5.9 Approximazione mediante diadi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione-come-compressione">7.9. 5.10 Interpretazione come compressione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-applicazione-pca-mediante-svd">7.10. 5.11 Una applicazione:  PCA mediante SVD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esempio-il-dataset-iris">7.11. 5.12 Esempio: il dataset Iris</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ricostruzione-con-un-numero-ridotto-di-componenti">Ricostruzione con un numero ridotto di componenti</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-sintesi">In sintesi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ricostruzione-con-un-numero-ridotto-di-componenti">8. Ricostruzione con un numero ridotto di componenti</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-sintesi">8.1. In sintesi</a></li>
 </ul>
 </li>
 </ul>

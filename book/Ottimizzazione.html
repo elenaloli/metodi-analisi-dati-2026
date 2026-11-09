@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Ottimizzazione numerica &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+    <title>13. Ottimizzazione numerica &#8212; Metodi numerici per l&#39;analisi dei dati</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/Ottimizzazione';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduzione alle equazioni differenziali e ai problemi di Cauchy" href="equazioni_differenziali.html" />
-    <link rel="prev" title="Risoluzione di equazioni non lineari" href="zeri.html" />
+    <link rel="next" title="14. Introduzione alle equazioni differenziali e ai problemi di Cauchy" href="equazioni_differenziali.html" />
+    <link rel="prev" title="12. Risoluzione di equazioni non lineari" href="zeri.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,23 +182,20 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">1. Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">2. I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">3. Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">4. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">6. Operazioni sulle matrici: fattorizzazione di matrici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">7. Decomposizione ai valori singolari (SVD)</a></li>
 
-
-<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="sislin.html">Sistemi lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Ottimizzazione numerica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="equazioni_differenziali.html">Introduzione alle equazioni differenziali e ai problemi di Cauchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sislin.html">9. Sistemi lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">10. Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">11. Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zeri.html">12. Risoluzione di equazioni non lineari</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Ottimizzazione numerica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equazioni_differenziali.html">14. Introduzione alle equazioni differenziali e ai problemi di Cauchy</a></li>
 </ul>
 
     </div>
@@ -394,20 +391,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduzione">Introduzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definizioni-punti-di-minimo">Definizioni: punti di minimo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-punti-stazionari">Tipi di punti stazionari</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-caso-convesso">Il caso convesso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">Metodi di discesa per il calcolo del minimo di una funzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">Metodo del gradiente</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dal-gradiente-completo-al-gradiente-stocastico">Dal gradiente completo al gradiente stocastico</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">Mini-batch gradient descent</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-cosa-misuriamo-e-come-confrontiamo-i-costi">3. Che cosa misuriamo e come confrontiamo i costi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-traiettorie-sul-piano">4. Le traiettorie sul piano</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risultati-numerici-e-interpretazione">6. Risultati numerici e interpretazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esperimenti-per-gli-studenti">Esperimenti per gli studenti</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vantaggi">Vantaggi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiti">Limiti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduzione">13.1. Introduzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definizioni-punti-di-minimo">13.2. Definizioni: punti di minimo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-punti-stazionari">13.3. Tipi di punti stazionari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-caso-convesso">13.4. Il caso convesso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">13.5. Metodi di discesa per il calcolo del minimo di una funzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">13.6. Metodo del gradiente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dal-gradiente-completo-al-gradiente-stocastico">13.6.1. Dal gradiente completo al gradiente stocastico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">13.6.2. Mini-batch gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-cosa-misuriamo-e-come-confrontiamo-i-costi">13.6.3. 3. Che cosa misuriamo e come confrontiamo i costi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-traiettorie-sul-piano">13.6.4. 4. Le traiettorie sul piano</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risultati-numerici-e-interpretazione">13.6.5. 6. Risultati numerici e interpretazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esperimenti-per-gli-studenti">13.6.6. Esperimenti per gli studenti</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vantaggi">13.6.7. Vantaggi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiti">13.6.8. Limiti</a></li>
 </ul>
 </li>
 </ul>
@@ -422,9 +419,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ottimizzazione-numerica">
-<h1>Ottimizzazione numerica<a class="headerlink" href="#ottimizzazione-numerica" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">13. </span>Ottimizzazione numerica<a class="headerlink" href="#ottimizzazione-numerica" title="Link to this heading">#</a></h1>
 <section id="introduzione">
-<h2>Introduzione<a class="headerlink" href="#introduzione" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.1. </span>Introduzione<a class="headerlink" href="#introduzione" title="Link to this heading">#</a></h2>
 <p>L’ottimizzazione è il settore della matematica che studia come individuare la soluzione migliore tra tutte quelle possibili. In termini matematici, questo significa spesso determinare il punto in cui una funzione assume il suo valore minimo o massimo. I problemi di minimo sono particolarmente importanti perché molte situazioni reali possono essere descritte come la ricerca della configurazione che riduce al minimo un costo, un errore, un consumo di risorse o una distanza rispetto a un obiettivo.</p>
 <p>Esempi di problemi di ottimizzazione compaiono in moltissimi ambiti. Nell’ingegneria si cerca di progettare strutture efficienti e resistenti utilizzando la minore quantità possibile di materiale. Nella logistica si vogliono ridurre i tempi e i costi di trasporto. Nell’elaborazione delle immagini si cerca una ricostruzione che sia allo stesso tempo fedele ai dati osservati e priva di rumore. In economia si ottimizzano profitti, investimenti e allocazione delle risorse.</p>
 <p>L’ottimizzazione riveste un ruolo centrale anche nell’analisi dei dati, nel machine learning e nelle reti neurali. In questi contesti si introduce generalmente una funzione di costo, o funzione di perdita, che misura quanto le previsioni del modello siano lontane dai valori desiderati. Addestrare un modello significa quindi trovare i valori dei suoi parametri che rendono questa funzione il più piccola possibile.</p>
@@ -475,7 +472,7 @@ del problema deve sottostare per essere dichiarata accettabile.</p>
 </div>
 </section>
 <section id="definizioni-punti-di-minimo">
-<h2>Definizioni: punti di minimo<a class="headerlink" href="#definizioni-punti-di-minimo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.2. </span>Definizioni: punti di minimo<a class="headerlink" href="#definizioni-punti-di-minimo" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(x^*\)</span> è un punto di <strong>minimo locale</strong> di <span class="math notranslate nohighlight">\(f(x)\)</span> se
 esiste un <span class="math notranslate nohighlight">\(\epsilon&gt;0\)</span> tale</p></li>
@@ -678,7 +675,7 @@ align: center
 <p>Le funzioni <span class="math notranslate nohighlight">\(x^2\)</span>, <span class="math notranslate nohighlight">\(x^3\)</span> e <span class="math notranslate nohighlight">\(-x^4\)</span> mostrano come un Hessiano nullo nel punto stazionario non sia sufficiente per classificare il punto.</p>
 </section>
 <section id="tipi-di-punti-stazionari">
-<h2>Tipi di punti stazionari<a class="headerlink" href="#tipi-di-punti-stazionari" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.3. </span>Tipi di punti stazionari<a class="headerlink" href="#tipi-di-punti-stazionari" title="Link to this heading">#</a></h2>
 <p>La forma locale della superficie dipende dalla definitezza dell’Hessiano:</p>
 <ul class="simple">
 <li><p>Hessiano definito positivo: funzione localmente convessa, minimo;</p></li>
@@ -697,7 +694,7 @@ align: center
 ---
 ``` --></section>
 <section id="il-caso-convesso">
-<h2>Il caso convesso<a class="headerlink" href="#il-caso-convesso" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.4. </span>Il caso convesso<a class="headerlink" href="#il-caso-convesso" title="Link to this heading">#</a></h2>
 <p>Una funzione <span class="math notranslate nohighlight">\(f\)</span> è <strong>convessa</strong> in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> se</p>
 <div class="math notranslate nohighlight">
 \[
@@ -766,7 +763,7 @@ f_3(x,y)=-x^2-y^2.
 \]</div>
 </section>
 <section id="metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">
-<h2>Metodi di discesa per il calcolo del minimo di una funzione<a class="headerlink" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.5. </span>Metodi di discesa per il calcolo del minimo di una funzione<a class="headerlink" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione" title="Link to this heading">#</a></h2>
 <p>Una funzione non convessa può possedere più punti stazionari e più minimi locali. Un metodo iterativo può convergere verso punti diversi a seconda dell’iterato iniziale e della strategia adottata.</p>
 <p><img alt="" src="../_images/fig8m.png" /></p>
 <!-- ```{figure} immagini_sorgente/fig8m.png
@@ -931,7 +928,7 @@ p^T\nabla f(x)=-\lVert\nabla f(x)\rVert^2&lt;0.
 \]</div>
 </section>
 <section id="metodo-del-gradiente">
-<h2>Metodo del gradiente<a class="headerlink" href="#metodo-del-gradiente" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.6. </span>Metodo del gradiente<a class="headerlink" href="#metodo-del-gradiente" title="Link to this heading">#</a></h2>
 <p>La direzione di ricerca è</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1128,7 +1125,7 @@ x_0=(1,1)^T,
 <li><p>Nel caso non convesso, la determinazione di punti stazionari non fornisce una soluzione globale e, in generale, non è neanche possibile garantire che sia raggiunto un punto di minimo locale.</p></li>
 </ul>
 <section id="dal-gradiente-completo-al-gradiente-stocastico">
-<h3>Dal gradiente completo al gradiente stocastico<a class="headerlink" href="#dal-gradiente-completo-al-gradiente-stocastico" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.6.1. </span>Dal gradiente completo al gradiente stocastico<a class="headerlink" href="#dal-gradiente-completo-al-gradiente-stocastico" title="Link to this heading">#</a></h3>
 <p>Condìsderiamo particolari funzioni obiettivo che si possono scrivere come:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1155,7 +1152,7 @@ $$
 
 dove $\varepsilon_k$ è l'errore casuale dovuto al campionamento. --></section>
 <section id="mini-batch-gradient-descent">
-<h3>Mini-batch gradient descent<a class="headerlink" href="#mini-batch-gradient-descent" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.6.2. </span>Mini-batch gradient descent<a class="headerlink" href="#mini-batch-gradient-descent" title="Link to this heading">#</a></h3>
 <p>Nella pratica si utilizza un sottoinsieme <span class="math notranslate nohighlight">\(B_k\)</span> degli indici, chiamato <strong>mini-batch</strong>. Si calcola</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1351,7 +1348,7 @@ x_{k+1}=x_k-\alpha_k g_k.\]</div>
 </div>
 </section>
 <section id="che-cosa-misuriamo-e-come-confrontiamo-i-costi">
-<h3>3. Che cosa misuriamo e come confrontiamo i costi<a class="headerlink" href="#che-cosa-misuriamo-e-come-confrontiamo-i-costi" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.6.3. </span>3. Che cosa misuriamo e come confrontiamo i costi<a class="headerlink" href="#che-cosa-misuriamo-e-come-confrontiamo-i-costi" title="Link to this heading">#</a></h3>
 <p>Per ogni iterato registriamo:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1427,7 +1424,7 @@ x_{k+1}=x_k-\alpha_k g_k.\]</div>
 </div>
 </section>
 <section id="le-traiettorie-sul-piano">
-<h3>4. Le traiettorie sul piano<a class="headerlink" href="#le-traiettorie-sul-piano" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.6.4. </span>4. Le traiettorie sul piano<a class="headerlink" href="#le-traiettorie-sul-piano" title="Link to this heading">#</a></h3>
 <p>Le curve di livello rappresentano lo scarto <span class="math notranslate nohighlight">\(F(x)-F(x^*)\)</span>: avvicinandosi al centro delle ellissi ci si avvicina al minimo. Il pannello a destra ingrandisce la regione attorno a <span class="math notranslate nohighlight">\(x^*\)</span> e aiuta a riconoscere le oscillazioni stocastiche.</p>
 <p>Ogni segmento collega due iterati consecutivi. Il punto di partenza è uguale per tutti i metodi; il gradiente completo produce una traiettoria regolare, mentre SGD risente dei diversi minibatch.</p>
 <div class="cell docutils container">
@@ -1470,7 +1467,7 @@ x_{k+1}=x_k-\alpha_k g_k.\]</div>
 </div>
 </section>
 <section id="risultati-numerici-e-interpretazione">
-<h3>6. Risultati numerici e interpretazione<a class="headerlink" href="#risultati-numerici-e-interpretazione" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.6.5. </span>6. Risultati numerici e interpretazione<a class="headerlink" href="#risultati-numerici-e-interpretazione" title="Link to this heading">#</a></h3>
 <p>La tabella riporta i risultati alla fine dello stesso numero di epoche. Le ultime colonne misurano l’errore finale e l’errore medio nell’ultima epoca; quest’ultimo aiuta a non giudicare un metodo stocastico da un unico punto casualmente favorevole.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1503,7 +1500,7 @@ SGD, batch=20, passo decrescente                 800     2.709690      2.120e-03
 <p>Le curve stocastiche mostrate corrispondono a <strong>una sola realizzazione riproducibile</strong>. Cambiando <code class="docutils literal notranslate"><span class="pre">seed_batch</span></code> cambiano le oscillazioni; non si tratta di un confronto statistico su più esecuzioni.</p>
 </section>
 <section id="esperimenti-per-gli-studenti">
-<h3>Esperimenti per gli studenti<a class="headerlink" href="#esperimenti-per-gli-studenti" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.6.6. </span>Esperimenti per gli studenti<a class="headerlink" href="#esperimenti-per-gli-studenti" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Impostare <code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">=</span> <span class="pre">1</span></code>, poi <code class="docutils literal notranslate"><span class="pre">20</span></code>, <code class="docutils literal notranslate"><span class="pre">100</span></code> e infine <code class="docutils literal notranslate"><span class="pre">N</span></code>. Osservare oscillazioni e numero di aggiornamenti per epoca. Con <code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">=</span> <span class="pre">N</span></code>, SGD a passo costante coincide con GD, salvo arrotondamenti.</p></li>
 <li><p>Cambiare <code class="docutils literal notranslate"><span class="pre">alpha0</span></code> da <code class="docutils literal notranslate"><span class="pre">0.15</span></code> a <code class="docutils literal notranslate"><span class="pre">0.05</span></code> oppure <code class="docutils literal notranslate"><span class="pre">0.30</span></code>: come cambiano le traiettorie e la velocità del gradiente completo?</p></li>
@@ -1528,7 +1525,7 @@ consentono di ottenere risultati di convergenza. La prima evita che i passi si r
 <p><strong>Ruolo del minibatch.</strong> Un minibatch piccolo rende gli aggiornamenti economici ma più variabili; aumentandolo si ottiene una stima più precisa, con un costo maggiore per aggiornamento. La scelta è quindi un compromesso fra costo, variabilità e possibilità di sfruttare il calcolo parallelo.</p>
 </section>
 <section id="vantaggi">
-<h3>Vantaggi<a class="headerlink" href="#vantaggi" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.6.7. </span>Vantaggi<a class="headerlink" href="#vantaggi" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Ogni aggiornamento ha costo ridotto.</p></li>
 <li><p>È adatto a dataset molto grandi.</p></li>
@@ -1537,7 +1534,7 @@ consentono di ottenere risultati di convergenza. La prima evita che i passi si r
 </ul>
 </section>
 <section id="limiti">
-<h3>Limiti<a class="headerlink" href="#limiti" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.6.8. </span>Limiti<a class="headerlink" href="#limiti" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>La funzione obiettivo non necessariamente diminuisce a ogni iterazione.</p></li>
 <li><p>Gli iterati seguono una traiettoria oscillante.</p></li>
@@ -1584,7 +1581,7 @@ consentono di ottenere risultati di convergenza. La prima evita che i passi si r
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Risoluzione di equazioni non lineari</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Risoluzione di equazioni non lineari</p>
       </div>
     </a>
     <a class="right-next"
@@ -1592,7 +1589,7 @@ consentono di ottenere risultati di convergenza. La prima evita che i passi si r
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduzione alle equazioni differenziali e ai problemi di Cauchy</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Introduzione alle equazioni differenziali e ai problemi di Cauchy</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1612,20 +1609,20 @@ consentono di ottenere risultati di convergenza. La prima evita che i passi si r
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduzione">Introduzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definizioni-punti-di-minimo">Definizioni: punti di minimo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-punti-stazionari">Tipi di punti stazionari</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-caso-convesso">Il caso convesso</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">Metodi di discesa per il calcolo del minimo di una funzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">Metodo del gradiente</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dal-gradiente-completo-al-gradiente-stocastico">Dal gradiente completo al gradiente stocastico</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">Mini-batch gradient descent</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-cosa-misuriamo-e-come-confrontiamo-i-costi">3. Che cosa misuriamo e come confrontiamo i costi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-traiettorie-sul-piano">4. Le traiettorie sul piano</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risultati-numerici-e-interpretazione">6. Risultati numerici e interpretazione</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esperimenti-per-gli-studenti">Esperimenti per gli studenti</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vantaggi">Vantaggi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiti">Limiti</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduzione">13.1. Introduzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definizioni-punti-di-minimo">13.2. Definizioni: punti di minimo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipi-di-punti-stazionari">13.3. Tipi di punti stazionari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-caso-convesso">13.4. Il caso convesso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-discesa-per-il-calcolo-del-minimo-di-una-funzione">13.5. Metodi di discesa per il calcolo del minimo di una funzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-del-gradiente">13.6. Metodo del gradiente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dal-gradiente-completo-al-gradiente-stocastico">13.6.1. Dal gradiente completo al gradiente stocastico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">13.6.2. Mini-batch gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#che-cosa-misuriamo-e-come-confrontiamo-i-costi">13.6.3. 3. Che cosa misuriamo e come confrontiamo i costi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-traiettorie-sul-piano">13.6.4. 4. Le traiettorie sul piano</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risultati-numerici-e-interpretazione">13.6.5. 6. Risultati numerici e interpretazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esperimenti-per-gli-studenti">13.6.6. Esperimenti per gli studenti</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vantaggi">13.6.7. Vantaggi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limiti">13.6.8. Limiti</a></li>
 </ul>
 </li>
 </ul>

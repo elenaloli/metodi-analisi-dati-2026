@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Sistemi lineari &#8212; Metodi numerici per l&#39;analisi dei dati</title>
+    <title>9. Sistemi lineari &#8212; Metodi numerici per l&#39;analisi dei dati</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/sislin';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Il problema lineare dei minimi quadrati" href="minimi_quadrati.html" />
-    <link rel="prev" title="Decomposizione ai valori singolari (SVD)" href="fattorizzazione-matrici2.html" />
+    <link rel="next" title="10. Il problema lineare dei minimi quadrati" href="minimi_quadrati.html" />
+    <link rel="prev" title="7. Decomposizione ai valori singolari (SVD)" href="fattorizzazione-matrici2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,22 +182,20 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_mnad.html">1. Introduzione al corso Metodi Numerici per l’Analisi dei Dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeri_finiti.html">2. I numeri finiti e il calcolo scientifico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">3. Introduzione all’analisi dei dati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">4. Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">6. Operazioni sulle matrici: fattorizzazione di matrici</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">7. Decomposizione ai valori singolari (SVD)</a></li>
 
-
-<li class="toctree-l1"><a class="reference internal" href="analisi_dati.html">Introduzione all’analisi dei dati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="algebra_lineare.html">Perché l’algebra lineare è fondamentale nell’analisi dei dati?</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici.html">Operazioni sulle matrici: fattorizzazione di matrici</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fattorizzazione-matrici2.html">Decomposizione ai valori singolari (SVD)</a></li>
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sistemi lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">Il problema lineare dei minimi quadrati</a></li>
-<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zeri.html">Risoluzione di equazioni non lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">Ottimizzazione numerica</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Sistemi lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimi_quadrati.html">10. Il problema lineare dei minimi quadrati</a></li>
+<li class="toctree-l1"><a class="reference internal" href="approx_dati.html">11. Il problema dei minimi quadrati nell’approssimazione dei dati. I modelli predittivi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zeri.html">12. Risoluzione di equazioni non lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ottimizzazione.html">13. Ottimizzazione numerica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equazioni_differenziali.html">14. Introduzione alle equazioni differenziali e ai problemi di Cauchy</a></li>
 </ul>
 
     </div>
@@ -393,13 +391,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita-della-soluzione">6.1 Esistenza e unicità della soluzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-diretti-e-metodi-iterativi">6.2 Metodi diretti e metodi iterativi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrici-particolari-sistemi-triangolari">6.3 Matrici particolari: sistemi triangolari</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risolvere-un-sistema-mediante-fattorizzazione-lu">6.3  Risolvere un sistema mediante fattorizzazione LU</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">6.5 Risoluzione di un sistema con fattorizzazione Lu con pivoting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">6.6 Risoluzione di un sistema con fattorizzazione di Cholesky</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condizionamento-dei-sistemi-lineari">6.7 Condizionamento dei sistemi lineari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita-della-soluzione">9.1. 6.1 Esistenza e unicità della soluzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-diretti-e-metodi-iterativi">9.2. 6.2 Metodi diretti e metodi iterativi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrici-particolari-sistemi-triangolari">9.3. 6.3 Matrici particolari: sistemi triangolari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risolvere-un-sistema-mediante-fattorizzazione-lu">9.4. 6.3  Risolvere un sistema mediante fattorizzazione LU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">9.5. 6.5 Risoluzione di un sistema con fattorizzazione Lu con pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">9.6. 6.6 Risoluzione di un sistema con fattorizzazione di Cholesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condizionamento-dei-sistemi-lineari">9.7. 6.7 Condizionamento dei sistemi lineari</a></li>
 </ul>
             </nav>
         </div>
@@ -412,7 +410,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="sistemi-lineari">
-<h1>Sistemi lineari<a class="headerlink" href="#sistemi-lineari" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">9. </span>Sistemi lineari<a class="headerlink" href="#sistemi-lineari" title="Link to this heading">#</a></h1>
 <p>Consideriamo un sistema lineare quadrato</p>
 <div class="math notranslate nohighlight">
 \[
@@ -429,7 +427,7 @@ A\in\mathbb{R}^{n\times n},
 <li><p><strong>Errore:</strong> quanto è affidabile la soluzione calcolata in aritmetica finita?</p></li>
 </ol>
 <section id="esistenza-e-unicita-della-soluzione">
-<h2>6.1 Esistenza e unicità della soluzione<a class="headerlink" href="#esistenza-e-unicita-della-soluzione" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.1. </span>6.1 Esistenza e unicità della soluzione<a class="headerlink" href="#esistenza-e-unicita-della-soluzione" title="Link to this heading">#</a></h2>
 <p>Se <span class="math notranslate nohighlight">\(A\)</span> è quadrata, le seguenti proprietà sono equivalenti:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(A\)</span> è non singolare;</p></li>
@@ -462,7 +460,7 @@ A\mathbf{x}=\mathbf{b}
 <p>senza costruire <span class="math notranslate nohighlight">\(A^{-1}\)</span>.</p>
 </section>
 <section id="metodi-diretti-e-metodi-iterativi">
-<h2>6.2 Metodi diretti e metodi iterativi<a class="headerlink" href="#metodi-diretti-e-metodi-iterativi" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.2. </span>6.2 Metodi diretti e metodi iterativi<a class="headerlink" href="#metodi-diretti-e-metodi-iterativi" title="Link to this heading">#</a></h2>
 <p><img alt="" src="../_images/metodi_diretti_iterativi.png" /></p>
 <!-- ```{figure} immagini_sorgente/metodi_diretti_iterativi.png
 ---
@@ -482,7 +480,7 @@ align: center
 <p>che, sotto opportune condizioni, converge alla soluzione. Sono particolarmente importanti per matrici grandi e sparse.</p>
 </section>
 <section id="matrici-particolari-sistemi-triangolari">
-<h2>6.3 Matrici particolari: sistemi triangolari<a class="headerlink" href="#matrici-particolari-sistemi-triangolari" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.3. </span>6.3 Matrici particolari: sistemi triangolari<a class="headerlink" href="#matrici-particolari-sistemi-triangolari" title="Link to this heading">#</a></h2>
 <p>Una matrice <span class="math notranslate nohighlight">\(L=(\ell_{ij})\)</span> è <strong>triangolare inferiore</strong> se</p>
 <div class="math notranslate nohighlight">
 \[
@@ -535,7 +533,7 @@ x_i=\frac{1}{u_{ii}}
 <p>Questo è molto meno del costo <span class="math notranslate nohighlight">\(\mathcal{O}(n^3)\)</span> necessario per fattorizzare una matrice densa generale.</p>
 </section>
 <section id="risolvere-un-sistema-mediante-fattorizzazione-lu">
-<h2>6.3  Risolvere un sistema mediante fattorizzazione LU<a class="headerlink" href="#risolvere-un-sistema-mediante-fattorizzazione-lu" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.4. </span>6.3  Risolvere un sistema mediante fattorizzazione LU<a class="headerlink" href="#risolvere-un-sistema-mediante-fattorizzazione-lu" title="Link to this heading">#</a></h2>
 <p>Consideriamo ora il sistema</p>
 <div class="math notranslate nohighlight">
 \[
@@ -626,7 +624,7 @@ L=
 \end{split}\]</div>
 </section>
 <section id="risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">
-<h2>6.5 Risoluzione di un sistema con fattorizzazione Lu con pivoting<a class="headerlink" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.5. </span>6.5 Risoluzione di un sistema con fattorizzazione Lu con pivoting<a class="headerlink" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting" title="Link to this heading">#</a></h2>
 <p>Quando la matrice <span class="math notranslate nohighlight">\(A\)</span> è fattorizzata con pivoting, si ha che:</p>
 <p><span class="math notranslate nohighlight">\(PA=LU\)</span> dove <span class="math notranslate nohighlight">\(P\)</span> è una matrice di permutazione.</p>
 <p>Allora il sistema lineare <span class="math notranslate nohighlight">\(Ax=b\)</span> è equivalente al sistema: <span class="math notranslate nohighlight">\(PAx=Pb\)</span>, cioè <span class="math notranslate nohighlight">\(LUx=Pb\)</span>.</p>
@@ -755,7 +753,7 @@ Errore relativo: 3.144e-15
 </div>
 </section>
 <section id="risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">
-<h2>6.6 Risoluzione di un sistema con fattorizzazione di Cholesky<a class="headerlink" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.6. </span>6.6 Risoluzione di un sistema con fattorizzazione di Cholesky<a class="headerlink" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky" title="Link to this heading">#</a></h2>
 <p>Se <span class="math notranslate nohighlight">\(A\)</span> è una matrice simmetrica e definita positiva, abbiamo visti che si può fattorizzare tramite l’algoritmo di Cholesky come: <span class="math notranslate nohighlight">\(A=LL^T\)</span>.</p>
 <p>Allora  il sistema</p>
 <div class="math notranslate nohighlight">
@@ -835,7 +833,7 @@ Errore relativo: 1.521e-15
 </ol>
 </section>
 <section id="condizionamento-dei-sistemi-lineari">
-<h2>6.7 Condizionamento dei sistemi lineari<a class="headerlink" href="#condizionamento-dei-sistemi-lineari" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.7. </span>6.7 Condizionamento dei sistemi lineari<a class="headerlink" href="#condizionamento-dei-sistemi-lineari" title="Link to this heading">#</a></h2>
 <p>Quando risolviamo un qualsiasi problema matematico rappresentato in generale come <span class="math notranslate nohighlight">\(y=f(x)\)</span>, i dati di input <span class="math notranslate nohighlight">\(x\)</span> sono spesso affetti da errori di misura, arrotondamento o discretizzazione. Il <strong>condizionamento</strong> descrive quanto la soluzione è sensibile a queste perturbazioni.</p>
 <blockquote>
 <div><p>Il condizionamento è una proprietà del <strong>problema</strong>. La stabilità, invece, è una proprietà dell’<strong>algoritmo</strong> usato per risolverlo.</p>
@@ -1035,7 +1033,7 @@ n = 10   kappa_2(H) =  1.603e+13
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Decomposizione ai valori singolari (SVD)</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Decomposizione ai valori singolari (SVD)</p>
       </div>
     </a>
     <a class="right-next"
@@ -1043,7 +1041,7 @@ n = 10   kappa_2(H) =  1.603e+13
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Il problema lineare dei minimi quadrati</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Il problema lineare dei minimi quadrati</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1063,13 +1061,13 @@ n = 10   kappa_2(H) =  1.603e+13
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita-della-soluzione">6.1 Esistenza e unicità della soluzione</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-diretti-e-metodi-iterativi">6.2 Metodi diretti e metodi iterativi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrici-particolari-sistemi-triangolari">6.3 Matrici particolari: sistemi triangolari</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risolvere-un-sistema-mediante-fattorizzazione-lu">6.3  Risolvere un sistema mediante fattorizzazione LU</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">6.5 Risoluzione di un sistema con fattorizzazione Lu con pivoting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">6.6 Risoluzione di un sistema con fattorizzazione di Cholesky</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condizionamento-dei-sistemi-lineari">6.7 Condizionamento dei sistemi lineari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esistenza-e-unicita-della-soluzione">9.1. 6.1 Esistenza e unicità della soluzione</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-diretti-e-metodi-iterativi">9.2. 6.2 Metodi diretti e metodi iterativi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrici-particolari-sistemi-triangolari">9.3. 6.3 Matrici particolari: sistemi triangolari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risolvere-un-sistema-mediante-fattorizzazione-lu">9.4. 6.3  Risolvere un sistema mediante fattorizzazione LU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-lu-con-pivoting">9.5. 6.5 Risoluzione di un sistema con fattorizzazione Lu con pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#risoluzione-di-un-sistema-con-fattorizzazione-di-cholesky">9.6. 6.6 Risoluzione di un sistema con fattorizzazione di Cholesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condizionamento-dei-sistemi-lineari">9.7. 6.7 Condizionamento dei sistemi lineari</a></li>
 </ul>
   </nav></div>
 
